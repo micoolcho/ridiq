@@ -1,10 +1,52 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:400,600,300);
+body {
+  font-family: "Open Sans"; }
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0; }
+
+a {
+  color: #19ADE2; }
+
 .main-nav {
   background: #CB473A;
-  padding: 12px; }
+  padding: 12px;
+  margin-bottom: 25px; }
   .main-nav .logo {
     font-family: 'Montserrat', sans-serif;
     color: white;
     font-size: 28px; }
+
+.user-info {
+  font-size: 15px;
+  color: #727272; }
+  .user-info .avatar {
+    margin: auto;
+    width: 70px;
+    height: 70px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 1000px;
+    margin-bottom: 15px; }
+  .user-info .displayName {
+    font-weight: 600;
+    color: #505050; }
+  .user-info ul.follow {
+    margin-bottom: 15px; }
+    .user-info ul.follow li {
+      display: inline-block; }
+      .user-info ul.follow li + li {
+        position: relative;
+        padding-left: 24px; }
+        .user-info ul.follow li + li:before {
+          position: absolute;
+          content: ".";
+          top: -6px;
+          left: -1px;
+          width: 24px; }
+  .user-info .intro {
+    margin-bottom: 11px; }
 
 /*# sourceMappingURL=main.css.map */
