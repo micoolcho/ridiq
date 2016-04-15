@@ -49,4 +49,43 @@ a {
   .user-info .intro {
     margin-bottom: 11px; }
 
+.answer-list {
+  max-width: 780px;
+  margin: auto auto; }
+  .answer-list:before {
+    content: " ";
+    height: 1px;
+    display: block;
+    margin: 40px auto;
+    border-bottom: 1px solid #979797;
+    opacity: 0.3;
+    width: 435px; }
+  .answer-list .overflow-wrapper {
+    margin-right: -15px; }
+  .answer-list .answer {
+    float: left;
+    position: relative;
+    margin-right: 15px;
+    margin-bottom: 15px; }
+    .answer-list .answer:before {
+      content: " ";
+      opacity: 0.6;
+      background: black; }
+    .answer-list .answer:before, .answer-list .answer .question {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%; }
+    .answer-list .answer .cover {
+      width: 250px;
+      height: 250px; }
+    .answer-list .answer .question {
+      color: white;
+      font-size: 20px;
+      line-height: 27px;
+      text-align: center;
+      padding: 40px; }
+
 /*# sourceMappingURL=main.css.map */

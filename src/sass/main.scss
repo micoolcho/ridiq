@@ -70,3 +70,60 @@ a {
     margin-bottom: 11px;
   }
 }
+
+$lgAnswerSize: 250px;
+$lgAnswerPadding: 15px;
+
+.answer-list {
+  max-width: $lgAnswerSize * 3 + $lgAnswerPadding * 2;
+  margin: auto auto;
+
+  &:before {
+    content: " ";
+    height: 1px;
+    display: block;
+    margin: 40px auto;
+    border-bottom: 1px solid #979797;
+    opacity: 0.3;
+    width: 435px;
+  }
+
+  .overflow-wrapper {
+    margin-right: -$lgAnswerPadding;
+  }
+
+  .answer {
+    float: left;
+    position: relative;
+    margin-right: $lgAnswerPadding;
+    margin-bottom: $lgAnswerPadding;
+
+    &:before {
+      content: " ";
+      opacity: 0.6;
+      background: black;
+    }
+
+    &:before, .question {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .cover {
+      width: 250px;
+      height: 250px;
+    }
+
+    .question {
+      color: white;
+      font-size: 20px;
+      line-height: 27px;
+      text-align: center;
+      padding: 40px;
+    }
+  }
+}
