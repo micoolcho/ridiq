@@ -1,0 +1,18 @@
+{
+  "name": "grunt-livereload",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Tri Truong <tri.itvn@gmail.com>"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
