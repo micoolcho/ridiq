@@ -1,6 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:400,600,300);
 body {
-  font-family: "Open Sans"; }
+  font-family: "Open Sans";
+  background: #F8F7F7; }
 
 ul {
   list-style: none;
