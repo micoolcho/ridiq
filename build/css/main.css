@@ -1,6 +1,10 @@
-body {
-  color: red; }
-  body p {
-    color: blue; }
+@import url(https://fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:400,600,300);
+.main-nav {
+  background: #CB473A;
+  padding: 12px; }
+  .main-nav .logo {
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    font-size: 28px; }
 
 /*# sourceMappingURL=main.css.map */
