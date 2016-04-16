@@ -22,7 +22,8 @@ a {
 
 .user-info {
   font-size: 15px;
-  color: #727272; }
+  color: #727272;
+  margin-bottom: 35px; }
   .user-info .avatar {
     margin: auto;
     width: 70px;
@@ -52,7 +53,14 @@ a {
 
 .answer-list {
   max-width: 780px;
-  margin: auto auto; }
+  margin-bottom: 30px; }
+  @media (max-width: 780px) {
+    .answer-list {
+      max-width: 515px; } }
+  @media (max-width: 515px) {
+    .answer-list {
+      max-width: 375px;
+      font-size: 16px; } }
   .answer-list:before {
     content: " ";
     height: 1px;
@@ -60,7 +68,7 @@ a {
     margin: 40px auto;
     border-bottom: 1px solid #979797;
     opacity: 0.3;
-    width: 435px; }
+    max-width: 435px; }
   .answer-list .overflow-wrapper {
     margin-right: -15px; }
   .answer-list .answer {
@@ -68,6 +76,10 @@ a {
     position: relative;
     margin-right: 15px;
     margin-bottom: 15px; }
+    @media (max-width: 515px) {
+      .answer-list .answer {
+        margin-right: 13px;
+        margin-bottom: 13px; } }
     .answer-list .answer:before {
       content: " ";
       opacity: 0.6;
@@ -82,12 +94,22 @@ a {
     .answer-list .answer .cover {
       width: 250px;
       height: 250px; }
+      @media (max-width: 515px) {
+        .answer-list .answer .cover {
+          width: 181px;
+          height: 181px; } }
     .answer-list .answer .question {
       color: white;
       font-size: 20px;
       line-height: 27px;
       text-align: center;
       padding: 40px; }
+      @media (max-width: 515px) {
+        .answer-list .answer .question {
+          font-size: 16px;
+          padding: 20px;
+          line-height: 23px;
+          font-weight: 300; } }
     .answer-list .answer .info {
       position: absolute;
       bottom: 0;
@@ -96,6 +118,9 @@ a {
       color: white;
       text-align: center;
       padding-bottom: 20px; }
+      @media (max-width: 515px) {
+        .answer-list .answer .info {
+          display: none; } }
       .answer-list .answer .info img {
         width: 21px;
         margin-right: 4px;
@@ -137,7 +162,7 @@ a {
 
 .ask-question-input {
   position: relative;
-  width: 400px;
+  max-width: 400px;
   background: white;
   border-radius: 8px;
   padding: 8px 14px 26px 14px; }
