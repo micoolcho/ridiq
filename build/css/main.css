@@ -88,6 +88,20 @@ a {
       line-height: 27px;
       text-align: center;
       padding: 40px; }
+    .answer-list .answer .info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      color: white;
+      text-align: center;
+      padding-bottom: 20px; }
+      .answer-list .answer .info img {
+        width: 21px;
+        margin-right: 4px;
+        margin-top: -3px; }
+      .answer-list .answer .info span + span {
+        margin-left: 15px; }
 
 .notice {
   padding: 20px 30px;

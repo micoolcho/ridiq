@@ -128,6 +128,26 @@ $lgAnswerPadding: 15px;
       text-align: center;
       padding: 40px;
     }
+
+    .info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      color: white;
+      text-align: center;
+      padding-bottom: 20px;
+
+      img {
+        width: 21px;
+        margin-right: 4px;
+        margin-top: -3px;
+      }
+
+      span + span {
+        margin-left: 15px;
+      }
+    }
   }
 }
 
