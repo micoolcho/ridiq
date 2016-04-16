@@ -56,7 +56,7 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _services = __webpack_require__(169);
+	var _services = __webpack_require__(166);
 
 	var _services2 = _interopRequireDefault(_services);
 
@@ -67,25 +67,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	// import { Dispatcher } from 'flux';
-
-
-	var answerService = new _services2.default();
-
-	// var AppDispatcher = new Dispatcher();
-	// AppDispatcher.register(function(payload){
-	//   switch (payload.actionName) {
-	//     case 'onNewAnswer':
-	//       break;
-	//   }
-	// });
-	answerService.addListener('loadmore', function () {
-	  var _console;
-
-	  (_console = console).log.apply(_console, arguments);
-	});
-
-	answerService.loadmore();
 
 	var AskQuestionFrom = function (_React$Component) {
 	  _inherits(AskQuestionFrom, _React$Component);
@@ -251,11 +232,15 @@
 	    var _this3 = _possibleConstructorReturn(this, (_Object$getPrototypeO2 = Object.getPrototypeOf(MoreAnswer)).call.apply(_Object$getPrototypeO2, [this].concat(args)));
 
 	    _this3.state = {
+	      isLoading: false,
 	      loadedItem: 0,
 	      item: []
 	    };
 
-	    _this3.loadMore = _this3.loadMore.bind(_this3);
+	    _this3.onClickLoadMoreBtn = _this3.onClickLoadMoreBtn.bind(_this3);
+	    _this3.onReceiveLoadmoreResult = _this3.onReceiveLoadmoreResult.bind(_this3);
+
+	    _services2.default.addListener('loadmore', _this3.onReceiveLoadmoreResult);
 	    return _this3;
 	  }
 
@@ -305,8 +290,10 @@
 	          { className: 'text-center m-t-20' },
 	          _react2.default.createElement(
 	            'div',
-	            { onClick: this.loadMore, className: 'button button-large' },
-	            'load more'
+	            {
+	              onClick: this.onClickLoadMoreBtn,
+	              className: 'button button-large ' + (this.state.isLoading ? 'disabled' : '') },
+	            this.state.isLoading ? 'loading...' : 'load more'
 	          )
 	        ) : _react2.default.createElement('span', null)
 	      );
@@ -319,35 +306,26 @@
 	      });
 	    }
 	  }, {
-	    key: 'loadMore',
-	    value: function loadMore() {
-	      var _this4 = this;
+	    key: 'onClickLoadMoreBtn',
+	    value: function onClickLoadMoreBtn() {
+	      if (this.state.isLoading) return;
+	      this.setState({
+	        isLoading: true
+	      });
 
-	      var result = [{
-	        id: Math.random(),
-	        cover: "images/item1.png",
-	        question: "lorem",
-	        like: "69",
-	        comment: "96"
-	      }, {
-	        id: Math.random(),
-	        cover: "images/item2.png",
-	        question: "lorem",
-	        like: "69",
-	        comment: "96"
-	      }, {
-	        id: Math.random(),
-	        cover: "images/item3.png",
-	        question: "lorem",
-	        like: "69",
-	        comment: "96"
-	      }];
+	      _services2.default.loadMore();
+	    }
+	  }, {
+	    key: 'onReceiveLoadmoreResult',
+	    value: function onReceiveLoadmoreResult(result) {
+	      var _this4 = this;
 
 	      result.map(function (newItem) {
 	        _this4.state.item.push(newItem);
 	      });
 
 	      this.state.loadedItem += result.length;
+	      this.state.isLoading = false;
 
 	      this.forceUpdate();
 	    }
@@ -20315,10 +20293,7 @@
 	module.exports = ReactMount.renderSubtreeIntoContainer;
 
 /***/ },
-/* 166 */,
-/* 167 */,
-/* 168 */,
-/* 169 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -20329,7 +20304,7 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _fbemitter = __webpack_require__(170);
+	var _fbemitter = __webpack_require__(167);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -20353,8 +20328,8 @@
 	  }
 
 	  _createClass(AnswerService, [{
-	    key: "loadmore",
-	    value: function loadmore() {
+	    key: "loadMore",
+	    value: function loadMore() {
 	      var _this2 = this;
 
 	      var result = [{
@@ -20388,13 +20363,11 @@
 	  return AnswerService;
 	}(_fbemitter.EventEmitter);
 
-	// export default new AnswerService();
-
-
 	exports.default = AnswerService;
+	exports.default = new AnswerService();
 
 /***/ },
-/* 170 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -20407,14 +20380,14 @@
 	 */
 
 	var fbemitter = {
-	  EventEmitter: __webpack_require__(171)
+	  EventEmitter: __webpack_require__(168)
 	};
 
 	module.exports = fbemitter;
 
 
 /***/ },
-/* 171 */
+/* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -20433,11 +20406,11 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var EmitterSubscription = __webpack_require__(172);
-	var EventSubscriptionVendor = __webpack_require__(174);
+	var EmitterSubscription = __webpack_require__(169);
+	var EventSubscriptionVendor = __webpack_require__(171);
 
-	var emptyFunction = __webpack_require__(176);
-	var invariant = __webpack_require__(175);
+	var emptyFunction = __webpack_require__(173);
+	var invariant = __webpack_require__(172);
 
 	/**
 	 * @class BaseEventEmitter
@@ -20611,7 +20584,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 172 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -20632,7 +20605,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var EventSubscription = __webpack_require__(173);
+	var EventSubscription = __webpack_require__(170);
 
 	/**
 	 * EmitterSubscription represents a subscription with listener and context data.
@@ -20664,7 +20637,7 @@
 	module.exports = EmitterSubscription;
 
 /***/ },
-/* 173 */
+/* 170 */
 /***/ function(module, exports) {
 
 	/**
@@ -20718,7 +20691,7 @@
 	module.exports = EventSubscription;
 
 /***/ },
-/* 174 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -20737,7 +20710,7 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var invariant = __webpack_require__(175);
+	var invariant = __webpack_require__(172);
 
 	/**
 	 * EventSubscriptionVendor stores a set of EventSubscriptions that are
@@ -20827,7 +20800,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 175 */
+/* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -20882,7 +20855,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 176 */
+/* 173 */
 /***/ function(module, exports) {
 
 	/**

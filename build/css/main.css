@@ -522,6 +522,8 @@ main {
   text-decoration: none;
   cursor: pointer;
   text-align: center; }
+  .button.disabled {
+    opacity: 0.5; }
   .button.button-small {
     background: #19ADE2;
     color: white;

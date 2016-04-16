@@ -242,6 +242,10 @@ main {
   cursor: pointer;
   text-align: center;
 
+  &.disabled {
+    opacity: 0.5;
+  }
+
   &.button-small {
     background: #19ADE2;
     color: white;

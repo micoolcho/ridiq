@@ -5,7 +5,7 @@ export default class AnswerService extends EventEmitter {
     super(...args);
   }
 
-  loadmore() {
+  loadMore() {
     const result = [
       {
         id: Math.random(),
@@ -38,4 +38,4 @@ export default class AnswerService extends EventEmitter {
   }
 }
 
-// export default new AnswerService();
+export default new AnswerService();

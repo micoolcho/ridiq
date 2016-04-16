@@ -1,22 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import { Dispatcher } from 'flux';
 import AnswerService from './services.jsx';
-
-var answerService = new AnswerService();
-
-// var AppDispatcher = new Dispatcher();
-// AppDispatcher.register(function(payload){
-//   switch (payload.actionName) {
-//     case 'onNewAnswer':
-//       break;
-//   }
-// });
-answerService.addListener('loadmore', function(...args){
-  console.log(...args);
-});
-
-answerService.loadmore();
 
 class AskQuestionFrom extends React.Component {
   constructor(...args) {
@@ -131,11 +115,15 @@ class MoreAnswer extends React.Component {
     super(...args);
 
     this.state = {
+      isLoading: false,
       loadedItem: 0,
       item: [],
     };
 
-    this.loadMore = this.loadMore.bind(this);
+    this.onClickLoadMoreBtn = this.onClickLoadMoreBtn.bind(this);
+    this.onReceiveLoadmoreResult = this.onReceiveLoadmoreResult.bind(this);
+    
+    AnswerService.addListener('loadmore', this.onReceiveLoadmoreResult);
   }
 
   render() {
@@ -165,7 +153,13 @@ class MoreAnswer extends React.Component {
         {
           this.state.loadedItem <= this.props.totalItem ? (
             <div className="text-center m-t-20">
-              <div onClick={this.loadMore} className="button button-large">load more</div>
+              <div
+                onClick={this.onClickLoadMoreBtn}
+                className={'button button-large ' + (this.state.isLoading ? 'disabled' : '')}>
+                {
+                  this.state.isLoading ? 'loading...' : 'load more'
+                }
+              </div>
             </div>
           ) : <span></span>
         }
@@ -179,36 +173,22 @@ class MoreAnswer extends React.Component {
     });
   }
 
-  loadMore() {
-    var result = [
-      {
-        id: Math.random(),
-        cover: "images/item1.png",
-        question: "lorem",
-        like: "69",
-        comment: "96",
-      },
-      {
-        id: Math.random(),
-        cover: "images/item2.png",
-        question: "lorem",
-        like: "69",
-        comment: "96",
-      },
-      {
-        id: Math.random(),
-        cover: "images/item3.png",
-        question: "lorem",
-        like: "69",
-        comment: "96",
-      },
-    ];
+  onClickLoadMoreBtn() {
+    if (this.state.isLoading) return;
+    this.setState({
+      isLoading: true,
+    });
 
+    AnswerService.loadMore();
+  }
+  
+  onReceiveLoadmoreResult(result) {
     result.map((newItem)=>{
       this.state.item.push(newItem);
     });
 
     this.state.loadedItem += result.length;
+    this.state.isLoading = false;
 
     this.forceUpdate();
   }
