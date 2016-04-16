@@ -109,13 +109,13 @@ main {
       font-size: 20px;
       line-height: 27px;
       text-align: center;
-      padding: 40px; }
+      padding: 40px;
+      font-weight: 300; }
       @media (max-width: 545px) {
         .answer-list .answer .question {
           font-size: 16px;
           padding: 20px;
-          line-height: 23px;
-          font-weight: 300; } }
+          line-height: 23px; } }
     .answer-list .answer .info {
       position: absolute;
       bottom: 0;

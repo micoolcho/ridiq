@@ -182,12 +182,12 @@ main {
       line-height: 27px;
       text-align: center;
       padding: 40px;
+      font-weight: 300;
 
       @include smallMobile() {
         font-size: 16px;
         padding: 20px;
         line-height: 23px;
-        font-weight: 300;
       }
     }
 
