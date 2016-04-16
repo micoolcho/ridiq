@@ -369,6 +369,12 @@
 .no-margin {
   margin: 0px; }
 
+.view-full-profile {
+  text-transform: capitalize; }
+  .view-full-profile:hover {
+    text-decoration: none;
+    color: #19ADE2; }
+
 body {
   font-family: "Open Sans";
   background: #F8F7F7; }
