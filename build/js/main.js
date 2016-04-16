@@ -8,8 +8,10 @@ class AskQuestionFrom extends React.Component {
       txtLength: 0,
     };
 
+    this.maxTxtLength = 250;
+
     this.submitForm = this.submitForm.bind(this);
-    this.countTxt = this.countTxt.bind(this);
+    this.onTextareaChange = this.onTextareaChange.bind(this);
     this.resetForm = this.resetForm.bind(this);
     this.openForm = this.openForm.bind(this);
   }
@@ -46,10 +48,10 @@ class AskQuestionFrom extends React.Component {
                 <textarea
                   ref="textarea"
                   placeholder="Ask a question" name="" id="" cols="30" rows="5"
-                  onChange={this.countTxt}
+                  onChange={this.onTextareaChange}
                 ></textarea>
                 <div className="counter">
-                  <span>{this.state.txtLength}</span>/250
+                  <span>{this.state.txtLength}</span>/{this.maxTxtLength}
                 </div>
               </div>
 
@@ -64,9 +66,16 @@ class AskQuestionFrom extends React.Component {
     );
   }
 
-  countTxt(e) {
+  onTextareaChange(e) {
+    let txtLength = this.refs.textarea.value.length;
+
+    if (txtLength > this.maxTxtLength) {
+      this.refs.textarea.value = this.refs.textarea.value.substring(0, this.maxTxtLength);
+      txtLength = this.maxTxtLength;
+    }
+
     this.setState({
-      txtLength: this.refs.textarea.value.length,
+      txtLength: txtLength
     });
   }
 
