@@ -1,9 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+// import { Dispatcher } from 'flux';
+import AnswerService from './services.jsx';
+
+var answerService = new AnswerService();
+
+// var AppDispatcher = new Dispatcher();
+// AppDispatcher.register(function(payload){
+//   switch (payload.actionName) {
+//     case 'onNewAnswer':
+//       break;
+//   }
+// });
+answerService.addListener('loadmore', function(...args){
+  console.log(...args);
+});
+
+answerService.loadmore();
 
 class AskQuestionFrom extends React.Component {
-  constructor(args) {
-    super(args);
+  constructor(...args) {
+    super(...args);
 
     this.state = {
       openForm: false,
@@ -110,8 +127,8 @@ class AskQuestionFrom extends React.Component {
 
 class MoreAnswer extends React.Component {
 
-  constructor(args) {
-    super(args);
+  constructor(...args) {
+    super(...args);
 
     this.state = {
       loadedItem: 0,

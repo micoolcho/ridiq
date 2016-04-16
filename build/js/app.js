@@ -56,6 +56,10 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
+	var _services = __webpack_require__(169);
+
+	var _services2 = _interopRequireDefault(_services);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -63,14 +67,39 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	// import { Dispatcher } from 'flux';
+
+
+	var answerService = new _services2.default();
+
+	// var AppDispatcher = new Dispatcher();
+	// AppDispatcher.register(function(payload){
+	//   switch (payload.actionName) {
+	//     case 'onNewAnswer':
+	//       break;
+	//   }
+	// });
+	answerService.addListener('loadmore', function () {
+	  var _console;
+
+	  (_console = console).log.apply(_console, arguments);
+	});
+
+	answerService.loadmore();
 
 	var AskQuestionFrom = function (_React$Component) {
 	  _inherits(AskQuestionFrom, _React$Component);
 
-	  function AskQuestionFrom(args) {
+	  function AskQuestionFrom() {
+	    var _Object$getPrototypeO;
+
 	    _classCallCheck(this, AskQuestionFrom);
 
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AskQuestionFrom).call(this, args));
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    var _this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(AskQuestionFrom)).call.apply(_Object$getPrototypeO, [this].concat(args)));
 
 	    _this.state = {
 	      openForm: false,
@@ -210,10 +239,16 @@
 	var MoreAnswer = function (_React$Component2) {
 	  _inherits(MoreAnswer, _React$Component2);
 
-	  function MoreAnswer(args) {
+	  function MoreAnswer() {
+	    var _Object$getPrototypeO2;
+
 	    _classCallCheck(this, MoreAnswer);
 
-	    var _this3 = _possibleConstructorReturn(this, Object.getPrototypeOf(MoreAnswer).call(this, args));
+	    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+	      args[_key2] = arguments[_key2];
+	    }
+
+	    var _this3 = _possibleConstructorReturn(this, (_Object$getPrototypeO2 = Object.getPrototypeOf(MoreAnswer)).call.apply(_Object$getPrototypeO2, [this].concat(args)));
 
 	    _this3.state = {
 	      loadedItem: 0,
@@ -20278,6 +20313,615 @@
 	var ReactMount = __webpack_require__(156);
 
 	module.exports = ReactMount.renderSubtreeIntoContainer;
+
+/***/ },
+/* 166 */,
+/* 167 */,
+/* 168 */,
+/* 169 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _fbemitter = __webpack_require__(170);
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var AnswerService = function (_EventEmitter) {
+	  _inherits(AnswerService, _EventEmitter);
+
+	  function AnswerService() {
+	    var _Object$getPrototypeO;
+
+	    _classCallCheck(this, AnswerService);
+
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    return _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(AnswerService)).call.apply(_Object$getPrototypeO, [this].concat(args)));
+	  }
+
+	  _createClass(AnswerService, [{
+	    key: "loadmore",
+	    value: function loadmore() {
+	      var _this2 = this;
+
+	      var result = [{
+	        id: Math.random(),
+	        cover: "images/item1.png",
+	        question: "lorem",
+	        like: "69",
+	        comment: "96"
+	      }, {
+	        id: Math.random(),
+	        cover: "images/item2.png",
+	        question: "lorem",
+	        like: "69",
+	        comment: "96"
+	      }, {
+	        id: Math.random(),
+	        cover: "images/item3.png",
+	        question: "lorem",
+	        like: "69",
+	        comment: "96"
+	      }];
+
+	      console.log('aaa');
+
+	      setTimeout(function () {
+	        _this2.emit('loadmore', result);
+	      }, 2000);
+	    }
+	  }]);
+
+	  return AnswerService;
+	}(_fbemitter.EventEmitter);
+
+	// export default new AnswerService();
+
+
+	exports.default = AnswerService;
+
+/***/ },
+/* 170 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2014-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 */
+
+	var fbemitter = {
+	  EventEmitter: __webpack_require__(171)
+	};
+
+	module.exports = fbemitter;
+
+
+/***/ },
+/* 171 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright (c) 2014-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule BaseEventEmitter
+	 * @typechecks
+	 */
+
+	'use strict';
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	var EmitterSubscription = __webpack_require__(172);
+	var EventSubscriptionVendor = __webpack_require__(174);
+
+	var emptyFunction = __webpack_require__(176);
+	var invariant = __webpack_require__(175);
+
+	/**
+	 * @class BaseEventEmitter
+	 * @description
+	 * An EventEmitter is responsible for managing a set of listeners and publishing
+	 * events to them when it is told that such events happened. In addition to the
+	 * data for the given event it also sends a event control object which allows
+	 * the listeners/handlers to prevent the default behavior of the given event.
+	 *
+	 * The emitter is designed to be generic enough to support all the different
+	 * contexts in which one might want to emit events. It is a simple multicast
+	 * mechanism on top of which extra functionality can be composed. For example, a
+	 * more advanced emitter may use an EventHolder and EventFactory.
+	 */
+
+	var BaseEventEmitter = (function () {
+	  /**
+	   * @constructor
+	   */
+
+	  function BaseEventEmitter() {
+	    _classCallCheck(this, BaseEventEmitter);
+
+	    this._subscriber = new EventSubscriptionVendor();
+	    this._currentSubscription = null;
+	  }
+
+	  /**
+	   * Adds a listener to be invoked when events of the specified type are
+	   * emitted. An optional calling context may be provided. The data arguments
+	   * emitted will be passed to the listener function.
+	   *
+	   * TODO: Annotate the listener arg's type. This is tricky because listeners
+	   *       can be invoked with varargs.
+	   *
+	   * @param {string} eventType - Name of the event to listen to
+	   * @param {function} listener - Function to invoke when the specified event is
+	   *   emitted
+	   * @param {*} context - Optional context object to use when invoking the
+	   *   listener
+	   */
+
+	  BaseEventEmitter.prototype.addListener = function addListener(eventType, listener, context) {
+	    return this._subscriber.addSubscription(eventType, new EmitterSubscription(this._subscriber, listener, context));
+	  };
+
+	  /**
+	   * Similar to addListener, except that the listener is removed after it is
+	   * invoked once.
+	   *
+	   * @param {string} eventType - Name of the event to listen to
+	   * @param {function} listener - Function to invoke only once when the
+	   *   specified event is emitted
+	   * @param {*} context - Optional context object to use when invoking the
+	   *   listener
+	   */
+
+	  BaseEventEmitter.prototype.once = function once(eventType, listener, context) {
+	    var emitter = this;
+	    return this.addListener(eventType, function () {
+	      emitter.removeCurrentListener();
+	      listener.apply(context, arguments);
+	    });
+	  };
+
+	  /**
+	   * Removes all of the registered listeners, including those registered as
+	   * listener maps.
+	   *
+	   * @param {?string} eventType - Optional name of the event whose registered
+	   *   listeners to remove
+	   */
+
+	  BaseEventEmitter.prototype.removeAllListeners = function removeAllListeners(eventType) {
+	    this._subscriber.removeAllSubscriptions(eventType);
+	  };
+
+	  /**
+	   * Provides an API that can be called during an eventing cycle to remove the
+	   * last listener that was invoked. This allows a developer to provide an event
+	   * object that can remove the listener (or listener map) during the
+	   * invocation.
+	   *
+	   * If it is called when not inside of an emitting cycle it will throw.
+	   *
+	   * @throws {Error} When called not during an eventing cycle
+	   *
+	   * @example
+	   *   var subscription = emitter.addListenerMap({
+	   *     someEvent: function(data, event) {
+	   *       console.log(data);
+	   *       emitter.removeCurrentListener();
+	   *     }
+	   *   });
+	   *
+	   *   emitter.emit('someEvent', 'abc'); // logs 'abc'
+	   *   emitter.emit('someEvent', 'def'); // does not log anything
+	   */
+
+	  BaseEventEmitter.prototype.removeCurrentListener = function removeCurrentListener() {
+	    !!!this._currentSubscription ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Not in an emitting cycle; there is no current subscription') : invariant(false) : undefined;
+	    this._subscriber.removeSubscription(this._currentSubscription);
+	  };
+
+	  /**
+	   * Returns an array of listeners that are currently registered for the given
+	   * event.
+	   *
+	   * @param {string} eventType - Name of the event to query
+	   * @return {array}
+	   */
+
+	  BaseEventEmitter.prototype.listeners = function listeners(eventType) /* TODO: Array<EventSubscription> */{
+	    var subscriptions = this._subscriber.getSubscriptionsForType(eventType);
+	    return subscriptions ? subscriptions.filter(emptyFunction.thatReturnsTrue).map(function (subscription) {
+	      return subscription.listener;
+	    }) : [];
+	  };
+
+	  /**
+	   * Emits an event of the given type with the given data. All handlers of that
+	   * particular type will be notified.
+	   *
+	   * @param {string} eventType - Name of the event to emit
+	   * @param {*} Arbitrary arguments to be passed to each registered listener
+	   *
+	   * @example
+	   *   emitter.addListener('someEvent', function(message) {
+	   *     console.log(message);
+	   *   });
+	   *
+	   *   emitter.emit('someEvent', 'abc'); // logs 'abc'
+	   */
+
+	  BaseEventEmitter.prototype.emit = function emit(eventType) {
+	    var subscriptions = this._subscriber.getSubscriptionsForType(eventType);
+	    if (subscriptions) {
+	      var keys = Object.keys(subscriptions);
+	      for (var ii = 0; ii < keys.length; ii++) {
+	        var key = keys[ii];
+	        var subscription = subscriptions[key];
+	        // The subscription may have been removed during this event loop.
+	        if (subscription) {
+	          this._currentSubscription = subscription;
+	          this.__emitToSubscription.apply(this, [subscription].concat(Array.prototype.slice.call(arguments)));
+	        }
+	      }
+	      this._currentSubscription = null;
+	    }
+	  };
+
+	  /**
+	   * Provides a hook to override how the emitter emits an event to a specific
+	   * subscription. This allows you to set up logging and error boundaries
+	   * specific to your environment.
+	   *
+	   * @param {EmitterSubscription} subscription
+	   * @param {string} eventType
+	   * @param {*} Arbitrary arguments to be passed to each registered listener
+	   */
+
+	  BaseEventEmitter.prototype.__emitToSubscription = function __emitToSubscription(subscription, eventType) {
+	    var args = Array.prototype.slice.call(arguments, 2);
+	    subscription.listener.apply(subscription.context, args);
+	  };
+
+	  return BaseEventEmitter;
+	})();
+
+	module.exports = BaseEventEmitter;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 172 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2014-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 * 
+	 * @providesModule EmitterSubscription
+	 * @typechecks
+	 */
+
+	'use strict';
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var EventSubscription = __webpack_require__(173);
+
+	/**
+	 * EmitterSubscription represents a subscription with listener and context data.
+	 */
+
+	var EmitterSubscription = (function (_EventSubscription) {
+	  _inherits(EmitterSubscription, _EventSubscription);
+
+	  /**
+	   * @param {EventSubscriptionVendor} subscriber - The subscriber that controls
+	   *   this subscription
+	   * @param {function} listener - Function to invoke when the specified event is
+	   *   emitted
+	   * @param {*} context - Optional context object to use when invoking the
+	   *   listener
+	   */
+
+	  function EmitterSubscription(subscriber, listener, context) {
+	    _classCallCheck(this, EmitterSubscription);
+
+	    _EventSubscription.call(this, subscriber);
+	    this.listener = listener;
+	    this.context = context;
+	  }
+
+	  return EmitterSubscription;
+	})(EventSubscription);
+
+	module.exports = EmitterSubscription;
+
+/***/ },
+/* 173 */
+/***/ function(module, exports) {
+
+	/**
+	 * Copyright (c) 2014-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 * @providesModule EventSubscription
+	 * @typechecks
+	 */
+
+	'use strict';
+
+	/**
+	 * EventSubscription represents a subscription to a particular event. It can
+	 * remove its own subscription.
+	 */
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	var EventSubscription = (function () {
+
+	  /**
+	   * @param {EventSubscriptionVendor} subscriber the subscriber that controls
+	   *   this subscription.
+	   */
+
+	  function EventSubscription(subscriber) {
+	    _classCallCheck(this, EventSubscription);
+
+	    this.subscriber = subscriber;
+	  }
+
+	  /**
+	   * Removes this subscription from the subscriber that controls it.
+	   */
+
+	  EventSubscription.prototype.remove = function remove() {
+	    if (this.subscriber) {
+	      this.subscriber.removeSubscription(this);
+	      this.subscriber = null;
+	    }
+	  };
+
+	  return EventSubscription;
+	})();
+
+	module.exports = EventSubscription;
+
+/***/ },
+/* 174 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright (c) 2014-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 * 
+	 * @providesModule EventSubscriptionVendor
+	 * @typechecks
+	 */
+
+	'use strict';
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+	var invariant = __webpack_require__(175);
+
+	/**
+	 * EventSubscriptionVendor stores a set of EventSubscriptions that are
+	 * subscribed to a particular event type.
+	 */
+
+	var EventSubscriptionVendor = (function () {
+	  function EventSubscriptionVendor() {
+	    _classCallCheck(this, EventSubscriptionVendor);
+
+	    this._subscriptionsForType = {};
+	    this._currentSubscription = null;
+	  }
+
+	  /**
+	   * Adds a subscription keyed by an event type.
+	   *
+	   * @param {string} eventType
+	   * @param {EventSubscription} subscription
+	   */
+
+	  EventSubscriptionVendor.prototype.addSubscription = function addSubscription(eventType, subscription) {
+	    !(subscription.subscriber === this) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'The subscriber of the subscription is incorrectly set.') : invariant(false) : undefined;
+	    if (!this._subscriptionsForType[eventType]) {
+	      this._subscriptionsForType[eventType] = [];
+	    }
+	    var key = this._subscriptionsForType[eventType].length;
+	    this._subscriptionsForType[eventType].push(subscription);
+	    subscription.eventType = eventType;
+	    subscription.key = key;
+	    return subscription;
+	  };
+
+	  /**
+	   * Removes a bulk set of the subscriptions.
+	   *
+	   * @param {?string} eventType - Optional name of the event type whose
+	   *   registered supscriptions to remove, if null remove all subscriptions.
+	   */
+
+	  EventSubscriptionVendor.prototype.removeAllSubscriptions = function removeAllSubscriptions(eventType) {
+	    if (eventType === undefined) {
+	      this._subscriptionsForType = {};
+	    } else {
+	      delete this._subscriptionsForType[eventType];
+	    }
+	  };
+
+	  /**
+	   * Removes a specific subscription. Instead of calling this function, call
+	   * `subscription.remove()` directly.
+	   *
+	   * @param {object} subscription
+	   */
+
+	  EventSubscriptionVendor.prototype.removeSubscription = function removeSubscription(subscription) {
+	    var eventType = subscription.eventType;
+	    var key = subscription.key;
+
+	    var subscriptionsForType = this._subscriptionsForType[eventType];
+	    if (subscriptionsForType) {
+	      delete subscriptionsForType[key];
+	    }
+	  };
+
+	  /**
+	   * Returns the array of subscriptions that are currently registered for the
+	   * given event type.
+	   *
+	   * Note: This array can be potentially sparse as subscriptions are deleted
+	   * from it when they are removed.
+	   *
+	   * TODO: This returns a nullable array. wat?
+	   *
+	   * @param {string} eventType
+	   * @return {?array}
+	   */
+
+	  EventSubscriptionVendor.prototype.getSubscriptionsForType = function getSubscriptionsForType(eventType) {
+	    return this._subscriptionsForType[eventType];
+	  };
+
+	  return EventSubscriptionVendor;
+	})();
+
+	module.exports = EventSubscriptionVendor;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 175 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2013-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 */
+
+	'use strict';
+
+	/**
+	 * Use invariant() to assert state which your program assumes to be true.
+	 *
+	 * Provide sprintf-style format (only %s is supported) and arguments
+	 * to provide information about what broke and what you were
+	 * expecting.
+	 *
+	 * The invariant message will be stripped in production, but the invariant
+	 * will remain to ensure logic does not differ in production.
+	 */
+
+	function invariant(condition, format, a, b, c, d, e, f) {
+	  if (process.env.NODE_ENV !== 'production') {
+	    if (format === undefined) {
+	      throw new Error('invariant requires an error message argument');
+	    }
+	  }
+
+	  if (!condition) {
+	    var error;
+	    if (format === undefined) {
+	      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
+	    } else {
+	      var args = [a, b, c, d, e, f];
+	      var argIndex = 0;
+	      error = new Error(format.replace(/%s/g, function () {
+	        return args[argIndex++];
+	      }));
+	      error.name = 'Invariant Violation';
+	    }
+
+	    error.framesToPop = 1; // we don't care about invariant's own frame
+	    throw error;
+	  }
+	}
+
+	module.exports = invariant;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 176 */
+/***/ function(module, exports) {
+
+	/**
+	 * Copyright 2013-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 *
+	 */
+
+	"use strict";
+
+	function makeEmptyFunction(arg) {
+	  return function () {
+	    return arg;
+	  };
+	}
+
+	/**
+	 * This function accepts and discards inputs; it has no side effects. This is
+	 * primarily useful idiomatically for overridable function endpoints which
+	 * always need to be callable, since JS lacks a null-call idiom ala Cocoa.
+	 */
+	function emptyFunction() {}
+
+	emptyFunction.thatReturns = makeEmptyFunction;
+	emptyFunction.thatReturnsFalse = makeEmptyFunction(false);
+	emptyFunction.thatReturnsTrue = makeEmptyFunction(true);
+	emptyFunction.thatReturnsNull = makeEmptyFunction(null);
+	emptyFunction.thatReturnsThis = function () {
+	  return this;
+	};
+	emptyFunction.thatReturnsArgument = function (arg) {
+	  return arg;
+	};
+
+	module.exports = emptyFunction;
 
 /***/ }
 /******/ ]);
