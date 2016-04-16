@@ -1,0 +1,57 @@
+$i: 5;
+@while $i <= 60 {
+  $i: $i + 5;
+  .m-#{$i} {
+    margin: #{$i}px;
+  }
+
+  .m-t-#{$i} {
+    margin-top: #{$i}px;
+  }
+
+  .m-r-#{$i} {
+    margin-right: #{$i}px;
+  }
+
+  .m-b-#{$i} {
+    margin-bottom: #{$i}px;
+  }
+
+  .m-l-#{$i} {
+    margin-left: #{$i}px;
+  }
+
+
+  .p-#{$i} {
+    padding: #{$i}px;
+  }
+
+  .p-t-#{$i} {
+    padding-top: #{$i}px;
+  }
+
+  .p-r-#{$i} {
+    padding-right: #{$i}px;
+  }
+
+  .p-b-#{$i} {
+    padding-bottom: #{$i}px;
+  }
+
+  .p-l-#{$i} {
+    padding-left: #{$i}px;
+  }
+}
+
+.a-nolink {
+  cursor: pointer;
+  color: #3380FF;
+}
+
+.no-padding {
+  padding: 0px;
+}
+
+.no-margin {
+  margin: 0px;
+}

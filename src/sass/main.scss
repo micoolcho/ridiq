@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:400,600,300);
+@import "helper";
 
 $textBlueColor: #19ADE2;
 
@@ -238,6 +239,7 @@ main {
 .button {
   display: inline-block;
   text-decoration: none;
+  cursor: pointer;
 
   &.button-small {
     background: #19ADE2;
@@ -295,4 +297,35 @@ main {
 .margin-auto {
   margin-left: auto;
   margin-right: auto;
+}
+
+.ridiq-modal {
+  background: #F8F7F7;
+  border-radius: 8px;
+
+  .ridiq-modal-header {
+    border-bottom: 1px solid rgba(151, 151, 151, 0.2);
+    padding: 13px;
+    font-size: 16px;
+    text-transform: uppercase;
+    text-align: center;
+    color: #575757;
+    position: relative;
+
+    .btn-close {
+      float: left;
+      display: inline-block;
+      color: #575757;
+      opacity: 0.3;
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 20px;
+      cursor: pointer;
+      padding: 3px;
+    }
+  }
+
+  .ridiq-modal-content {
+    padding: 25px 14px;
+  }
 }

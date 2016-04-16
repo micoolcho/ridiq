@@ -49,6 +49,7 @@
       </div>
 
       <div class="button button-small">submit question</div>
+      <div data-toggle="modal" data-target="#askQuestionModal" class="button button-small">ask a question</div>
     </div>
 
     <div class="answer-list margin-auto">
@@ -86,5 +87,34 @@
     <br><br><br><br><br>
   </main>
 
+
+  <div class="modal fade" id="askQuestionModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="ridiq-modal">
+        <div class="ridiq-modal-header">
+          <span class="btn-close" data-dismiss="modal" aria-label="Close">&times;</span>
+          header
+        </div>
+        <div class="ridiq-modal-content">
+          <div class="ask-question-input margin-auto">
+            <textarea placeholder="Ask a question" name="" id="" cols="30" rows="5"></textarea>
+            <div class="counter">
+              <span>14</span>/250
+            </div>
+          </div>
+
+          <div class="text-center p-t-25 m-b-25">
+            <div class="button button-small">submit question</div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  <script src="js/vendor.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    jQuery("#askQuestionModal").modal('show');
+  </script>
 </body>
 </html>
