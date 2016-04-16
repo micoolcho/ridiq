@@ -3,40 +3,63 @@ class AskQuestionFrom extends React.Component {
     super(args);
 
     this.state = {
+      openForm: false,
       submitted: false,
       txtLength: 0,
     };
 
     this.submitForm = this.submitForm.bind(this);
     this.countTxt = this.countTxt.bind(this);
+    this.resetForm = this.resetForm.bind(this);
+    this.openForm = this.openForm.bind(this);
   }
 
   render() {
+    if (this.state.openForm == false) {
+      return (
+        <div className="text-center">
+          <div
+            className="button button-small"
+            onClick={this.openForm}
+          >ask a question</div>
+        </div>
+      )
+    }
+
     return (
       <div className="text-center">
-        <div className="ask-question-input margin-auto">
-          <textarea
-            ref="textarea"
-            placeholder="Ask a question" name="" id="" cols="30" rows="5"
-            onChange={this.countTxt}
-          ></textarea>
-          <div className="counter">
-            <span>{this.state.txtLength}</span>/250
-          </div>
-        </div>
 
         {
           this.state.submitted ? (
-            <div className="notice blue">
-              Your question has been submitted!
+            <div>
+              <div className="notice blue">
+                Your question has been submitted!
+              </div>
+              <div
+                className="button button-small btn-submit m-t-15"
+                onClick={this.resetForm}
+              >ASK ANOTHER QUESTION</div>
             </div>
-          ) : <span></span>
-        }
+          ) : (
+            <div>
+              <div className="ask-question-input margin-auto">
+                <textarea
+                  ref="textarea"
+                  placeholder="Ask a question" name="" id="" cols="30" rows="5"
+                  onChange={this.countTxt}
+                ></textarea>
+                <div className="counter">
+                  <span>{this.state.txtLength}</span>/250
+                </div>
+              </div>
 
-        <div
-          className="button button-small"
-          onClick={this.submitForm}
-        >submit question</div>
+              <div
+                className="button button-small m-t-15"
+                onClick={this.submitForm}
+              >submit question</div>
+            </div>
+          )
+        }
       </div>
     );
   }
@@ -48,7 +71,28 @@ class AskQuestionFrom extends React.Component {
   }
 
   submitForm() {
-    console.log(this.refs.textarea.value)
+    const txtValue = this.refs.textarea.value;
+
+    this.setState({
+      submitted: true,
+    });
+  }
+
+  resetForm() {
+    this.setState({
+      submitted: false,
+      txtLength: 0,
+    });
+
+    setTimeout(()=>{
+      this.refs.textarea.focus();
+    }, 100);
+  }
+
+  openForm() {
+    this.setState({
+      openForm: true,
+    });
   }
 }
 
