@@ -172,3 +172,37 @@ $lgAnswerPadding: 15px;
     color: #19ADE2;
   }
 }
+
+.ask-question-input {
+  position: relative;
+  width: 400px;
+  background: white;
+  border-radius: 8px;
+  padding: 8px 14px 26px 14px;
+
+  textarea {
+    background: transparent;
+    width: 100%;
+    border: none;
+    resize: none;
+    outline: none;
+  }
+
+  .counter {
+    position: absolute;
+    right: 14px;
+    bottom: 7px;
+
+    font-size: 13px;
+    color: #A5A5A5;
+
+    span {
+      color: #E55454;
+    }
+  }
+}
+
+.margin-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
