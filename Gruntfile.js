@@ -23,10 +23,8 @@ module.exports = function(grunt) {
     concat: {
       jsVendor: {
         src: [
-          'bower_components/jquery/dist/jquery.min.js',
+          // 'bower_components/jquery/dist/jquery.min.js',
           // 'bower_components/bootstrap-sass/assets/javascripts/bootstrap/modal.js',
-          'bower_components/react/react.min.js',
-          'bower_components/react/react-dom.min.js',
         ],
         dest: 'build/js/vendor.js',
       },

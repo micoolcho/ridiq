@@ -1,5 +1,8 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 class AskQuestionFrom extends React.Component {
-  constructor(...args) {
+  constructor(args) {
     super(args);
 
     this.state = {
@@ -107,7 +110,7 @@ class AskQuestionFrom extends React.Component {
 
 class MoreAnswer extends React.Component {
 
-  constructor(...args) {
+  constructor(args) {
     super(args);
 
     this.state = {
@@ -123,14 +126,12 @@ class MoreAnswer extends React.Component {
       return (<span></span>);
     }
 
-    console.log(this.state.loadedItem <= this.props.totalItem);
-
     return (
       <div>
         {
           this.state.item.map((item)=>{
             return (
-              <div className="answer">
+              <div className="answer" key={`answer-${item.id}`}>
                 <img className="cover" src={item.cover} alt="" />
                 <div className="question">{item.question}</div>
                 <div className="info">
@@ -164,18 +165,21 @@ class MoreAnswer extends React.Component {
   loadMore() {
     var result = [
       {
+        id: Math.random(),
         cover: "images/item1.png",
         question: "lorem",
         like: "69",
         comment: "96",
       },
       {
+        id: Math.random(),
         cover: "images/item2.png",
         question: "lorem",
         like: "69",
         comment: "96",
       },
       {
+        id: Math.random(),
         cover: "images/item3.png",
         question: "lorem",
         like: "69",
