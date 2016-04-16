@@ -105,4 +105,93 @@ class AskQuestionFrom extends React.Component {
   }
 }
 
+class MoreAnswer extends React.Component {
+
+  constructor(...args) {
+    super(args);
+
+    this.state = {
+      loadedItem: 0,
+      item: [],
+    };
+
+    this.loadMore = this.loadMore.bind(this);
+  }
+
+  render() {
+    if (this.props.totalItem == 0) {
+      return (<span></span>);
+    }
+
+    console.log(this.state.loadedItem <= this.props.totalItem);
+
+    return (
+      <div>
+        {
+          this.state.item.map((item)=>{
+            return (
+              <div className="answer">
+                <img className="cover" src={item.cover} alt="" />
+                <div className="question">{item.question}</div>
+                <div className="info">
+                  <span><img src="images/like_icon.png" alt="" /> {item.like}</span>
+                  <span><img src="images/comment_icon.png" alt="" /> {item.comment}</span>
+                </div>
+              </div>
+            )
+          })
+        }
+
+        <div className="clearfix"></div>
+
+        {
+          this.state.loadedItem <= this.props.totalItem ? (
+            <div className="text-center m-t-20">
+              <div onClick={this.loadMore} className="button button-large">load more</div>
+            </div>
+          ) : <span></span>
+        }
+      </div>
+    )
+  }
+
+  componentDidMount() {
+    this.setState({
+      loadedItem: this.props.loadedItem,
+    });
+  }
+
+  loadMore() {
+    var result = [
+      {
+        cover: "images/item1.png",
+        question: "lorem",
+        like: "69",
+        comment: "96",
+      },
+      {
+        cover: "images/item2.png",
+        question: "lorem",
+        like: "69",
+        comment: "96",
+      },
+      {
+        cover: "images/item3.png",
+        question: "lorem",
+        like: "69",
+        comment: "96",
+      },
+    ];
+
+    result.map((newItem)=>{
+      this.state.item.push(newItem);
+    });
+
+    this.state.loadedItem += result.length;
+
+    this.forceUpdate();
+  }
+}
+
 ReactDOM.render(<AskQuestionFrom />, document.getElementById('askQuestionForm'));
+ReactDOM.render(<MoreAnswer totalItem={15} loadedItem={5} />, document.getElementById('moreAnswer'));

@@ -112,7 +112,7 @@ main {
 
 .answer-list {
   max-width: $lgAnswerListSize;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 
   @include mobile() {
     max-width: $smallAnswerListSize;
@@ -240,6 +240,7 @@ main {
   display: inline-block;
   text-decoration: none;
   cursor: pointer;
+  text-align: center;
 
   &.button-small {
     background: #19ADE2;

@@ -426,7 +426,7 @@ main {
 
 .answer-list {
   max-width: 780px;
-  margin-bottom: 30px; }
+  margin-bottom: 50px; }
   @media (max-width: 810px) {
     .answer-list {
       max-width: 515px; } }
@@ -520,7 +520,8 @@ main {
 .button {
   display: inline-block;
   text-decoration: none;
-  cursor: pointer; }
+  cursor: pointer;
+  text-align: center; }
   .button.button-small {
     background: #19ADE2;
     color: white;
