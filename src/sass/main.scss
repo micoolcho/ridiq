@@ -147,6 +147,10 @@ main {
     margin-right: $lgAnswerPadding;
     margin-bottom: $lgAnswerPadding;
 
+    a {
+      text-decoration: none;
+    }
+
     @include smallMobile() {
       margin-right: $extraSmallAnswerPadding;
       margin-bottom: $extraSmallAnswerPadding;

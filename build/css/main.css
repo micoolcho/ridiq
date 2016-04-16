@@ -452,6 +452,8 @@ main {
     position: relative;
     margin-right: 15px;
     margin-bottom: 15px; }
+    .answer-list .answer a {
+      text-decoration: none; }
     @media (max-width: 545px) {
       .answer-list .answer {
         margin-right: 13px;

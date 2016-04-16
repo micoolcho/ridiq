@@ -138,7 +138,7 @@ class MoreAnswer extends React.Component {
             return (
               <div className="answer" key={`answer-${item.id}`}>
                 <img className="cover" src={item.cover} alt="" />
-                <div className="question">{item.question}</div>
+                <a href={item.url} className="question">{item.question}</a>
                 <div className="info">
                   <span><img src="images/like_icon.png" alt="" /> {item.like}</span>
                   <span><img src="images/comment_icon.png" alt="" /> {item.comment}</span>

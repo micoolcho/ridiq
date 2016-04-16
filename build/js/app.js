@@ -260,8 +260,8 @@
 	            { className: 'answer', key: 'answer-' + item.id },
 	            _react2.default.createElement('img', { className: 'cover', src: item.cover, alt: '' }),
 	            _react2.default.createElement(
-	              'div',
-	              { className: 'question' },
+	              'a',
+	              { href: item.url, className: 'question' },
 	              item.question
 	            ),
 	            _react2.default.createElement(
@@ -20337,26 +20337,27 @@
 	        cover: "images/item1.png",
 	        question: "lorem",
 	        like: "69",
-	        comment: "96"
+	        comment: "96",
+	        url: "single-answer.html"
 	      }, {
 	        id: Math.random(),
 	        cover: "images/item2.png",
 	        question: "lorem",
 	        like: "69",
-	        comment: "96"
+	        comment: "96",
+	        url: "single-answer.html"
 	      }, {
 	        id: Math.random(),
 	        cover: "images/item3.png",
 	        question: "lorem",
 	        like: "69",
-	        comment: "96"
+	        comment: "96",
+	        url: "single-answer.html"
 	      }];
-
-	      console.log('aaa');
 
 	      setTimeout(function () {
 	        _this2.emit('loadmore', result);
-	      }, 2000);
+	      }, 1000);
 	    }
 	  }]);
 

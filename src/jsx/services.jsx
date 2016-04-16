@@ -13,6 +13,7 @@ export default class AnswerService extends EventEmitter {
         question: "lorem",
         like: "69",
         comment: "96",
+        url: "single-answer.html",
       },
       {
         id: Math.random(),
@@ -20,6 +21,7 @@ export default class AnswerService extends EventEmitter {
         question: "lorem",
         like: "69",
         comment: "96",
+        url: "single-answer.html",
       },
       {
         id: Math.random(),
@@ -27,14 +29,13 @@ export default class AnswerService extends EventEmitter {
         question: "lorem",
         like: "69",
         comment: "96",
+        url: "single-answer.html",
       },
     ];
 
-    console.log('aaa');
-
     setTimeout(()=>{
       this.emit('loadmore', result);
-    }, 2000);
+    }, 1000);
   }
 }
 
