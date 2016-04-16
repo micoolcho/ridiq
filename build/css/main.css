@@ -11,6 +11,9 @@ ul {
 a {
   color: #19ADE2; }
 
+main {
+  padding: 0 15px; }
+
 .main-nav {
   background: #CB473A;
   padding: 12px;
@@ -54,13 +57,16 @@ a {
 .answer-list {
   max-width: 780px;
   margin-bottom: 30px; }
-  @media (max-width: 780px) {
+  @media (max-width: 810px) {
     .answer-list {
       max-width: 515px; } }
-  @media (max-width: 515px) {
+  @media (max-width: 545px) {
     .answer-list {
       max-width: 375px;
       font-size: 16px; } }
+  @media (max-width: 405px) {
+    .answer-list {
+      max-width: 181px; } }
   .answer-list:before {
     content: " ";
     height: 1px;
@@ -76,7 +82,7 @@ a {
     position: relative;
     margin-right: 15px;
     margin-bottom: 15px; }
-    @media (max-width: 515px) {
+    @media (max-width: 545px) {
       .answer-list .answer {
         margin-right: 13px;
         margin-bottom: 13px; } }
@@ -94,7 +100,7 @@ a {
     .answer-list .answer .cover {
       width: 250px;
       height: 250px; }
-      @media (max-width: 515px) {
+      @media (max-width: 545px) {
         .answer-list .answer .cover {
           width: 181px;
           height: 181px; } }
@@ -104,7 +110,7 @@ a {
       line-height: 27px;
       text-align: center;
       padding: 40px; }
-      @media (max-width: 515px) {
+      @media (max-width: 545px) {
         .answer-list .answer .question {
           font-size: 16px;
           padding: 20px;
@@ -118,7 +124,7 @@ a {
       color: white;
       text-align: center;
       padding-bottom: 20px; }
-      @media (max-width: 515px) {
+      @media (max-width: 545px) {
         .answer-list .answer .info {
           display: none; } }
       .answer-list .answer .info img {
@@ -159,6 +165,9 @@ a {
     min-width: 240px;
     font-size: 18px;
     color: #19ADE2; }
+    @media (max-width: 405px) {
+      .button.button-large {
+        min-width: initial; } }
 
 .ask-question-input {
   position: relative;
