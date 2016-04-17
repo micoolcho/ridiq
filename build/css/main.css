@@ -390,7 +390,57 @@
     padding-right: 15px;
     margin-bottom: 15px; }
     .single-answer-wrapper .question .user {
+      margin-top: 5px;
       color: #AAAAAA; }
+  .single-answer-wrapper .answer-info {
+    padding: 11px 15px;
+    color: #444647;
+    opacity: 0.3; }
+    .single-answer-wrapper .answer-info li + li {
+      margin-left: 15px; }
+    .single-answer-wrapper .answer-info .left {
+      float: left; }
+    .single-answer-wrapper .answer-info .right {
+      float: right; }
+  .single-answer-wrapper a.loadmore-comment {
+    border-top: 0.5px solid rgba(151, 151, 151, 0.2);
+    padding: 10px 15px;
+    text-align: center;
+    display: block;
+    width: 100%; }
+  .single-answer-wrapper .comment-list .comment {
+    padding: 10px 15px;
+    border-top: 0.5px solid rgba(151, 151, 151, 0.2);
+    position: relative;
+    min-height: 55px; }
+    .single-answer-wrapper .comment-list .comment .avatar {
+      background: red;
+      width: 35px;
+      height: 35px;
+      border-radius: 1000px;
+      position: absolute;
+      top: 10px;
+      left: 15px; }
+    .single-answer-wrapper .comment-list .comment .time {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      color: #444647;
+      opacity: 0.3; }
+    .single-answer-wrapper .comment-list .comment .content {
+      margin-top: -1px;
+      padding-left: 50px; }
+      .single-answer-wrapper .comment-list .comment .content .username {
+        margin-bottom: 4px; }
+      .single-answer-wrapper .comment-list .comment .content .txt {
+        color: #727272;
+        font-size: 15px;
+        line-height: 20px; }
+    .single-answer-wrapper .comment-list .comment .tags li {
+      display: inline-block;
+      margin-top: 25px; }
+      .single-answer-wrapper .comment-list .comment .tags li + li {
+        margin-left: 5px; }
 
 body {
   font-family: "Open Sans";

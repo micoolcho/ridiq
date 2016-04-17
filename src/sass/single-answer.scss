@@ -8,6 +8,7 @@
 }
 
 $singleAnswerContentPadding: 15px;
+$commentAvatarSize: 35px;
 
 .single-answer-wrapper {
   max-width: 500px;
@@ -26,7 +27,88 @@ $singleAnswerContentPadding: 15px;
     margin-bottom: 15px;
 
     .user {
+      margin-top: 5px;
       color: #AAAAAA;
+    }
+  }
+
+  .answer-info {
+    padding: 11px $singleAnswerContentPadding;
+    color: #444647;
+    opacity: 0.3;
+
+    li + li {
+      margin-left: 15px;
+    }
+
+    .left {
+      float: left;
+    }
+
+    .right {
+      float: right;
+    }
+  }
+
+  a.loadmore-comment {
+    border-top: .5px solid rgba(151, 151, 151, 0.2);
+    padding: 10px $singleAnswerContentPadding;
+    text-align: center;
+    display: block;
+    width: 100%;
+  }
+
+  .comment-list {
+
+    .comment {
+      padding: 10px $singleAnswerContentPadding;
+      border-top: .5px solid rgba(151, 151, 151, 0.2);
+      position: relative;
+      min-height: $commentAvatarSize + 10px * 2;
+
+      .avatar {
+        background: red;
+        width: $commentAvatarSize;
+        height: $commentAvatarSize;
+        border-radius: 1000px;
+        position: absolute;
+        top: 10px;
+        left: $singleAnswerContentPadding;
+      }
+
+      .time {
+        position: absolute;
+        top: 10px;
+        right: $singleAnswerContentPadding;
+        color: #444647;
+        opacity: 0.3;
+      }
+
+      .content {
+        margin-top: -1px;
+        padding-left: $commentAvatarSize + $singleAnswerContentPadding;
+
+        .username {
+          margin-bottom: 4px;
+        }
+
+        .txt {
+          color: #727272;
+          font-size: 15px;
+          line-height: 20px;
+        }
+      }
+
+      .tags {
+        li {
+          display: inline-block;
+          margin-top: 25px;
+
+          &+li {
+            margin-left: 5px;
+          }
+        }
+      }
     }
   }
 }
