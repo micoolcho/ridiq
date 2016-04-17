@@ -46,8 +46,6 @@
 
 	'use strict';
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -56,286 +54,23 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _services = __webpack_require__(166);
+	var _MoreAnswer = __webpack_require__(175);
 
-	var _services2 = _interopRequireDefault(_services);
+	var _MoreAnswer2 = _interopRequireDefault(_MoreAnswer);
+
+	var _AskQuestionForm = __webpack_require__(176);
+
+	var _AskQuestionForm2 = _interopRequireDefault(_AskQuestionForm);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	if (document.getElementById('askQuestionForm')) {
+	  _reactDom2.default.render(_react2.default.createElement(_AskQuestionForm2.default, null), document.getElementById('askQuestionForm'));
+	}
 
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var AskQuestionFrom = function (_React$Component) {
-	  _inherits(AskQuestionFrom, _React$Component);
-
-	  function AskQuestionFrom() {
-	    var _Object$getPrototypeO;
-
-	    _classCallCheck(this, AskQuestionFrom);
-
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
-
-	    var _this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(AskQuestionFrom)).call.apply(_Object$getPrototypeO, [this].concat(args)));
-
-	    _this.state = {
-	      openForm: false,
-	      submitted: false,
-	      txtLength: 0
-	    };
-
-	    _this.maxTxtLength = 250;
-
-	    _this.submitForm = _this.submitForm.bind(_this);
-	    _this.onTextareaChange = _this.onTextareaChange.bind(_this);
-	    _this.resetForm = _this.resetForm.bind(_this);
-	    _this.openForm = _this.openForm.bind(_this);
-	    return _this;
-	  }
-
-	  _createClass(AskQuestionFrom, [{
-	    key: 'render',
-	    value: function render() {
-	      if (this.state.openForm == false) {
-	        return _react2.default.createElement(
-	          'div',
-	          { className: 'text-center' },
-	          _react2.default.createElement(
-	            'div',
-	            {
-	              className: 'button button-small',
-	              onClick: this.openForm
-	            },
-	            'ask a question'
-	          )
-	        );
-	      }
-
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'text-center' },
-	        this.state.submitted ? _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'notice blue' },
-	            'Your question has been submitted!'
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            {
-	              className: 'button button-small btn-submit m-t-15',
-	              onClick: this.resetForm
-	            },
-	            'ASK ANOTHER QUESTION'
-	          )
-	        ) : _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'ask-question-input margin-auto' },
-	            _react2.default.createElement('textarea', {
-	              ref: 'textarea',
-	              placeholder: 'Ask a question', name: '', id: '', cols: '30', rows: '5',
-	              onChange: this.onTextareaChange
-	            }),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'counter' },
-	              _react2.default.createElement(
-	                'span',
-	                null,
-	                this.state.txtLength
-	              ),
-	              '/',
-	              this.maxTxtLength
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            {
-	              className: 'button button-small m-t-15',
-	              onClick: this.submitForm
-	            },
-	            'submit question'
-	          )
-	        )
-	      );
-	    }
-	  }, {
-	    key: 'onTextareaChange',
-	    value: function onTextareaChange(e) {
-	      var txtLength = this.refs.textarea.value.length;
-
-	      if (txtLength > this.maxTxtLength) {
-	        this.refs.textarea.value = this.refs.textarea.value.substring(0, this.maxTxtLength);
-	        txtLength = this.maxTxtLength;
-	      }
-
-	      this.setState({
-	        txtLength: txtLength
-	      });
-	    }
-	  }, {
-	    key: 'submitForm',
-	    value: function submitForm() {
-	      var txtValue = this.refs.textarea.value;
-
-	      this.setState({
-	        submitted: true
-	      });
-	    }
-	  }, {
-	    key: 'resetForm',
-	    value: function resetForm() {
-	      var _this2 = this;
-
-	      this.setState({
-	        submitted: false,
-	        txtLength: 0
-	      });
-
-	      setTimeout(function () {
-	        _this2.refs.textarea.focus();
-	      }, 100);
-	    }
-	  }, {
-	    key: 'openForm',
-	    value: function openForm() {
-	      this.setState({
-	        openForm: true
-	      });
-	    }
-	  }]);
-
-	  return AskQuestionFrom;
-	}(_react2.default.Component);
-
-	var MoreAnswer = function (_React$Component2) {
-	  _inherits(MoreAnswer, _React$Component2);
-
-	  function MoreAnswer() {
-	    var _Object$getPrototypeO2;
-
-	    _classCallCheck(this, MoreAnswer);
-
-	    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-	      args[_key2] = arguments[_key2];
-	    }
-
-	    var _this3 = _possibleConstructorReturn(this, (_Object$getPrototypeO2 = Object.getPrototypeOf(MoreAnswer)).call.apply(_Object$getPrototypeO2, [this].concat(args)));
-
-	    _this3.state = {
-	      isLoading: false,
-	      loadedItem: 0,
-	      item: []
-	    };
-
-	    _this3.onClickLoadMoreBtn = _this3.onClickLoadMoreBtn.bind(_this3);
-	    _this3.onReceiveLoadmoreResult = _this3.onReceiveLoadmoreResult.bind(_this3);
-
-	    _services2.default.addListener('loadmore', _this3.onReceiveLoadmoreResult);
-	    return _this3;
-	  }
-
-	  _createClass(MoreAnswer, [{
-	    key: 'render',
-	    value: function render() {
-	      if (this.props.totalItem == 0) {
-	        return _react2.default.createElement('span', null);
-	      }
-
-	      return _react2.default.createElement(
-	        'div',
-	        null,
-	        this.state.item.map(function (item) {
-	          return _react2.default.createElement(
-	            'div',
-	            { className: 'answer', key: 'answer-' + item.id },
-	            _react2.default.createElement('img', { className: 'cover', src: item.cover, alt: '' }),
-	            _react2.default.createElement(
-	              'a',
-	              { href: item.url, className: 'question' },
-	              item.question
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'info' },
-	              _react2.default.createElement(
-	                'span',
-	                null,
-	                _react2.default.createElement('img', { src: 'images/like_icon.png', alt: '' }),
-	                ' ',
-	                item.like
-	              ),
-	              _react2.default.createElement(
-	                'span',
-	                null,
-	                _react2.default.createElement('img', { src: 'images/comment_icon.png', alt: '' }),
-	                ' ',
-	                item.comment
-	              )
-	            )
-	          );
-	        }),
-	        _react2.default.createElement('div', { className: 'clearfix' }),
-	        this.state.loadedItem <= this.props.totalItem ? _react2.default.createElement(
-	          'div',
-	          { className: 'text-center m-t-20' },
-	          _react2.default.createElement(
-	            'div',
-	            {
-	              onClick: this.onClickLoadMoreBtn,
-	              className: 'button button-large ' + (this.state.isLoading ? 'disabled' : '') },
-	            this.state.isLoading ? 'loading...' : 'load more'
-	          )
-	        ) : _react2.default.createElement('span', null)
-	      );
-	    }
-	  }, {
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      this.setState({
-	        loadedItem: this.props.loadedItem
-	      });
-	    }
-	  }, {
-	    key: 'onClickLoadMoreBtn',
-	    value: function onClickLoadMoreBtn() {
-	      if (this.state.isLoading) return;
-	      this.setState({
-	        isLoading: true
-	      });
-
-	      _services2.default.loadMore();
-	    }
-	  }, {
-	    key: 'onReceiveLoadmoreResult',
-	    value: function onReceiveLoadmoreResult(result) {
-	      var _this4 = this;
-
-	      result.map(function (newItem) {
-	        _this4.state.item.push(newItem);
-	      });
-
-	      this.state.loadedItem += result.length;
-	      this.state.isLoading = false;
-
-	      this.forceUpdate();
-	    }
-	  }]);
-
-	  return MoreAnswer;
-	}(_react2.default.Component);
-
-	_reactDom2.default.render(_react2.default.createElement(AskQuestionFrom, null), document.getElementById('askQuestionForm'));
-	_reactDom2.default.render(_react2.default.createElement(MoreAnswer, { totalItem: 15, loadedItem: 5 }), document.getElementById('moreAnswer'));
+	if (document.getElementById('moreAnswer')) {
+	  _reactDom2.default.render(_react2.default.createElement(_MoreAnswer2.default, { totalItem: 15, loadedItem: 5 }), document.getElementById('moreAnswer'));
+	}
 
 /***/ },
 /* 1 */
@@ -20896,6 +20631,333 @@
 	};
 
 	module.exports = emptyFunction;
+
+/***/ },
+/* 174 */,
+/* 175 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _services = __webpack_require__(166);
+
+	var _services2 = _interopRequireDefault(_services);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var MoreAnswer = function (_React$Component) {
+	  _inherits(MoreAnswer, _React$Component);
+
+	  function MoreAnswer() {
+	    var _Object$getPrototypeO;
+
+	    _classCallCheck(this, MoreAnswer);
+
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    var _this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(MoreAnswer)).call.apply(_Object$getPrototypeO, [this].concat(args)));
+
+	    _this.state = {
+	      isLoading: false,
+	      loadedItem: 0,
+	      item: []
+	    };
+
+	    _this.onClickLoadMoreBtn = _this.onClickLoadMoreBtn.bind(_this);
+	    _this.onReceiveLoadmoreResult = _this.onReceiveLoadmoreResult.bind(_this);
+
+	    _services2.default.addListener('loadmore', _this.onReceiveLoadmoreResult);
+	    return _this;
+	  }
+
+	  _createClass(MoreAnswer, [{
+	    key: 'render',
+	    value: function render() {
+	      if (this.props.totalItem == 0) {
+	        return _react2.default.createElement('span', null);
+	      }
+
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        this.state.item.map(function (item) {
+	          return _react2.default.createElement(
+	            'div',
+	            { className: 'answer', key: 'answer-' + item.id },
+	            _react2.default.createElement('img', { className: 'cover', src: item.cover, alt: '' }),
+	            _react2.default.createElement(
+	              'a',
+	              { href: item.url, className: 'question' },
+	              item.question
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'info' },
+	              _react2.default.createElement(
+	                'span',
+	                null,
+	                _react2.default.createElement('img', { src: 'images/like_icon.png', alt: '' }),
+	                ' ',
+	                item.like
+	              ),
+	              _react2.default.createElement(
+	                'span',
+	                null,
+	                _react2.default.createElement('img', { src: 'images/comment_icon.png', alt: '' }),
+	                ' ',
+	                item.comment
+	              )
+	            )
+	          );
+	        }),
+	        _react2.default.createElement('div', { className: 'clearfix' }),
+	        this.state.loadedItem <= this.props.totalItem ? _react2.default.createElement(
+	          'div',
+	          { className: 'text-center m-t-20' },
+	          _react2.default.createElement(
+	            'div',
+	            {
+	              onClick: this.onClickLoadMoreBtn,
+	              className: 'button button-large ' + (this.state.isLoading ? 'disabled' : '') },
+	            this.state.isLoading ? 'loading...' : 'load more'
+	          )
+	        ) : _react2.default.createElement('span', null)
+	      );
+	    }
+	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.setState({
+	        loadedItem: this.props.loadedItem
+	      });
+	    }
+	  }, {
+	    key: 'onClickLoadMoreBtn',
+	    value: function onClickLoadMoreBtn() {
+	      if (this.state.isLoading) return;
+	      this.setState({
+	        isLoading: true
+	      });
+
+	      _services2.default.loadMore();
+	    }
+	  }, {
+	    key: 'onReceiveLoadmoreResult',
+	    value: function onReceiveLoadmoreResult(result) {
+	      var _this2 = this;
+
+	      result.map(function (newItem) {
+	        _this2.state.item.push(newItem);
+	      });
+
+	      this.state.loadedItem += result.length;
+	      this.state.isLoading = false;
+
+	      this.forceUpdate();
+	    }
+	  }]);
+
+	  return MoreAnswer;
+	}(_react2.default.Component);
+
+	exports.default = MoreAnswer;
+
+/***/ },
+/* 176 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _services = __webpack_require__(166);
+
+	var _services2 = _interopRequireDefault(_services);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var AskQuestionForm = function (_React$Component) {
+	  _inherits(AskQuestionForm, _React$Component);
+
+	  function AskQuestionForm() {
+	    var _Object$getPrototypeO;
+
+	    _classCallCheck(this, AskQuestionForm);
+
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    var _this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(AskQuestionForm)).call.apply(_Object$getPrototypeO, [this].concat(args)));
+
+	    _this.state = {
+	      openForm: false,
+	      submitted: false,
+	      txtLength: 0
+	    };
+
+	    _this.maxTxtLength = 250;
+
+	    _this.submitForm = _this.submitForm.bind(_this);
+	    _this.onTextareaChange = _this.onTextareaChange.bind(_this);
+	    _this.resetForm = _this.resetForm.bind(_this);
+	    _this.openForm = _this.openForm.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(AskQuestionForm, [{
+	    key: 'render',
+	    value: function render() {
+	      if (this.state.openForm == false) {
+	        return _react2.default.createElement(
+	          'div',
+	          { className: 'text-center' },
+	          _react2.default.createElement(
+	            'div',
+	            {
+	              className: 'button button-small',
+	              onClick: this.openForm
+	            },
+	            'ask a question'
+	          )
+	        );
+	      }
+
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'text-center' },
+	        this.state.submitted ? _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'notice blue' },
+	            'Your question has been submitted!'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            {
+	              className: 'button button-small btn-submit m-t-15',
+	              onClick: this.resetForm
+	            },
+	            'ASK ANOTHER QUESTION'
+	          )
+	        ) : _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'ask-question-input margin-auto' },
+	            _react2.default.createElement('textarea', {
+	              ref: 'textarea',
+	              placeholder: 'Ask a question', name: '', id: '', cols: '30', rows: '5',
+	              onChange: this.onTextareaChange
+	            }),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'counter' },
+	              _react2.default.createElement(
+	                'span',
+	                null,
+	                this.state.txtLength
+	              ),
+	              '/',
+	              this.maxTxtLength
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            {
+	              className: 'button button-small m-t-15',
+	              onClick: this.submitForm
+	            },
+	            'submit question'
+	          )
+	        )
+	      );
+	    }
+	  }, {
+	    key: 'onTextareaChange',
+	    value: function onTextareaChange(e) {
+	      var txtLength = this.refs.textarea.value.length;
+
+	      if (txtLength > this.maxTxtLength) {
+	        this.refs.textarea.value = this.refs.textarea.value.substring(0, this.maxTxtLength);
+	        txtLength = this.maxTxtLength;
+	      }
+
+	      this.setState({
+	        txtLength: txtLength
+	      });
+	    }
+	  }, {
+	    key: 'submitForm',
+	    value: function submitForm() {
+	      var txtValue = this.refs.textarea.value;
+
+	      this.setState({
+	        submitted: true
+	      });
+	    }
+	  }, {
+	    key: 'resetForm',
+	    value: function resetForm() {
+	      var _this2 = this;
+
+	      this.setState({
+	        submitted: false,
+	        txtLength: 0
+	      });
+
+	      setTimeout(function () {
+	        _this2.refs.textarea.focus();
+	      }, 100);
+	    }
+	  }, {
+	    key: 'openForm',
+	    value: function openForm() {
+	      this.setState({
+	        openForm: true
+	      });
+	    }
+	  }]);
+
+	  return AskQuestionForm;
+	}(_react2.default.Component);
+
+	exports.default = AskQuestionForm;
 
 /***/ }
 /******/ ]);
