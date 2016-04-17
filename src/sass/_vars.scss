@@ -1,0 +1,16 @@
+$textBlueColor: #19ADE2;
+
+$lgAnswerSize: 250px;
+$lgAnswerPadding: 15px;
+
+$extraSmallAnswerSize: 181px;
+$extraSmallAnswerPadding: 13px;
+
+$lgAnswerListSize: $lgAnswerSize * 3 + $lgAnswerPadding * 2;
+$smallAnswerListSize: $lgAnswerSize * 2 + $lgAnswerPadding;
+$extraSmallAnswerListSize: $extraSmallAnswerSize * 2 + $extraSmallAnswerPadding;
+
+$mainPadding: 15px;
+
+$singleAnswerContentPadding: 15px;
+$commentAvatarSize: 35px;

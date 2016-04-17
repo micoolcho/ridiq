@@ -1,3 +1,5 @@
+@import "vars";
+
 .view-full-profile {
   text-transform: capitalize;
 
@@ -6,9 +8,6 @@
     color: #19ADE2;
   }
 }
-
-$singleAnswerContentPadding: 15px;
-$commentAvatarSize: 35px;
 
 .single-answer-wrapper {
   max-width: 500px;
@@ -50,12 +49,19 @@ $commentAvatarSize: 35px;
     }
   }
 
-  a.loadmore-comment {
+  .loadmore-comment {
     border-top: .5px solid rgba(151, 151, 151, 0.2);
     padding: 10px $singleAnswerContentPadding;
     text-align: center;
     display: block;
+    cursor: pointer;
     width: 100%;
+    color: $textBlueColor;
+
+    &.disabled {
+      color: darkgray;
+      cursor: not-allowed;
+    }
   }
 
   .comment-list {

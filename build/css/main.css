@@ -402,12 +402,17 @@
       float: left; }
     .single-answer-wrapper .answer-info .right {
       float: right; }
-  .single-answer-wrapper a.loadmore-comment {
+  .single-answer-wrapper .loadmore-comment {
     border-top: 0.5px solid rgba(151, 151, 151, 0.2);
     padding: 10px 15px;
     text-align: center;
     display: block;
-    width: 100%; }
+    cursor: pointer;
+    width: 100%;
+    color: #19ADE2; }
+    .single-answer-wrapper .loadmore-comment.disabled {
+      color: darkgray;
+      cursor: not-allowed; }
   .single-answer-wrapper .comment-list .comment {
     padding: 10px 15px;
     border-top: 0.5px solid rgba(151, 151, 151, 0.2);

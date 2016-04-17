@@ -1,20 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:400,600,300);
 @import "helper";
 @import "single-answer";
-
-$textBlueColor: #19ADE2;
-
-$lgAnswerSize: 250px;
-$lgAnswerPadding: 15px;
-
-$extraSmallAnswerSize: 181px;
-$extraSmallAnswerPadding: 13px;
-
-$lgAnswerListSize: $lgAnswerSize * 3 + $lgAnswerPadding * 2;
-$smallAnswerListSize: $lgAnswerSize * 2 + $lgAnswerPadding;
-$extraSmallAnswerListSize: $extraSmallAnswerSize * 2 + $extraSmallAnswerPadding;
-
-$mainPadding: 15px;
+@import "vars";
 
 @mixin mobile {
   @media (max-width: $lgAnswerListSize + $mainPadding * 2) {

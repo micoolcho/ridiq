@@ -1,5 +1,5 @@
 import React from 'react';
-import AnswerService from './services.jsx';
+import AnswerService from './services/AnserServices.jsx';
 
 export default class MoreAnswer extends React.Component {
 
@@ -43,7 +43,7 @@ export default class MoreAnswer extends React.Component {
         <div className="clearfix"></div>
 
         {
-          this.state.loadedItem <= this.props.totalItem ? (
+          this.state.loadedItem < this.props.totalItem ? (
             <div className="text-center m-t-20">
               <div
                 onClick={this.onClickLoadMoreBtn}
