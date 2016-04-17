@@ -6,3 +6,27 @@
     color: #19ADE2;
   }
 }
+
+$singleAnswerContentPadding: 15px;
+
+.single-answer-wrapper {
+  max-width: 500px;
+  background: white;
+  border-radius: 4px;
+  padding: 25px 0;
+  font-size: 14px;
+
+  .question {
+    color: #585858;
+    font-size: 13.5px;
+    line-height: 18px;
+    background: url("../images/quote_icon.png") no-repeat $singleAnswerContentPadding 3px / 24px;
+    padding-left: 24px + $singleAnswerContentPadding*2;
+    padding-right: $singleAnswerContentPadding;
+    margin-bottom: 15px;
+
+    .user {
+      color: #AAAAAA;
+    }
+  }
+}

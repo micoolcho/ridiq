@@ -375,6 +375,23 @@
     text-decoration: none;
     color: #19ADE2; }
 
+.single-answer-wrapper {
+  max-width: 500px;
+  background: white;
+  border-radius: 4px;
+  padding: 25px 0;
+  font-size: 14px; }
+  .single-answer-wrapper .question {
+    color: #585858;
+    font-size: 13.5px;
+    line-height: 18px;
+    background: url("../images/quote_icon.png") no-repeat 15px 3px/24px;
+    padding-left: 54px;
+    padding-right: 15px;
+    margin-bottom: 15px; }
+    .single-answer-wrapper .question .user {
+      color: #AAAAAA; }
+
 body {
   font-family: "Open Sans";
   background: #F8F7F7; }

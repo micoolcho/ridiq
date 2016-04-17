@@ -5,6 +5,7 @@
   <title>Document</title>
   <link rel="stylesheet" href="css/customized_bootstrap.css">
   <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="js/jwplayer-7.3.6/skins/vapor.css">
 </head>
 <body>
 <nav class="main-nav text-center">
@@ -22,20 +23,68 @@
     </div>
   </div>
 
-  <div id="player"></div>
+  <div class="single-answer-wrapper margin-auto">
+    <div class="question">
+      Why did you decided to create RoD? How long did it take to get the 1st version out?
+      <div class="user text-right">
+        by <a href="#">Louis Nguyen</a>
+      </div>
+    </div>
+    <div id="player"></div>
+    <div class="answer-info">
+      <ul>
+        <li class="left">
+          1,451 views
+        </li>
+        <li class="left">
+          12 likes
+        </li>
+        <li class="left">
+          50 comments
+        </li>
+        <li class="right">
+          2h ago
+        </li>
+      </ul>
+    </div>
+    <ul class="comment-list">
+      <li class="loadmore">Load older comments</li>
+      <li class="comment">
+        <div class="avatar"></div>
+        <div class="content">
+          <div class="username">Jason Dinh</div>
+          <div class="txt">
+            Great answer!!!<br />
+            I learnt from this.
+          </div>
+          <ul class="tags">
+            <li><a href="#">#YouSuck</a></li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
 </main>
 
-<script src="http://content.jwplatform.com/libraries/F7toIaN9.js"></script>
+<script src="js/jwplayer-7.3.6/jwplayer.js"></script>
 <script>
+  jwplayer.key="pXIoAFBGBUhsaU33E1uKIQ+HohZuc1FL0TS+QA==";
   jwplayer("player").setup({
     file: 'http://clips.vorwaerts-gmbh.de/VfE_html5.mp4',
-    captions: {
-      color: "FFCC00",
-      backgroundColor: "000000",
-      backgroundOpacity: 50
-    }
+    width: "100%",
+    aspectratio: "4:3",
+    skin: {
+      name: "vapor"
+    },
+    sharing: {
+      code: "&lt;iframe src=&quot;http://example.com/12345.html&quot; /&gt;",
+      link: ["http://example.com/page/MEDIAID/"],
+      sites: false,
+    },
   });
 </script>
 <!--<script src="js/app.js"></script>-->
+
+
 </body>
 </html>
