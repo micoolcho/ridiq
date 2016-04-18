@@ -25,6 +25,7 @@ module.exports = function(grunt) {
         src: [
           // 'bower_components/jquery/dist/jquery.min.js',
           // 'bower_components/bootstrap-sass/assets/javascripts/bootstrap/modal.js',
+          // 'bower_components/moment/min/moment-with-locales.min.js',
         ],
         dest: 'build/js/vendor.js',
       },

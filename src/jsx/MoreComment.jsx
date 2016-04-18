@@ -1,8 +1,24 @@
 import React from 'react';
-import Monent from 'moment';
 import CommentService from './services/CommentService.jsx';
+import Moment from 'moment';
 
-console.log(Monent.now());
+Moment.updateLocale('en', {
+  relativeTime: {
+    future : 'in %s',
+    past : '%s',
+    s : 'now',
+    m : '1m',
+    mm : '%dm',
+    h : '1h',
+    hh : '%dh',
+    d : '1d',
+    dd : '%dd',
+    M : 'a month',
+    MM : '%d months',
+    y : 'a year',
+    yy : '%d years'
+  }
+});
 
 export default class MoreComment extends React.Component {
   constructor(...args) {
@@ -25,8 +41,6 @@ export default class MoreComment extends React.Component {
       return (<span></span>);
     }
 
-    console.log(this.state.loadedItem, this.props.totalItem)
-
     return (
       <div>
         {
@@ -48,7 +62,11 @@ export default class MoreComment extends React.Component {
             return (
               <li key={`comment-${comment.id}`} className="comment">
                 <div className="avatar"></div>
-                <div className="time">{comment.time}</div>
+                <div className="time">
+                  {
+                    Moment(new Date(comment.time)).fromNow()
+                  }
+                </div>
                 <div className="content">
                   <div className="username">
                     <a href={comment.user.url}>{comment.user.displayName}</a>

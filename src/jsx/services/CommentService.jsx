@@ -1,5 +1,7 @@
 import {EventEmitter} from 'fbemitter';
 
+var count = 0;
+
 export default class CommentService extends EventEmitter {
   constructor(...args) {
     super(...args);
@@ -18,9 +20,9 @@ export default class CommentService extends EventEmitter {
         tags: [
           "tag1", "tag2", "tag3",
         ],
-        content: `==== lorem ipsum ${Math.random()} ====`,
+        content: `==== lorem ipsum ${count++} ====`,
         // FIXME use moment
-        time: "10m",
+        time: (new Date()),
       },
       {
         id: Math.random(),
@@ -33,8 +35,8 @@ export default class CommentService extends EventEmitter {
         tags: [
           "tag1", "tag2", "tag3",
         ],
-        content: `==== lorem ipsum ${Math.random()} ====`,
-        time: "10m",
+        content: `==== lorem ipsum ${count++} ====`,
+        time: "Sun Apr 17 2016 21:00:20 GMT+0700 (ICT)",
       },
       {
         id: Math.random(),
@@ -47,8 +49,8 @@ export default class CommentService extends EventEmitter {
         tags: [
           "tag1", "tag2", "tag3",
         ],
-        content: `==== lorem ipsum ${Math.random()} ====`,
-        time: "10m",
+        content: `==== lorem ipsum ${count++} ====`,
+        time: "Sun Apr 18 2016 8:20:20 GMT+0700 (ICT)",
       },
     ];
 

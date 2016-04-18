@@ -16,7 +16,6 @@
     "babel-loader": "^6.2.4",
     "babel-preset-react": "^6.5.0",
     "fbemitter": "^2.0.2",
-    "flux": "^2.1.1",
     "grunt": "^1.0.1",
     "grunt-browser-sync": "^2.2.0",
     "grunt-contrib-concat": "^1.0.0",
