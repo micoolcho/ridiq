@@ -71,7 +71,7 @@ export default class MoreAnswer extends React.Component {
 
       const wHeight = $window.height();
       const wScrollTop = $window.scrollTop();
-      if (wScrollTop + window.innerHeight + 10 >= wHeight) {
+      if (wScrollTop + window.innerHeight + 20 >= wHeight) {
         this.loadmore();
       }
     });
@@ -82,9 +82,12 @@ export default class MoreAnswer extends React.Component {
   }
 
   loadmore() {
-    if (
-      this.state.isLoading || this.state.loadedItem >= this.props.totalItem
-    ) {
+    if (this.state.isLoading) {
+      return;
+    }
+
+    if (this.state.loadedItem >= this.props.totalItem) {
+      jQuery(window).unbind('scroll');
       return;
     }
 
