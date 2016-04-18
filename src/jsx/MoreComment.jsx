@@ -60,7 +60,7 @@ export default class MoreComment extends React.Component {
         {
           this.state.items.map((comment)=>{
             return (
-              <li key={`comment-${comment.id}`} className="comment">
+              <li key={`comment-${Math.random()}`} className="comment">
                 <div className="avatar"></div>
                 <div className="time">
                   {

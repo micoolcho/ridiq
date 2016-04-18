@@ -22468,7 +22468,7 @@
 	          this.state.items.map(function (comment) {
 	            return _react2.default.createElement(
 	              'li',
-	              { key: 'comment-' + comment.id, className: 'comment' },
+	              { key: 'comment-' + Math.random(), className: 'comment' },
 	              _react2.default.createElement('div', { className: 'avatar' }),
 	              _react2.default.createElement(
 	                'div',
@@ -22555,7 +22555,7 @@
 /* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -22565,13 +22565,25 @@
 
 	var _fbemitter = __webpack_require__(168);
 
+	var _es6Promise = __webpack_require__(175);
+
+	var _es6Promise2 = _interopRequireDefault(_es6Promise);
+
+	var _isomorphicFetch = __webpack_require__(179);
+
+	var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
+
+	var _Config = __webpack_require__(283);
+
+	var _Config2 = _interopRequireDefault(_Config);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var count = 0;
 
 	var CommentService = function (_EventEmitter) {
 	  _inherits(CommentService, _EventEmitter);
@@ -22585,53 +22597,30 @@
 	      args[_key] = arguments[_key];
 	    }
 
-	    return _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(CommentService)).call.apply(_Object$getPrototypeO, [this].concat(args)));
+	    var _this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(CommentService)).call.apply(_Object$getPrototypeO, [this].concat(args)));
+
+	    _es6Promise2.default.polyfill();
+	    return _this;
 	  }
 
 	  _createClass(CommentService, [{
-	    key: "loadMore",
+	    key: 'loadMore',
 	    value: function loadMore() {
 	      var _this2 = this;
 
-	      var result = [{
-	        id: Math.random(),
-	        user: {
-	          id: "10",
-	          avatar: "images/item1.png",
-	          displayName: "Jason Dinh",
-	          url: "#/user/username"
-	        },
-	        tags: ["tag1", "tag2", "tag3"],
-	        content: "==== lorem ipsum " + count++ + " ====",
-	        // FIXME use moment
-	        time: new Date()
-	      }, {
-	        id: Math.random(),
-	        user: {
-	          id: "10",
-	          avatar: "images/item1.png",
-	          displayName: "Jason Dinh",
-	          url: "#/user/username"
-	        },
-	        tags: ["tag1", "tag2", "tag3"],
-	        content: "==== lorem ipsum " + count++ + " ====",
-	        time: "Sun Apr 17 2016 21:00:20 GMT+0700 (ICT)"
-	      }, {
-	        id: Math.random(),
-	        user: {
-	          id: "10",
-	          avatar: "images/item1.png",
-	          displayName: "Jason Dinh",
-	          url: "#/user/username"
-	        },
-	        tags: ["tag1", "tag2", "tag3"],
-	        content: "==== lorem ipsum " + count++ + " ====",
-	        time: "Sun Apr 18 2016 8:20:20 GMT+0700 (ICT)"
-	      }];
-
-	      setTimeout(function () {
-	        _this2.emit('loadmore', result);
-	      }, 1000);
+	      (0, _isomorphicFetch2.default)(_Config2.default.SERVICE_URI.COMMENT.GET, {
+	        method: "GET"
+	      }).then(function (response) {
+	        if (response.status >= 400) {
+	          throw new Error("Bad response from server");
+	        }
+	        return response.json();
+	      }).then(function (stories) {
+	        // FIXME remove setTimeout
+	        setTimeout(function () {
+	          _this2.emit('loadmore', stories);
+	        }, 1000);
+	      });
 	    }
 	  }]);
 
