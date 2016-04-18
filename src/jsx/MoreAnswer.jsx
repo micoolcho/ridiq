@@ -1,4 +1,5 @@
 import React from 'react';
+import jQuery from 'jquery';
 import AnswerService from './services/AnserServices.jsx';
 
 export default class MoreAnswer extends React.Component {
@@ -10,9 +11,10 @@ export default class MoreAnswer extends React.Component {
       isLoading: false,
       loadedItem: 0,
       item: [],
+      firstLoadDone: false,
     };
 
-    this.onClickLoadMoreBtn = this.onClickLoadMoreBtn.bind(this);
+    this.loadmore = this.loadmore.bind(this);
     this.onReceiveLoadmoreResult = this.onReceiveLoadmoreResult.bind(this);
 
     AnswerService.addListener('loadmore', this.onReceiveLoadmoreResult);
@@ -46,7 +48,7 @@ export default class MoreAnswer extends React.Component {
           this.state.loadedItem < this.props.totalItem ? (
             <div className="text-center m-t-20">
               <div
-                onClick={this.onClickLoadMoreBtn}
+                onClick={this.loadmore}
                 className={'button button-large ' + (this.state.isLoading ? 'disabled' : '')}>
                 {
                   this.state.isLoading ? 'loading...' : 'load more'
@@ -60,13 +62,32 @@ export default class MoreAnswer extends React.Component {
   }
 
   componentDidMount() {
+    const $window = jQuery(window);
+
+    $window.scroll((e)=>{
+      if (!this.state.firstLoadDone || this.state.isLoading) {
+        return;
+      }
+
+      const wHeight = $window.height();
+      const wScrollTop = $window.scrollTop();
+      if (wScrollTop + window.innerHeight + 10 >= wHeight) {
+        this.loadmore();
+      }
+    });
+
     this.setState({
       loadedItem: this.props.loadedItem,
     });
   }
 
-  onClickLoadMoreBtn() {
-    if (this.state.isLoading) return;
+  loadmore() {
+    if (
+      this.state.isLoading || this.state.loadedItem >= this.props.totalItem
+    ) {
+      return;
+    }
+
     this.setState({
       isLoading: true,
     });
@@ -79,6 +100,7 @@ export default class MoreAnswer extends React.Component {
       this.state.item.push(newItem);
     });
 
+    this.state.firstLoadDone = true;
     this.state.loadedItem += result.length;
     this.state.isLoading = false;
 
