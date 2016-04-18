@@ -15,12 +15,14 @@
     "babel-core": "^6.7.6",
     "babel-loader": "^6.2.4",
     "babel-preset-react": "^6.5.0",
+    "es6-promise": "^3.1.2",
     "fbemitter": "^2.0.2",
     "grunt": "^1.0.1",
     "grunt-browser-sync": "^2.2.0",
     "grunt-contrib-concat": "^1.0.0",
     "grunt-contrib-sass": "^1.0.0",
     "grunt-contrib-watch": "^1.0.0",
+    "isomorphic-fetch": "^2.2.1",
     "moment": "^2.12.0",
     "webpack": "^1.13.0"
   }

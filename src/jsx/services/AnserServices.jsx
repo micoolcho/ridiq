@@ -1,41 +1,30 @@
 import {EventEmitter} from 'fbemitter';
+import Es6Promise from 'es6-promise';
+import Fetch from 'isomorphic-fetch';
+import Config from './../Config.jsx';
 
 export default class AnswerService extends EventEmitter {
   constructor(...args) {
     super(...args);
+    Es6Promise.polyfill();
   }
 
   loadMore() {
-    const result = [
-      {
-        id: Math.random(),
-        cover: "images/item1.png",
-        question: "lorem",
-        like: "69",
-        comment: "96",
-        url: "single-answer.html",
-      },
-      {
-        id: Math.random(),
-        cover: "images/item2.png",
-        question: "lorem",
-        like: "69",
-        comment: "96",
-        url: "single-answer.html",
-      },
-      {
-        id: Math.random(),
-        cover: "images/item3.png",
-        question: "lorem",
-        like: "69",
-        comment: "96",
-        url: "single-answer.html",
-      },
-    ];
-
-    setTimeout(()=>{
-      this.emit('loadmore', result);
-    }, 1000);
+    Fetch(Config.SERVICE_URI.ANSWER.GET, {
+      method: "GET",
+    })
+      .then((response) => {
+        if (response.status >= 400) {
+          throw new Error("Bad response from server");
+        }
+        return response.json();
+      })
+      .then((stories) => {
+        // FIXME remove setTimeout
+        setTimeout(()=>{
+          this.emit('loadmore', stories);
+        }, 1000);
+      });
   }
 }
 

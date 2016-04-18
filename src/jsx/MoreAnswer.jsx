@@ -28,7 +28,7 @@ export default class MoreAnswer extends React.Component {
         {
           this.state.item.map((item)=>{
             return (
-              <div className="answer" key={`answer-${item.id}`}>
+              <div className="answer" key={`answer-${Math.random()}`}>
                 <img className="cover" src={item.cover} alt="" />
                 <a href={item.url} className="question">{item.question}</a>
                 <div className="info">
