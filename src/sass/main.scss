@@ -112,7 +112,9 @@ main {
   }
 
   @include extraSmallMobile() {
-    max-width: $extraSmallAnswerSize;
+    margin-left: -$mainPadding !important;
+    margin-right: -$mainPadding !important;
+    // max-width: $extraSmallAnswerSize;
   }
 
   &:before {
