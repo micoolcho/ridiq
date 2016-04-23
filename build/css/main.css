@@ -515,7 +515,8 @@ main {
   @media (max-width: 405px) {
     .answer-list {
       margin-left: -15px !important;
-      margin-right: -15px !important; } }
+      margin-right: -15px !important;
+      max-width: initial; } }
   .answer-list:before {
     content: " ";
     height: 1px;
@@ -526,17 +527,31 @@ main {
     max-width: 435px; }
   .answer-list .overflow-wrapper {
     margin-right: -15px; }
+    @media (max-width: 405px) {
+      .answer-list .overflow-wrapper {
+        margin-left: -2% !important;
+        margin-right: -2% !important; } }
   .answer-list .answer {
     float: left;
     position: relative;
     margin-right: 15px;
-    margin-bottom: 15px; }
+    margin-bottom: 15px;
+    overflow: hidden; }
     .answer-list .answer a {
       text-decoration: none; }
     @media (max-width: 545px) {
       .answer-list .answer {
         margin-right: 13px;
         margin-bottom: 13px; } }
+    @media (max-width: 405px) {
+      .answer-list .answer {
+        width: 46%;
+        margin: 2%; }
+        .answer-list .answer:after {
+          content: " ";
+          display: block;
+          padding-top: 100%;
+          background: red; } }
     .answer-list .answer:before {
       content: " ";
       opacity: 0.6;
@@ -544,17 +559,27 @@ main {
     .answer-list .answer:before, .answer-list .answer .question {
       display: block;
       position: absolute;
+      z-index: 2;
       left: 0;
       top: 0;
       width: 100%;
       height: 100%; }
     .answer-list .answer .cover {
+      position: relative;
+      z-index: 1;
       width: 250px;
       height: 250px; }
       @media (max-width: 545px) {
         .answer-list .answer .cover {
           width: 181px;
           height: 181px; } }
+      @media (max-width: 405px) {
+        .answer-list .answer .cover {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%; } }
     .answer-list .answer .question {
       color: white;
       font-size: 20px;
@@ -569,6 +594,7 @@ main {
           line-height: 23px; } }
     .answer-list .answer .info {
       position: absolute;
+      z-index: 3;
       bottom: 0;
       left: 0;
       right: 0;

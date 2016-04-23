@@ -114,7 +114,7 @@ main {
   @include extraSmallMobile() {
     margin-left: -$mainPadding !important;
     margin-right: -$mainPadding !important;
-    // max-width: $extraSmallAnswerSize;
+    max-width: initial;
   }
 
   &:before {
@@ -129,6 +129,11 @@ main {
 
   .overflow-wrapper {
     margin-right: -$lgAnswerPadding;
+
+    @include extraSmallMobile() {
+      margin-left: -2% !important;
+      margin-right: -2% !important;
+    }
   }
 
   .answer {
@@ -136,6 +141,7 @@ main {
     position: relative;
     margin-right: $lgAnswerPadding;
     margin-bottom: $lgAnswerPadding;
+    overflow: hidden;
 
     a {
       text-decoration: none;
@@ -144,6 +150,18 @@ main {
     @include smallMobile() {
       margin-right: $extraSmallAnswerPadding;
       margin-bottom: $extraSmallAnswerPadding;
+    }
+
+    @include extraSmallMobile() {
+      width: 46%;
+      margin: 2%;
+
+      &:after {
+        content: " ";
+        display: block;
+        padding-top: 100%;
+        background: red;
+      }
     }
 
     &:before {
@@ -155,6 +173,7 @@ main {
     &:before, .question {
       display: block;
       position: absolute;
+      z-index: 2;
       left: 0;
       top: 0;
       width: 100%;
@@ -162,12 +181,22 @@ main {
     }
 
     .cover {
+      position: relative;
+      z-index: 1;
       width: $lgAnswerSize;
       height: $lgAnswerSize;
 
       @include smallMobile() {
         width: $extraSmallAnswerSize;
         height: $extraSmallAnswerSize;
+      }
+
+      @include extraSmallMobile() {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
       }
     }
 
@@ -188,6 +217,7 @@ main {
 
     .info {
       position: absolute;
+      z-index: 3;
       bottom: 0;
       left: 0;
       right: 0;
