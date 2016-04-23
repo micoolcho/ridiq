@@ -550,8 +550,7 @@ main {
         .answer-list .answer:after {
           content: " ";
           display: block;
-          padding-top: 100%;
-          background: red; } }
+          padding-top: 100%; } }
     .answer-list .answer:before {
       content: " ";
       opacity: 0.6;
