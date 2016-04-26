@@ -30678,7 +30678,7 @@
 /* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var require;var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
+	var __WEBPACK_AMD_DEFINE_RESULT__;var require;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
 	 * @overview es6-promise - a tiny implementation of Promises/A+.
 	 * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
 	 * @license   Licensed under MIT license
@@ -32107,9 +32107,9 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _AnserServices = __webpack_require__(168);
+	var _QuestionService = __webpack_require__(288);
 
-	var _AnserServices2 = _interopRequireDefault(_AnserServices);
+	var _QuestionService2 = _interopRequireDefault(_QuestionService);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -32220,6 +32220,16 @@
 	      );
 	    }
 	  }, {
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      _QuestionService2.default.addListener('posted', this.onPostedQuestion);
+	    }
+	  }, {
+	    key: 'onPostedQuestion',
+	    value: function onPostedQuestion(result) {
+	      console.log(result);
+	    }
+	  }, {
 	    key: 'onTextareaChange',
 	    value: function onTextareaChange(e) {
 	      var txtLength = this.refs.textarea.value.length;
@@ -32237,6 +32247,7 @@
 	    key: 'submitForm',
 	    value: function submitForm() {
 	      var txtValue = this.refs.textarea.value;
+	      _QuestionService2.default.post(txtValue);
 
 	      this.setState({
 	        submitted: true
@@ -46309,6 +46320,81 @@
 	    return zh_tw;
 
 	}));
+
+/***/ },
+/* 288 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _fbemitter = __webpack_require__(169);
+
+	var _es6Promise = __webpack_require__(176);
+
+	var _es6Promise2 = _interopRequireDefault(_es6Promise);
+
+	var _isomorphicFetch = __webpack_require__(180);
+
+	var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var QuestionService = function (_EventEmitter) {
+	  _inherits(QuestionService, _EventEmitter);
+
+	  function QuestionService() {
+	    var _Object$getPrototypeO;
+
+	    _classCallCheck(this, QuestionService);
+
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    var _this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(QuestionService)).call.apply(_Object$getPrototypeO, [this].concat(args)));
+
+	    _es6Promise2.default.polyfill();
+	    return _this;
+	  }
+
+	  _createClass(QuestionService, [{
+	    key: 'post',
+	    value: function post(content) {
+	      var _this2 = this;
+
+	      (0, _isomorphicFetch2.default)(window.ridiqConf.askQuestion.apiPost, {
+	        method: "POST",
+	        data: {
+	          content: content
+	        }
+	      }).then(function (response) {
+	        if (response.status >= 400) {
+	          throw new Error("Bad response from server");
+	        }
+	        return response.json();
+	      }).then(function (stories) {
+	        _this2.emit('posted', stories);
+	      });
+	    }
+	  }]);
+
+	  return QuestionService;
+	}(_fbemitter.EventEmitter);
+
+	exports.default = QuestionService;
+	exports.default = new QuestionService();
 
 /***/ }
 /******/ ]);

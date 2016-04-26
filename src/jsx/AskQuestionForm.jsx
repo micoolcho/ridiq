@@ -1,5 +1,5 @@
 import React from 'react';
-import AnswerService from './services/AnserServices.jsx';
+import QuestionService from './services/QuestionService.jsx';
 
 export default class AskQuestionForm extends React.Component {
   constructor(...args) {
@@ -69,6 +69,14 @@ export default class AskQuestionForm extends React.Component {
     );
   }
 
+  componentDidMount() {
+    QuestionService.addListener('posted', this.onPostedQuestion);
+  }
+
+  onPostedQuestion(result) {
+    console.log(result)
+  }
+
   onTextareaChange(e) {
     let txtLength = this.refs.textarea.value.length;
 
@@ -84,6 +92,7 @@ export default class AskQuestionForm extends React.Component {
 
   submitForm() {
     const txtValue = this.refs.textarea.value;
+    QuestionService.post(txtValue);
 
     this.setState({
       submitted: true,
