@@ -16,5 +16,5 @@ if (document.getElementById('moreAnswer')) {
 }
 
 if (document.getElementById('moreComment')) {
-  ReactDOM.render(<MoreComment totalItem={15} loadedItem={5} />, document.getElementById('moreComment'));
+  ReactDOM.render(<MoreComment totalItem={window.ridiqConf.comment.commentCount} perPage={window.ridiqConf.comment.perPage} />, document.getElementById('moreComment'));
 }

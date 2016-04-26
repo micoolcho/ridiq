@@ -49,41 +49,6 @@
     </div>
 
     <div id="moreComment"></div>
-
-    <ul class="comment-list">
-      <li class="comment">
-        <div class="avatar"></div>
-        <div class="time">5m</div>
-        <div class="content">
-          <div class="username">
-            <a href="#">Jason Dinh</a>
-          </div>
-          <div class="txt">
-            Great answer!!!<br />
-            I learnt from this.<br />
-          </div>
-          <ul class="tags">
-            <li><a href="#">#YouSuck</a></li>
-            <li><a href="#">#YouSuck</a></li>
-            <li><a href="#">#YouSuck</a></li>
-            <li><a href="#">#YouSuck</a></li>
-          </ul>
-        </div>
-      </li>
-      <li class="comment">
-        <div class="avatar"></div>
-        <div class="time">5m</div>
-        <div class="content">
-          <div class="username">Jason Dinh</div>
-          <div class="txt">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores beatae blanditiis cupiditate debitis deserunt dignissimos dolore eaque eius eveniet incidunt, ipsam iste optio quo repudiandae similique sit tempore? Debitis, magni?
-          </div>
-          <ul class="tags">
-            <li><a href="#">#YouSuck</a></li>
-          </ul>
-        </div>
-      </li>
-    </ul>
   </div>
 </main>
 
@@ -98,6 +63,17 @@
       sites: false,
     },
   });
+</script>
+
+<script>
+  window.ridiqConf = {
+    comment: {
+      apiGet: "jsons/comments.json",
+      answerId: "abc",
+      perPage: 10,
+      commentCount: 20,
+    },
+  };
 </script>
 
 <script src="js/app.js"></script>

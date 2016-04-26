@@ -1,7 +1,6 @@
 import {EventEmitter} from 'fbemitter';
 import Es6Promise from 'es6-promise';
 import Fetch from 'isomorphic-fetch';
-import Config from './../Config.jsx';
 
 export default class CommentService extends EventEmitter {
   constructor(...args) {
@@ -9,8 +8,14 @@ export default class CommentService extends EventEmitter {
     Es6Promise.polyfill();
   }
 
-  loadMore() {
-    Fetch(Config.SERVICE_URI.COMMENT.GET, {
+  loadMore(pageNum) {
+    const apiUrl =
+      window.ridiqConf.comment.apiGet + "?" +
+      "answer_id=" + window.ridiqConf.comment.answerId + "&" +
+      "perpage=" + window.ridiqConf.comment.perPage + "&" +
+      "page=" + pageNum;
+
+    Fetch(apiUrl, {
       method: "GET",
     })
       .then((response) => {

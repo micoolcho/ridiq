@@ -27,6 +27,7 @@ export default class MoreComment extends React.Component {
     this.state = {
       isLoading: false,
       loadedItem: 0,
+      currentPage: 0,
       items: [],
     };
 
@@ -100,18 +101,20 @@ export default class MoreComment extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({
-      loadedItem: this.props.loadedItem,
-    });
+    this.loadmore();
   }
 
   onClickLoadMoreBtn() {
+    this.loadmore();
+  }
+
+  loadmore() {
     if (this.state.isLoading) return;
     this.setState({
       isLoading: true,
     });
 
-    CommentService.loadMore();
+    CommentService.loadMore(this.state.currentPage + 1);
   }
 
   onReceiveLoadmoreResult(result) {
@@ -119,6 +122,7 @@ export default class MoreComment extends React.Component {
       this.state.items.unshift(newItem);
     });
 
+    this.state.currentPage++;
     this.state.loadedItem += result.length;
     this.state.isLoading = false;
 

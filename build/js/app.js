@@ -77,7 +77,7 @@
 	}
 
 	if (document.getElementById('moreComment')) {
-	  _reactDom2.default.render(_react2.default.createElement(_MoreComment2.default, { totalItem: 15, loadedItem: 5 }), document.getElementById('moreComment'));
+	  _reactDom2.default.render(_react2.default.createElement(_MoreComment2.default, { totalItem: window.ridiqConf.comment.commentCount, perPage: window.ridiqConf.comment.perPage }), document.getElementById('moreComment'));
 	}
 
 /***/ },
@@ -32072,26 +32072,7 @@
 
 
 /***/ },
-/* 182 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.default = {
-	  SERVICE_URI: {
-	    ANSWER: {
-	      GET: "jsons/answers.json"
-	    },
-	    COMMENT: {
-	      GET: "jsons/comments.json"
-	    }
-	  }
-	};
-
-/***/ },
+/* 182 */,
 /* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -32348,6 +32329,7 @@
 	    _this.state = {
 	      isLoading: false,
 	      loadedItem: 0,
+	      currentPage: 0,
 	      items: []
 	    };
 
@@ -32430,19 +32412,22 @@
 	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      this.setState({
-	        loadedItem: this.props.loadedItem
-	      });
+	      this.loadmore();
 	    }
 	  }, {
 	    key: 'onClickLoadMoreBtn',
 	    value: function onClickLoadMoreBtn() {
+	      this.loadmore();
+	    }
+	  }, {
+	    key: 'loadmore',
+	    value: function loadmore() {
 	      if (this.state.isLoading) return;
 	      this.setState({
 	        isLoading: true
 	      });
 
-	      _CommentService2.default.loadMore();
+	      _CommentService2.default.loadMore(this.state.currentPage + 1);
 	    }
 	  }, {
 	    key: 'onReceiveLoadmoreResult',
@@ -32453,6 +32438,7 @@
 	        _this2.state.items.unshift(newItem);
 	      });
 
+	      this.state.currentPage++;
 	      this.state.loadedItem += result.length;
 	      this.state.isLoading = false;
 
@@ -32487,10 +32473,6 @@
 
 	var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
 
-	var _Config = __webpack_require__(182);
-
-	var _Config2 = _interopRequireDefault(_Config);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -32519,10 +32501,12 @@
 
 	  _createClass(CommentService, [{
 	    key: 'loadMore',
-	    value: function loadMore() {
+	    value: function loadMore(pageNum) {
 	      var _this2 = this;
 
-	      (0, _isomorphicFetch2.default)(_Config2.default.SERVICE_URI.COMMENT.GET, {
+	      var apiUrl = window.ridiqConf.comment.apiGet + "?" + "answer_id=" + window.ridiqConf.comment.answerId + "&" + "perpage=" + window.ridiqConf.comment.perPage + "&" + "page=" + pageNum;
+
+	      (0, _isomorphicFetch2.default)(apiUrl, {
 	        method: "GET"
 	      }).then(function (response) {
 	        if (response.status >= 400) {
