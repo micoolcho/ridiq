@@ -10,7 +10,7 @@ if (document.getElementById('askQuestionForm')) {
 
 if (document.getElementById('moreAnswer')) {
   ReactDOM.render(
-    <UserAnswers totalItem={window.ridiqConf.answerCount} perPage={window.ridiqConf.perPage} />,
+    <UserAnswers totalItem={window.ridiqConf.answer.answerCount} perPage={window.ridiqConf.answer.perPage} />,
     document.getElementById('moreAnswer')
   );
 }

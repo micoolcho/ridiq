@@ -44,12 +44,15 @@
 
   <script>
     window.ridiqConf = {
-//      userId: @user.id,
-//      perPage: 12,
-//      answerCount: @user.answer_count,
-      userId: "abc",
-      perPage: 12,
-      answerCount: 40,
+      answer: {
+        apiGet: "jsons/answers.json",
+        userId: "abc",
+        perPage: 12,
+        answerCount: 10,
+      },
+      askQuestion: {
+        apiPost: "",
+      },
     };
   </script>
   <script src="js/app.js"></script>

@@ -10,6 +10,7 @@ export default class UserAnsweredQuestions extends React.Component {
     this.state = {
       isLoading: false,
       loadedItem: 0,
+      currentPage: 0,
       item: [],
       firstLoadDone: false,
       isInitialized: false,
@@ -22,6 +23,8 @@ export default class UserAnsweredQuestions extends React.Component {
   }
 
   render() {
+    console.log(this.props);
+
     if (this.props.totalItem == 0) {
       return (<span></span>);
     }
@@ -93,7 +96,7 @@ export default class UserAnsweredQuestions extends React.Component {
       isLoading: true,
     });
 
-    AnswerService.loadMore();
+    AnswerService.loadMore(this.state.currentPage + 1);
   }
 
   onReceiveLoadmoreResult(result) {
@@ -106,7 +109,8 @@ export default class UserAnsweredQuestions extends React.Component {
     } else {
       this.state.isInitialized = true;
     }
-    
+
+    this.state.currentPage++;
     this.state.loadedItem += result.length;
     this.state.isLoading = false;
 

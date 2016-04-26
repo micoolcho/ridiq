@@ -73,7 +73,7 @@
 	}
 
 	if (document.getElementById('moreAnswer')) {
-	  _reactDom2.default.render(_react2.default.createElement(_UserAnswers2.default, { totalItem: window.ridiqConf.answerCount, perPage: window.ridiqConf.perPage }), document.getElementById('moreAnswer'));
+	  _reactDom2.default.render(_react2.default.createElement(_UserAnswers2.default, { totalItem: window.ridiqConf.answer.answerCount, perPage: window.ridiqConf.answer.perPage }), document.getElementById('moreAnswer'));
 	}
 
 	if (document.getElementById('moreComment')) {
@@ -20084,6 +20084,7 @@
 	    _this.state = {
 	      isLoading: false,
 	      loadedItem: 0,
+	      currentPage: 0,
 	      item: [],
 	      firstLoadDone: false,
 	      isInitialized: false
@@ -20099,6 +20100,8 @@
 	  _createClass(UserAnsweredQuestions, [{
 	    key: 'render',
 	    value: function render() {
+	      console.log(this.props);
+
 	      if (this.props.totalItem == 0) {
 	        return _react2.default.createElement('span', null);
 	      }
@@ -20186,7 +20189,7 @@
 	        isLoading: true
 	      });
 
-	      _AnserServices2.default.loadMore();
+	      _AnserServices2.default.loadMore(this.state.currentPage + 1);
 	    }
 	  }, {
 	    key: 'onReceiveLoadmoreResult',
@@ -20203,6 +20206,7 @@
 	        this.state.isInitialized = true;
 	      }
 
+	      this.state.currentPage++;
 	      this.state.loadedItem += result.length;
 	      this.state.isLoading = false;
 
@@ -30085,10 +30089,6 @@
 
 	var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
 
-	var _Config = __webpack_require__(182);
-
-	var _Config2 = _interopRequireDefault(_Config);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -30117,10 +30117,12 @@
 
 	  _createClass(AnswerService, [{
 	    key: 'loadMore',
-	    value: function loadMore() {
+	    value: function loadMore(pageNum) {
 	      var _this2 = this;
 
-	      (0, _isomorphicFetch2.default)(_Config2.default.SERVICE_URI.ANSWER.GET, {
+	      var apiUrl = window.ridiqConf.answer.apiGet + "?" + "user_id=" + window.ridiqConf.answer.userId + "&" + "perpage=" + window.ridiqConf.answer.perPage + "&" + "page=" + pageNum;
+
+	      (0, _isomorphicFetch2.default)(apiUrl, {
 	        method: "GET"
 	      }).then(function (response) {
 	        if (response.status >= 400) {
