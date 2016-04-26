@@ -54,9 +54,9 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _MoreAnswer = __webpack_require__(166);
+	var _UserAnswers = __webpack_require__(166);
 
-	var _MoreAnswer2 = _interopRequireDefault(_MoreAnswer);
+	var _UserAnswers2 = _interopRequireDefault(_UserAnswers);
 
 	var _AskQuestionForm = __webpack_require__(183);
 
@@ -73,7 +73,7 @@
 	}
 
 	if (document.getElementById('moreAnswer')) {
-	  _reactDom2.default.render(_react2.default.createElement(_MoreAnswer2.default, { totalItem: 15, loadedItem: 5 }), document.getElementById('moreAnswer'));
+	  _reactDom2.default.render(_react2.default.createElement(_UserAnswers2.default, { totalItem: window.ridiqConf.answerCount, perPage: window.ridiqConf.perPage }), document.getElementById('moreAnswer'));
 	}
 
 	if (document.getElementById('moreComment')) {
@@ -20067,25 +20067,26 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var MoreAnswer = function (_React$Component) {
-	  _inherits(MoreAnswer, _React$Component);
+	var UserAnsweredQuestions = function (_React$Component) {
+	  _inherits(UserAnsweredQuestions, _React$Component);
 
-	  function MoreAnswer() {
+	  function UserAnsweredQuestions() {
 	    var _Object$getPrototypeO;
 
-	    _classCallCheck(this, MoreAnswer);
+	    _classCallCheck(this, UserAnsweredQuestions);
 
 	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
 	      args[_key] = arguments[_key];
 	    }
 
-	    var _this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(MoreAnswer)).call.apply(_Object$getPrototypeO, [this].concat(args)));
+	    var _this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(UserAnsweredQuestions)).call.apply(_Object$getPrototypeO, [this].concat(args)));
 
 	    _this.state = {
 	      isLoading: false,
 	      loadedItem: 0,
 	      item: [],
-	      firstLoadDone: false
+	      firstLoadDone: false,
+	      isInitialized: false
 	    };
 
 	    _this.loadmore = _this.loadmore.bind(_this);
@@ -20095,7 +20096,7 @@
 	    return _this;
 	  }
 
-	  _createClass(MoreAnswer, [{
+	  _createClass(UserAnsweredQuestions, [{
 	    key: 'render',
 	    value: function render() {
 	      if (this.props.totalItem == 0) {
@@ -20155,6 +20156,7 @@
 	      var _this2 = this;
 
 	      var $window = (0, _jquery2.default)(window);
+	      this.loadmore();
 
 	      $window.scroll(function (e) {
 	        if (!_this2.state.firstLoadDone || _this2.state.isLoading) {
@@ -20166,10 +20168,6 @@
 	        if (wScrollTop + window.innerHeight + 20 >= wHeight) {
 	          _this2.loadmore();
 	        }
-	      });
-
-	      this.setState({
-	        loadedItem: this.props.loadedItem
 	      });
 	    }
 	  }, {
@@ -20199,7 +20197,12 @@
 	        _this3.state.item.push(newItem);
 	      });
 
-	      this.state.firstLoadDone = true;
+	      if (this.state.isInitialized) {
+	        this.state.firstLoadDone = true;
+	      } else {
+	        this.state.isInitialized = true;
+	      }
+
 	      this.state.loadedItem += result.length;
 	      this.state.isLoading = false;
 
@@ -20207,10 +20210,10 @@
 	    }
 	  }]);
 
-	  return MoreAnswer;
+	  return UserAnsweredQuestions;
 	}(_react2.default.Component);
 
-	exports.default = MoreAnswer;
+	exports.default = UserAnsweredQuestions;
 
 /***/ },
 /* 167 */

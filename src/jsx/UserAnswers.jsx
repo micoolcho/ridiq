@@ -2,7 +2,7 @@ import React from 'react';
 import jQuery from 'jquery';
 import AnswerService from './services/AnserServices.jsx';
 
-export default class MoreAnswer extends React.Component {
+export default class UserAnsweredQuestions extends React.Component {
 
   constructor(...args) {
     super(...args);
@@ -12,6 +12,7 @@ export default class MoreAnswer extends React.Component {
       loadedItem: 0,
       item: [],
       firstLoadDone: false,
+      isInitialized: false,
     };
 
     this.loadmore = this.loadmore.bind(this);
@@ -63,6 +64,7 @@ export default class MoreAnswer extends React.Component {
 
   componentDidMount() {
     const $window = jQuery(window);
+    this.loadmore();
 
     $window.scroll((e)=>{
       if (!this.state.firstLoadDone || this.state.isLoading) {
@@ -74,10 +76,6 @@ export default class MoreAnswer extends React.Component {
       if (wScrollTop + window.innerHeight + 20 >= wHeight) {
         this.loadmore();
       }
-    });
-
-    this.setState({
-      loadedItem: this.props.loadedItem,
     });
   }
 
@@ -103,7 +101,12 @@ export default class MoreAnswer extends React.Component {
       this.state.item.push(newItem);
     });
 
-    this.state.firstLoadDone = true;
+    if (this.state.isInitialized) {
+      this.state.firstLoadDone = true;
+    } else {
+      this.state.isInitialized = true;
+    }
+    
     this.state.loadedItem += result.length;
     this.state.isLoading = false;
 
