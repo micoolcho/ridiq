@@ -23,8 +23,6 @@ export default class UserAnsweredQuestions extends React.Component {
   }
 
   render() {
-    console.log(this.props);
-
     if (this.props.totalItem == 0) {
       return (<span></span>);
     }
