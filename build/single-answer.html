@@ -43,7 +43,7 @@
           50 comments
         </li>
         <li class="right">
-          2h
+          <span id="answerCreatedAt">Sun Apr 18 2016 8:20:20 GMT+0700 (ICT)</span>
         </li>
       </ul>
     </div>
@@ -51,6 +51,18 @@
     <div id="moreComment"></div>
   </div>
 </main>
+
+<script>
+  window.ridiqConf = {
+    comment: {
+      apiGet: "jsons/comments.json",
+      answerId: "abc",
+      perPage: 10,
+      commentCount: 20,
+    },
+  };
+</script>
+<script src="js/app.js"></script>
 
 <script src="http://content.jwplatform.com/libraries/EIPT8P5A.js"></script>
 <script>
@@ -64,19 +76,6 @@
     },
   });
 </script>
-
-<script>
-  window.ridiqConf = {
-    comment: {
-      apiGet: "jsons/comments.json",
-      answerId: "abc",
-      perPage: 10,
-      commentCount: 20,
-    },
-  };
-</script>
-
-<script src="js/app.js"></script>
 
 </body>
 </html>

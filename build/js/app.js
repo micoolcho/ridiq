@@ -66,6 +66,10 @@
 
 	var _MoreComment2 = _interopRequireDefault(_MoreComment);
 
+	var _moment = __webpack_require__(186);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	if (document.getElementById('askQuestionForm')) {
@@ -78,6 +82,29 @@
 
 	if (document.getElementById('moreComment')) {
 	  _reactDom2.default.render(_react2.default.createElement(_MoreComment2.default, { totalItem: window.ridiqConf.comment.commentCount, perPage: window.ridiqConf.comment.perPage }), document.getElementById('moreComment'));
+	}
+
+	if (document.getElementById('answerCreatedAt')) {
+	  _moment2.default.updateLocale('en', {
+	    relativeTime: {
+	      future: 'in %s',
+	      past: '%s',
+	      s: 'now',
+	      m: '1m',
+	      mm: '%dm',
+	      h: '1h',
+	      hh: '%dh',
+	      d: '1d',
+	      dd: '%dd',
+	      M: 'a month',
+	      MM: '%d months',
+	      y: 'a year',
+	      yy: '%d years'
+	    }
+	  });
+
+	  var ele = document.getElementById('answerCreatedAt');
+	  ele.innerHTML = (0, _moment2.default)(new Date(ele.innerHTML)).fromNow();
 	}
 
 /***/ },
@@ -30676,7 +30703,7 @@
 /* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_RESULT__;var require;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
+	var require;var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
 	 * @overview es6-promise - a tiny implementation of Promises/A+.
 	 * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
 	 * @license   Licensed under MIT license
