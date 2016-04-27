@@ -62,15 +62,19 @@ export default class MoreComment extends React.Component {
           this.state.items.map((comment)=>{
             return (
               <li key={`comment-${Math.random()}`} className="comment">
-                <div className="avatar"></div>
+                <div className="avatar">
+                  <a href={comment.user.public_url}>
+                    <img src={comment.user.avatar_url} />
+                  </a>
+                </div>
                 <div className="time">
                   {
-                    Moment(new Date(comment.time)).fromNow()
+                    Moment(new Date(comment.created_at)).fromNow()
                   }
                 </div>
                 <div className="content">
                   <div className="username">
-                    <a href={comment.user.url}>{comment.user.displayName}</a>
+                    <a href={comment.user.public_url}>{comment.user.name}</a>
                   </div>
                   <div className="txt">
                     {comment.content}

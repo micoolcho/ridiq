@@ -30676,7 +30676,7 @@
 /* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var require;var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
+	var __WEBPACK_AMD_DEFINE_RESULT__;var require;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
 	 * @overview es6-promise - a tiny implementation of Promises/A+.
 	 * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
 	 * @license   Licensed under MIT license
@@ -32433,11 +32433,19 @@
 	            return _react2.default.createElement(
 	              'li',
 	              { key: 'comment-' + Math.random(), className: 'comment' },
-	              _react2.default.createElement('div', { className: 'avatar' }),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'avatar' },
+	                _react2.default.createElement(
+	                  'a',
+	                  { href: comment.user.public_url },
+	                  _react2.default.createElement('img', { src: comment.user.avatar_url })
+	                )
+	              ),
 	              _react2.default.createElement(
 	                'div',
 	                { className: 'time' },
-	                (0, _moment2.default)(new Date(comment.time)).fromNow()
+	                (0, _moment2.default)(new Date(comment.created_at)).fromNow()
 	              ),
 	              _react2.default.createElement(
 	                'div',
@@ -32447,8 +32455,8 @@
 	                  { className: 'username' },
 	                  _react2.default.createElement(
 	                    'a',
-	                    { href: comment.user.url },
-	                    comment.user.displayName
+	                    { href: comment.user.public_url },
+	                    comment.user.name
 	                  )
 	                ),
 	                _react2.default.createElement(
