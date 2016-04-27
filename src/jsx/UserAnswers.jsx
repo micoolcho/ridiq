@@ -33,11 +33,11 @@ export default class UserAnsweredQuestions extends React.Component {
           this.state.item.map((item)=>{
             return (
               <div className="answer" key={`answer-${Math.random()}`}>
-                <img className="cover" src={item.cover} alt="" />
-                <a href={item.url} className="question">{item.question}</a>
+                <img className="cover" src={item.answer.image_url} alt="" />
+                <a href={item.answer.public_url} className="question">{item.content}</a>
                 <div className="info">
-                  <span><img src="images/like_icon.png" alt="" /> {item.like}</span>
-                  <span><img src="images/comment_icon.png" alt="" /> {item.comment}</span>
+                  <span><img src="images/like_icon.png" alt="" /> {item.answer.like_count}</span>
+                  <span><img src="images/comment_icon.png" alt="" /> {item.answer.comment_count}</span>
                 </div>
               </div>
             )
