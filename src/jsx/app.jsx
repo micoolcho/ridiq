@@ -32,8 +32,10 @@ if (document.getElementById('answerCreatedAt')) {
       hh : '%dh',
       d : '1d',
       dd : '%dd',
-      M : 'a month',
-      MM : '%d months',
+      M : '4w',
+      MM : (number)=>{
+        return `${number * 4}w`;
+      },
       y : 'a year',
       yy : '%d years'
     }
