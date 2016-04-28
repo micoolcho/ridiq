@@ -22,8 +22,10 @@
 }
 
 body {
-  font-family: "Open Sans";
-  background: #F8F7F7;
+  font-family: "Open Sans" !important;
+  background: #F8F7F7 !important;
+  background-color: #F8F7F7 !important;
+  font-size: 15px;
 }
 
 ul {
@@ -33,7 +35,7 @@ ul {
 }
 
 a {
-  color: $textBlueColor;
+  color: $textBlueColor !important;
 }
 
 main {

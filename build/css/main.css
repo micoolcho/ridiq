@@ -452,8 +452,10 @@
         margin-left: 5px; }
 
 body {
-  font-family: "Open Sans";
-  background: #F8F7F7; }
+  font-family: "Open Sans" !important;
+  background: #F8F7F7 !important;
+  background-color: #F8F7F7 !important;
+  font-size: 15px; }
 
 ul {
   list-style: none;
@@ -461,7 +463,7 @@ ul {
   margin: 0; }
 
 a {
-  color: #19ADE2; }
+  color: #19ADE2 !important; }
 
 main {
   padding: 0 15px; }
