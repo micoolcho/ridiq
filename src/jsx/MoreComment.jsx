@@ -66,12 +66,12 @@ export default class MoreComment extends React.Component {
               <li key={`comment-${Math.random()}`} className="comment">
                 <div className="avatar">
                   <a href={comment.user.public_url}>
-                    <img src={comment.user.avatar_url} />
+                    <img src={comment.user.avatar_thumb_url} />
                   </a>
                 </div>
                 <div className="time">
                   {
-                    Moment(new Date(comment.created_at)).fromNow()
+                    Moment(new Date(comment.created_at * 1000)).fromNow()
                   }
                 </div>
                 <div className="content">
@@ -124,12 +124,12 @@ export default class MoreComment extends React.Component {
   }
 
   onReceiveLoadmoreResult(result) {
-    result.map((newItem)=>{
+    result.data.map((newItem)=>{
       this.state.items.unshift(newItem);
     });
 
     this.state.currentPage++;
-    this.state.loadedItem += result.length;
+    this.state.loadedItem += result.data.length;
     this.state.isLoading = false;
 
     this.forceUpdate();
