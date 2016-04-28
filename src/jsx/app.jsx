@@ -5,6 +5,8 @@ import AskQuestionForm from './AskQuestionForm.jsx';
 import MoreComment from './MoreComment.jsx';
 import Moment from 'moment';
 
+console.log("App v." + "28.04.0");
+
 if (document.getElementById('askQuestionForm')) {
   ReactDOM.render(<AskQuestionForm />, document.getElementById('askQuestionForm'));
 }
