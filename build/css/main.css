@@ -482,7 +482,8 @@ main {
 .user-info {
   font-size: 15px;
   color: #727272;
-  margin-bottom: 35px; }
+  margin: 0 auto 35px;
+  max-width: 780px; }
   .user-info .avatar {
     margin: auto;
     width: 70px;
@@ -546,7 +547,8 @@ main {
     margin-bottom: 15px;
     overflow: hidden; }
     .answer-list .answer a {
-      text-decoration: none; }
+      text-decoration: none;
+      color: white !important; }
     @media (max-width: 545px) {
       .answer-list .answer {
         margin-right: 13px;
@@ -589,16 +591,26 @@ main {
           height: 100%; } }
     .answer-list .answer .question {
       color: white;
-      font-size: 20px;
-      line-height: 27px;
+      z-index: 4;
       text-align: center;
-      padding: 40px;
       font-weight: 300; }
-      @media (max-width: 545px) {
-        .answer-list .answer .question {
-          font-size: 16px;
-          padding: 20px;
-          line-height: 23px; } }
+      .answer-list .answer .question .content {
+        position: absolute;
+        font-size: 17px;
+        line-height: 25px;
+        left: 40px;
+        top: 40px;
+        right: 40px;
+        bottom: 55px;
+        overflow: hidden; }
+        @media (max-width: 545px) {
+          .answer-list .answer .question .content {
+            font-size: 16px;
+            line-height: 23px;
+            left: 20px;
+            top: 15px;
+            right: 15px;
+            bottom: 25px; } }
     .answer-list .answer .info {
       position: absolute;
       z-index: 3;

@@ -20146,7 +20146,11 @@
 	            _react2.default.createElement(
 	              'a',
 	              { href: item.answer.public_url, className: 'question' },
-	              item.content
+	              _react2.default.createElement(
+	                'span',
+	                { className: 'content' },
+	                item.content
+	              )
 	            ),
 	            _react2.default.createElement(
 	              'div',
@@ -32473,13 +32477,13 @@
 	                _react2.default.createElement(
 	                  'a',
 	                  { href: comment.user.public_url },
-	                  _react2.default.createElement('img', { src: comment.user.avatar_url })
+	                  _react2.default.createElement('img', { src: comment.user.avatar_thumb_url })
 	                )
 	              ),
 	              _react2.default.createElement(
 	                'div',
 	                { className: 'time' },
-	                (0, _moment2.default)(new Date(comment.created_at)).fromNow()
+	                (0, _moment2.default)(new Date(comment.created_at * 1000)).fromNow()
 	              ),
 	              _react2.default.createElement(
 	                'div',
@@ -32544,12 +32548,12 @@
 	    value: function onReceiveLoadmoreResult(result) {
 	      var _this2 = this;
 
-	      result.map(function (newItem) {
+	      result.data.map(function (newItem) {
 	        _this2.state.items.unshift(newItem);
 	      });
 
 	      this.state.currentPage++;
-	      this.state.loadedItem += result.length;
+	      this.state.loadedItem += result.data.length;
 	      this.state.isLoading = false;
 
 	      this.forceUpdate();

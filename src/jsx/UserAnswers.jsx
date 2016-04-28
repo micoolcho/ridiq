@@ -34,7 +34,11 @@ export default class UserAnsweredQuestions extends React.Component {
             return (
               <div className="answer" key={`answer-${Math.random()}`}>
                 <img className="cover" src={item.answer.image_url} alt="" />
-                <a href={item.answer.public_url} className="question">{item.content}</a>
+                <a href={item.answer.public_url} className="question">
+                  <span className="content">
+                    {item.content}
+                  </span>
+                </a>
                 <div className="info">
                   <span><img src="/images/like_icon.png" alt="" /> {item.answer.like_count}</span>
                   <span><img src="/images/comment_icon.png" alt="" /> {item.answer.comment_count}</span>
