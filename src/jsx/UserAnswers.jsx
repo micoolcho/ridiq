@@ -36,8 +36,8 @@ export default class UserAnsweredQuestions extends React.Component {
                 <img className="cover" src={item.answer.image_url} alt="" />
                 <a href={item.answer.public_url} className="question">{item.content}</a>
                 <div className="info">
-                  <span><img src="images/like_icon.png" alt="" /> {item.answer.like_count}</span>
-                  <span><img src="images/comment_icon.png" alt="" /> {item.answer.comment_count}</span>
+                  <span><img src="/images/like_icon.png" alt="" /> {item.answer.like_count}</span>
+                  <span><img src="/images/comment_icon.png" alt="" /> {item.answer.comment_count}</span>
                 </div>
               </div>
             )
@@ -98,7 +98,7 @@ export default class UserAnsweredQuestions extends React.Component {
   }
 
   onReceiveLoadmoreResult(result) {
-    result.map((newItem)=>{
+    result.data.map((newItem)=>{
       this.state.item.push(newItem);
     });
 
@@ -109,7 +109,7 @@ export default class UserAnsweredQuestions extends React.Component {
     }
 
     this.state.currentPage++;
-    this.state.loadedItem += result.length;
+    this.state.loadedItem += result.data.length;
     this.state.isLoading = false;
 
     this.forceUpdate();

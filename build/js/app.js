@@ -20154,14 +20154,14 @@
 	              _react2.default.createElement(
 	                'span',
 	                null,
-	                _react2.default.createElement('img', { src: 'images/like_icon.png', alt: '' }),
+	                _react2.default.createElement('img', { src: '/images/like_icon.png', alt: '' }),
 	                ' ',
 	                item.answer.like_count
 	              ),
 	              _react2.default.createElement(
 	                'span',
 	                null,
-	                _react2.default.createElement('img', { src: 'images/comment_icon.png', alt: '' }),
+	                _react2.default.createElement('img', { src: '/images/comment_icon.png', alt: '' }),
 	                ' ',
 	                item.answer.comment_count
 	              )
@@ -20225,7 +20225,7 @@
 	    value: function onReceiveLoadmoreResult(result) {
 	      var _this3 = this;
 
-	      result.map(function (newItem) {
+	      result.data.map(function (newItem) {
 	        _this3.state.item.push(newItem);
 	      });
 
@@ -20236,7 +20236,7 @@
 	      }
 
 	      this.state.currentPage++;
-	      this.state.loadedItem += result.length;
+	      this.state.loadedItem += result.data.length;
 	      this.state.isLoading = false;
 
 	      this.forceUpdate();
@@ -32347,6 +32347,7 @@
 	        url: window.ridiqConf.askQuestion.apiPost,
 	        method: "POST",
 	        data: {
+	          user_id: window.ridiqConf.askQuestion.userId,
 	          content: content
 	        }
 	      }).success(function (resp) {

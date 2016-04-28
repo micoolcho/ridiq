@@ -13,6 +13,7 @@ export default class QuestionService extends EventEmitter {
       url: window.ridiqConf.askQuestion.apiPost,
       method: "POST",
       data: {
+        user_id: window.ridiqConf.askQuestion.userId,
         content: content,
       },
     }).success((resp) => {
