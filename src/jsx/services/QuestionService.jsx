@@ -17,7 +17,9 @@ export default class QuestionService extends EventEmitter {
         content: content,
       },
     }).success((resp) => {
-      this.emit('posted', resp);
+      this.emit('posted', true);
+    }).error(()=>{
+      this.emit('posted', false);
     });
   }
 }

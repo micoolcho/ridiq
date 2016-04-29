@@ -669,6 +669,9 @@ main {
       .button.button-large {
         min-width: initial; } }
 
+.ask-question-form.disabled {
+  opacity: 0.5; }
+
 .ask-question-input {
   position: relative;
   max-width: 400px;

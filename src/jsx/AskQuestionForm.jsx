@@ -7,7 +7,8 @@ export default class AskQuestionForm extends React.Component {
 
     this.state = {
       openForm: false,
-      submitted: false,
+      submit: 0, // 0: not submited, 1: submitting, 2: submitted
+      submitResult: false,
       txtLength: 0,
     };
 
@@ -17,6 +18,7 @@ export default class AskQuestionForm extends React.Component {
     this.onTextareaChange = this.onTextareaChange.bind(this);
     this.resetForm = this.resetForm.bind(this);
     this.openForm = this.openForm.bind(this);
+    this.onPostedQuestion = this.onPostedQuestion.bind(this);
   }
 
   render() {
@@ -35,10 +37,12 @@ export default class AskQuestionForm extends React.Component {
       <div className="text-center">
 
         {
-          this.state.submitted ? (
+          this.state.submit == 2 ? (
             <div>
               <div className="notice blue">
-                Your question has been submitted!
+                {
+                  this.state.submitResult ? 'Your question has been submitted!' : 'Error !!'
+                }
               </div>
               <div
                 className="button button-small btn-submit m-t-15"
@@ -46,12 +50,15 @@ export default class AskQuestionForm extends React.Component {
               >ASK ANOTHER QUESTION</div>
             </div>
           ) : (
-            <div>
+            <div 
+              className={ "ask-question-form" + (this.state.submit == 1 ? ' disabled' : '') }
+            >
               <div className="ask-question-input margin-auto">
                 <textarea
                   ref="textarea"
                   placeholder="Ask a question" name="" id="" cols="30" rows="5"
                   onChange={this.onTextareaChange}
+                  disabled={this.state.submit == 1}
                 ></textarea>
                 <div className="counter">
                   <span>{this.state.txtLength}</span>/{this.maxTxtLength}
@@ -61,7 +68,9 @@ export default class AskQuestionForm extends React.Component {
               <div
                 className="button button-small m-t-15"
                 onClick={this.submitForm}
-              >submit question</div>
+              >
+                {this.state.submit == 1 ? 'Submitting...' : 'submit question'}
+              </div>
             </div>
           )
         }
@@ -74,7 +83,10 @@ export default class AskQuestionForm extends React.Component {
   }
 
   onPostedQuestion(result) {
-    console.log(result)
+    this.setState({
+      submit: 2,
+      submitResult: result,
+    });
   }
 
   onTextareaChange(e) {
@@ -91,17 +103,22 @@ export default class AskQuestionForm extends React.Component {
   }
 
   submitForm() {
-    const txtValue = this.refs.textarea.value;
-    QuestionService.post(txtValue);
+    // submiting form
+    if (this.state.submit == 1) {
+      return;
+    }
 
     this.setState({
-      submitted: true,
+      submit: 1,
     });
+
+    const txtValue = this.refs.textarea.value;
+    QuestionService.post(txtValue);
   }
 
   resetForm() {
     this.setState({
-      submitted: false,
+      submit: 0,
       txtLength: 0,
     });
 
