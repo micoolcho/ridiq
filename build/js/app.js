@@ -30163,10 +30163,7 @@
 	        }
 	        return response.json();
 	      }).then(function (stories) {
-	        // FIXME remove setTimeout
-	        setTimeout(function () {
-	          _this2.emit('loadmore', stories);
-	        }, 1000);
+	        _this2.emit('loadmore', stories);
 	      });
 	    }
 	  }]);
@@ -32569,10 +32566,7 @@
 	        }
 	        return response.json();
 	      }).then(function (stories) {
-	        // FIXME remove setTimeout
-	        setTimeout(function () {
-	          _this2.emit('loadmore', stories);
-	        }, 1000);
+	        _this2.emit('loadmore', stories);
 	      });
 	    }
 	  }]);

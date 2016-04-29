@@ -25,10 +25,7 @@ export default class AnswerService extends EventEmitter {
         return response.json();
       })
       .then((stories) => {
-        // FIXME remove setTimeout
-        setTimeout(()=>{
-          this.emit('loadmore', stories);
-        }, 1000);
+        this.emit('loadmore', stories);
       });
   }
 }
