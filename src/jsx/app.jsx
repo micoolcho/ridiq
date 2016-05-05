@@ -44,5 +44,5 @@ if (document.getElementById('answerCreatedAt')) {
   });
 
   var ele = document.getElementById('answerCreatedAt');
-  ele.innerHTML = Moment(new Date(ele.innerHTML)).fromNow();
+  ele.innerHTML = Moment(new Date(parseInt(ele.innerHTML) * 1000)).fromNow();
 }
