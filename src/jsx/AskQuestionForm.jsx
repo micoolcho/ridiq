@@ -61,7 +61,9 @@ export default class AskQuestionForm extends React.Component {
                   disabled={this.state.submit == 1}
                 ></textarea>
                 <div className="counter">
-                  <span>{this.state.txtLength}</span>/{this.maxTxtLength}
+                  <span className={ (this.state.txtLength + 10) > this.maxTxtLength ? 'active' : '' }>
+                    {this.state.txtLength}
+                  </span>/{this.maxTxtLength}
                 </div>
               </div>
 
