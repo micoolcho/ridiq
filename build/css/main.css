@@ -496,7 +496,7 @@ main {
   font-size: 15px;
   color: #727272;
   margin: 0 auto 35px;
-  max-width: 780px; }
+  max-width: 500px; }
   .user-info .avatar {
     margin: auto;
     width: 70px;
@@ -546,7 +546,7 @@ main {
     margin: 40px auto;
     border-bottom: 1px solid #979797;
     opacity: 0.3;
-    max-width: 435px; }
+    max-width: 500px; }
   .answer-list .overflow-wrapper {
     margin-right: -15px; }
     @media (max-width: 405px) {
@@ -646,7 +646,7 @@ main {
 .notice {
   padding: 20px 30px;
   font-size: 16px;
-  max-width: 440px;
+  max-width: 500px;
   margin: auto;
   border-radius: 8px; }
   .notice.green {
@@ -687,7 +687,7 @@ main {
 
 .ask-question-input {
   position: relative;
-  max-width: 400px;
+  max-width: 500px;
   background: white;
   border-radius: 8px;
   padding: 8px 14px 26px 14px; }
