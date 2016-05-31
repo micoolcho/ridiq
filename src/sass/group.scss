@@ -74,6 +74,10 @@ $tabItemActiveColor: #19ADE2;
           border-radius: 1000px;
           background-size: cover;
           background-position: center;
+
+          &+.item {
+            margin-left: 3px;
+          }
         }
       }
     }

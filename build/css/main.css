@@ -515,6 +515,8 @@
         border-radius: 1000px;
         background-size: cover;
         background-position: center; }
+        .group-questions .questions > .item .users .item + .item {
+          margin-left: 3px; }
 
 body {
   font-family: "Open Sans" !important;

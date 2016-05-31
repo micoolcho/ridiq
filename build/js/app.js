@@ -66,6 +66,10 @@
 
 	var _MoreComment2 = _interopRequireDefault(_MoreComment);
 
+	var _GroupQuestions = __webpack_require__(288);
+
+	var _GroupQuestions2 = _interopRequireDefault(_GroupQuestions);
+
 	var _moment = __webpack_require__(186);
 
 	var _moment2 = _interopRequireDefault(_moment);
@@ -84,6 +88,9 @@
 
 	if (document.getElementById('moreComment')) {
 	  _reactDom2.default.render(_react2.default.createElement(_MoreComment2.default, { totalItem: window.ridiqConf.comment.commentCount, perPage: window.ridiqConf.comment.perPage }), document.getElementById('moreComment'));
+	}
+	if (document.getElementById('groupQuestions')) {
+	  _reactDom2.default.render(_react2.default.createElement(_GroupQuestions2.default, null), document.getElementById('groupQuestions'));
 	}
 
 	if (document.getElementById('answerCreatedAt')) {
@@ -30708,7 +30715,7 @@
 /* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var require;var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
+	var __WEBPACK_AMD_DEFINE_RESULT__;var require;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
 	 * @overview es6-promise - a tiny implementation of Promises/A+.
 	 * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
 	 * @license   Licensed under MIT license
@@ -46427,6 +46434,298 @@
 	    return zh_tw;
 
 	}));
+
+/***/ },
+/* 288 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _BasedLoadMoreComponent = __webpack_require__(289);
+
+	var _BasedLoadMoreComponent2 = _interopRequireDefault(_BasedLoadMoreComponent);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Tabs = function (_React$Component) {
+	  _inherits(Tabs, _React$Component);
+
+	  function Tabs() {
+	    var _Object$getPrototypeO;
+
+	    _classCallCheck(this, Tabs);
+
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    var _this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Tabs)).call.apply(_Object$getPrototypeO, [this].concat(args)));
+
+	    _this.items = ["TRENDING", "MOST RECENT", "ALL TIME", "UNANSWERED"];
+	    _this.state = {
+	      activeItemIndex: 0
+	    };
+	    return _this;
+	  }
+
+	  _createClass(Tabs, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "ul",
+	        { className: "tabs clearfix" },
+	        this.getItemComponents()
+	      );
+	    }
+	  }, {
+	    key: "getItemComponents",
+	    value: function getItemComponents() {
+	      var _this2 = this;
+
+	      return this.items.map(function (item, index) {
+	        return _react2.default.createElement(
+	          "li",
+	          {
+	            onClick: _this2.onSelectItem.bind(_this2, index),
+	            key: "tab-" + index,
+	            className: ["item", index == _this2.state.activeItemIndex && "active"].join(" ")
+	          },
+	          item
+	        );
+	      });
+	    }
+	  }, {
+	    key: "onSelectItem",
+	    value: function onSelectItem(index) {
+	      this.setState({
+	        activeItemIndex: index
+	      });
+
+	      this.props.onSelectItem && this.props.onSelectItem();
+	    }
+	  }]);
+
+	  return Tabs;
+	}(_react2.default.Component);
+
+	var TrendingQuestion = function (_BasedLoadMoreCompone) {
+	  _inherits(TrendingQuestion, _BasedLoadMoreCompone);
+
+	  function TrendingQuestion() {
+	    var _Object$getPrototypeO2;
+
+	    _classCallCheck(this, TrendingQuestion);
+
+	    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+	      args[_key2] = arguments[_key2];
+	    }
+
+	    return _possibleConstructorReturn(this, (_Object$getPrototypeO2 = Object.getPrototypeOf(TrendingQuestion)).call.apply(_Object$getPrototypeO2, [this].concat(args, [{ foo: "bars" }])));
+	  }
+
+	  _createClass(TrendingQuestion, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        { className: "questions" },
+	        this.getItem(),
+	        this.getItem(),
+	        this.getItem()
+	      );
+	    }
+	  }, {
+	    key: "getItem",
+	    value: function getItem() {
+	      return _react2.default.createElement(
+	        "div",
+	        { className: "item" },
+	        _react2.default.createElement(
+	          "div",
+	          { className: "content" },
+	          "Any advice for 1st time entrepreneurs?"
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "clearfix" },
+	          _react2.default.createElement(
+	            "ul",
+	            { className: "tertiary-info" },
+	            _react2.default.createElement(
+	              "li",
+	              { className: "item" },
+	              "12 votes"
+	            ),
+	            _react2.default.createElement(
+	              "li",
+	              { className: "item" },
+	              "21 answers"
+	            )
+	          ),
+	          _react2.default.createElement(
+	            "ul",
+	            { className: "users" },
+	            _react2.default.createElement(
+	              "li",
+	              { className: "item", style: { backgroundImage: "url(images/avatar.jpg)" } },
+	              " "
+	            ),
+	            _react2.default.createElement(
+	              "li",
+	              { className: "item", style: { backgroundImage: "url(images/group-avatar.jpeg)" } },
+	              " "
+	            ),
+	            _react2.default.createElement(
+	              "li",
+	              { className: "item", style: { backgroundImage: "url(images/avatar.jpg)" } },
+	              " "
+	            ),
+	            _react2.default.createElement(
+	              "li",
+	              { className: "item", style: { backgroundImage: "url(images/group-avatar.jpeg)" } },
+	              " "
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return TrendingQuestion;
+	}(_BasedLoadMoreComponent2.default);
+
+	var GroupQuestion = function (_React$Component2) {
+	  _inherits(GroupQuestion, _React$Component2);
+
+	  function GroupQuestion() {
+	    _classCallCheck(this, GroupQuestion);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(GroupQuestion).apply(this, arguments));
+	  }
+
+	  _createClass(GroupQuestion, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        { className: "group-questions margin-auto" },
+	        _react2.default.createElement(Tabs, null),
+	        _react2.default.createElement(TrendingQuestion, null)
+	      );
+	    }
+	  }]);
+
+	  return GroupQuestion;
+	}(_react2.default.Component);
+
+	exports.default = GroupQuestion;
+
+/***/ },
+/* 289 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	// props: service
+
+	var BasedLoadMoreComponent = function (_React$Component) {
+	  _inherits(BasedLoadMoreComponent, _React$Component);
+
+	  function BasedLoadMoreComponent() {
+	    var _Object$getPrototypeO;
+
+	    _classCallCheck(this, BasedLoadMoreComponent);
+
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    var _this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(BasedLoadMoreComponent)).call.apply(_Object$getPrototypeO, [this].concat(args)));
+
+	    _this.state = {
+	      isLoading: false,
+	      loadedItem: 0,
+	      currentPage: 0,
+	      items: []
+	    };
+
+	    _this.onClickLoadMoreBtn = _this.onClickLoadMoreBtn.bind(_this);
+	    _this.onReceiveLoadmoreResult = _this.onReceiveLoadmoreResult.bind(_this);
+	    _this.service = args[args.length - 1];
+	    // this.service.addListener('loadmore', this.onReceiveLoadmoreResult);
+	    return _this;
+	  }
+
+	  _createClass(BasedLoadMoreComponent, [{
+	    key: "onClickLoadMoreBtn",
+	    value: function onClickLoadMoreBtn() {
+	      this.loadmore();
+	    }
+	  }, {
+	    key: "loadmore",
+	    value: function loadmore() {
+	      if (this.state.isLoading) return;
+	      this.setState({
+	        isLoading: true
+	      });
+
+	      this.service.loadMore(this.state.currentPage + 1);
+	    }
+	  }, {
+	    key: "onReceiveLoadmoreResult",
+	    value: function onReceiveLoadmoreResult(result) {
+	      var _this2 = this;
+
+	      result.data.map(function (newItem) {
+	        _this2.state.items.unshift(newItem);
+	      });
+
+	      this.state.currentPage++;
+	      this.state.loadedItem += result.data.length;
+	      this.state.isLoading = false;
+
+	      this.forceUpdate();
+	    }
+	  }]);
+
+	  return BasedLoadMoreComponent;
+	}(_react2.default.Component);
+
+	exports.default = BasedLoadMoreComponent;
 
 /***/ }
 /******/ ]);
