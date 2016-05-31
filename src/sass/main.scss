@@ -1,6 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:400,600,300);
 @import "helper";
 @import "single-answer";
+@import "group";
 @import "vars";
 
 @mixin mobile {
@@ -26,6 +27,11 @@ body {
   background: #F8F7F7 !important;
   background-color: #F8F7F7 !important;
   font-size: 15px;
+
+  &.white {
+    background: white !important;
+    background-color: white !important;
+  }
 }
 
 ul {

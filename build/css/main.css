@@ -464,11 +464,66 @@
       .single-answer-wrapper .comment-list .comment .tags li + li {
         margin-left: 5px; }
 
+.group-questions {
+  max-width: 500px; }
+  .group-questions .tabs {
+    border-top: 0.5px solid;
+    border-bottom: 0.5px solid;
+    border-color: rgba(151, 151, 151, 0.4);
+    margin-top: 25px; }
+    .group-questions .tabs .item {
+      width: 25%;
+      float: left;
+      font-size: 12px;
+      font-weight: 600;
+      text-align: center;
+      line-height: 45px;
+      cursor: pointer;
+      position: relative; }
+      .group-questions .tabs .item.active {
+        color: #19ADE2; }
+        .group-questions .tabs .item.active:after {
+          content: "";
+          display: block;
+          border-bottom: 2px solid #19ADE2;
+          position: relative;
+          bottom: -1px;
+          left: 0; }
+  .group-questions .questions > .item {
+    padding: 15px 12px;
+    border-bottom: 0.5px solid rgba(151, 151, 151, 0.2); }
+    .group-questions .questions > .item .content {
+      font-size: 17px;
+      font-weight: 600;
+      color: #585858;
+      margin-bottom: 5px; }
+    .group-questions .questions > .item .tertiary-info {
+      float: left;
+      font-size: 13px;
+      line-height: 20px;
+      color: rgba(93, 93, 93, 0.6); }
+      .group-questions .questions > .item .tertiary-info .item {
+        display: inline-block; }
+        .group-questions .questions > .item .tertiary-info .item + .item {
+          margin-left: 12px; }
+    .group-questions .questions > .item .users {
+      float: right; }
+      .group-questions .questions > .item .users .item {
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        border-radius: 1000px;
+        background-size: cover;
+        background-position: center; }
+
 body {
   font-family: "Open Sans" !important;
   background: #F8F7F7 !important;
   background-color: #F8F7F7 !important;
   font-size: 15px; }
+  body.white {
+    background: white !important;
+    background-color: white !important; }
 
 ul {
   list-style: none;
