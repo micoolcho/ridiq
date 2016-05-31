@@ -5,17 +5,19 @@ export default class BasedLoadMoreComponent extends React.Component {
   constructor(...args) {
     super(...args);
 
+    this.items = [];
     this.state = {
       isLoading: false,
       loadedItem: 0,
       currentPage: 0,
-      items: [],
     };
 
     this.onClickLoadMoreBtn = this.onClickLoadMoreBtn.bind(this);
     this.onReceiveLoadmoreResult = this.onReceiveLoadmoreResult.bind(this);
+    this.loadmore = this.loadmore.bind(this);
+
     this.service = args[args.length - 1];
-    // this.service.addListener('loadmore', this.onReceiveLoadmoreResult);
+    this.service.addListener('loadmore', this.onReceiveLoadmoreResult);
   }
 
   onClickLoadMoreBtn() {
@@ -33,7 +35,7 @@ export default class BasedLoadMoreComponent extends React.Component {
 
   onReceiveLoadmoreResult(result) {
     result.data.map((newItem)=>{
-      this.state.items.unshift(newItem);
+      this.items.unshift(newItem);
     });
 
     this.state.currentPage++;

@@ -30715,7 +30715,7 @@
 /* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_RESULT__;var require;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
+	var require;var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
 	 * @overview es6-promise - a tiny implementation of Promises/A+.
 	 * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
 	 * @license   Licensed under MIT license
@@ -46455,6 +46455,10 @@
 
 	var _BasedLoadMoreComponent2 = _interopRequireDefault(_BasedLoadMoreComponent);
 
+	var _GroupQuestionService = __webpack_require__(290);
+
+	var _GroupQuestionService2 = _interopRequireDefault(_GroupQuestionService);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -46517,7 +46521,7 @@
 	        activeItemIndex: index
 	      });
 
-	      this.props.onSelectItem && this.props.onSelectItem();
+	      this.props.onSelectItem && this.props.onSelectItem(index);
 	    }
 	  }]);
 
@@ -46536,7 +46540,7 @@
 	      args[_key2] = arguments[_key2];
 	    }
 
-	    return _possibleConstructorReturn(this, (_Object$getPrototypeO2 = Object.getPrototypeOf(TrendingQuestion)).call.apply(_Object$getPrototypeO2, [this].concat(args, [{ foo: "bars" }])));
+	    return _possibleConstructorReturn(this, (_Object$getPrototypeO2 = Object.getPrototypeOf(TrendingQuestion)).call.apply(_Object$getPrototypeO2, [this].concat(args, [_GroupQuestionService2.default])));
 	  }
 
 	  _createClass(TrendingQuestion, [{
@@ -46544,65 +46548,77 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        "div",
-	        { className: "questions" },
-	        this.getItem(),
-	        this.getItem(),
-	        this.getItem()
-	      );
-	    }
-	  }, {
-	    key: "getItem",
-	    value: function getItem() {
-	      return _react2.default.createElement(
-	        "div",
-	        { className: "item" },
+	        null,
 	        _react2.default.createElement(
 	          "div",
-	          { className: "content" },
-	          "Any advice for 1st time entrepreneurs?"
+	          { className: "questions" },
+	          this.getItemComponents()
 	        ),
 	        _react2.default.createElement(
 	          "div",
-	          { className: "clearfix" },
+	          { className: "text-center m-t-20" },
 	          _react2.default.createElement(
-	            "ul",
-	            { className: "tertiary-info" },
-	            _react2.default.createElement(
-	              "li",
-	              { className: "item" },
-	              "12 votes"
-	            ),
-	            _react2.default.createElement(
-	              "li",
-	              { className: "item" },
-	              "21 answers"
-	            )
-	          ),
-	          _react2.default.createElement(
-	            "ul",
-	            { className: "users" },
-	            _react2.default.createElement(
-	              "li",
-	              { className: "item", style: { backgroundImage: "url(images/avatar.jpg)" } },
-	              " "
-	            ),
-	            _react2.default.createElement(
-	              "li",
-	              { className: "item", style: { backgroundImage: "url(images/group-avatar.jpeg)" } },
-	              " "
-	            ),
-	            _react2.default.createElement(
-	              "li",
-	              { className: "item", style: { backgroundImage: "url(images/avatar.jpg)" } },
-	              " "
-	            ),
-	            _react2.default.createElement(
-	              "li",
-	              { className: "item", style: { backgroundImage: "url(images/group-avatar.jpeg)" } },
-	              " "
-	            )
+	            "div",
+	            {
+	              onClick: this.loadmore,
+	              className: 'button button-large ' + (this.state.isLoading ? 'disabled' : '')
+	            },
+	            this.state.isLoading ? 'loading...' : 'load more'
 	          )
 	        )
+	      );
+	    }
+	  }, {
+	    key: "getItemComponents",
+	    value: function getItemComponents() {
+	      var _this4 = this;
+
+	      return this.items.map(function (question, questionIndex) {
+	        return _react2.default.createElement(
+	          "div",
+	          { key: "question-" + questionIndex, className: "item" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "content" },
+	            "Any advice for 1st time entrepreneurs?"
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "clearfix" },
+	            _react2.default.createElement(
+	              "ul",
+	              { className: "tertiary-info" },
+	              question.vote_count && _react2.default.createElement(
+	                "li",
+	                { className: "item" },
+	                question.vote_count,
+	                " votes"
+	              ),
+	              question.answer_count && _react2.default.createElement(
+	                "li",
+	                { className: "item" },
+	                question.answer_count,
+	                " answers"
+	              )
+	            ),
+	            question.users && question.users.length && _this4.getQuestionUserComponents(question.users)
+	          )
+	        );
+	      });
+	    }
+	  }, {
+	    key: "getQuestionUserComponents",
+	    value: function getQuestionUserComponents(users) {
+	      return _react2.default.createElement(
+	        "ul",
+	        { className: "users" },
+	        users.map(function (user, userIndex) {
+	          return _react2.default.createElement(
+	            "li",
+	            { key: "user-" + userIndex, className: "item", style: { backgroundImage: "url(" + user.avatar_url + ")" } },
+	            " "
+	          );
+	        })
 	      );
 	    }
 	  }]);
@@ -46614,9 +46630,18 @@
 	  _inherits(GroupQuestion, _React$Component2);
 
 	  function GroupQuestion() {
+	    var _Object$getPrototypeO3;
+
 	    _classCallCheck(this, GroupQuestion);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(GroupQuestion).apply(this, arguments));
+	    for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+	      args[_key3] = arguments[_key3];
+	    }
+
+	    var _this5 = _possibleConstructorReturn(this, (_Object$getPrototypeO3 = Object.getPrototypeOf(GroupQuestion)).call.apply(_Object$getPrototypeO3, [this].concat(args)));
+
+	    _this5.onSelectTabItem = _this5.onSelectTabItem.bind(_this5);
+	    return _this5;
 	  }
 
 	  _createClass(GroupQuestion, [{
@@ -46625,9 +46650,14 @@
 	      return _react2.default.createElement(
 	        "div",
 	        { className: "group-questions margin-auto" },
-	        _react2.default.createElement(Tabs, null),
+	        _react2.default.createElement(Tabs, { onSelectItem: this.onSelectTabItem }),
 	        _react2.default.createElement(TrendingQuestion, null)
 	      );
+	    }
+	  }, {
+	    key: "onSelectTabItem",
+	    value: function onSelectTabItem(index) {
+	      console.log(index);
 	    }
 	  }]);
 
@@ -46676,17 +46706,19 @@
 
 	    var _this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(BasedLoadMoreComponent)).call.apply(_Object$getPrototypeO, [this].concat(args)));
 
+	    _this.items = [];
 	    _this.state = {
 	      isLoading: false,
 	      loadedItem: 0,
-	      currentPage: 0,
-	      items: []
+	      currentPage: 0
 	    };
 
 	    _this.onClickLoadMoreBtn = _this.onClickLoadMoreBtn.bind(_this);
 	    _this.onReceiveLoadmoreResult = _this.onReceiveLoadmoreResult.bind(_this);
+	    _this.loadmore = _this.loadmore.bind(_this);
+
 	    _this.service = args[args.length - 1];
-	    // this.service.addListener('loadmore', this.onReceiveLoadmoreResult);
+	    _this.service.addListener('loadmore', _this.onReceiveLoadmoreResult);
 	    return _this;
 	  }
 
@@ -46711,7 +46743,7 @@
 	      var _this2 = this;
 
 	      result.data.map(function (newItem) {
-	        _this2.state.items.unshift(newItem);
+	        _this2.items.unshift(newItem);
 	      });
 
 	      this.state.currentPage++;
@@ -46726,6 +46758,82 @@
 	}(_react2.default.Component);
 
 	exports.default = BasedLoadMoreComponent;
+
+/***/ },
+/* 290 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _fbemitter = __webpack_require__(169);
+
+	var _es6Promise = __webpack_require__(176);
+
+	var _es6Promise2 = _interopRequireDefault(_es6Promise);
+
+	var _isomorphicFetch = __webpack_require__(180);
+
+	var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var GroupQuestionService = function (_EventEmitter) {
+	  _inherits(GroupQuestionService, _EventEmitter);
+
+	  function GroupQuestionService() {
+	    var _Object$getPrototypeO;
+
+	    _classCallCheck(this, GroupQuestionService);
+
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    var _this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(GroupQuestionService)).call.apply(_Object$getPrototypeO, [this].concat(args)));
+
+	    _es6Promise2.default.polyfill();
+	    return _this;
+	  }
+
+	  _createClass(GroupQuestionService, [{
+	    key: 'loadMore',
+	    value: function loadMore() {
+	      var _this2 = this;
+
+	      var pageNum = arguments.length <= 0 || arguments[0] === undefined ? 1 : arguments[0];
+
+	      var apiUrl = window.ridiqConf.groupQuestion.apiGet + "?" + "user_id=" + window.ridiqConf.groupQuestion.groupId + "&" + "perpage=" + window.ridiqConf.groupQuestion.perPage + "&" + "page=" + pageNum;
+
+	      (0, _isomorphicFetch2.default)(apiUrl, {
+	        method: "GET"
+	      }).then(function (response) {
+	        if (response.status >= 400) {
+	          throw new Error("Bad response from server");
+	        }
+	        return response.json();
+	      }).then(function (stories) {
+	        _this2.emit('loadmore', stories);
+	      });
+	    }
+	  }]);
+
+	  return GroupQuestionService;
+	}(_fbemitter.EventEmitter);
+
+	exports.default = GroupQuestionService;
+	exports.default = new GroupQuestionService();
 
 /***/ }
 /******/ ]);
