@@ -1,9 +1,15 @@
 @import "vars";
+@import "mixins";
 
 $questionAvatarSize: 30px;
 $questionUserPadding: 15px;
 
 .answer-block {
+  @include smallMobile() {
+    margin-left: -$mainPadding;
+    margin-right:-$mainPadding;
+  }
+
   .user {
     border-top: 0.5px solid rgba(151, 151, 151, 0.4);
     position: relative;
