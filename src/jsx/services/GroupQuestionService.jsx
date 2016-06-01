@@ -35,10 +35,7 @@ export class GroupQuestionService extends EventEmitter {
         return response.json();
       })
       .then((stories) => {
-        setTimeout(()=>{
-          this.emit('loadmore', stories);
-        }, 1000);
-        // FIXME remote setTimeout when build production
+        this.emit('loadmore', stories);
       });
   }
 }
