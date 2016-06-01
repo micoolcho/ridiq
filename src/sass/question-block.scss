@@ -1,0 +1,14 @@
+@import "vars";
+
+.question-block {
+  .asked-in {
+    color: $lightGrey;
+  }
+
+  .content {
+    font-weight: 600;
+    font-size: 17px;
+    color: #585858;
+    padding: 8px 0 10px;
+  }
+}
