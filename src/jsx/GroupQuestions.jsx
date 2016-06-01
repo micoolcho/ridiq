@@ -145,7 +145,7 @@ class BasedQuestionContainer extends BasedLoadMoreComponent {
 
 class TrendingQuestion extends BasedQuestionContainer {
   constructor(...args) {
-    let groupQuestionService = new GroupQuestionService("trending");
+    let groupQuestionService = new GroupQuestionService("public_trending");
     let total = window.ridiqConf.groupQuestion.trending.total;
     super(...args, groupQuestionService, total);
   }
@@ -153,7 +153,7 @@ class TrendingQuestion extends BasedQuestionContainer {
 
 class MostRecentQuestion extends BasedQuestionContainer {
   constructor(...args) {
-    let groupQuestionService = new GroupQuestionService("most-recent");
+    let groupQuestionService = new GroupQuestionService("public_questions");
     let total = window.ridiqConf.groupQuestion.mostRecent.total;
     super(...args, groupQuestionService, total);
   }
@@ -161,7 +161,7 @@ class MostRecentQuestion extends BasedQuestionContainer {
 
 class AllTimeQuestion extends BasedQuestionContainer {
   constructor(...args) {
-    let groupQuestionService = new GroupQuestionService("all-time");
+    let groupQuestionService = new GroupQuestionService("public_all_time");
     let total = window.ridiqConf.groupQuestion.allTime.total;
     super(...args, groupQuestionService, total);
   }
@@ -169,7 +169,7 @@ class AllTimeQuestion extends BasedQuestionContainer {
 
 class UnansweredQuestion extends BasedQuestionContainer {
   constructor(...args) {
-    let groupQuestionService = new GroupQuestionService("unanswered");
+    let groupQuestionService = new GroupQuestionService("public_unanswered");
     let total = window.ridiqConf.groupQuestion.unanswered.total;
     super(...args, groupQuestionService, total);
   }

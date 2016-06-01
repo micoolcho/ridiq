@@ -30724,7 +30724,7 @@
 /* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var require;var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
+	var __WEBPACK_AMD_DEFINE_RESULT__;var require;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
 	 * @overview es6-promise - a tiny implementation of Promises/A+.
 	 * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
 	 * @license   Licensed under MIT license
@@ -46682,7 +46682,7 @@
 
 	    _classCallCheck(this, TrendingQuestion);
 
-	    var groupQuestionService = new _GroupQuestionService.GroupQuestionService("trending");
+	    var groupQuestionService = new _GroupQuestionService.GroupQuestionService("public_trending");
 	    var total = window.ridiqConf.groupQuestion.trending.total;
 
 	    for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
@@ -46703,7 +46703,7 @@
 
 	    _classCallCheck(this, MostRecentQuestion);
 
-	    var groupQuestionService = new _GroupQuestionService.GroupQuestionService("most-recent");
+	    var groupQuestionService = new _GroupQuestionService.GroupQuestionService("public_questions");
 	    var total = window.ridiqConf.groupQuestion.mostRecent.total;
 
 	    for (var _len4 = arguments.length, args = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
@@ -46724,7 +46724,7 @@
 
 	    _classCallCheck(this, AllTimeQuestion);
 
-	    var groupQuestionService = new _GroupQuestionService.GroupQuestionService("all-time");
+	    var groupQuestionService = new _GroupQuestionService.GroupQuestionService("public_all_time");
 	    var total = window.ridiqConf.groupQuestion.allTime.total;
 
 	    for (var _len5 = arguments.length, args = Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
@@ -46745,7 +46745,7 @@
 
 	    _classCallCheck(this, UnansweredQuestion);
 
-	    var groupQuestionService = new _GroupQuestionService.GroupQuestionService("unanswered");
+	    var groupQuestionService = new _GroupQuestionService.GroupQuestionService("public_unanswered");
 	    var total = window.ridiqConf.groupQuestion.unanswered.total;
 
 	    for (var _len6 = arguments.length, args = Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
@@ -46961,7 +46961,14 @@
 
 	      var pageNum = arguments.length <= 0 || arguments[0] === undefined ? 1 : arguments[0];
 
-	      var apiUrl = [window.ridiqConf.groupQuestion.apiGet, "?", 'perpage=' + window.ridiqConf.groupQuestion.perPage + '&', 'page=' + pageNum, 'filter=' + this.filter].join("");
+	      // const apiUrl = [
+	      //   window.ridiqConf.groupQuestion.apiGet,
+	      //   "?",
+	      //   `page=${ pageNum }`,
+	      //   `filter=${ this.filter }`
+	      // ].join("");
+
+	      var apiUrl = [window.ridiqConf.groupQuestion.apiGetPrefix, '/' + this.filter].join("");
 
 	      (0, _isomorphicFetch2.default)(apiUrl, {
 	        method: "GET"

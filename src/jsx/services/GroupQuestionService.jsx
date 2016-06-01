@@ -11,12 +11,16 @@ export class GroupQuestionService extends EventEmitter {
   }
 
   loadMore(pageNum = 1) {
+    // const apiUrl = [
+    //   window.ridiqConf.groupQuestion.apiGet,
+    //   "?",
+    //   `page=${ pageNum }`,
+    //   `filter=${ this.filter }`
+    // ].join("");
+
     const apiUrl = [
-      window.ridiqConf.groupQuestion.apiGet,
-      "?",
-      `perpage=${ window.ridiqConf.groupQuestion.perPage }&`,
-      `page=${ pageNum }`,
-      `filter=${ this.filter }`
+      window.ridiqConf.groupQuestion.apiGetPrefix,
+      `/${this.filter}`
     ].join("");
 
     Fetch(apiUrl, {
