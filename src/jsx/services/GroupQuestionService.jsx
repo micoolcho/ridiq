@@ -32,6 +32,7 @@ export class GroupQuestionService extends EventEmitter {
         setTimeout(()=>{
           this.emit('loadmore', stories);
         }, 1000);
+        // FIXME remote setTimeout when build production
       });
   }
 }

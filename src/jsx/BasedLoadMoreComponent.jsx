@@ -18,8 +18,6 @@ export default class BasedLoadMoreComponent extends React.Component {
 
     this.service = args[args.length - 2];
     this.service.addListener('loadmore', this.onReceiveLoadmoreResult);
-
-    console.log(this.state.total)
   }
 
   loadmore() {

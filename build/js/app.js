@@ -30715,7 +30715,7 @@
 /* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var require;var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
+	var __WEBPACK_AMD_DEFINE_RESULT__;var require;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
 	 * @overview es6-promise - a tiny implementation of Promises/A+.
 	 * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
 	 * @license   Licensed under MIT license
@@ -46542,6 +46542,9 @@
 
 	    _this3.state = _this3.state || {};
 	    _this3.state.active = false;
+	    _this3.state.isExecutedFirstLoad = false;
+
+	    _this3.executeFirstLoad = _this3.executeFirstLoad.bind(_this3);
 	    return _this3;
 	  }
 
@@ -46581,14 +46584,22 @@
 	    value: function componentDidMount() {
 	      this.setState({
 	        active: this.props.active
-	      });
+	      }, this.executeFirstLoad);
+	    }
+	  }, {
+	    key: "executeFirstLoad",
+	    value: function executeFirstLoad() {
+	      if (!this.state.isExecutedFirstLoad && this.state.active) {
+	        this.state.isExecutedFirstLoad = true;
+	        this.loadmore();
+	      }
 	    }
 	  }, {
 	    key: "componentWillReceiveProps",
 	    value: function componentWillReceiveProps(nextProps) {
 	      this.setState({
 	        active: nextProps.active
-	      });
+	      }, this.executeFirstLoad);
 	    }
 	  }, {
 	    key: "getItemComponents",
@@ -46834,8 +46845,6 @@
 
 	    _this.service = args[args.length - 2];
 	    _this.service.addListener('loadmore', _this.onReceiveLoadmoreResult);
-
-	    console.log(_this.state.total);
 	    return _this;
 	  }
 
@@ -46950,6 +46959,7 @@
 	        setTimeout(function () {
 	          _this2.emit('loadmore', stories);
 	        }, 1000);
+	        // FIXME remote setTimeout when build production
 	      });
 	    }
 	  }]);

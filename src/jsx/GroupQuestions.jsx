@@ -52,6 +52,9 @@ class BasedQuestionContainer extends BasedLoadMoreComponent {
 
     this.state = this.state || {};
     this.state.active = false;
+    this.state.isExecutedFirstLoad = false;
+
+    this.executeFirstLoad = this.executeFirstLoad.bind(this);
   }
 
   render() {
@@ -85,13 +88,20 @@ class BasedQuestionContainer extends BasedLoadMoreComponent {
   componentDidMount() {
     this.setState({
       active: this.props.active,
-    });
+    }, this.executeFirstLoad);
+  }
+
+  executeFirstLoad() {
+    if (!this.state.isExecutedFirstLoad && this.state.active){
+      this.state.isExecutedFirstLoad = true;
+      this.loadmore();
+    }
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
       active: nextProps.active,
-    });
+    }, this.executeFirstLoad);
   }
 
   getItemComponents() {
