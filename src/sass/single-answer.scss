@@ -1,12 +1,13 @@
 @import "vars";
 
-$questionAvatarSize: 30px;
-$questionUserPadding: 15px;
-
 .single-answer-wrapper {
   max-width: $contentMaxWidth;
   font-size: 14px;
   margin-bottom: 50px;
+
+  .answer-block .info {
+    background: white;
+  }
 
   .background {
     background: white;
@@ -17,12 +18,8 @@ $questionUserPadding: 15px;
   }
 
   .question {
-    .asked-in, .view, .time {
+    .asked-in {
       color: $lightGrey;
-    }
-
-    .view, .time {
-      font-size: 13px;
     }
 
     .content {
@@ -30,47 +27,6 @@ $questionUserPadding: 15px;
       font-size: 17px;
       color: #585858;
       padding: 8px 0 10px;
-    }
-
-    .user {
-      border-top: 0.5px solid rgba(151, 151, 151, 0.4);
-      position: relative;
-      padding: $questionUserPadding;
-      padding-left: $questionAvatarSize + ($questionUserPadding * 2);
-    }
-      .avatar {
-        position: absolute;
-        left: $questionUserPadding;
-        top: 50%;
-        margin-top: -($questionAvatarSize / 2);
-        display: block;
-        width: $questionAvatarSize;
-        height: $questionAvatarSize;
-        border-radius: 1000px;
-        background-size: cover;
-        background-position: center;
-      }
-
-      .name {
-        color: #6D6D6D;
-      }
-  }
-
-  .answer-info {
-    padding: 11px $singleAnswerContentPadding;
-    color: #444647;
-    opacity: 0.3;
-
-    li + li {
-      margin-left: 15px;
-    }
-
-    .left {
-      float: left;
-    }
-
-    .right {
-      float: right;
     }
   }
 

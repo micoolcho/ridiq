@@ -1,0 +1,51 @@
+@import "vars";
+
+$questionAvatarSize: 30px;
+$questionUserPadding: 15px;
+
+.answer-block {
+  .user {
+    border-top: 0.5px solid rgba(151, 151, 151, 0.4);
+    position: relative;
+    padding: $questionUserPadding;
+    padding-left: $questionAvatarSize + ($questionUserPadding * 2);
+  }
+  .avatar {
+    position: absolute;
+    left: $questionUserPadding;
+    top: 50%;
+    margin-top: -($questionAvatarSize / 2);
+    display: block;
+    width: $questionAvatarSize;
+    height: $questionAvatarSize;
+    border-radius: 1000px;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .name {
+    color: #6D6D6D;
+  }
+
+  .view, .time {
+    color: $lightGrey;
+    font-size: 13px;
+  }
+
+  .info {
+    padding: 11px $singleAnswerContentPadding;
+    color: rgba(68, 70, 71, 0.3);
+
+    li + li {
+      margin-left: 15px;
+    }
+
+    .left {
+      float: left;
+    }
+
+    .right {
+      float: right;
+    }
+  }
+}
