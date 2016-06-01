@@ -95,12 +95,14 @@ $tabItemActiveColor: #19ADE2;
         float: right;
 
         .item {
+          display: block;
           width: 20px;
           height: 20px;
           display: inline-block;
           border-radius: 1000px;
           background-size: cover;
           background-position: center;
+          text-decoration: none;
 
           &+.item {
             margin-left: 3px;

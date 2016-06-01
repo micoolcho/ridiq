@@ -111,18 +111,18 @@ class BasedQuestionContainer extends BasedLoadMoreComponent {
       return (
         <div key={`question-${questionIndex}`} className="item">
           <div className="content">
-            <a href="single-question.html">{ question.content }</a>
+            <a href={question.public_url}>{ question.content }</a>
           </div>
 
           <div className="clearfix">
             <ul className="tertiary-info">
-              { question.vote_count && <li className="item">{ question.vote_count } votes</li> }
-              { question.answer_count && <li className="item">{ question.answer_count } answers</li> }
+              { question.vote_count ? <li className="item">{ question.vote_count } votes</li> : null }
+              { question.answer_count ? <li className="item">{ question.answer_count } answers</li> : null }
             </ul>
             {
-                question.users && 
-                question.users.length && 
-                  this.getQuestionUserComponents(question.users)
+                question.answered_users && 
+                question.answered_users.length && 
+                  this.getQuestionUserComponents(question.answered_users)
             }
           </div>
         </div>
@@ -132,13 +132,21 @@ class BasedQuestionContainer extends BasedLoadMoreComponent {
 
   getQuestionUserComponents(users) {
     return (
-      <ul className="users">
+      <div className="users">
       {
         users.map((user, userIndex)=>{
-          return (<li key={`user-${userIndex}`} className="item" style={{backgroundImage: `url(${user.avatar_url})`}}>&nbsp;</li>)
+          return (
+            <a
+              href={user.public_url}
+              key={`user-${userIndex}`} 
+              className="item" style={{backgroundImage: `url(${user.avatar_url})`}}
+            >
+              &nbsp;
+            </a>
+          );
         })
       }
-      </ul>
+      </div>
     );
   }
 }

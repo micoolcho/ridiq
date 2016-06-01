@@ -46626,7 +46626,7 @@
 	            { className: "content" },
 	            _react2.default.createElement(
 	              "a",
-	              { href: "single-question.html" },
+	              { href: question.public_url },
 	              question.content
 	            )
 	          ),
@@ -46636,20 +46636,20 @@
 	            _react2.default.createElement(
 	              "ul",
 	              { className: "tertiary-info" },
-	              question.vote_count && _react2.default.createElement(
+	              question.vote_count ? _react2.default.createElement(
 	                "li",
 	                { className: "item" },
 	                question.vote_count,
 	                " votes"
-	              ),
-	              question.answer_count && _react2.default.createElement(
+	              ) : null,
+	              question.answer_count ? _react2.default.createElement(
 	                "li",
 	                { className: "item" },
 	                question.answer_count,
 	                " answers"
-	              )
+	              ) : null
 	            ),
-	            question.users && question.users.length && _this4.getQuestionUserComponents(question.users)
+	            question.answered_users && question.answered_users.length && _this4.getQuestionUserComponents(question.answered_users)
 	          )
 	        );
 	      });
@@ -46658,12 +46658,16 @@
 	    key: "getQuestionUserComponents",
 	    value: function getQuestionUserComponents(users) {
 	      return _react2.default.createElement(
-	        "ul",
+	        "div",
 	        { className: "users" },
 	        users.map(function (user, userIndex) {
 	          return _react2.default.createElement(
-	            "li",
-	            { key: "user-" + userIndex, className: "item", style: { backgroundImage: "url(" + user.avatar_url + ")" } },
+	            "a",
+	            {
+	              href: user.public_url,
+	              key: "user-" + userIndex,
+	              className: "item", style: { backgroundImage: "url(" + user.avatar_url + ")" }
+	            },
 	            " "
 	          );
 	        })
@@ -46961,14 +46965,12 @@
 
 	      var pageNum = arguments.length <= 0 || arguments[0] === undefined ? 1 : arguments[0];
 
-	      // const apiUrl = [
-	      //   window.ridiqConf.groupQuestion.apiGet,
-	      //   "?",
-	      //   `page=${ pageNum }`,
-	      //   `filter=${ this.filter }`
-	      // ].join("");
+	      var apiUrl = [window.ridiqConf.groupQuestion.apiGetPrefix, "?", 'page=' + pageNum, 'filter=' + this.filter].join("");
 
-	      var apiUrl = [window.ridiqConf.groupQuestion.apiGetPrefix, '/' + this.filter].join("");
+	      // const apiUrl = [
+	      //   window.ridiqConf.groupQuestion.apiGetPrefix,
+	      //   `/${this.filter}`
+	      // ].join("");
 
 	      (0, _isomorphicFetch2.default)(apiUrl, {
 	        method: "GET"

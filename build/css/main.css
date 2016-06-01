@@ -542,12 +542,14 @@
     .group-questions .questions > .item .users {
       float: right; }
       .group-questions .questions > .item .users .item {
+        display: block;
         width: 20px;
         height: 20px;
         display: inline-block;
         border-radius: 1000px;
         background-size: cover;
-        background-position: center; }
+        background-position: center;
+        text-decoration: none; }
         .group-questions .questions > .item .users .item + .item {
           margin-left: 3px; }
 
