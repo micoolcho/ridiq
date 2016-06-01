@@ -1,0 +1,17 @@
+@mixin mobile {
+  @media (max-width: $lgAnswerListSize + $mainPadding * 2) {
+    @content;
+  }
+}
+
+@mixin smallMobile {
+  @media (max-width: $smallAnswerListSize + $mainPadding * 2) {
+    @content;
+  }
+}
+
+@mixin extraSmallMobile {
+  @media (max-width: $extraSmallAnswerListSize + $mainPadding * 2) {
+    @content;
+  }
+}

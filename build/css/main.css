@@ -464,8 +464,18 @@
       .single-answer-wrapper .comment-list .comment .tags li + li {
         margin-left: 5px; }
 
+@media (max-width: 545px) {
+  #groupQuestions {
+    margin-left: -15px;
+    margin-right: -15px; } }
+
 .group-questions {
-  max-width: 500px; }
+  max-width: 500px;
+  margin-bottom: 50px; }
+  @media (max-width: 545px) {
+    .group-questions {
+      width: 100%;
+      max-width: inherit; } }
   .group-questions .tabs {
     border-top: 0.5px solid;
     border-bottom: 0.5px solid;
@@ -480,6 +490,10 @@
       line-height: 45px;
       cursor: pointer;
       position: relative; }
+      @media (max-width: 545px) {
+        .group-questions .tabs .item {
+          font-size: 10.5px;
+          line-height: 40px; } }
       .group-questions .tabs .item.active {
         color: #19ADE2; }
         .group-questions .tabs .item.active:after {
@@ -497,6 +511,9 @@
       font-weight: 600;
       color: #585858;
       margin-bottom: 5px; }
+      @media (max-width: 545px) {
+        .group-questions .questions > .item .content {
+          font-size: 14.5px; } }
     .group-questions .questions > .item .tertiary-info {
       float: left;
       font-size: 13px;

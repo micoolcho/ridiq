@@ -1,9 +1,23 @@
 @import "vars";
+@import "mixins";
 
 $tabItemActiveColor: #19ADE2;
 
+#groupQuestions {
+  @include smallMobile() {
+    margin-left: -$mainPadding;
+    margin-right: -$mainPadding;
+  }
+}
+
 .group-questions {
   max-width: $contentMaxWidth;
+  margin-bottom: 50px;
+
+  @include smallMobile() {
+    width: 100%;
+    max-width: inherit;
+  }
 
   .tabs {
     border-top: 0.5px solid;
@@ -21,6 +35,11 @@ $tabItemActiveColor: #19ADE2;
       cursor: pointer;
 
       position: relative;
+
+      @include smallMobile() {
+        font-size: 10.5px;
+        line-height: 40px;
+      }
 
       &.active {
         color: $tabItemActiveColor;
@@ -47,6 +66,10 @@ $tabItemActiveColor: #19ADE2;
         font-weight: 600;
         color: #585858;
         margin-bottom: 5px;
+
+        @include smallMobile() {
+          font-size: 14.5px;
+        }
       }
 
       .tertiary-info {
