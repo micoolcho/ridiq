@@ -509,8 +509,10 @@
     .group-questions .questions > .item .content {
       font-size: 17px;
       font-weight: 600;
-      color: #585858;
       margin-bottom: 5px; }
+      .group-questions .questions > .item .content a {
+        color: #585858 !important;
+        text-decoration: none; }
       @media (max-width: 545px) {
         .group-questions .questions > .item .content {
           font-size: 14.5px; } }

@@ -46606,6 +46606,8 @@
 	    value: function getItemComponents() {
 	      var _this4 = this;
 
+	      // TODO replace single-question.html by question.public_url
+
 	      return this.items.map(function (question, questionIndex) {
 	        return _react2.default.createElement(
 	          "div",
@@ -46613,7 +46615,11 @@
 	          _react2.default.createElement(
 	            "div",
 	            { className: "content" },
-	            "Any advice for 1st time entrepreneurs?"
+	            _react2.default.createElement(
+	              "a",
+	              { href: "single-question.html" },
+	              question.content
+	            )
 	          ),
 	          _react2.default.createElement(
 	            "div",

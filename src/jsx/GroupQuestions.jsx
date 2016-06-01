@@ -105,10 +105,14 @@ class BasedQuestionContainer extends BasedLoadMoreComponent {
   }
 
   getItemComponents() {
+    // TODO replace single-question.html by question.public_url
+
     return this.items.map((question, questionIndex)=>{
       return (
         <div key={`question-${questionIndex}`} className="item">
-          <div className="content">Any advice for 1st time entrepreneurs?</div>
+          <div className="content">
+            <a href="single-question.html">{ question.content }</a>
+          </div>
 
           <div className="clearfix">
             <ul className="tertiary-info">

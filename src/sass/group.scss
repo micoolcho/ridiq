@@ -64,8 +64,12 @@ $tabItemActiveColor: #19ADE2;
       .content {
         font-size: 17px;
         font-weight: 600;
-        color: #585858;
         margin-bottom: 5px;
+
+        a {
+          color: #585858 !important;
+          text-decoration: none;
+        }
 
         @include smallMobile() {
           font-size: 14.5px;
