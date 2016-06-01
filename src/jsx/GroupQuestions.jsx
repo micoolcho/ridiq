@@ -49,9 +49,17 @@ class Tabs extends React.Component {
 class BasedQuestionContainer extends BasedLoadMoreComponent {
   constructor(...args) {
     super(...args);
+
+    this.state = {
+      active: false,
+    }
   }
 
   render() {
+    if (!this.state.active) {
+      return null;
+    }
+
     return (
       <div>
         <div className="questions">
@@ -69,6 +77,18 @@ class BasedQuestionContainer extends BasedLoadMoreComponent {
         </div>
       </div>
     )
+  }
+
+  componentDidMount() {
+    this.setState({
+      active: this.props.active,
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      active: nextProps.active,
+    });
   }
 
   getItemComponents() {
@@ -138,6 +158,10 @@ export default class GroupQuestion extends React.Component {
   constructor(...args) {
     super(...args);
 
+    this.state =  {
+      currentActiveTabIndex: 0,
+    };
+
     this.onSelectTabItem = this.onSelectTabItem.bind(this);
   }
 
@@ -145,15 +169,17 @@ export default class GroupQuestion extends React.Component {
     return (
       <div className="group-questions margin-auto">
         <Tabs onSelectItem={ this.onSelectTabItem } />
-        <TrendingQuestion />
-        <MostRecentQuestion />
-        <AllTimeQuestion />
-        <UnansweredQuestion />
+        <TrendingQuestion active={ this.state.currentActiveTabIndex == 0 } />
+        <MostRecentQuestion active={ this.state.currentActiveTabIndex == 1 } />
+        <AllTimeQuestion active={ this.state.currentActiveTabIndex == 2 } />
+        <UnansweredQuestion active={ this.state.currentActiveTabIndex == 3 } />
       </div>
     )
   }
 
   onSelectTabItem(index) {
-    console.log(index);
+    this.setState({
+      currentActiveTabIndex: index,
+    });
   }
 }
