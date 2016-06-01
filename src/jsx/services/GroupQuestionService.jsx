@@ -29,7 +29,9 @@ export class GroupQuestionService extends EventEmitter {
         return response.json();
       })
       .then((stories) => {
-        this.emit('loadmore', stories);
+        setTimeout(()=>{
+          this.emit('loadmore', stories);
+        }, 1000);
       });
   }
 }

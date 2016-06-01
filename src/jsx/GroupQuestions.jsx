@@ -50,9 +50,8 @@ class BasedQuestionContainer extends BasedLoadMoreComponent {
   constructor(...args) {
     super(...args);
 
-    this.state = {
-      active: false,
-    }
+    this.state = this.state || {};
+    this.state.active = false;
   }
 
   render() {
@@ -66,15 +65,19 @@ class BasedQuestionContainer extends BasedLoadMoreComponent {
           { this.getItemComponents() }
         </div>
 
-        {/* Load more */}
-        <div className="text-center m-t-20">
-          <div
-            onClick={this.loadmore}
-            className={'button button-large ' + (this.state.isLoading ? 'disabled' : '')}
-          >
-            {this.state.isLoading ? 'loading...' : 'load more'}
-          </div>
-        </div>
+        {
+          /* Load more */
+          this.state.loadedItem < this.state.total && (
+            <div className="text-center m-t-20">
+              <div
+                onClick={this.loadmore}
+                className={'button button-large ' + (this.state.isLoading ? 'disabled' : '')}
+              >
+                {this.state.isLoading ? 'loading...' : 'load more'}
+              </div>
+            </div>
+          )
+        }
       </div>
     )
   }
@@ -129,28 +132,32 @@ class BasedQuestionContainer extends BasedLoadMoreComponent {
 class TrendingQuestion extends BasedQuestionContainer {
   constructor(...args) {
     let groupQuestionService = new GroupQuestionService("trending");
-    super(...args, groupQuestionService);
+    let total = window.ridiqConf.groupQuestion.trending.total;
+    super(...args, groupQuestionService, total);
   }
 }
 
 class MostRecentQuestion extends BasedQuestionContainer {
   constructor(...args) {
     let groupQuestionService = new GroupQuestionService("most-recent");
-    super(...args, groupQuestionService);
+    let total = window.ridiqConf.groupQuestion.mostRecent.total;
+    super(...args, groupQuestionService, total);
   }
 }
 
 class AllTimeQuestion extends BasedQuestionContainer {
   constructor(...args) {
     let groupQuestionService = new GroupQuestionService("all-time");
-    super(...args, groupQuestionService);
+    let total = window.ridiqConf.groupQuestion.allTime.total;
+    super(...args, groupQuestionService, total);
   }
 }
 
 class UnansweredQuestion extends BasedQuestionContainer {
   constructor(...args) {
     let groupQuestionService = new GroupQuestionService("unanswered");
-    super(...args, groupQuestionService);
+    let total = window.ridiqConf.groupQuestion.unanswered.total;
+    super(...args, groupQuestionService, total);
   }
 }
 

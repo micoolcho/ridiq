@@ -46457,8 +46457,6 @@
 
 	var _GroupQuestionService = __webpack_require__(290);
 
-	var _GroupQuestionService2 = _interopRequireDefault(_GroupQuestionService);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -46528,24 +46526,32 @@
 	  return Tabs;
 	}(_react2.default.Component);
 
-	var TrendingQuestion = function (_BasedLoadMoreCompone) {
-	  _inherits(TrendingQuestion, _BasedLoadMoreCompone);
+	var BasedQuestionContainer = function (_BasedLoadMoreCompone) {
+	  _inherits(BasedQuestionContainer, _BasedLoadMoreCompone);
 
-	  function TrendingQuestion() {
+	  function BasedQuestionContainer() {
 	    var _Object$getPrototypeO2;
 
-	    _classCallCheck(this, TrendingQuestion);
+	    _classCallCheck(this, BasedQuestionContainer);
 
 	    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
 	      args[_key2] = arguments[_key2];
 	    }
 
-	    return _possibleConstructorReturn(this, (_Object$getPrototypeO2 = Object.getPrototypeOf(TrendingQuestion)).call.apply(_Object$getPrototypeO2, [this].concat(args, [_GroupQuestionService2.default])));
+	    var _this3 = _possibleConstructorReturn(this, (_Object$getPrototypeO2 = Object.getPrototypeOf(BasedQuestionContainer)).call.apply(_Object$getPrototypeO2, [this].concat(args)));
+
+	    _this3.state = _this3.state || {};
+	    _this3.state.active = false;
+	    return _this3;
 	  }
 
-	  _createClass(TrendingQuestion, [{
+	  _createClass(BasedQuestionContainer, [{
 	    key: "render",
 	    value: function render() {
+	      if (!this.state.active) {
+	        return null;
+	      }
+
 	      return _react2.default.createElement(
 	        "div",
 	        null,
@@ -46554,7 +46560,9 @@
 	          { className: "questions" },
 	          this.getItemComponents()
 	        ),
-	        _react2.default.createElement(
+
+	        /* Load more */
+	        this.state.loadedItem < this.state.total && _react2.default.createElement(
 	          "div",
 	          { className: "text-center m-t-20" },
 	          _react2.default.createElement(
@@ -46567,6 +46575,20 @@
 	          )
 	        )
 	      );
+	    }
+	  }, {
+	    key: "componentDidMount",
+	    value: function componentDidMount() {
+	      this.setState({
+	        active: this.props.active
+	      });
+	    }
+	  }, {
+	    key: "componentWillReceiveProps",
+	    value: function componentWillReceiveProps(nextProps) {
+	      this.setState({
+	        active: nextProps.active
+	      });
 	    }
 	  }, {
 	    key: "getItemComponents",
@@ -46623,25 +46645,113 @@
 	    }
 	  }]);
 
-	  return TrendingQuestion;
+	  return BasedQuestionContainer;
 	}(_BasedLoadMoreComponent2.default);
 
-	var GroupQuestion = function (_React$Component2) {
-	  _inherits(GroupQuestion, _React$Component2);
+	var TrendingQuestion = function (_BasedQuestionContain) {
+	  _inherits(TrendingQuestion, _BasedQuestionContain);
 
-	  function GroupQuestion() {
+	  function TrendingQuestion() {
 	    var _Object$getPrototypeO3;
 
-	    _classCallCheck(this, GroupQuestion);
+	    _classCallCheck(this, TrendingQuestion);
+
+	    var groupQuestionService = new _GroupQuestionService.GroupQuestionService("trending");
+	    var total = window.ridiqConf.groupQuestion.trending.total;
 
 	    for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
 	      args[_key3] = arguments[_key3];
 	    }
 
-	    var _this5 = _possibleConstructorReturn(this, (_Object$getPrototypeO3 = Object.getPrototypeOf(GroupQuestion)).call.apply(_Object$getPrototypeO3, [this].concat(args)));
+	    return _possibleConstructorReturn(this, (_Object$getPrototypeO3 = Object.getPrototypeOf(TrendingQuestion)).call.apply(_Object$getPrototypeO3, [this].concat(args, [groupQuestionService, total])));
+	  }
 
-	    _this5.onSelectTabItem = _this5.onSelectTabItem.bind(_this5);
-	    return _this5;
+	  return TrendingQuestion;
+	}(BasedQuestionContainer);
+
+	var MostRecentQuestion = function (_BasedQuestionContain2) {
+	  _inherits(MostRecentQuestion, _BasedQuestionContain2);
+
+	  function MostRecentQuestion() {
+	    var _Object$getPrototypeO4;
+
+	    _classCallCheck(this, MostRecentQuestion);
+
+	    var groupQuestionService = new _GroupQuestionService.GroupQuestionService("most-recent");
+	    var total = window.ridiqConf.groupQuestion.mostRecent.total;
+
+	    for (var _len4 = arguments.length, args = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+	      args[_key4] = arguments[_key4];
+	    }
+
+	    return _possibleConstructorReturn(this, (_Object$getPrototypeO4 = Object.getPrototypeOf(MostRecentQuestion)).call.apply(_Object$getPrototypeO4, [this].concat(args, [groupQuestionService, total])));
+	  }
+
+	  return MostRecentQuestion;
+	}(BasedQuestionContainer);
+
+	var AllTimeQuestion = function (_BasedQuestionContain3) {
+	  _inherits(AllTimeQuestion, _BasedQuestionContain3);
+
+	  function AllTimeQuestion() {
+	    var _Object$getPrototypeO5;
+
+	    _classCallCheck(this, AllTimeQuestion);
+
+	    var groupQuestionService = new _GroupQuestionService.GroupQuestionService("all-time");
+	    var total = window.ridiqConf.groupQuestion.allTime.total;
+
+	    for (var _len5 = arguments.length, args = Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+	      args[_key5] = arguments[_key5];
+	    }
+
+	    return _possibleConstructorReturn(this, (_Object$getPrototypeO5 = Object.getPrototypeOf(AllTimeQuestion)).call.apply(_Object$getPrototypeO5, [this].concat(args, [groupQuestionService, total])));
+	  }
+
+	  return AllTimeQuestion;
+	}(BasedQuestionContainer);
+
+	var UnansweredQuestion = function (_BasedQuestionContain4) {
+	  _inherits(UnansweredQuestion, _BasedQuestionContain4);
+
+	  function UnansweredQuestion() {
+	    var _Object$getPrototypeO6;
+
+	    _classCallCheck(this, UnansweredQuestion);
+
+	    var groupQuestionService = new _GroupQuestionService.GroupQuestionService("unanswered");
+	    var total = window.ridiqConf.groupQuestion.unanswered.total;
+
+	    for (var _len6 = arguments.length, args = Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+	      args[_key6] = arguments[_key6];
+	    }
+
+	    return _possibleConstructorReturn(this, (_Object$getPrototypeO6 = Object.getPrototypeOf(UnansweredQuestion)).call.apply(_Object$getPrototypeO6, [this].concat(args, [groupQuestionService, total])));
+	  }
+
+	  return UnansweredQuestion;
+	}(BasedQuestionContainer);
+
+	var GroupQuestion = function (_React$Component2) {
+	  _inherits(GroupQuestion, _React$Component2);
+
+	  function GroupQuestion() {
+	    var _Object$getPrototypeO7;
+
+	    _classCallCheck(this, GroupQuestion);
+
+	    for (var _len7 = arguments.length, args = Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
+	      args[_key7] = arguments[_key7];
+	    }
+
+	    var _this9 = _possibleConstructorReturn(this, (_Object$getPrototypeO7 = Object.getPrototypeOf(GroupQuestion)).call.apply(_Object$getPrototypeO7, [this].concat(args)));
+
+	    _this9.state = {
+	      currentActiveTabIndex: 0
+	    };
+
+	    _this9.onSelectTabItem = _this9.onSelectTabItem.bind(_this9);
+	    return _this9;
 	  }
 
 	  _createClass(GroupQuestion, [{
@@ -46651,13 +46761,18 @@
 	        "div",
 	        { className: "group-questions margin-auto" },
 	        _react2.default.createElement(Tabs, { onSelectItem: this.onSelectTabItem }),
-	        _react2.default.createElement(TrendingQuestion, null)
+	        _react2.default.createElement(TrendingQuestion, { active: this.state.currentActiveTabIndex == 0 }),
+	        _react2.default.createElement(MostRecentQuestion, { active: this.state.currentActiveTabIndex == 1 }),
+	        _react2.default.createElement(AllTimeQuestion, { active: this.state.currentActiveTabIndex == 2 }),
+	        _react2.default.createElement(UnansweredQuestion, { active: this.state.currentActiveTabIndex == 3 })
 	      );
 	    }
 	  }, {
 	    key: "onSelectTabItem",
 	    value: function onSelectTabItem(index) {
-	      console.log(index);
+	      this.setState({
+	        currentActiveTabIndex: index
+	      });
 	    }
 	  }]);
 
@@ -46709,41 +46824,46 @@
 	    _this.items = [];
 	    _this.state = {
 	      isLoading: false,
+	      total: args[args.length - 1] || 0,
 	      loadedItem: 0,
 	      currentPage: 0
 	    };
 
-	    _this.onClickLoadMoreBtn = _this.onClickLoadMoreBtn.bind(_this);
 	    _this.onReceiveLoadmoreResult = _this.onReceiveLoadmoreResult.bind(_this);
 	    _this.loadmore = _this.loadmore.bind(_this);
 
-	    _this.service = args[args.length - 1];
+	    _this.service = args[args.length - 2];
 	    _this.service.addListener('loadmore', _this.onReceiveLoadmoreResult);
+
+	    console.log(_this.state.total);
 	    return _this;
 	  }
 
 	  _createClass(BasedLoadMoreComponent, [{
-	    key: "onClickLoadMoreBtn",
-	    value: function onClickLoadMoreBtn() {
-	      this.loadmore();
-	    }
-	  }, {
 	    key: "loadmore",
 	    value: function loadmore() {
-	      if (this.state.isLoading) return;
+	      var _this2 = this;
+
+	      if (!this.canLoadMore()) return;
+
 	      this.setState({
 	        isLoading: true
+	      }, function () {
+	        _this2.service.loadMore(_this2.state.currentPage + 1);
 	      });
-
-	      this.service.loadMore(this.state.currentPage + 1);
+	    }
+	  }, {
+	    key: "canLoadMore",
+	    value: function canLoadMore() {
+	      return !this.state.isLoading && this.state.loadedItem < this.state.total;
 	    }
 	  }, {
 	    key: "onReceiveLoadmoreResult",
 	    value: function onReceiveLoadmoreResult(result) {
-	      var _this2 = this;
+	      var _this3 = this;
 
 	      result.data.map(function (newItem) {
-	        _this2.items.unshift(newItem);
+	        _this3.items.unshift(newItem);
 	      });
 
 	      this.state.currentPage++;
@@ -46768,6 +46888,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.FILTER = exports.GroupQuestionService = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -46789,7 +46910,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var GroupQuestionService = function (_EventEmitter) {
+	var GroupQuestionService = exports.GroupQuestionService = function (_EventEmitter) {
 	  _inherits(GroupQuestionService, _EventEmitter);
 
 	  function GroupQuestionService() {
@@ -46804,6 +46925,8 @@
 	    var _this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(GroupQuestionService)).call.apply(_Object$getPrototypeO, [this].concat(args)));
 
 	    _es6Promise2.default.polyfill();
+
+	    _this.filter = args[args.length - 1];
 	    return _this;
 	  }
 
@@ -46814,7 +46937,7 @@
 
 	      var pageNum = arguments.length <= 0 || arguments[0] === undefined ? 1 : arguments[0];
 
-	      var apiUrl = window.ridiqConf.groupQuestion.apiGet + "?" + "user_id=" + window.ridiqConf.groupQuestion.groupId + "&" + "perpage=" + window.ridiqConf.groupQuestion.perPage + "&" + "page=" + pageNum;
+	      var apiUrl = [window.ridiqConf.groupQuestion.apiGet, "?", 'perpage=' + window.ridiqConf.groupQuestion.perPage + '&', 'page=' + pageNum, 'filter=' + this.filter].join("");
 
 	      (0, _isomorphicFetch2.default)(apiUrl, {
 	        method: "GET"
@@ -46824,7 +46947,9 @@
 	        }
 	        return response.json();
 	      }).then(function (stories) {
-	        _this2.emit('loadmore', stories);
+	        setTimeout(function () {
+	          _this2.emit('loadmore', stories);
+	        }, 1000);
 	      });
 	    }
 	  }]);
@@ -46832,8 +46957,9 @@
 	  return GroupQuestionService;
 	}(_fbemitter.EventEmitter);
 
-	exports.default = GroupQuestionService;
-	exports.default = new GroupQuestionService();
+	var FILTER = exports.FILTER = {
+	  TRENDING: 0
+	};
 
 /***/ }
 /******/ ]);
