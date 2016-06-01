@@ -12,16 +12,11 @@ export default class BasedLoadMoreComponent extends React.Component {
       currentPage: 0,
     };
 
-    this.onClickLoadMoreBtn = this.onClickLoadMoreBtn.bind(this);
     this.onReceiveLoadmoreResult = this.onReceiveLoadmoreResult.bind(this);
     this.loadmore = this.loadmore.bind(this);
 
     this.service = args[args.length - 1];
     this.service.addListener('loadmore', this.onReceiveLoadmoreResult);
-  }
-
-  onClickLoadMoreBtn() {
-    this.loadmore();
   }
 
   loadmore() {

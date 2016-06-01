@@ -1,6 +1,6 @@
 import React from "react";
 import BasedLoadMoreComponent from "./BasedLoadMoreComponent.jsx";
-import GroupQuestionService from "./services/GroupQuestionService.jsx";
+import { GroupQuestionService } from "./services/GroupQuestionService.jsx";
 
 class Tabs extends React.Component {
   constructor(...args) {
@@ -46,9 +46,9 @@ class Tabs extends React.Component {
   }
 }
 
-class TrendingQuestion extends BasedLoadMoreComponent {
+class BasedQuestionContainer extends BasedLoadMoreComponent {
   constructor(...args) {
-    super(...args, GroupQuestionService);
+    super(...args);
   }
 
   render() {
@@ -106,6 +106,34 @@ class TrendingQuestion extends BasedLoadMoreComponent {
   }
 }
 
+class TrendingQuestion extends BasedQuestionContainer {
+  constructor(...args) {
+    let groupQuestionService = new GroupQuestionService("trending");
+    super(...args, groupQuestionService);
+  }
+}
+
+class MostRecentQuestion extends BasedQuestionContainer {
+  constructor(...args) {
+    let groupQuestionService = new GroupQuestionService("most-recent");
+    super(...args, groupQuestionService);
+  }
+}
+
+class AllTimeQuestion extends BasedQuestionContainer {
+  constructor(...args) {
+    let groupQuestionService = new GroupQuestionService("all-time");
+    super(...args, groupQuestionService);
+  }
+}
+
+class UnansweredQuestion extends BasedQuestionContainer {
+  constructor(...args) {
+    let groupQuestionService = new GroupQuestionService("unanswered");
+    super(...args, groupQuestionService);
+  }
+}
+
 export default class GroupQuestion extends React.Component {
   constructor(...args) {
     super(...args);
@@ -118,6 +146,9 @@ export default class GroupQuestion extends React.Component {
       <div className="group-questions margin-auto">
         <Tabs onSelectItem={ this.onSelectTabItem } />
         <TrendingQuestion />
+        <MostRecentQuestion />
+        <AllTimeQuestion />
+        <UnansweredQuestion />
       </div>
     )
   }

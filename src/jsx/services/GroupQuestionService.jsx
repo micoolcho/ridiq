@@ -2,18 +2,22 @@ import {EventEmitter} from 'fbemitter';
 import Es6Promise from 'es6-promise';
 import Fetch from 'isomorphic-fetch';
 
-export default class GroupQuestionService extends EventEmitter {
+export class GroupQuestionService extends EventEmitter {
   constructor(...args) {
     super(...args);
     Es6Promise.polyfill();
+
+    this.filter = args[ args.length - 1 ];
   }
 
   loadMore(pageNum = 1) {
-    const apiUrl =
-      window.ridiqConf.groupQuestion.apiGet + "?" +
-      "user_id=" + window.ridiqConf.groupQuestion.groupId + "&" +
-      "perpage=" + window.ridiqConf.groupQuestion.perPage + "&" +
-      "page=" + pageNum;
+    const apiUrl = [
+      window.ridiqConf.groupQuestion.apiGet,
+      "?",
+      `perpage=${ window.ridiqConf.groupQuestion.perPage }&`,
+      `page=${ pageNum }`,
+      `filter=${ this.filter }`
+    ].join("");
 
     Fetch(apiUrl, {
       method: "GET",
@@ -30,4 +34,6 @@ export default class GroupQuestionService extends EventEmitter {
   }
 }
 
-export default new GroupQuestionService();
+export const FILTER = {
+  TRENDING: 0,
+};
