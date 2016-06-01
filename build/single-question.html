@@ -26,121 +26,22 @@
       </div>
     </div>
 
-    <div class="answer-block">
-      <div class="user">
-        <a href="#" class="avatar" style="background-image: url(images/avatar.jpg)">&nbsp;</a>
-        <div class="name">Michael Cho - dad, entrepreneur</div>
-        <div class="clearfix">
-          <div class="view pull-left">1.7k views</div>
-          <div class="time pull-right">6h ago</div>
-        </div>
-      </div>
-
-      <div id="player"></div>
-
-      <div class="info clearfix">
-        <ul>
-          <li class="left">
-            1,451 views
-          </li>
-          <li class="left">
-            12 likes
-          </li>
-          <li class="left">
-            50 comments
-          </li>
-          <li class="right">
-            <span id="answerCreatedAt">1462356600</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="answer-block">
-      <div class="user">
-        <a href="#" class="avatar" style="background-image: url(images/avatar.jpg)">&nbsp;</a>
-        <div class="name">Michael Cho - dad, entrepreneur</div>
-        <div class="clearfix">
-          <div class="view pull-left">1.7k views</div>
-          <div class="time pull-right">6h ago</div>
-        </div>
-      </div>
-
-      <div id="player"></div>
-
-      <div class="info clearfix">
-        <ul>
-          <li class="left">
-            1,451 views
-          </li>
-          <li class="left">
-            12 likes
-          </li>
-          <li class="left">
-            50 comments
-          </li>
-          <li class="right">
-            <span id="answerCreatedAt">1462356600</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="answer-block">
-      <div class="user">
-        <a href="#" class="avatar" style="background-image: url(images/avatar.jpg)">&nbsp;</a>
-        <div class="name">Michael Cho - dad, entrepreneur</div>
-        <div class="clearfix">
-          <div class="view pull-left">1.7k views</div>
-          <div class="time pull-right">6h ago</div>
-        </div>
-      </div>
-
-      <div id="player"></div>
-
-      <div class="info clearfix">
-        <ul>
-          <li class="left">
-            1,451 views
-          </li>
-          <li class="left">
-            12 likes
-          </li>
-          <li class="left">
-            50 comments
-          </li>
-          <li class="right">
-            <span id="answerCreatedAt">1462356600</span>
-          </li>
-        </ul>
-      </div>
-    </div>
+    <div id="singleQuestionAnswers"></div>
   </div>
 </main>
 
 <script>
   window.ridiqConf = {
-    comment: {
-      apiGet: "jsons/comments.json",
-      answerId: "abc",
-      perPage: 10,
-      commentCount: 20,
+    singleQuestion: {
+      apiGet: "jsons/single_question_answers.json",
+      questionId: "[question_id]",
+      answerCount: 10,
     },
   };
 </script>
-<script src="js/app.js"></script>
 
 <script src="http://content.jwplatform.com/libraries/EIPT8P5A.js"></script>
-<script>
-  jwplayer("player").setup({
-    file: 'http://clips.vorwaerts-gmbh.de/VfE_html5.mp4',
-    image: 'http://www.petakids.com/wp-content/uploads/2015/11/Cute-Red-Bunny.jpg',
-    width: "100%",
-    sharing: {
-      code: "&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;iframe.html&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;",
-      link: ["http://example.com/page/MEDIAID/"],
-      sites: false,
-    },
-  });
-</script>
+<script src="js/app.js"></script>
 
 </body>
 </html>

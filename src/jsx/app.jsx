@@ -4,6 +4,7 @@ import UserAnswers from './UserAnswers.jsx';
 import AskQuestionForm from './AskQuestionForm.jsx';
 import MoreComment from './MoreComment.jsx';
 import GroupQuestions from "./GroupQuestions.jsx";
+import SingleQuestion from "./SingleQuestion.jsx";
 import Moment from 'moment';
 
 console.log("App v." + "28.04.0");
@@ -22,8 +23,13 @@ if (document.getElementById('moreAnswer')) {
 if (document.getElementById('moreComment')) {
   ReactDOM.render(<MoreComment totalItem={window.ridiqConf.comment.commentCount} perPage={window.ridiqConf.comment.perPage} />, document.getElementById('moreComment'));
 }
+
 if (document.getElementById('groupQuestions')) {
   ReactDOM.render(<GroupQuestions />, document.getElementById('groupQuestions'));
+}
+
+if (document.getElementById('singleQuestionAnswers')) {
+  ReactDOM.render(<SingleQuestion />, document.getElementById('singleQuestionAnswers'));
 }
 
 if (document.getElementById('answerCreatedAt')) {

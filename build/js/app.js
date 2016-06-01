@@ -70,6 +70,10 @@
 
 	var _GroupQuestions2 = _interopRequireDefault(_GroupQuestions);
 
+	var _SingleQuestion = __webpack_require__(291);
+
+	var _SingleQuestion2 = _interopRequireDefault(_SingleQuestion);
+
 	var _moment = __webpack_require__(186);
 
 	var _moment2 = _interopRequireDefault(_moment);
@@ -89,8 +93,13 @@
 	if (document.getElementById('moreComment')) {
 	  _reactDom2.default.render(_react2.default.createElement(_MoreComment2.default, { totalItem: window.ridiqConf.comment.commentCount, perPage: window.ridiqConf.comment.perPage }), document.getElementById('moreComment'));
 	}
+
 	if (document.getElementById('groupQuestions')) {
 	  _reactDom2.default.render(_react2.default.createElement(_GroupQuestions2.default, null), document.getElementById('groupQuestions'));
+	}
+
+	if (document.getElementById('singleQuestionAnswers')) {
+	  _reactDom2.default.render(_react2.default.createElement(_SingleQuestion2.default, null), document.getElementById('singleQuestionAnswers'));
 	}
 
 	if (document.getElementById('answerCreatedAt')) {
@@ -30715,7 +30724,7 @@
 /* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_RESULT__;var require;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
+	var require;var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
 	 * @overview es6-promise - a tiny implementation of Promises/A+.
 	 * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
 	 * @license   Licensed under MIT license
@@ -46976,6 +46985,307 @@
 	var FILTER = exports.FILTER = {
 	  TRENDING: 0
 	};
+
+/***/ },
+/* 291 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _BasedLoadMoreComponent = __webpack_require__(289);
+
+	var _BasedLoadMoreComponent2 = _interopRequireDefault(_BasedLoadMoreComponent);
+
+	var _SingleQuestionService = __webpack_require__(292);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Player = function (_React$Component) {
+	  _inherits(Player, _React$Component);
+
+	  function Player() {
+	    var _Object$getPrototypeO;
+
+	    _classCallCheck(this, Player);
+
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    var _this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Player)).call.apply(_Object$getPrototypeO, [this].concat(args)));
+
+	    _this.playerId = "player-" + Date.now();
+	    return _this;
+	  }
+
+	  _createClass(Player, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        { id: this.playerId },
+	        " "
+	      );
+	    }
+	  }, {
+	    key: "componentDidMount",
+	    value: function componentDidMount() {
+	      jwplayer(this.playerId).setup(this.props.playerConfig);
+	    }
+	  }]);
+
+	  return Player;
+	}(_react2.default.Component);
+
+	var Answers = function (_BasedLoadMoreCompone) {
+	  _inherits(Answers, _BasedLoadMoreCompone);
+
+	  function Answers() {
+	    var _Object$getPrototypeO2;
+
+	    _classCallCheck(this, Answers);
+
+	    var service = new _SingleQuestionService.AnswerService();
+	    var total = window.ridiqConf.singleQuestion.answerCount;
+
+	    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+	      args[_key2] = arguments[_key2];
+	    }
+
+	    return _possibleConstructorReturn(this, (_Object$getPrototypeO2 = Object.getPrototypeOf(Answers)).call.apply(_Object$getPrototypeO2, [this].concat(args, [service, total])));
+	  }
+
+	  _createClass(Answers, [{
+	    key: "render",
+	    value: function render() {
+	      if (this.items && this.items.length) {
+	        return _react2.default.createElement(
+	          "div",
+	          null,
+	          this.items.map(function (answer, index) {
+	            return _react2.default.createElement(
+	              "div",
+	              { key: "answer-" + index, className: "answer-block" },
+	              _react2.default.createElement(
+	                "div",
+	                { className: "user" },
+	                _react2.default.createElement(
+	                  "a",
+	                  { href: "#", className: "avatar", style: { backgroundImage: "url(" + answer.user_avatar + ")" } },
+	                  " "
+	                ),
+	                _react2.default.createElement(
+	                  "div",
+	                  { className: "name" },
+	                  answer.username
+	                ),
+	                _react2.default.createElement(
+	                  "div",
+	                  { className: "clearfix" },
+	                  _react2.default.createElement(
+	                    "div",
+	                    { className: "view pull-left" },
+	                    "1.7k views"
+	                  ),
+	                  _react2.default.createElement(
+	                    "div",
+	                    { className: "time pull-right" },
+	                    answer.created_at,
+	                    " ago"
+	                  )
+	                )
+	              ),
+	              _react2.default.createElement(Player, { playerConfig: answer.video }),
+	              _react2.default.createElement(
+	                "div",
+	                { className: "info clearfix" },
+	                _react2.default.createElement(
+	                  "ul",
+	                  null,
+	                  _react2.default.createElement(
+	                    "li",
+	                    { className: "left" },
+	                    "1,451 views"
+	                  ),
+	                  _react2.default.createElement(
+	                    "li",
+	                    { className: "left" },
+	                    "12 likes"
+	                  ),
+	                  _react2.default.createElement(
+	                    "li",
+	                    { className: "left" },
+	                    "50 comments"
+	                  ),
+	                  _react2.default.createElement(
+	                    "li",
+	                    { className: "right" },
+	                    _react2.default.createElement(
+	                      "span",
+	                      { id: "answerCreatedAt" },
+	                      "1462356600"
+	                    )
+	                  )
+	                )
+	              )
+	            );
+	          })
+	        );
+	      } else {
+	        return _react2.default.createElement(
+	          "span",
+	          null,
+	          "empty"
+	        );
+	      }
+	    }
+	  }, {
+	    key: "componentDidMount",
+	    value: function componentDidMount() {
+	      this.loadmore();
+	    }
+	  }]);
+
+	  return Answers;
+	}(_BasedLoadMoreComponent2.default);
+
+	exports.default = Answers;
+
+/***/ },
+/* 292 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.AnswerService = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _BasedLoadMoreService2 = __webpack_require__(293);
+
+	var _BasedLoadMoreService3 = _interopRequireDefault(_BasedLoadMoreService2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var AnswerService = exports.AnswerService = function (_BasedLoadMoreService) {
+	  _inherits(AnswerService, _BasedLoadMoreService);
+
+	  function AnswerService() {
+	    _classCallCheck(this, AnswerService);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(AnswerService).apply(this, arguments));
+	  }
+
+	  _createClass(AnswerService, [{
+	    key: "getApiUrl",
+	    value: function getApiUrl(pageNum) {
+	      return [window.ridiqConf.singleQuestion.apiGet, "?", "questionId=" + window.ridiqConf.singleQuestion.questionId, "&", "page=" + pageNum].join("");
+	    }
+	  }]);
+
+	  return AnswerService;
+	}(_BasedLoadMoreService3.default);
+
+/***/ },
+/* 293 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _fbemitter = __webpack_require__(169);
+
+	var _es6Promise = __webpack_require__(176);
+
+	var _es6Promise2 = _interopRequireDefault(_es6Promise);
+
+	var _isomorphicFetch = __webpack_require__(180);
+
+	var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var BasedLoadMoreService = function (_EventEmitter) {
+	  _inherits(BasedLoadMoreService, _EventEmitter);
+
+	  function BasedLoadMoreService() {
+	    var _Object$getPrototypeO;
+
+	    _classCallCheck(this, BasedLoadMoreService);
+
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    var _this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(BasedLoadMoreService)).call.apply(_Object$getPrototypeO, [this].concat(args)));
+
+	    _es6Promise2.default.polyfill();
+	    return _this;
+	  }
+
+	  _createClass(BasedLoadMoreService, [{
+	    key: 'loadMore',
+	    value: function loadMore(pageNum) {
+	      var _this2 = this;
+
+	      (0, _isomorphicFetch2.default)(this.getApiUrl(pageNum), {
+	        method: "GET"
+	      }).then(function (response) {
+	        if (response.status >= 400) {
+	          throw new Error("Bad response from server");
+	        }
+	        return response.json();
+	      }).then(function (stories) {
+	        _this2.emit('loadmore', stories);
+	      });
+	    }
+	  }, {
+	    key: 'getApiUrl',
+	    value: function getApiUrl() {
+	      return "";
+	    }
+	  }]);
+
+	  return BasedLoadMoreService;
+	}(_fbemitter.EventEmitter);
+
+	exports.default = BasedLoadMoreService;
 
 /***/ }
 /******/ ]);
