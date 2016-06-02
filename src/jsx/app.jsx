@@ -10,7 +10,13 @@ import Moment from 'moment';
 console.log("App v." + "28.04.0");
 
 if (document.getElementById('askQuestionForm')) {
-  ReactDOM.render(<AskQuestionForm />, document.getElementById('askQuestionForm'));
+  ReactDOM.render(
+    <AskQuestionForm 
+      subject_id={window.ridiqConf.askQuestion.subject_id}
+      subject_type={window.ridiqConf.askQuestion.subject_type}
+    />, 
+    document.getElementById('askQuestionForm')
+  );
 }
 
 if (document.getElementById('moreAnswer')) {

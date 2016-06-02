@@ -36,15 +36,11 @@
 
   <script>
     window.ridiqConf = {
-      answer: {
-        apiGet: "jsons/answers.json",
-        userId: "abc",
-        perPage: 12,
-        answerCount: 10,
-      },
       askQuestion: {
-        userId: "abc",
-        apiPost: "https://api.myjson.com/bins",
+        subject_id: "subject-id",
+        subject_type: "Group",
+        // /questions/anonymous
+        apiPostPrefix: "https://api.myjson.com/bins",
       },
       groupQuestion: {
         groupId: "123",

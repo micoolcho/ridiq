@@ -2,20 +2,18 @@ import {EventEmitter} from 'fbemitter';
 import Es6Promise from 'es6-promise';
 import jQuery from 'jquery';
 
-export default class QuestionService extends EventEmitter {
+export default class AskQuestionService extends EventEmitter {
   constructor(...args) {
     super(...args);
     Es6Promise.polyfill();
   }
 
-  post(content) {
+  // params: content, subject_id, subject_type
+  post(data) {
     jQuery.ajax({
-      url: window.ridiqConf.askQuestion.apiPost,
+      url: window.ridiqConf.askQuestion.apiPostPrefix,
       method: "POST",
-      data: {
-        user_id: window.ridiqConf.askQuestion.userId,
-        content: content,
-      },
+      data: data,
     }).success((resp) => {
       this.emit('posted', true);
     }).error(()=>{
@@ -24,4 +22,4 @@ export default class QuestionService extends EventEmitter {
   }
 }
 
-export default new QuestionService();
+export default new AskQuestionService();

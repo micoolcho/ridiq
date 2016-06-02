@@ -83,7 +83,10 @@
 	console.log("App v." + "28.04.0");
 
 	if (document.getElementById('askQuestionForm')) {
-	  _reactDom2.default.render(_react2.default.createElement(_AskQuestionForm2.default, null), document.getElementById('askQuestionForm'));
+	  _reactDom2.default.render(_react2.default.createElement(_AskQuestionForm2.default, {
+	    subject_id: window.ridiqConf.askQuestion.subject_id,
+	    subject_type: window.ridiqConf.askQuestion.subject_type
+	  }), document.getElementById('askQuestionForm'));
 	}
 
 	if (document.getElementById('moreAnswer')) {
@@ -30724,7 +30727,7 @@
 /* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var require;var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
+	var __WEBPACK_AMD_DEFINE_RESULT__;var require;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
 	 * @overview es6-promise - a tiny implementation of Promises/A+.
 	 * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
 	 * @license   Licensed under MIT license
@@ -32133,9 +32136,9 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _QuestionService = __webpack_require__(183);
+	var _AskQuestionService = __webpack_require__(294);
 
-	var _QuestionService2 = _interopRequireDefault(_QuestionService);
+	var _AskQuestionService2 = _interopRequireDefault(_AskQuestionService);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -32253,7 +32256,7 @@
 	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      _QuestionService2.default.addListener('posted', this.onPostedQuestion);
+	      _AskQuestionService2.default.addListener('posted', this.onPostedQuestion);
 	    }
 	  }, {
 	    key: 'onPostedQuestion',
@@ -32289,8 +32292,15 @@
 	        submit: 1
 	      });
 
-	      var txtValue = this.refs.textarea.value;
-	      _QuestionService2.default.post(txtValue);
+	      var content = this.refs.textarea.value;
+
+	      var data = {
+	        subject_id: this.props.subject_id,
+	        subject_type: this.props.subject_type,
+	        content: content
+	      };
+
+	      _AskQuestionService2.default.post(data);
 	    }
 	  }, {
 	    key: 'resetForm',
@@ -32321,80 +32331,7 @@
 	exports.default = AskQuestionForm;
 
 /***/ },
-/* 183 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _fbemitter = __webpack_require__(169);
-
-	var _es6Promise = __webpack_require__(176);
-
-	var _es6Promise2 = _interopRequireDefault(_es6Promise);
-
-	var _jquery = __webpack_require__(167);
-
-	var _jquery2 = _interopRequireDefault(_jquery);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var QuestionService = function (_EventEmitter) {
-	  _inherits(QuestionService, _EventEmitter);
-
-	  function QuestionService() {
-	    var _Object$getPrototypeO;
-
-	    _classCallCheck(this, QuestionService);
-
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
-
-	    var _this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(QuestionService)).call.apply(_Object$getPrototypeO, [this].concat(args)));
-
-	    _es6Promise2.default.polyfill();
-	    return _this;
-	  }
-
-	  _createClass(QuestionService, [{
-	    key: 'post',
-	    value: function post(content) {
-	      var _this2 = this;
-
-	      _jquery2.default.ajax({
-	        url: window.ridiqConf.askQuestion.apiPost,
-	        method: "POST",
-	        data: {
-	          user_id: window.ridiqConf.askQuestion.userId,
-	          content: content
-	        }
-	      }).success(function (resp) {
-	        _this2.emit('posted', true);
-	      }).error(function () {
-	        _this2.emit('posted', false);
-	      });
-	    }
-	  }]);
-
-	  return QuestionService;
-	}(_fbemitter.EventEmitter);
-
-	exports.default = QuestionService;
-	exports.default = new QuestionService();
-
-/***/ },
+/* 183 */,
 /* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -46984,10 +46921,7 @@
 	        }
 	        return response.json();
 	      }).then(function (stories) {
-	        setTimeout(function () {
-	          _this2.emit('loadmore', stories);
-	        }, 1000);
-	        // FIXME remote setTimeout when build production
+	        _this2.emit('loadmore', stories);
 	      });
 	    }
 	  }]);
@@ -47299,6 +47233,80 @@
 	}(_fbemitter.EventEmitter);
 
 	exports.default = BasedLoadMoreService;
+
+/***/ },
+/* 294 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _fbemitter = __webpack_require__(169);
+
+	var _es6Promise = __webpack_require__(176);
+
+	var _es6Promise2 = _interopRequireDefault(_es6Promise);
+
+	var _jquery = __webpack_require__(167);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var AskQuestionService = function (_EventEmitter) {
+	  _inherits(AskQuestionService, _EventEmitter);
+
+	  function AskQuestionService() {
+	    var _Object$getPrototypeO;
+
+	    _classCallCheck(this, AskQuestionService);
+
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    var _this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(AskQuestionService)).call.apply(_Object$getPrototypeO, [this].concat(args)));
+
+	    _es6Promise2.default.polyfill();
+	    return _this;
+	  }
+
+	  // params: content, subject_id, subject_type
+
+
+	  _createClass(AskQuestionService, [{
+	    key: 'post',
+	    value: function post(data) {
+	      var _this2 = this;
+
+	      _jquery2.default.ajax({
+	        url: window.ridiqConf.askQuestion.apiPostPrefix,
+	        method: "POST",
+	        data: data
+	      }).success(function (resp) {
+	        _this2.emit('posted', true);
+	      }).error(function () {
+	        _this2.emit('posted', false);
+	      });
+	    }
+	  }]);
+
+	  return AskQuestionService;
+	}(_fbemitter.EventEmitter);
+
+	exports.default = AskQuestionService;
+	exports.default = new AskQuestionService();
 
 /***/ }
 /******/ ]);

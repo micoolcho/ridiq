@@ -1,5 +1,5 @@
 import React from 'react';
-import QuestionService from './services/QuestionService.jsx';
+import QuestionService from './services/AskQuestionService.jsx';
 
 export default class AskQuestionForm extends React.Component {
   constructor(...args) {
@@ -114,8 +114,15 @@ export default class AskQuestionForm extends React.Component {
       submit: 1,
     });
 
-    const txtValue = this.refs.textarea.value;
-    QuestionService.post(txtValue);
+    const content = this.refs.textarea.value;
+    
+    let data = {
+      subject_id: this.props.subject_id,
+      subject_type: this.props.subject_type,
+      content: content,
+    };
+    
+    QuestionService.post(data);
   }
 
   resetForm() {
