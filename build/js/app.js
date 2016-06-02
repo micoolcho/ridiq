@@ -47022,6 +47022,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _moment = __webpack_require__(186);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
 	var _BasedLoadMoreComponent = __webpack_require__(289);
 
 	var _BasedLoadMoreComponent2 = _interopRequireDefault(_BasedLoadMoreComponent);
@@ -47036,6 +47040,26 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	_moment2.default.updateLocale('en', {
+	  relativeTime: {
+	    future: 'in %s',
+	    past: '%s',
+	    s: 'now',
+	    m: '1m',
+	    mm: '%dm',
+	    h: '1h',
+	    hh: '%dh',
+	    d: '1d',
+	    dd: '%dd',
+	    M: '4w',
+	    MM: function MM(number) {
+	      return number * 4 + "w";
+	    },
+	    y: 'a year',
+	    yy: '%d years'
+	  }
+	});
+
 	var Player = function (_React$Component) {
 	  _inherits(Player, _React$Component);
 
@@ -47048,10 +47072,7 @@
 	      args[_key] = arguments[_key];
 	    }
 
-	    var _this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Player)).call.apply(_Object$getPrototypeO, [this].concat(args)));
-
-	    _this.playerId = "player-" + Date.now();
-	    return _this;
+	    return _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Player)).call.apply(_Object$getPrototypeO, [this].concat(args)));
 	  }
 
 	  _createClass(Player, [{
@@ -47059,14 +47080,14 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        "div",
-	        { id: this.playerId },
+	        { id: this.props.id },
 	        " "
 	      );
 	    }
 	  }, {
 	    key: "componentDidMount",
 	    value: function componentDidMount() {
-	      jwplayer(this.playerId).setup(this.props.playerConfig);
+	      jwplayer(this.props.id).setup(this.props.playerConfig);
 	    }
 	  }]);
 
@@ -47099,6 +47120,15 @@
 	          "div",
 	          null,
 	          this.items.map(function (answer, index) {
+	            var videoConfig = {
+	              image: answer.image_url,
+	              file: answer.video_url,
+	              sharing: {
+	                code: "",
+	                link: answer.public_url
+	              }
+	            };
+
 	            return _react2.default.createElement(
 	              "div",
 	              { key: "answer-" + index, className: "answer-block" },
@@ -47107,13 +47137,15 @@
 	                { className: "user" },
 	                _react2.default.createElement(
 	                  "a",
-	                  { href: "#", className: "avatar", style: { backgroundImage: "url(" + answer.user_avatar + ")" } },
+	                  { href: "#", className: "avatar", style: { backgroundImage: "url(" + answer.user.avatar_url + ")" } },
 	                  " "
 	                ),
 	                _react2.default.createElement(
 	                  "div",
 	                  { className: "name" },
-	                  answer.username
+	                  answer.user.name,
+	                  " - ",
+	                  answer.user_short_bio
 	                ),
 	                _react2.default.createElement(
 	                  "div",
@@ -47121,58 +47153,42 @@
 	                  _react2.default.createElement(
 	                    "div",
 	                    { className: "view pull-left" },
-	                    "1.7k views"
+	                    answer.view_count,
+	                    " views"
 	                  ),
 	                  _react2.default.createElement(
 	                    "div",
 	                    { className: "time pull-right" },
-	                    answer.created_at,
-	                    " ago"
+	                    (0, _moment2.default)(answer.created_at).fromNow()
 	                  )
 	                )
 	              ),
-	              _react2.default.createElement(Player, { playerConfig: answer.video }),
+	              _react2.default.createElement(Player, { id: "player-" + answer.id, playerConfig: videoConfig }),
 	              _react2.default.createElement(
 	                "div",
 	                { className: "info clearfix" },
 	                _react2.default.createElement(
 	                  "ul",
 	                  null,
-	                  _react2.default.createElement(
+	                  answer.like_count ? _react2.default.createElement(
 	                    "li",
 	                    { className: "left" },
-	                    "1,451 views"
-	                  ),
-	                  _react2.default.createElement(
+	                    answer.like_count,
+	                    " likes"
+	                  ) : null,
+	                  answer.comment_count ? _react2.default.createElement(
 	                    "li",
 	                    { className: "left" },
-	                    "12 likes"
-	                  ),
-	                  _react2.default.createElement(
-	                    "li",
-	                    { className: "left" },
-	                    "50 comments"
-	                  ),
-	                  _react2.default.createElement(
-	                    "li",
-	                    { className: "right" },
-	                    _react2.default.createElement(
-	                      "span",
-	                      { id: "answerCreatedAt" },
-	                      "1462356600"
-	                    )
-	                  )
+	                    answer.comment_count,
+	                    " comments"
+	                  ) : null
 	                )
 	              )
 	            );
 	          })
 	        );
 	      } else {
-	        return _react2.default.createElement(
-	          "span",
-	          null,
-	          "empty"
-	        );
+	        return _react2.default.createElement("span", null);
 	      }
 	    }
 	  }, {

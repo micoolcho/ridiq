@@ -1,20 +1,39 @@
 import React from "react";
+import Moment from "moment";
 import BasedLoadMoreComponent from "./BasedLoadMoreComponent.jsx";
 import { AnswerService } from "./services/SingleQuestionService.jsx";
+
+Moment.updateLocale('en', {
+  relativeTime: {
+    future : 'in %s',
+    past : '%s',
+    s : 'now',
+    m : '1m',
+    mm : '%dm',
+    h : '1h',
+    hh : '%dh',
+    d : '1d',
+    dd : '%dd',
+    M : '4w',
+    MM : (number)=>{
+      return `${number * 4}w`;
+    },
+    y : 'a year',
+    yy : '%d years'
+  }
+});
 
 class Player extends React.Component {
   constructor(...args) {
     super(...args);
-
-    this.playerId = `player-${Date.now()}`;
   }
 
   render() {
-    return (<div id={this.playerId}>&nbsp;</div>);
+    return (<div id={this.props.id}>&nbsp;</div>);
   }
 
   componentDidMount() {
-    jwplayer(this.playerId).setup(this.props.playerConfig);
+    jwplayer(this.props.id).setup(this.props.playerConfig);
   }
 }
 
@@ -31,33 +50,44 @@ export default class Answers extends BasedLoadMoreComponent {
         <div>
           {
             this.items.map((answer, index)=>{
+              let videoConfig = {
+                image: answer.image_url,
+                file: answer.video_url,
+                sharing: {
+                  code: "",
+                  link: answer.public_url,
+                }
+              }
+
               return (
                 <div key={`answer-${index}`} className="answer-block">
                   <div className="user">
-                    <a href="#" className="avatar" style={{backgroundImage: `url(${answer.user_avatar})`}}>&nbsp;</a>
-                    <div className="name">{answer.username}</div>
+                    <a href="#" className="avatar" style={{backgroundImage: `url(${answer.user.avatar_url})`}}>&nbsp;</a>
+                    <div className="name">{answer.user.name} - {answer.user_short_bio}</div>
                     <div className="clearfix">
-                      <div className="view pull-left">1.7k views</div>
-                      <div className="time pull-right">{answer.created_at} ago</div>
+                      <div className="view pull-left">{answer.view_count} views</div>
+                      <div className="time pull-right">{Moment(answer.created_at).fromNow()}</div>
                     </div>
                   </div>
 
-                  <Player playerConfig={answer.video} />
+                  <Player id={`player-${answer.id}`} playerConfig={videoConfig} />
 
                   <div className="info clearfix">
                     <ul>
-                      <li className="left">
-                        1,451 views
-                      </li>
-                      <li className="left">
-                        12 likes
-                      </li>
-                      <li className="left">
-                        50 comments
-                      </li>
-                      <li className="right">
-                        <span id="answerCreatedAt">1462356600</span>
-                      </li>
+                      {
+                        answer.like_count ? (
+                          <li className="left">
+                            {answer.like_count} likes
+                          </li>
+                        ) : null
+                      }
+                      {
+                        answer.comment_count ? (
+                          <li className="left">
+                            {answer.comment_count} comments
+                          </li>
+                        ) : null
+                      }
                     </ul>
                   </div>
                 </div>
@@ -67,7 +97,7 @@ export default class Answers extends BasedLoadMoreComponent {
         </div>
       )
     } else {
-      return <span>empty</span>
+      return <span></span>
     }
   }
 

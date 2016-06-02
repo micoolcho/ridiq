@@ -1,1 +1,55 @@
-{"data":[{"user_avatar":"images/avatar.jpg","username":"Michael Cho - dad, entrepreneur","view_count":1700,"created_at":"6wwww","video":{"image":"images/playful-kitten-6683.jpg","file":"http://clips.vorwaerts-gmbh.de/VfE_html5.mp4","sharing":{"code":"&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;iframe.html&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;","link":["http://example.com/page/MEDIAID/"]}}},{"user_avatar":"images/avatar.jpg","username":"Michael Cho - dad, entrepreneur","view_count":1700,"created_at":"6hhhhh","video":{"image":"http://www.petakids.com/wp-content/uploads/2015/11/Cute-Red-Bunny.jpg","file":"http://clips.vorwaerts-gmbh.de/VfE_html5.mp4","sharing":{"code":"&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;iframe.html&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;","link":["http://example.com/page/MEDIAID/"]}}}]}
+{
+  "data": [
+    {
+      "id": 281,
+      "user": {
+        "id": 36,
+        "name": "John Amante",
+        "avatar_url": "",
+        "public_url": "http://localhost:3000/users/b0c8978d74"
+      },
+      "user_short_bio": "I'm an e-commerce dude who is keen to use Bitcoin as transaction currency",
+      "image_url": "https://d2g9p8cekugjwh.cloudfront.net/answers/images/281_original.jpg?1464321546",
+      "video_url": "https://d2g9p8cekugjwh.cloudfront.net/answers/videos/281_original.mp4?1464321546",
+      "public_url": "http://localhost:3000/answers/a7a07eeb54",
+      "view_count": 9,
+      "like_count": 0,
+      "comment_count": 0,
+      "created_at": "2016-05-27T03:59:06.412Z"
+    },
+    {
+      "id": 282,
+      "user": {
+        "id": 36,
+        "name": "John Amante",
+        "avatar_url": "",
+        "public_url": "http://localhost:3000/users/b0c8978d74"
+      },
+      "user_short_bio": "I'm an e-commerce dude who is keen to use Bitcoin as transaction currency",
+      "image_url": "https://d2g9p8cekugjwh.cloudfront.net/answers/images/281_original.jpg?1464321546",
+      "video_url": "https://d2g9p8cekugjwh.cloudfront.net/answers/videos/281_original.mp4?1464321546",
+      "public_url": "http://localhost:3000/answers/a7a07eeb54",
+      "view_count": 9,
+      "like_count": 0,
+      "comment_count": 0,
+      "created_at": "2016-05-27T03:59:06.412Z"
+    },
+    {
+      "id": 283,
+      "user": {
+        "id": 36,
+        "name": "John Amante",
+        "avatar_url": "",
+        "public_url": "http://localhost:3000/users/b0c8978d74"
+      },
+      "user_short_bio": "I'm an e-commerce dude who is keen to use Bitcoin as transaction currency",
+      "image_url": "https://d2g9p8cekugjwh.cloudfront.net/answers/images/281_original.jpg?1464321546",
+      "video_url": "https://d2g9p8cekugjwh.cloudfront.net/answers/videos/281_original.mp4?1464321546",
+      "public_url": "http://localhost:3000/answers/a7a07eeb54",
+      "view_count": 9,
+      "like_count": 0,
+      "comment_count": 0,
+      "created_at": "2016-05-27T03:59:06.412Z"
+    }
+  ]
+}
