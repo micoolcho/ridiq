@@ -30727,7 +30727,7 @@
 /* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var require;var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
+	var __WEBPACK_AMD_DEFINE_RESULT__;var require;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
 	 * @overview es6-promise - a tiny implementation of Promises/A+.
 	 * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
 	 * @license   Licensed under MIT license
@@ -46470,6 +46470,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _Utils = __webpack_require__(294);
+
+	var _Utils2 = _interopRequireDefault(_Utils);
+
 	var _BasedLoadMoreComponent = __webpack_require__(289);
 
 	var _BasedLoadMoreComponent2 = _interopRequireDefault(_BasedLoadMoreComponent);
@@ -46649,14 +46653,14 @@
 	              _react2.default.createElement(
 	                "li",
 	                { className: "item" },
-	                question.vote_count,
+	                _Utils2.default.kFormat(question.vote_count),
 	                " ",
 	                question.vote_count > 1 ? "votes" : "vote"
 	              ),
 	              _react2.default.createElement(
 	                "li",
 	                { className: "item" },
-	                question.answer_count,
+	                _Utils2.default.kFormat(question.answer_count),
 	                " ",
 	                question.answer_count > 1 ? "answers" : "answer"
 	              )
@@ -46977,6 +46981,9 @@
 
 	      var pageNum = arguments.length <= 0 || arguments[0] === undefined ? 1 : arguments[0];
 
+	      // For stagging
+	      var apiUrl = [window.ridiqConf.groupQuestion.apiGetPrefix, '/' + this.filter, "?", 'page=' + pageNum].join("");
+
 	      // For testing
 	      // const apiUrl = [
 	      //   window.ridiqConf.groupQuestion.apiGetPrefix,
@@ -46984,9 +46991,6 @@
 	      //   `page=${ pageNum }`,
 	      //   `filter=${ this.filter }`
 	      // ].join("");
-
-	      // For stagging
-	      var apiUrl = [window.ridiqConf.groupQuestion.apiGetPrefix, '/' + this.filter, "?", 'page=' + pageNum].join("");
 
 	      (0, _isomorphicFetch2.default)(apiUrl, {
 	        method: "GET"
@@ -47027,6 +47031,10 @@
 	var _moment = __webpack_require__(186);
 
 	var _moment2 = _interopRequireDefault(_moment);
+
+	var _Utils = __webpack_require__(294);
+
+	var _Utils2 = _interopRequireDefault(_Utils);
 
 	var _BasedLoadMoreComponent = __webpack_require__(289);
 
@@ -47158,8 +47166,9 @@
 	                  _react2.default.createElement(
 	                    "div",
 	                    { className: "view pull-left" },
-	                    answer.view_count,
-	                    " views"
+	                    _Utils2.default.kFormat(answer.view_count),
+	                    " ",
+	                    answer.view_count > 1 ? "views" : "view"
 	                  ),
 	                  _react2.default.createElement(
 	                    "div",
@@ -47178,14 +47187,14 @@
 	                  _react2.default.createElement(
 	                    "li",
 	                    { className: "left" },
-	                    answer.like_count,
+	                    _Utils2.default.kFormat(answer.like_count),
 	                    " ",
 	                    answer.like_count > 1 ? "likes" : "like"
 	                  ),
 	                  _react2.default.createElement(
 	                    "li",
 	                    { className: "left" },
-	                    answer.comment_count,
+	                    _Utils2.default.kFormat(answer.comment_count),
 	                    " ",
 	                    answer.comment_count > 1 ? "comments" : "comment"
 	                  )
@@ -47343,6 +47352,45 @@
 	}(_fbemitter.EventEmitter);
 
 	exports.default = BasedLoadMoreService;
+
+/***/ },
+/* 294 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var Utils = function () {
+	  function Utils() {
+	    _classCallCheck(this, Utils);
+	  }
+
+	  _createClass(Utils, null, [{
+	    key: "kFormat",
+	    value: function kFormat(num) {
+	      if (num < 1000) {
+	        return num;
+	      }
+
+	      if (num % 1000 == 0) {
+	        return num / 1000 + "k";
+	      }
+
+	      return (num / 1000).toFixed(1) + 'k';
+	    }
+	  }]);
+
+	  return Utils;
+	}();
+
+	exports.default = Utils;
 
 /***/ }
 /******/ ]);

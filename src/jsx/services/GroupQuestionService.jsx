@@ -11,14 +11,6 @@ export class GroupQuestionService extends EventEmitter {
   }
 
   loadMore(pageNum = 1) {
-    // For testing
-    // const apiUrl = [
-    //   window.ridiqConf.groupQuestion.apiGetPrefix,
-    //   "?",
-    //   `page=${ pageNum }`,
-    //   `filter=${ this.filter }`
-    // ].join("");
-
     // For stagging
     const apiUrl = [
       window.ridiqConf.groupQuestion.apiGetPrefix,
@@ -26,6 +18,14 @@ export class GroupQuestionService extends EventEmitter {
       "?",
       `page=${ pageNum }`,
     ].join("");
+
+    // For testing
+    // const apiUrl = [
+    //   window.ridiqConf.groupQuestion.apiGetPrefix,
+    //   "?",
+    //   `page=${ pageNum }`,
+    //   `filter=${ this.filter }`
+    // ].join("");
 
     Fetch(apiUrl, {
       method: "GET",

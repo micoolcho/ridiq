@@ -1,5 +1,6 @@
 import React from "react";
 import Moment from "moment";
+import Utils from "./Utils.jsx";
 import BasedLoadMoreComponent from "./BasedLoadMoreComponent.jsx";
 import { AnswerService } from "./services/SingleQuestionService.jsx";
 
@@ -66,7 +67,9 @@ export default class Answers extends BasedLoadMoreComponent {
                     <a href={answer.user.public_url} className="avatar" style={{backgroundImage: `url(${answer.user.avatar_url})`}}>&nbsp;</a>
                     <div className="name">{answer.user.name} - {answer.user_short_bio}</div>
                     <div className="clearfix">
-                      <div className="view pull-left">{answer.view_count} views</div>
+                      <div className="view pull-left">
+                        { Utils.kFormat(answer.view_count) } { answer.view_count > 1 ? "views" : "view" }
+                      </div>
                       <div className="time pull-right">{Moment(answer.created_at).fromNow()}</div>
                     </div>
                   </div>
@@ -76,10 +79,10 @@ export default class Answers extends BasedLoadMoreComponent {
                   <div className="info clearfix">
                     <ul>
                       <li className="left">
-                        {answer.like_count} {answer.like_count > 1 ? "likes" : "like"}
+                        { Utils.kFormat(answer.like_count) } {answer.like_count > 1 ? "likes" : "like"}
                       </li>
                       <li className="left">
-                        {answer.comment_count} {answer.comment_count > 1 ? "comments" : "comment"}
+                        { Utils.kFormat(answer.comment_count) } {answer.comment_count > 1 ? "comments" : "comment"}
                       </li>
                     </ul>
                   </div>

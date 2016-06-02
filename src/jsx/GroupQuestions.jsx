@@ -1,4 +1,5 @@
 import React from "react";
+import Utils from "./Utils.jsx"
 import BasedLoadMoreComponent from "./BasedLoadMoreComponent.jsx";
 import { GroupQuestionService } from "./services/GroupQuestionService.jsx";
 
@@ -116,8 +117,12 @@ class BasedQuestionContainer extends BasedLoadMoreComponent {
 
           <div className="clearfix">
             <ul className="tertiary-info">
-              <li className="item">{ question.vote_count } { question.vote_count > 1 ? "votes" : "vote" }</li>
-              <li className="item">{ question.answer_count } { question.answer_count > 1 ? "answers" : "answer" }</li>
+              <li className="item">
+                { Utils.kFormat(question.vote_count) } { question.vote_count > 1 ? "votes" : "vote" }
+              </li>
+              <li className="item">
+                { Utils.kFormat(question.answer_count) } { question.answer_count > 1 ? "answers" : "answer" }
+              </li>
             </ul>
             {
                 question.answered_users && 
