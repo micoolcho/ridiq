@@ -1,1 +1,70 @@
-{"data":[{"content":"question content 1, Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus molestias, sit molestiae laborum! Eos provident ut ex ipsa delectus et deserunt. Quia tenetur, doloremque dolorum perferendis, odit iure consectetur voluptate.","answer":{"image_url":"images/item1.png","public_url":"single-answer.html","like_count":19,"comment_count":18}},{"content":"question content 2","answer":{"image_url":"images/item2.png","public_url":"single-answer.html","like_count":19,"comment_count":18}},{"content":"question content 3","answer":{"image_url":"images/item3.png","public_url":"single-answer.html","like_count":19,"comment_count":18}}]}
+{
+  "data": [
+    {
+      "id": 284,
+      "image_url": "https://d2g9p8cekugjwh.cloudfront.net/answers/images/284_original.jpg?1464398285",
+      "video_url": "https://d2g9p8cekugjwh.cloudfront.net/answers/videos/284_original.mp4?1464398285",
+      "public_url": "http://localhost:3000/answers/23a5cebc1b",
+      "question": {
+        "id": 271,
+        "content": "question number 9",
+        "author_name": "Louis Nguyen",
+        "author_public_url": "http://localhost:3000/users/3439b74c22",
+        "is_anonymous": false,
+        "vote_count": 1,
+        "answer_count": 1,
+        "public_url": "http://localhost:3000/questions/0fca57027a",
+        "answer": null
+      },
+      "is_featured": false,
+      "view_count": 12,
+      "like_count": 0,
+      "comment_count": 0,
+      "created_at": 1464398285
+    },
+    {
+      "id": 284,
+      "image_url": "https://d2g9p8cekugjwh.cloudfront.net/answers/images/284_original.jpg?1464398285",
+      "video_url": "https://d2g9p8cekugjwh.cloudfront.net/answers/videos/284_original.mp4?1464398285",
+      "public_url": "http://localhost:3000/answers/23a5cebc1b",
+      "question": {
+        "id": 271,
+        "content": "question number 9",
+        "author_name": "Louis Nguyen",
+        "author_public_url": "http://localhost:3000/users/3439b74c22",
+        "is_anonymous": false,
+        "vote_count": 1,
+        "answer_count": 1,
+        "public_url": "http://localhost:3000/questions/0fca57027a",
+        "answer": null
+      },
+      "is_featured": false,
+      "view_count": 12,
+      "like_count": 0,
+      "comment_count": 0,
+      "created_at": 1464398285
+    },
+    {
+      "id": 284,
+      "image_url": "https://d2g9p8cekugjwh.cloudfront.net/answers/images/284_original.jpg?1464398285",
+      "video_url": "https://d2g9p8cekugjwh.cloudfront.net/answers/videos/284_original.mp4?1464398285",
+      "public_url": "http://localhost:3000/answers/23a5cebc1b",
+      "question": {
+        "id": 271,
+        "content": "question number 9",
+        "author_name": "Louis Nguyen",
+        "author_public_url": "http://localhost:3000/users/3439b74c22",
+        "is_anonymous": false,
+        "vote_count": 1,
+        "answer_count": 1,
+        "public_url": "http://localhost:3000/questions/0fca57027a",
+        "answer": null
+      },
+      "is_featured": false,
+      "view_count": 12,
+      "like_count": 0,
+      "comment_count": 0,
+      "created_at": 1464398285
+    }
+  ]
+}

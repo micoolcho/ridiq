@@ -20161,14 +20161,14 @@
 	          return _react2.default.createElement(
 	            'div',
 	            { className: 'answer', key: 'answer-' + Math.random() },
-	            _react2.default.createElement('img', { className: 'cover', src: item.answer.image_url, alt: '' }),
+	            _react2.default.createElement('img', { className: 'cover', src: item.image_url, alt: '' }),
 	            _react2.default.createElement(
 	              'a',
-	              { href: item.answer.public_url, className: 'question' },
+	              { href: item.public_url, className: 'question' },
 	              _react2.default.createElement(
 	                'span',
 	                { className: 'content' },
-	                item.content
+	                item.question.content
 	              )
 	            ),
 	            _react2.default.createElement(
@@ -20179,14 +20179,14 @@
 	                null,
 	                _react2.default.createElement('img', { src: '/images/like_icon.png', alt: '' }),
 	                ' ',
-	                item.answer.like_count
+	                item.like_count
 	              ),
 	              _react2.default.createElement(
 	                'span',
 	                null,
 	                _react2.default.createElement('img', { src: '/images/comment_icon.png', alt: '' }),
 	                ' ',
-	                item.answer.comment_count
+	                item.comment_count
 	              )
 	            )
 	          );
@@ -30727,7 +30727,7 @@
 /* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_RESULT__;var require;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
+	var require;var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
 	 * @overview es6-promise - a tiny implementation of Promises/A+.
 	 * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
 	 * @license   Licensed under MIT license
@@ -47224,7 +47224,7 @@
 	  _createClass(AnswerService, [{
 	    key: "getApiUrl",
 	    value: function getApiUrl(pageNum) {
-	      return [window.ridiqConf.singleQuestion.apiGet, "?", "questionId=" + window.ridiqConf.singleQuestion.questionId, "&", "page=" + pageNum].join("");
+	      return [window.ridiqConf.singleQuestion.apiGet, "?", "page=" + pageNum].join("");
 	    }
 	  }]);
 

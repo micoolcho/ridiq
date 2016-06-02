@@ -5,8 +5,6 @@ export class AnswerService extends BasedLoadMoreService {
     return [
       window.ridiqConf.singleQuestion.apiGet,
       "?",
-      `questionId=${window.ridiqConf.singleQuestion.questionId}`,
-      "&",
       `page=${pageNum}`
     ].join("");
   }
