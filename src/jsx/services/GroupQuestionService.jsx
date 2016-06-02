@@ -22,7 +22,9 @@ export class GroupQuestionService extends EventEmitter {
     // For stagging
     const apiUrl = [
       window.ridiqConf.groupQuestion.apiGetPrefix,
-      `/${this.filter}`
+      `/${this.filter}`,
+      "?",
+      `page=${ pageNum }`,
     ].join("");
 
     Fetch(apiUrl, {
