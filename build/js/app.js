@@ -47074,7 +47074,10 @@
 	      args[_key] = arguments[_key];
 	    }
 
-	    return _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Player)).call.apply(_Object$getPrototypeO, [this].concat(args)));
+	    var _this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Player)).call.apply(_Object$getPrototypeO, [this].concat(args)));
+
+	    _this.playerId = _this.props.id + Math.random();
+	    return _this;
 	  }
 
 	  _createClass(Player, [{
@@ -47082,14 +47085,14 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        "div",
-	        { id: this.props.id },
+	        { id: this.playerId },
 	        " "
 	      );
 	    }
 	  }, {
 	    key: "componentDidMount",
 	    value: function componentDidMount() {
-	      jwplayer(this.props.id).setup(this.props.playerConfig);
+	      jwplayer(this.playerId).setup(this.props.playerConfig);
 	    }
 	  }]);
 
@@ -47189,7 +47192,21 @@
 	                )
 	              )
 	            );
-	          })
+	          }),
+
+	          /* Load more */
+	          this.state.loadedItem < this.state.total && _react2.default.createElement(
+	            "div",
+	            { className: "text-center m-t-20" },
+	            _react2.default.createElement(
+	              "div",
+	              {
+	                onClick: this.loadmore,
+	                className: 'button button-large ' + (this.state.isLoading ? 'disabled' : '')
+	              },
+	              this.state.isLoading ? 'loading...' : 'load more'
+	            )
+	          )
 	        );
 	      } else {
 	        return _react2.default.createElement("span", null);

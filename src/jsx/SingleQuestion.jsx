@@ -26,14 +26,15 @@ Moment.updateLocale('en', {
 class Player extends React.Component {
   constructor(...args) {
     super(...args);
+    this.playerId = this.props.id + (Math.random());
   }
 
   render() {
-    return (<div id={this.props.id}>&nbsp;</div>);
+    return (<div id={this.playerId}>&nbsp;</div>);
   }
 
   componentDidMount() {
-    jwplayer(this.props.id).setup(this.props.playerConfig);
+    jwplayer(this.playerId).setup(this.props.playerConfig);
   }
 }
 
@@ -85,6 +86,20 @@ export default class Answers extends BasedLoadMoreComponent {
                 </div>
               )
             })
+          }
+
+          {
+            /* Load more */
+            this.state.loadedItem < this.state.total && (
+              <div className="text-center m-t-20">
+                <div
+                  onClick={this.loadmore}
+                  className={'button button-large ' + (this.state.isLoading ? 'disabled' : '')}
+                >
+                  {this.state.isLoading ? 'loading...' : 'load more'}
+                </div>
+              </div>
+            )
           }
         </div>
       )
