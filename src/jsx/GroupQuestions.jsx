@@ -116,8 +116,8 @@ class BasedQuestionContainer extends BasedLoadMoreComponent {
 
           <div className="clearfix">
             <ul className="tertiary-info">
-              { question.vote_count ? <li className="item">{ question.vote_count } votes</li> : null }
-              { question.answer_count ? <li className="item">{ question.answer_count } answers</li> : null }
+              <li className="item">{ question.vote_count } { question.vote_count > 1 ? "votes" : "vote" }</li>
+              <li className="item">{ question.answer_count } { question.answer_count > 1 ? "answers" : "answer" }</li>
             </ul>
             {
                 question.answered_users && 

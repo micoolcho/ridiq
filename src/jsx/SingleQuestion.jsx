@@ -74,20 +74,12 @@ export default class Answers extends BasedLoadMoreComponent {
 
                   <div className="info clearfix">
                     <ul>
-                      {
-                        answer.like_count ? (
-                          <li className="left">
-                            {answer.like_count} likes
-                          </li>
-                        ) : null
-                      }
-                      {
-                        answer.comment_count ? (
-                          <li className="left">
-                            {answer.comment_count} comments
-                          </li>
-                        ) : null
-                      }
+                      <li className="left">
+                        {answer.like_count} {answer.like_count > 1 ? "likes" : "like"}
+                      </li>
+                      <li className="left">
+                        {answer.comment_count} {answer.comment_count > 1 ? "comments" : "comment"}
+                      </li>
                     </ul>
                   </div>
                 </div>

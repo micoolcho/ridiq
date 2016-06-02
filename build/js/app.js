@@ -46646,18 +46646,20 @@
 	            _react2.default.createElement(
 	              "ul",
 	              { className: "tertiary-info" },
-	              question.vote_count ? _react2.default.createElement(
+	              _react2.default.createElement(
 	                "li",
 	                { className: "item" },
 	                question.vote_count,
-	                " votes"
-	              ) : null,
-	              question.answer_count ? _react2.default.createElement(
+	                " ",
+	                question.vote_count > 1 ? "votes" : "vote"
+	              ),
+	              _react2.default.createElement(
 	                "li",
 	                { className: "item" },
 	                question.answer_count,
-	                " answers"
-	              ) : null
+	                " ",
+	                question.answer_count > 1 ? "answers" : "answer"
+	              )
 	            ),
 	            question.answered_users && question.answered_users.length && _this4.getQuestionUserComponents(question.answered_users)
 	          )
@@ -47170,18 +47172,20 @@
 	                _react2.default.createElement(
 	                  "ul",
 	                  null,
-	                  answer.like_count ? _react2.default.createElement(
+	                  _react2.default.createElement(
 	                    "li",
 	                    { className: "left" },
 	                    answer.like_count,
-	                    " likes"
-	                  ) : null,
-	                  answer.comment_count ? _react2.default.createElement(
+	                    " ",
+	                    answer.like_count > 1 ? "likes" : "like"
+	                  ),
+	                  _react2.default.createElement(
 	                    "li",
 	                    { className: "left" },
 	                    answer.comment_count,
-	                    " comments"
-	                  ) : null
+	                    " ",
+	                    answer.comment_count > 1 ? "comments" : "comment"
+	                  )
 	                )
 	              )
 	            );
