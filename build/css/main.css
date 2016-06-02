@@ -388,7 +388,8 @@
   height: 30px;
   border-radius: 1000px;
   background-size: cover;
-  background-position: center; }
+  background-position: center;
+  text-decoration: none; }
 .answer-block .name {
   color: #6D6D6D; }
 .answer-block .view, .answer-block .time {

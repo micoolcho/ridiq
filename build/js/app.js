@@ -30727,7 +30727,7 @@
 /* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var require;var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
+	var __WEBPACK_AMD_DEFINE_RESULT__;var require;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
 	 * @overview es6-promise - a tiny implementation of Promises/A+.
 	 * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
 	 * @license   Licensed under MIT license
@@ -47137,7 +47137,7 @@
 	                { className: "user" },
 	                _react2.default.createElement(
 	                  "a",
-	                  { href: "#", className: "avatar", style: { backgroundImage: "url(" + answer.user.avatar_url + ")" } },
+	                  { href: answer.user.public_url, className: "avatar", style: { backgroundImage: "url(" + answer.user.avatar_url + ")" } },
 	                  " "
 	                ),
 	                _react2.default.createElement(
