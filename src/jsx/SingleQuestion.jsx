@@ -65,7 +65,7 @@ export default class Answers extends BasedLoadMoreComponent {
                 <div key={`answer-${index}`} className="answer-block">
                   <div className="user">
                     <a href={answer.user.public_url} className="avatar" style={{backgroundImage: `url(${answer.user.avatar_url})`}}>&nbsp;</a>
-                    <div className="name">{answer.user.name} - {answer.user_short_bio}</div>
+                    <div className="name">{answer.user.name}{answer.user_short_bio && ` - ${answer.user_short_bio}`}</div>
                     <div className="clearfix">
                       <div className="view pull-left">
                         { Utils.kFormat(answer.view_count) } { answer.view_count > 1 ? "views" : "view" }
