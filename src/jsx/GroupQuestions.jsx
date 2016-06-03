@@ -140,11 +140,13 @@ class BasedQuestionContainer extends BasedLoadMoreComponent {
       <div className="users">
       {
         users.map((user, userIndex)=>{
+          let userAvatar = user.avatar_url || "/assets/user_default_avatar.png";
+
           return (
             <a
               href={user.public_url}
               key={`user-${userIndex}`} 
-              className="item" style={{backgroundImage: `url(${user.avatar_url})`}}
+              className="item" style={{backgroundImage: `url(${userAvatar})`}}
             >
               &nbsp;
             </a>

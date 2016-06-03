@@ -62,11 +62,13 @@ export default class MoreComment extends React.Component {
         <ul className="comment-list">
         {
           this.state.items.map((comment)=>{
+            let userAvatarThumbUrl = comment.user.avatar_thumb_url || "/assets/user_default_avatar.png";
+
             return (
               <li key={`comment-${Math.random()}`} className="comment">
                 <div className="avatar">
                   <a href={comment.user.public_url}>
-                    <img src={comment.user.avatar_thumb_url} />
+                    <img src={userAvatarThumbUrl} />
                   </a>
                 </div>
                 <div className="time">
