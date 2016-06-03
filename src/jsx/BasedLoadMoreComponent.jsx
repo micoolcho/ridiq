@@ -39,7 +39,7 @@ export default class BasedLoadMoreComponent extends React.Component {
 
   onReceiveLoadmoreResult(result) {
     result.data.map((newItem)=>{
-      this.items.unshift(newItem);
+      this.items.push(newItem);
     });
 
     this.state.currentPage++;
