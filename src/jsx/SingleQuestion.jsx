@@ -70,7 +70,7 @@ export default class Answers extends BasedLoadMoreComponent {
                       <div className="view pull-left">
                         { Utils.kFormat(answer.view_count) } { answer.view_count > 1 ? "views" : "view" }
                       </div>
-                      <div className="time pull-right">{Moment(answer.created_at).fromNow()}</div>
+                      <div className="time pull-right">{Moment(parseInt(answer.created_at) * 1000).fromNow()}</div>
                     </div>
                   </div>
 
