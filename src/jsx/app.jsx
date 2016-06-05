@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import UserAnswers from './UserAnswers.jsx';
 import AskQuestionForm from './AskQuestionForm.jsx';
 import MoreComment from './MoreComment.jsx';
-import GroupQuestions from "./GroupQuestions.jsx";
+import GroupQuestions from "./group/GroupQuestions.jsx";
 import SingleQuestion from "./SingleQuestion.jsx";
 import Moment from 'moment';
 
-console.log("App v." + "05.07.16");
+console.log("App v." + "05.07.16.2");
 
 // Config moment
 Moment.updateLocale('en', {
