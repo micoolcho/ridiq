@@ -21,7 +21,7 @@ export default class BasedQuestionContainer extends BasedLoadMoreComponent {
     return (
       <div>
         <div className="questions">
-          { this.getItemComponents() }
+          { this.getComponentQuestions() }
         </div>
 
         { this.getLoadMoreBtn() }
@@ -48,9 +48,7 @@ export default class BasedQuestionContainer extends BasedLoadMoreComponent {
     }, this.executeFirstLoad);
   }
 
-  getItemComponents() {
-    // TODO replace single-question.html by question.public_url
-
+  getComponentQuestions() {
     return this.items.map((question, questionIndex)=>{
       return (
         <div key={`question-${questionIndex}`} className="item">
@@ -70,7 +68,7 @@ export default class BasedQuestionContainer extends BasedLoadMoreComponent {
             {
                 question.answered_users && 
                 question.answered_users.length && 
-                  this.getQuestionUserComponents(question.answered_users)
+                  this.getComponentAnsweredUsers(question.answered_users)
             }
           </div>
         </div>
@@ -78,7 +76,7 @@ export default class BasedQuestionContainer extends BasedLoadMoreComponent {
     });
   }
 
-  getQuestionUserComponents(users) {
+  getComponentAnsweredUsers(users) {
     return (
       <div className="users">
       {
