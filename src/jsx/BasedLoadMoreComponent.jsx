@@ -38,6 +38,10 @@ export default class BasedLoadMoreComponent extends React.Component {
   }
 
   onReceiveLoadmoreResult(result) {
+    if (!result.data || !result.data.length) {
+      return false;
+    }
+
     result.data.map((newItem)=>{
       this.items.push(newItem);
     });
@@ -47,5 +51,21 @@ export default class BasedLoadMoreComponent extends React.Component {
     this.state.isLoading = false;
 
     this.forceUpdate();
+
+    return true;
+  }
+
+  getLoadMoreBtn() {
+    return this.state.loadedItem < this.props.totalItem ? (
+      <div className="text-center m-t-20">
+        <div
+          onClick={this.loadmore}
+          className={'button button-large ' + (this.state.isLoading ? 'disabled' : '')}>
+          {
+            this.state.isLoading ? 'loading...' : 'load more'
+          }
+        </div>
+      </div>
+    ) : <span></span>
   }
 }

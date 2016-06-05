@@ -1,36 +1,26 @@
 import React from 'react';
 import jQuery from 'jquery';
 import AnswerService from './services/AnserServices.jsx';
+import BasedLoadMoreComponent from "./BasedLoadMoreComponent.jsx";
 
-export default class UserAnsweredQuestions extends React.Component {
+export default class UserAnsweredQuestions extends BasedLoadMoreComponent {
 
   constructor(...args) {
-    super(...args);
+    super(...args, AnswerService, 0);
 
-    this.state = {
-      isLoading: false,
-      loadedItem: 0,
-      currentPage: 0,
-      item: [],
-      firstLoadDone: false,
-      isInitialized: false,
-    };
-
-    this.loadmore = this.loadmore.bind(this);
-    this.onReceiveLoadmoreResult = this.onReceiveLoadmoreResult.bind(this);
-
-    AnswerService.addListener('loadmore', this.onReceiveLoadmoreResult);
+    this.state.successLoadCount = 0;
+    this.state.total = this.props.totalItem;
   }
 
   render() {
-    if (this.props.totalItem == 0) {
+    if (this.props.total == 0) {
       return (<span></span>);
     }
 
     return (
       <div>
         {
-          this.state.item.map((item)=>{
+          this.items.map((item)=>{
             return (
               <div className="answer" key={`answer-${Math.random()}`}>
                 <img className="cover" src={item.image_url} alt="" />
@@ -50,19 +40,7 @@ export default class UserAnsweredQuestions extends React.Component {
 
         <div className="clearfix"></div>
 
-        {
-          this.state.loadedItem < this.props.totalItem ? (
-            <div className="text-center m-t-20">
-              <div
-                onClick={this.loadmore}
-                className={'button button-large ' + (this.state.isLoading ? 'disabled' : '')}>
-                {
-                  this.state.isLoading ? 'loading...' : 'load more'
-                }
-              </div>
-            </div>
-          ) : <span></span>
-        }
+        { this.getLoadMoreBtn() }
       </div>
     )
   }
@@ -72,7 +50,7 @@ export default class UserAnsweredQuestions extends React.Component {
     this.loadmore();
 
     $window.scroll((e)=>{
-      if (!this.state.firstLoadDone || this.state.isLoading) {
+      if (this.state.successLoadCount <= 1 || this.state.isLoading) {
         return;
       }
 
@@ -84,38 +62,9 @@ export default class UserAnsweredQuestions extends React.Component {
     });
   }
 
-  loadmore() {
-    if (this.state.isLoading) {
-      return;
-    }
-
-    if (this.state.loadedItem >= this.props.totalItem) {
-      jQuery(window).unbind('scroll');
-      return;
-    }
-
-    this.setState({
-      isLoading: true,
-    });
-
-    AnswerService.loadMore(this.state.currentPage + 1);
-  }
-
   onReceiveLoadmoreResult(result) {
-    result.data.map((newItem)=>{
-      this.state.item.push(newItem);
-    });
-
-    if (this.state.isInitialized) {
-      this.state.firstLoadDone = true;
-    } else {
-      this.state.isInitialized = true;
+    if ( super.onReceiveLoadmoreResult(result) ) {
+      this.state.successLoadCount = this.state.successLoadCount + 1;
     }
-
-    this.state.currentPage++;
-    this.state.loadedItem += result.data.length;
-    this.state.isLoading = false;
-
-    this.forceUpdate();
   }
 }
