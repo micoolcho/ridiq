@@ -4,7 +4,7 @@
       "id": 284,
       "image_url": "https://d2g9p8cekugjwh.cloudfront.net/answers/images/284_original.jpg?1464398285",
       "video_url": "https://d2g9p8cekugjwh.cloudfront.net/answers/videos/284_original.mp4?1464398285",
-      "public_url": "http://localhost:3000/answers/23a5cebc1b",
+      "public_url": "single-answer.html",
       "question": {
         "id": 271,
         "content": "question number 9",
@@ -26,7 +26,7 @@
       "id": 284,
       "image_url": "https://d2g9p8cekugjwh.cloudfront.net/answers/images/284_original.jpg?1464398285",
       "video_url": "https://d2g9p8cekugjwh.cloudfront.net/answers/videos/284_original.mp4?1464398285",
-      "public_url": "http://localhost:3000/answers/23a5cebc1b",
+      "public_url": "single-answer.html",
       "question": {
         "id": 271,
         "content": "question number 9",
@@ -48,7 +48,7 @@
       "id": 284,
       "image_url": "https://d2g9p8cekugjwh.cloudfront.net/answers/images/284_original.jpg?1464398285",
       "video_url": "https://d2g9p8cekugjwh.cloudfront.net/answers/videos/284_original.mp4?1464398285",
-      "public_url": "http://localhost:3000/answers/23a5cebc1b",
+      "public_url": "single-answer.html",
       "question": {
         "id": 271,
         "content": "question number 9",
