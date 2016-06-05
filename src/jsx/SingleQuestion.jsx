@@ -21,9 +21,11 @@ class Player extends React.Component {
 
 export default class Answers extends BasedLoadMoreComponent {
   constructor(...args) {
-    let service = new AnswerService();
-    let total = window.ridiqConf.singleQuestion.answerCount;
-    super(...args, service, total);
+    const externalArgs = {
+      service: new AnswerService(),
+      total: window.ridiqConf.singleQuestion.answerCount,
+    }
+    super(...args, externalArgs);
   }
 
   render() {
@@ -71,19 +73,7 @@ export default class Answers extends BasedLoadMoreComponent {
             })
           }
 
-          {
-            /* Load more */
-            this.state.loadedItem < this.state.total && (
-              <div className="text-center m-t-20">
-                <div
-                  onClick={this.loadmore}
-                  className={'button button-large ' + (this.state.isLoading ? 'disabled' : '')}
-                >
-                  {this.state.isLoading ? 'loading...' : 'load more'}
-                </div>
-              </div>
-            )
-          }
+          { this.getLoadMoreBtn() }
         </div>
       )
     } else {

@@ -69,19 +69,7 @@ class BasedQuestionContainer extends BasedLoadMoreComponent {
           { this.getItemComponents() }
         </div>
 
-        {
-          /* Load more */
-          this.state.loadedItem < this.state.total && (
-            <div className="text-center m-t-20">
-              <div
-                onClick={this.loadmore}
-                className={'button button-large ' + (this.state.isLoading ? 'disabled' : '')}
-              >
-                {this.state.isLoading ? 'loading...' : 'load more'}
-              </div>
-            </div>
-          )
-        }
+        { this.getLoadMoreBtn() }
       </div>
     )
   }
@@ -160,33 +148,45 @@ class BasedQuestionContainer extends BasedLoadMoreComponent {
 
 class TrendingQuestion extends BasedQuestionContainer {
   constructor(...args) {
-    let groupQuestionService = new GroupQuestionService("public_trending");
-    let total = window.ridiqConf.groupQuestion.trending.total;
-    super(...args, groupQuestionService, total);
+    const externalArgs = {
+      service: new GroupQuestionService("public_trending"),
+      total: window.ridiqConf.groupQuestion.trending.total,
+    }
+
+    super(...args, externalArgs);
   }
 }
 
 class MostRecentQuestion extends BasedQuestionContainer {
   constructor(...args) {
-    let groupQuestionService = new GroupQuestionService("public_questions");
-    let total = window.ridiqConf.groupQuestion.mostRecent.total;
-    super(...args, groupQuestionService, total);
+    const externalArgs = {
+      service: new GroupQuestionService("public_questions"),
+      total: window.ridiqConf.groupQuestion.mostRecent.total,
+    }
+
+    super(...args, externalArgs);
   }
 }
 
 class AllTimeQuestion extends BasedQuestionContainer {
   constructor(...args) {
-    let groupQuestionService = new GroupQuestionService("public_all_time");
-    let total = window.ridiqConf.groupQuestion.allTime.total;
-    super(...args, groupQuestionService, total);
+    const externalArgs = {
+      service: new GroupQuestionService("public_all_time"),
+      total: window.ridiqConf.groupQuestion.allTime.total,
+    }
+
+    super(...args, externalArgs);
   }
 }
 
 class UnansweredQuestion extends BasedQuestionContainer {
   constructor(...args) {
-    let groupQuestionService = new GroupQuestionService("public_unanswered");
-    let total = window.ridiqConf.groupQuestion.unanswered.total;
-    super(...args, groupQuestionService, total);
+    const externalArgs = {
+      service: new GroupQuestionService("public_unanswered"),
+      total: window.ridiqConf.groupQuestion.unanswered.total,
+    }
+    
+    super(...args, externalArgs);
   }
 }
 

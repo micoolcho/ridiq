@@ -7,7 +7,7 @@ import GroupQuestions from "./GroupQuestions.jsx";
 import SingleQuestion from "./SingleQuestion.jsx";
 import Moment from 'moment';
 
-console.log("App v." + "28.04.0");
+console.log("App v." + "05.07.16");
 
 // Config moment
 Moment.updateLocale('en', {

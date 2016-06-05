@@ -1,36 +1,31 @@
 import React from 'react';
 import CommentService from './services/CommentService.jsx';
+import BasedLoadMoreComponent from "./BasedLoadMoreComponent.jsx";
 import Moment from 'moment';
 
-export default class MoreComment extends React.Component {
+export default class MoreComment extends BasedLoadMoreComponent {
   constructor(...args) {
-    super(...args);
+    const externalArgs = {
+      service: CommentService,
+      unshiftLoadedItems: true,
+    }
 
-    this.state = {
-      isLoading: false,
-      loadedItem: 0,
-      currentPage: 0,
-      items: [],
-    };
-
-    this.onClickLoadMoreBtn = this.onClickLoadMoreBtn.bind(this);
-    this.onReceiveLoadmoreResult = this.onReceiveLoadmoreResult.bind(this);
-
-    CommentService.addListener('loadmore', this.onReceiveLoadmoreResult);
+    super(...args, externalArgs);
+    this.state.total = this.props.totalItem || 0;
   }
 
   render() {
-    if (this.props.totalItem == 0) {
+    if (this.state.total == 0) {
       return (<span></span>);
     }
 
     return (
       <div>
         {
-          this.state.loadedItem < this.props.totalItem ? (
+          this.state.loadedItem < this.state.total ? (
             <div
               className={"loadmore-comment " + (this.state.isLoading ? 'disabled' : '')}
-              onClick={this.onClickLoadMoreBtn}
+              onClick={this.loadmore}
             >
               {
                 this.state.isLoading ? 'loading...' : 'Load older comments'
@@ -41,7 +36,7 @@ export default class MoreComment extends React.Component {
 
         <ul className="comment-list">
         {
-          this.state.items.map((comment)=>{
+          this.items.map((comment)=>{
             let userAvatarThumbUrl = comment.user.avatar_thumb_url || "/assets/user_default_avatar.png";
 
             return (
@@ -90,30 +85,5 @@ export default class MoreComment extends React.Component {
 
   componentDidMount() {
     this.loadmore();
-  }
-
-  onClickLoadMoreBtn() {
-    this.loadmore();
-  }
-
-  loadmore() {
-    if (this.state.isLoading) return;
-    this.setState({
-      isLoading: true,
-    });
-
-    CommentService.loadMore(this.state.currentPage + 1);
-  }
-
-  onReceiveLoadmoreResult(result) {
-    result.data.map((newItem)=>{
-      this.state.items.unshift(newItem);
-    });
-
-    this.state.currentPage++;
-    this.state.loadedItem += result.data.length;
-    this.state.isLoading = false;
-
-    this.forceUpdate();
   }
 }

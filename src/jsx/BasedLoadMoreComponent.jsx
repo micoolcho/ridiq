@@ -1,14 +1,26 @@
 import React from "react";
 
-// props: service
+// externalArgs :
+// {
+//    total: number,
+//    unshiftLoadedItems: boolean,
+//    service: EventEmitter
+// }
 export default class BasedLoadMoreComponent extends React.Component {
   constructor(...args) {
     super(...args);
 
+    const externalArgs = args[ args.length - 1 ];
+
+    if (!externalArgs.service) {
+      throw new Error("Service is missing");
+    }
+
     this.items = [];
+    this.unshiftLoadedItems = externalArgs.unshiftLoadedItems || false;
     this.state = {
       isLoading: false,
-      total: args[ args.length - 1 ] || 0,
+      total: externalArgs.total || 0,
       loadedItem: 0,
       currentPage: 0,
     };
@@ -16,7 +28,7 @@ export default class BasedLoadMoreComponent extends React.Component {
     this.onReceiveLoadmoreResult = this.onReceiveLoadmoreResult.bind(this);
     this.loadmore = this.loadmore.bind(this);
 
-    this.service = args[args.length - 2];
+    this.service = externalArgs.service;
     this.service.addListener('loadmore', this.onReceiveLoadmoreResult);
   }
 
@@ -43,7 +55,11 @@ export default class BasedLoadMoreComponent extends React.Component {
     }
 
     result.data.map((newItem)=>{
-      this.items.push(newItem);
+      if (this.unshiftLoadedItems) {
+        this.items.unshift(newItem);
+      } else {
+        this.items.push(newItem);
+      }
     });
 
     this.state.currentPage++;
@@ -56,7 +72,7 @@ export default class BasedLoadMoreComponent extends React.Component {
   }
 
   getLoadMoreBtn() {
-    return this.state.loadedItem < this.props.totalItem ? (
+    return this.state.loadedItem < this.state.total ? (
       <div className="text-center m-t-20">
         <div
           onClick={this.loadmore}

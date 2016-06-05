@@ -6,7 +6,11 @@ import BasedLoadMoreComponent from "./BasedLoadMoreComponent.jsx";
 export default class UserAnsweredQuestions extends BasedLoadMoreComponent {
 
   constructor(...args) {
-    super(...args, AnswerService, 0);
+    const externalArgs = {
+      service: AnswerService,
+    }
+    
+    super(...args, externalArgs);
 
     this.state.successLoadCount = 0;
     this.state.total = this.props.totalItem;
