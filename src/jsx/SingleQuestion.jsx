@@ -4,26 +4,6 @@ import Utils from "./Utils.jsx";
 import BasedLoadMoreComponent from "./BasedLoadMoreComponent.jsx";
 import { AnswerService } from "./services/SingleQuestionService.jsx";
 
-Moment.updateLocale('en', {
-  relativeTime: {
-    future : 'in %s',
-    past : '%s',
-    s : 'now',
-    m : '1m',
-    mm : '%dm',
-    h : '1h',
-    hh : '%dh',
-    d : '1d',
-    dd : '%dd',
-    M : '4w',
-    MM : (number)=>{
-      return `${number * 4}w`;
-    },
-    y : 'a year',
-    yy : '%d years'
-  }
-});
-
 class Player extends React.Component {
   constructor(...args) {
     super(...args);
