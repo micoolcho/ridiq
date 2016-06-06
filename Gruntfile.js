@@ -1,6 +1,9 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     sass: {
+      options: {
+        style: "compressed",
+      },
       main: {
         files: {
           './build/css/main.css': './src/sass/main.scss',
