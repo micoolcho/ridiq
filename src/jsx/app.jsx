@@ -30,6 +30,7 @@ Moment.updateLocale('en', {
   }
 });
 
+// Ask question form for User or Group.
 if (document.getElementById('askQuestionForm')) {
   ReactDOM.render(
     <AskQuestionForm 
@@ -40,6 +41,7 @@ if (document.getElementById('askQuestionForm')) {
   );
 }
 
+// Public profile page: user answers.
 if (document.getElementById('moreAnswer')) {
   ReactDOM.render(
     <UserAnswers totalItem={window.ridiqConf.answer.answerCount} perPage={window.ridiqConf.answer.perPage} />,
@@ -47,19 +49,23 @@ if (document.getElementById('moreAnswer')) {
   );
 }
 
+// Single answer page: comments of answer.
 if (document.getElementById('moreComment')) {
   ReactDOM.render(<MoreComment totalItem={window.ridiqConf.comment.commentCount} perPage={window.ridiqConf.comment.perPage} />, document.getElementById('moreComment'));
 }
 
+// Single answer page: translate from timestamp to `1h, 1w ... ago`.
+if (document.getElementById('answerCreatedAt')) {
+  var ele = document.getElementById('answerCreatedAt');
+  ele.innerHTML = Moment(new Date(parseInt(ele.innerHTML) * 1000)).fromNow();
+}
+
+// Group page: questions in group. Including 4 types: trending, most recent, all time, unanswered.
 if (document.getElementById('groupQuestions')) {
   ReactDOM.render(<GroupQuestions />, document.getElementById('groupQuestions'));
 }
 
+// Single question page: answers of question.
 if (document.getElementById('singleQuestionAnswers')) {
   ReactDOM.render(<SingleQuestion />, document.getElementById('singleQuestionAnswers'));
-}
-
-if (document.getElementById('answerCreatedAt')) {
-  var ele = document.getElementById('answerCreatedAt');
-  ele.innerHTML = Moment(new Date(parseInt(ele.innerHTML) * 1000)).fromNow();
 }
