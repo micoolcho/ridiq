@@ -42,7 +42,7 @@ Includes:
 
 ## How to run
 
-## Install dependencies
+### Install dependencies
 
 - Install npm packages
 ```
@@ -54,7 +54,7 @@ npm install
 bower install
 ```
 
-## Develop
+### Develop
 
 - Run `npm start`. It will excute:
   - `browserSync` : live update on browser for any change of CSS/JS
@@ -63,7 +63,7 @@ bower install
 - Go to `http://localhost:3000`
 - We use `browserSync` to auto update webpage in browser when `buid/` files was changed.
 
-## Build production
+### Build production
 
 Including build js, sass.
 
