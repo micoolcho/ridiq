@@ -20,17 +20,6 @@ module.exports = function(grunt) {
       },
     },
 
-    concat: {
-      jsVendor: {
-        src: [
-          // 'bower_components/jquery/dist/jquery.min.js',
-          // 'bower_components/bootstrap-sass/assets/javascripts/bootstrap/modal.js',
-          // 'bower_components/moment/min/moment-with-locales.min.js',
-        ],
-        dest: 'build/js/vendor.js',
-      },
-    },
-
     browserSync: {
       dev: {
         bsFiles: {
@@ -53,12 +42,6 @@ module.exports = function(grunt) {
     'watch'
   ]);
 
-  grunt.registerInitTask('vendor', [
-    'sass:bootstrap',
-    'concat:jsVendor',
-  ]);
-
-  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-browser-sync');
