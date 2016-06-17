@@ -57,7 +57,7 @@ if (document.getElementById('moreComment')) {
 // Single answer page: translate from timestamp to `1h, 1w ... ago`.
 if (document.getElementById('answerCreatedAt')) {
   var ele = document.getElementById('answerCreatedAt');
-  ele.innerHTML = Moment(new Date(parseInt(ele.innerHTML) * 1000)).fromNow();
+  ele.innerHTML = Moment(new Date(parseInt(ele.dataset.answerCreatedAt) * 1000)).fromNow();
 }
 
 // Group page: questions in group. Including 4 types: trending, most recent, all time, unanswered.
