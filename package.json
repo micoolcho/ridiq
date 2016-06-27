@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --colors --progress --config ./webpack.config.js --optimize-minimize && grunt sass",
+    "build": "NODE_ENV=production webpack --colors --progress --config ./webpack.config.js --optimize-minimize && grunt sass",
     "watch": "webpack --colors --progress --watch --config ./webpack.config.js",
     "start": "grunt serve | npm run watch"
   },
