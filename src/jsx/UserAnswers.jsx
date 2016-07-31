@@ -34,8 +34,7 @@ export default class UserAnsweredQuestions extends BasedLoadMoreComponent {
                   </span>
                 </a>
                 <div className="info">
-                  <span><img src="/images/like_icon.png" alt="" /> {item.like_count}</span>
-                  <span><img src="/images/comment_icon.png" alt="" /> {item.comment_count}</span>
+                  <span><img src="/images/view_icon.png" alt="" /> {item.view_count}</span>
                 </div>
               </div>
             )

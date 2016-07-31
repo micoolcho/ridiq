@@ -67,6 +67,7 @@ main {
   }
 
   .displayName {
+    font-size: 18px;
     font-weight: 600;
     color: #505050;
   }
@@ -90,6 +91,11 @@ main {
         }
       }
     }
+  }
+  
+  .short_intro {
+    color: #aaaaaa;
+    margin-bottom: 11px;
   }
 
   .intro {
@@ -276,6 +282,11 @@ main {
   text-decoration: none;
   cursor: pointer;
   text-align: center;
+  
+  a {
+    text-decoration: none;
+    color: white !important;
+  }
 
   &.disabled {
     opacity: 0.5;
