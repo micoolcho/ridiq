@@ -6,8 +6,9 @@ import MoreComment from './MoreComment.jsx';
 import GroupQuestions from "./group/GroupQuestions.jsx";
 import SingleQuestion from "./SingleQuestion.jsx";
 import Moment from 'moment';
+import autolinkJs from 'autolink-js';
 
-console.log("App v." + "05.07.16.2");
+console.log("App v." + "01.08.16.1");
 
 // Config moment
 Moment.updateLocale('en', {
@@ -69,3 +70,14 @@ if (document.getElementById('groupQuestions')) {
 if (document.getElementById('singleQuestionAnswers')) {
   ReactDOM.render(<SingleQuestion />, document.getElementById('singleQuestionAnswers'));
 }
+
+// Auto link
+document.addEventListener("DOMContentLoaded", function(event) { 
+  var autoLinkElements = document.querySelectorAll('.autolink');
+  if (autoLinkElements && autoLinkElements.length) {
+    autoLinkElements.forEach(function(autoLinkElement) {
+      var content = autoLinkElement.innerHTML;
+      autoLinkElement.innerHTML = content.autoLink({target: "_blank"});
+    })
+  }
+});
