@@ -6,9 +6,8 @@ import MoreComment from './MoreComment.jsx';
 import GroupQuestions from "./group/GroupQuestions.jsx";
 import SingleQuestion from "./SingleQuestion.jsx";
 import Moment from 'moment';
-import autolinkJs from 'autolink-js';
 
-console.log("App v." + "01.08.16.1");
+console.log("App v." + "01.08.16.2");
 
 // Config moment
 Moment.updateLocale('en', {
@@ -77,7 +76,16 @@ document.addEventListener("DOMContentLoaded", function(event) {
   if (autoLinkElements && autoLinkElements.length) {
     autoLinkElements.forEach(function(autoLinkElement) {
       var content = autoLinkElement.innerHTML;
-      autoLinkElement.innerHTML = content.autoLink({target: "_blank"});
+      autoLinkElement.innerHTML = urlify(content);
     })
   }
 });
+
+function urlify(text) {
+    var urlRegex = /(((https?:\/\/)|(www\.))[^\s]+)/g;
+    //var urlRegex = /(https?:\/\/[^\s]+)/g;
+    return text.replace(urlRegex, function(url,b,c) {
+        var url2 = (c == 'www.') ?  'http://' +url : url;
+        return '<a href="' +url2+ '" target="_blank">' + url + '</a>';
+    }) 
+}
