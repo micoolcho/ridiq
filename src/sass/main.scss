@@ -34,9 +34,9 @@ main {
 }
 
 .main-nav {
-  background: #129096;
+  background: #CB473A;
   padding: 12px;
-  margin-bottom: 25px;
+  // margin-bottom: 25px;
 
   .logo {
     font-family: 'Montserrat', sans-serif;
@@ -63,7 +63,9 @@ main {
     background-size: cover;
     background-position: center;
     border-radius: 1000px;
+    margin-top: 15px;
     margin-bottom: 15px;
+
   }
 
   .displayName {
