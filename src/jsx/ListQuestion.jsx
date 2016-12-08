@@ -46,6 +46,7 @@ export default class Answers extends BasedLoadMoreComponent {
               return (
                 <div key={`answer-${index}`} className="answer-block">
                   <div className="user">
+                  {{this.items.length}}
                     <a href={answer.user.public_url} className="avatar" style={{backgroundImage: `url(${answer.user.avatar_url})`}}>&nbsp;</a>
                     <div className="name">{answer.user.name}{answer.user_short_bio && ` - ${answer.user_short_bio}`}</div>
                     <div className="clearfix">

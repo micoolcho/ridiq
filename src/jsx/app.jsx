@@ -6,6 +6,7 @@ import MoreComment from './MoreComment.jsx';
 import GroupQuestions from "./group/GroupQuestions.jsx";
 import SingleQuestion from "./SingleQuestion.jsx";
 import Moment from 'moment';
+import {Button, Row, Col } from 'react-boostrap';
 
 console.log("App v." + "01.08.16.2");
 
