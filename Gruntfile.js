@@ -6,12 +6,12 @@ module.exports = function(grunt) {
       },
       main: {
         files: {
-          './build/css/main.css': './src/sass/main.scss',
+          '../yam/vendor/assets/stylesheets/share_page/main.css': './src/sass/main.scss',
         }
       },
       bootstrap: {
         files: {
-          './build/css/customized_bootstrap.css': './src/sass/customized_bootsrap.scss',
+          '../yam/vendor/assets/stylesheets/share_page/customized_bootstrap.css': './src/sass/customized_bootsrap.scss',
         },
       }
     },
@@ -34,7 +34,8 @@ module.exports = function(grunt) {
         },
         options: {
           watchTask: true,
-          server: './build'
+          server: './build', 
+          port: 8000
         }
       }
     }

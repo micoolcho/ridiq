@@ -5,8 +5,9 @@ import AskQuestionForm from './AskQuestionForm.jsx';
 import MoreComment from './MoreComment.jsx';
 import GroupQuestions from "./group/GroupQuestions.jsx";
 import SingleQuestion from "./SingleQuestion.jsx";
+import FeaturedAnswers from "./FeaturedAnswers.jsx"
 import Moment from 'moment';
-import {Button, Row, Col } from 'react-boostrap';
+import {Button, Row, Col } from 'react-bootstrap';
 
 console.log("App v." + "01.08.16.2");
 
@@ -35,8 +36,8 @@ Moment.updateLocale('en', {
 if (document.getElementById('askQuestionForm')) {
   ReactDOM.render(
     <AskQuestionForm 
-      subject_id={window.ridiqConf.askQuestion.subject_id}
-      subject_type={window.ridiqConf.askQuestion.subject_type}
+      subject_id={window.yamConf.askQuestion.subject_id}
+      subject_type={window.yamConf.askQuestion.subject_type}
     />, 
     document.getElementById('askQuestionForm')
   );
@@ -45,14 +46,14 @@ if (document.getElementById('askQuestionForm')) {
 // Public profile page: user answers.
 if (document.getElementById('moreAnswer')) {
   ReactDOM.render(
-    <UserAnswers totalItem={window.ridiqConf.answer.answerCount} perPage={window.ridiqConf.answer.perPage} />,
+    <UserAnswers totalItem={window.yamConf.answer.answerCount} perPage={window.yamConf.answer.perPage} />,
     document.getElementById('moreAnswer')
   );
 }
 
 // Single answer page: comments of answer.
 if (document.getElementById('moreComment')) {
-  ReactDOM.render(<MoreComment totalItem={window.ridiqConf.comment.commentCount} perPage={window.ridiqConf.comment.perPage} />, document.getElementById('moreComment'));
+  ReactDOM.render(<MoreComment totalItem={window.yamConf.comment.commentCount} perPage={window.yamConf.comment.perPage} />, document.getElementById('moreComment'));
 }
 
 // Single answer page: translate from timestamp to `1h, 1w ... ago`.
@@ -69,6 +70,11 @@ if (document.getElementById('groupQuestions')) {
 // Single question page: answers of question.
 if (document.getElementById('singleQuestionAnswers')) {
   ReactDOM.render(<SingleQuestion />, document.getElementById('singleQuestionAnswers'));
+}
+
+// List of featured answers page: answers of question.
+if (document.getElementById('featuredAnswers')) {
+  ReactDOM.render(<FeaturedAnswers />, document.getElementById('featuredAnswers'));
 }
 
 // Auto link

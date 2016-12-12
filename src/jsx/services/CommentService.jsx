@@ -10,9 +10,9 @@ export default class CommentService extends EventEmitter {
 
   loadMore(pageNum) {
     const apiUrl =
-      window.ridiqConf.comment.apiGet + "?" +
-      "answer_id=" + window.ridiqConf.comment.answerId + "&" +
-      "perpage=" + window.ridiqConf.comment.perPage + "&" +
+      window.yamConf.comment.apiGet + "?" +
+      "answer_id=" + window.yamConf.comment.answerId + "&" +
+      "perpage=" + window.yamConf.comment.perPage + "&" +
       "page=" + pageNum;
 
     Fetch(apiUrl, {

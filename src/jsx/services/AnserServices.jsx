@@ -10,9 +10,9 @@ export default class AnswerService extends EventEmitter {
 
   loadMore(pageNum) {
     const apiUrl =
-      window.ridiqConf.answer.apiGet + "?" +
-      "user_id=" + window.ridiqConf.answer.userId + "&" +
-      "perpage=" + window.ridiqConf.answer.perPage + "&" +
+      window.yamConf.answer.apiGet + "?" +
+      "user_id=" + window.yamConf.answer.userId + "&" +
+      "perpage=" + window.yamConf.answer.perPage + "&" +
       "page=" + pageNum;
 
     Fetch(apiUrl, {

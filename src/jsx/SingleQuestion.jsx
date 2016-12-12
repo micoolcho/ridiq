@@ -23,7 +23,7 @@ export default class Answers extends BasedLoadMoreComponent {
   constructor(...args) {
     const externalArgs = {
       service: new AnswerService(),
-      total: window.ridiqConf.singleQuestion.answerCount,
+      total: window.yamConf.singleQuestion.answerCount,
     }
     super(...args, externalArgs);
   }

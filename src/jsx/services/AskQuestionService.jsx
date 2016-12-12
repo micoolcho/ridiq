@@ -11,7 +11,7 @@ export default class AskQuestionService extends EventEmitter {
   // params: content, subject_id, subject_type
   post(data) {
     jQuery.ajax({
-      url: window.ridiqConf.askQuestion.apiPost,
+      url: window.yamConf.askQuestion.apiPost,
       method: "POST",
       data: data,
     }).success((resp) => {

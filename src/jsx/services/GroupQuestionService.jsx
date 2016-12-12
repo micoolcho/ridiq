@@ -13,7 +13,7 @@ export class GroupQuestionService extends EventEmitter {
   loadMore(pageNum = 1) {
     // For stagging
     const apiUrl = [
-      window.ridiqConf.groupQuestion.apiGetPrefix,
+      window.yamConf.groupQuestion.apiGetPrefix,
       `/${this.filter}`,
       "?",
       `page=${ pageNum }`,
@@ -21,7 +21,7 @@ export class GroupQuestionService extends EventEmitter {
 
     // For testing
     // const apiUrl = [
-    //   window.ridiqConf.groupQuestion.apiGetPrefix,
+    //   window.yamConf.groupQuestion.apiGetPrefix,
     //   "?",
     //   `page=${ pageNum }`,
     //   `filter=${ this.filter }`

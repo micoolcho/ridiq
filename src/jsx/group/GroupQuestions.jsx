@@ -9,7 +9,7 @@ class TrendingQuestion extends BasedQuestionContainer {
   constructor(...args) {
     const externalArgs = {
       service: new GroupQuestionService("public_trending"),
-      total: window.ridiqConf.groupQuestion.trending.total,
+      total: window.yamConf.groupQuestion.trending.total,
     }
 
     super(...args, externalArgs);
@@ -20,7 +20,7 @@ class MostRecentQuestion extends BasedQuestionContainer {
   constructor(...args) {
     const externalArgs = {
       service: new GroupQuestionService("public_questions"),
-      total: window.ridiqConf.groupQuestion.mostRecent.total,
+      total: window.yamConf.groupQuestion.mostRecent.total,
     }
 
     super(...args, externalArgs);
@@ -31,7 +31,7 @@ class AllTimeQuestion extends BasedQuestionContainer {
   constructor(...args) {
     const externalArgs = {
       service: new GroupQuestionService("public_all_time"),
-      total: window.ridiqConf.groupQuestion.allTime.total,
+      total: window.yamConf.groupQuestion.allTime.total,
     }
 
     super(...args, externalArgs);
@@ -42,7 +42,7 @@ class UnansweredQuestion extends BasedQuestionContainer {
   constructor(...args) {
     const externalArgs = {
       service: new GroupQuestionService("public_unanswered"),
-      total: window.ridiqConf.groupQuestion.unanswered.total,
+      total: window.yamConf.groupQuestion.unanswered.total,
     }
     
     super(...args, externalArgs);

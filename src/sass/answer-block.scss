@@ -1,7 +1,7 @@
 @import "vars";
 @import "mixins";
 
-$questionAvatarSize: 30px;
+$questionAvatarSize: 40px;
 $questionUserPadding: 15px;
 
 .answer-block {
@@ -15,6 +15,7 @@ $questionUserPadding: 15px;
     position: relative;
     padding: $questionUserPadding;
     padding-left: $questionAvatarSize + ($questionUserPadding * 2);
+    cursor: pointer;
   }
   .avatar {
     position: absolute;
