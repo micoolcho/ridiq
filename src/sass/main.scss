@@ -7,6 +7,8 @@
 @import "vars";
 @import "_mixins";
 
+$separatorColor: rgba(0, 0, 0, 0.1);
+
 body {
   font-family: "Open Sans" !important;
   background: #F8F7F7 !important;
@@ -34,8 +36,9 @@ main {
 }
 
 .main-nav {
-  background: #CB473A;
+  background: white;
   padding: 12px;
+  border-bottom: 1px solid $separatorColor;
   // margin-bottom: 25px;
 
   .logo {

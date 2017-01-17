@@ -2,12 +2,31 @@
 @import "mixins";
 
 $tabItemActiveColor: #19ADE2;
+$separatorColor: rgba(0, 0, 0, 0.1);
 
 #groupQuestions {
   @include smallMobile() {
     margin-left: -$mainPadding;
     margin-right: -$mainPadding;
   }
+}
+
+.group_name{
+  font-size: 25px;
+  border-bottom: 1px solid $separatorColor;
+}
+
+.count_box{
+  text-align: center;
+
+  .count{
+    display: block;
+  }
+}
+
+.group_nav{
+  border-top: 1px solid $separatorColor;
+  border-bottom: 1px solid $separatorColor;
 }
 
 .group-questions {
