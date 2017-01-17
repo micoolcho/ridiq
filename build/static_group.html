@@ -1,0 +1,141 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+  <title>Document</title>
+  <link rel="stylesheet" href="css/customized_bootstrap.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <nav class="main-nav text-center">
+    <div class="logo">
+      <img src="images/logo_ridiq.png" alt="" />
+    </div>
+  </nav>
+
+    <main class="clearfix">
+      <div class="user-info text-center">
+        <div style="background-image: url(images/group-avatar.jpeg)" class="avatar">&nbsp;</div>
+        <div class="displayName">Game of Thrones</div>
+
+        <ul id="group_info">
+          <li class="count_box">
+            <span class="count">324</span>
+            <span>members</span>
+          </li>
+          <li class="count_box">
+            <span class="count">1782</span>
+            <span>questions</span>
+          </li>
+          <li class="count_box">
+            <span class="count">631</span>
+            <span>responses</span>
+          </li>
+        </ul>
+
+        <div id="group_top_users">
+          <h3>TOP USERS</h3>
+          <ul>
+            <li>
+              <div style="background-image: url(images/group-avatar.jpeg)" class="avatar">&nbsp;</div>
+              Louis
+            </li>
+            <li>
+              <div style="background-image: url(images/group-avatar.jpeg)" class="avatar">&nbsp;</div>
+              Alexandria
+            </li>
+            <li>
+              <div style="background-image: url(images/group-avatar.jpeg)" class="avatar">&nbsp;</div>
+              Barrack
+            </li>
+            <li>
+              <div style="background-image: url(images/group-avatar.jpeg)" class="avatar">&nbsp;</div>
+              Louis
+            </li>
+            <li>
+              <div style="background-image: url(images/group-avatar.jpeg)" class="avatar">&nbsp;</div>
+              Alexandria
+            </li>
+            <li>
+              <div style="background-image: url(images/group-avatar.jpeg)" class="avatar">&nbsp;</div>
+              Barrack
+            </li>
+          </ul>
+        </div>
+
+        </div>
+
+          <ul id="group_nav">
+            <li><a href="#" class="selected">TRENDING</a></li>
+            <li><a href="#">RECENT</a></li>
+            <li><a href="#">TOP</a></li>
+            <li><a href="#">UNANSWERED</a></li>
+          </ul>
+
+          <div id="questions_list">
+            <div class="question">
+              <h3>Do you think Tyrion is Targaryen (the third head of the dragon)?</h4>
+              <span>13 responses</span>
+              <ul>
+                <li class="answer_card">
+                  <div style="background-image: url(images/item1.png)">
+                    <div style="background-image: url(images/answer_card_play_btn.png)" class="play_btn"></div>
+                  </div>
+                  <h4>Michael Cho</h4>
+                  <span>Dad. Entrepreneur. Go player.</span>
+                </li>
+                <li class="answer_card">
+                  <div style="background-image: url(images/item1.png)">
+                    <div style="background-image: url(images/answer_card_play_btn.png)" class="play_btn"></div>
+                  </div>
+                  <h4>Michael Cho</h4>
+                  <span>Dad. Entrepreneur. Go player.</span>
+                </li>
+                <li class="answer_card">
+                  <div style="background-image: url(images/item1.png)">
+                    <div style="background-image: url(images/answer_card_play_btn.png)" class="play_btn"></div>
+                  </div>
+                  <h4>Michael Cho</h4>
+                  <span>Dad. Entrepreneur. Go player.</span>
+                </li>
+              </ul>
+            </div>
+            <div class="question">
+              <h3>What was the most shocking moment for you in the S06E05?</h4>
+              <span>8 responses</span>
+            </div>
+          </div>
+
+    <!-- <div id="groupQuestions"></div> -->
+  </main>
+
+  <script>
+    window.yamConf = {
+      askQuestion: {
+        subject_id: "subject-id",
+        subject_type: "Group",
+        // /questions/anonymous
+        apiPost: "https://api.myjson.com/bins",
+      },
+      groupQuestion: {
+        groupId: "123",
+        apiGetPrefix: "jsons/group_questions.json",
+        perPage: 1,
+        trending: {
+          total: 14,
+        },
+        mostRecent: {
+          total: 15,
+        },
+        allTime: {
+          total: 9,
+        },
+        unanswered: {
+          total: 9,
+        },
+      }
+    };
+  </script>
+  <script src="js/app.js"></script>
+</body>
+</html>

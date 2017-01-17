@@ -39,7 +39,7 @@ export default class AskQuestionForm extends React.Component {
         {
           this.state.submit == 2 ? (
             <div>
-              <div className="notice blue">
+              <div className="notice red">
                 {
                   this.state.submitResult ? 'Your question has been submitted!' : 'Error !!'
                 }
@@ -50,7 +50,7 @@ export default class AskQuestionForm extends React.Component {
               >ASK ANOTHER QUESTION</div>
             </div>
           ) : (
-            <div 
+            <div
               className={ "ask-question-form" + (this.state.submit == 1 ? ' disabled' : '') }
             >
               <div className="ask-question-input margin-auto">
@@ -115,13 +115,13 @@ export default class AskQuestionForm extends React.Component {
     });
 
     const content = this.refs.textarea.value;
-    
+
     let data = {
       subject_id: this.props.subject_id,
       subject_type: this.props.subject_type,
       content: content,
     };
-    
+
     QuestionService.post(data);
   }
 

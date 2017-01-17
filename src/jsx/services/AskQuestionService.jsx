@@ -21,5 +21,3 @@ export default class AskQuestionService extends EventEmitter {
     });
   }
 }
-
-export default new AskQuestionService();

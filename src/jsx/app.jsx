@@ -7,7 +7,7 @@ import GroupQuestions from "./group/GroupQuestions.jsx";
 import SingleQuestion from "./SingleQuestion.jsx";
 import FeaturedAnswers from "./FeaturedAnswers.jsx"
 import Moment from 'moment';
-import {Button, Row, Col } from 'react-bootstrap';
+// import {Button, Row, Col } from 'react-bootstrap';
 
 console.log("App v." + "01.08.16.2");
 
@@ -35,10 +35,10 @@ Moment.updateLocale('en', {
 // Ask question form for User or Group.
 if (document.getElementById('askQuestionForm')) {
   ReactDOM.render(
-    <AskQuestionForm 
+    <AskQuestionForm
       subject_id={window.yamConf.askQuestion.subject_id}
       subject_type={window.yamConf.askQuestion.subject_type}
-    />, 
+    />,
     document.getElementById('askQuestionForm')
   );
 }
@@ -78,7 +78,7 @@ if (document.getElementById('featuredAnswers')) {
 }
 
 // Auto link
-document.addEventListener("DOMContentLoaded", function(event) { 
+document.addEventListener("DOMContentLoaded", function(event) {
   var autoLinkElements = document.querySelectorAll('.autolink');
   if (autoLinkElements && autoLinkElements.length) {
     autoLinkElements.forEach(function(autoLinkElement) {
@@ -94,5 +94,5 @@ function urlify(text) {
     return text.replace(urlRegex, function(url,b,c) {
         var url2 = (c == 'www.') ?  'http://' +url : url;
         return '<a href="' +url2+ '" target="_blank">' + url + '</a>';
-    }) 
+    })
 }

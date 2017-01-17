@@ -29,5 +29,3 @@ export default class AnswerService extends EventEmitter {
       });
   }
 }
-
-export default new AnswerService();

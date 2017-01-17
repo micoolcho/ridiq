@@ -94,7 +94,7 @@ main {
       }
     }
   }
-  
+
   .short_intro {
     color: #aaaaaa;
     margin-bottom: 11px;
@@ -277,6 +277,11 @@ main {
     background: #D1F3FF;
     color: $textBlueColor;
   }
+
+  &.red {
+    background: red;
+    color: white;
+  }
 }
 
 .button {
@@ -284,7 +289,7 @@ main {
   text-decoration: none;
   cursor: pointer;
   text-align: center;
-  
+
   a {
     text-decoration: none;
     color: white !important;

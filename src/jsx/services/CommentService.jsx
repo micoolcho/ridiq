@@ -29,5 +29,3 @@ export default class CommentService extends EventEmitter {
       });
   }
 }
-
-export default new CommentService();
