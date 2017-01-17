@@ -1,9 +1,6 @@
 @import "vars";
 @import "mixins";
 
-$tabItemActiveColor: #19ADE2;
-$separatorColor: rgba(0, 0, 0, 0.1);
-
 #groupQuestions {
   @include smallMobile() {
     margin-left: -$mainPadding;
@@ -13,20 +10,138 @@ $separatorColor: rgba(0, 0, 0, 0.1);
 
 .group_name{
   font-size: 25px;
-  border-bottom: 1px solid $separatorColor;
+  color: $bodyTextColor;
+  margin-top: 40px;
 }
 
-.count_box{
-  text-align: center;
+.group_name_separator{
+  width: 100px;
+  height: 1px;
+  margin-top:10px;
+  background: $separatorColor;
+}
 
-  .count{
-    display: block;
+#group_info{
+  width: 240px;
+  height: 50px;
+  margin: 15px auto 0;
+
+  .count_box{
+    width: 80px;
+    height: 50px;
+    float: left;
+    text-align: center;
+    color: $timestampColor;
+    font-size: 12px;
+
+    .count{
+      display: block;
+      font-size: 17px;
+      color: $bodyTextColor;
+    }
   }
 }
 
-.group_nav{
+#group_top_users{
+  height: 100px;
+
+  h3 {
+    font-size: 13px;
+  }
+
+  li{
+    float: left;
+    font-size: 13px;
+    width:60px;
+    text-align: center;
+    margin-right: 8px;
+
+    .avatar{
+      margin: 0 auto 4px;
+      width: 50px;
+      height: 50px;
+    }
+  }
+}
+
+#group_nav{
   border-top: 1px solid $separatorColor;
   border-bottom: 1px solid $separatorColor;
+  height: 35px;
+
+  ul{
+    margin: 0 auto;
+    max-width: 350px;
+
+    li{
+      float: left;
+      padding: 6px 15px;
+
+      a{
+        color: $bodyTextColor;
+        font-size: 12px;
+
+        &.selected{
+          color: $textBlueColor;
+        }
+      }
+    }
+  }
+}
+
+#questions_list{
+  .question{
+    h3{
+      font-size: 17px;
+      color: black;
+    }
+
+    span{
+      font-size: 13px;
+      color: $timestampColor;
+    }
+
+    .answer_card{
+      width: 200px;
+      height: 280px;
+      float: left;
+      margin-top: 20px;
+      margin-right: 10px;
+      position: relative;
+      background: white;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px 0 rgba(0,0,0,0.07);
+
+      .video_thumbnail{
+        width: 200px;
+        height: 200px;
+        background-size:cover;
+        border-radius: 6px 6px 0 0;
+      }
+
+      .play_btn{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 50px;
+        height: 52px;
+        background: url(../images/answer_card_play_btn.png) no-repeat;
+      }
+
+      h4{
+        font-size: 15px;
+        margin-left: 8px;
+        margin-bottom: 2px;
+      }
+
+      span{
+        font-size: 14px;
+        color: $timestampColor;
+        margin-left: 8px;
+        display: block;
+      }
+    }
+  }
 }
 
 .group-questions {
