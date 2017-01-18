@@ -501,6 +501,9 @@
     margin-left: -15px;
     margin-right: -15px; } }
 
+main {
+  background: white; }
+
 .group_name {
   font-size: 25px;
   color: #585858;
@@ -510,7 +513,8 @@
   width: 100px;
   height: 1px;
   margin-top: 10px;
-  background: rgba(0, 0, 0, 0.1); }
+  background: rgba(0, 0, 0, 0.1);
+  border: 0; }
 
 #group_info {
   width: 240px;
@@ -529,7 +533,9 @@
       color: #585858; }
 
 #group_top_users {
-  height: 100px; }
+  height: 100px;
+  margin: 0 auto;
+  max-width: 800px; }
   #group_top_users h3 {
     font-size: 13px; }
   #group_top_users li {
@@ -541,12 +547,15 @@
     #group_top_users li .avatar {
       margin: 0 auto 4px;
       width: 50px;
-      height: 50px; }
+      height: 50px;
+      border-radius: 50%;
+      background-size: cover; }
 
 #group_nav {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  height: 35px; }
+  height: 35px;
+  margin-top: 20px; }
   #group_nav ul {
     margin: 0 auto;
     max-width: 350px; }
@@ -558,41 +567,55 @@
         font-size: 12px; }
         #group_nav ul li a.selected {
           color: #19ADE2; }
+        #group_nav ul li a:hover {
+          color: #19ADE2;
+          text-decoration: none; }
 
-#questions_list .question h3 {
-  font-size: 17px;
-  color: black; }
-#questions_list .question span {
-  font-size: 13px;
-  color: #A7A7A7; }
-#questions_list .question .answer_card {
-  width: 200px;
-  height: 280px;
-  float: left;
-  margin-right: 10px;
-  position: relative;
-  background: white;
-  border-radius: 6px;
-  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07); }
-  #questions_list .question .answer_card .video_thumbnail {
-    width: 200px;
-    height: 200px;
-    background-size: cover;
-    border-radius: 6px 6px 0 0; }
-  #questions_list .question .answer_card .play_btn {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 50px;
-    height: 52px;
-    background: url(../images/answer_card_play_btn.png) no-repeat; }
-  #questions_list .question .answer_card h4 {
-    font-size: 15px;
-    margin-left: 8px; }
-  #questions_list .question .answer_card span {
-    font-size: 14px;
-    color: #A7A7A7;
-    margin-left: 8px; }
+#questions_list {
+  margin: 0 auto;
+  max-width: 800px; }
+  #questions_list .question {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 20px;
+    margin-bottom: 10px; }
+    #questions_list .question h3 {
+      font-size: 17px;
+      color: black;
+      margin-bottom: 5px; }
+    #questions_list .question span {
+      font-size: 13px;
+      color: #A7A7A7; }
+    #questions_list .question .answer_card {
+      width: 200px;
+      height: 280px;
+      float: left;
+      margin-top: 20px;
+      margin-right: 10px;
+      position: relative;
+      background: white;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07); }
+      #questions_list .question .answer_card .video_thumbnail {
+        width: 200px;
+        height: 200px;
+        background-size: cover;
+        border-radius: 6px 6px 0 0; }
+      #questions_list .question .answer_card .play_btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 50px;
+        height: 52px;
+        background: url(../images/answer_card_play_btn.png) no-repeat; }
+      #questions_list .question .answer_card h4 {
+        font-size: 15px;
+        margin-left: 8px;
+        margin-bottom: 2px; }
+      #questions_list .question .answer_card span {
+        font-size: 14px;
+        color: #A7A7A7;
+        margin-left: 8px;
+        display: block; }
 
 .group-questions {
   max-width: 500px;
@@ -666,13 +689,13 @@
           margin-left: 3px; }
 
 body {
-  font-family: "Open Sans" !important;
-  background: #585858 !important;
-  background-color: #F8F7F7 !important;
+  font-family: "Open Sans";
+  background: #585858;
+  background-color: #F8F7F7;
   font-size: 15px; }
   body.white {
-    background: white !important;
-    background-color: white !important; }
+    background: white;
+    background-color: white; }
 
 ul {
   list-style: none;
@@ -687,14 +710,16 @@ main {
 
 .main-nav {
   background: white;
-  padding: 12px;
+  padding: 15px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
   .main-nav .logo {
     font-family: 'Montserrat', sans-serif;
     color: white;
-    font-size: 28px; }
-    .main-nav .logo img {
-      height: 27px; }
+    font-size: 28px;
+    width: 58px;
+    height: 20px;
+    background: url(../images/yam_logo.png) no-repeat;
+    margin: 0 auto; }
 
 .user-info {
   font-size: 15px;

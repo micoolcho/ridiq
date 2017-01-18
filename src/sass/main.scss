@@ -8,14 +8,14 @@
 @import "_mixins";
 
 body {
-  font-family: "Open Sans" !important;
-  background: $bodyTextColor !important;
-  background-color: #F8F7F7 !important;
+  font-family: "Open Sans";
+  background: $bodyTextColor;
+  background-color: #F8F7F7;
   font-size: 15px;
 
   &.white {
-    background: white !important;
-    background-color: white !important;
+    background: white;
+    background-color: white;
   }
 }
 
@@ -35,7 +35,7 @@ main {
 
 .main-nav {
   background: white;
-  padding: 12px;
+  padding: 15px;
   border-bottom: 1px solid $separatorColor;
   // margin-bottom: 25px;
 
@@ -43,10 +43,10 @@ main {
     font-family: 'Montserrat', sans-serif;
     color: white;
     font-size: 28px;
-
-    img {
-      height: 27px;
-    }
+    width: 58px;
+    height: 20px;
+    background: url(../images/yam_logo.png) no-repeat;
+    margin: 0 auto;
   }
 }
 
