@@ -56,43 +56,43 @@ export default class SingleGroup extends React.Component {
      const {loadMore} = this.loadMore
     return (
       <div>
-      <h1 class="group_name text-center">Game of Thrones</h1>
-      <hr class="group_name_separator"/>
+      <h1 className="group_name text-center">Game of Thrones</h1>
+      <hr className="group_name_separator"/>
 
       <ul id="group_info">
-        <li class="count_box">
-          <span class="count">324</span>
+        <li className="count_box">
+          <span className="count">324</span>
           <span>members</span>
         </li>
-        <li class="count_box">
-          <span class="count">1782</span>
+        <li className="count_box">
+          <span className="count">1782</span>
           <span>questions</span>
         </li>
-        <li class="count_box">
-          <span class="count">631</span>
+        <li className="count_box">
+          <span className="count">631</span>
           <span>responses</span>
         </li>
       </ul>
 
       <div id="group_top_users">
         <h3>TOP USERS</h3>
-        <a href="#" class="prev_btn"></a>
-        <div class="list_container">
+        <a href="#" className="prev_btn"></a>
+        <div className="list_container">
         <ul>
           <li>
             <a href="/">
-            <div style="background-image: url(images/group-avatar.jpeg)" class="avatar">&nbsp;</div>
+            <div style={{backgroundImage:"url(images/group-avatar.jpeg)"}} className="avatar">&nbsp;</div>
             Louis
             </a>
           </li>
         </ul>
         </div>
-        <a href="#" class="next_btn"></a>
+        <a href="#" className="next_btn"></a>
       </div>
 
         <div id="group_nav">
           <ul>
-            <li><a href="#" class="selected">TRENDING</a></li>
+            <li><a href="#" className="selected">TRENDING</a></li>
             <li><a href="#">RECENT</a></li>
             <li><a href="#">TOP</a></li>
             <li><a href="#">UNANSWERED</a></li>
@@ -101,8 +101,8 @@ export default class SingleGroup extends React.Component {
 
 
         <div id="questions_list">
-          <SingleQuestion />
-          <div class="question clearfix">
+          <SingleGroupQuestion />
+          <div className="question clearfix">
             <h3>What was the most shocking moment for you in the S06E05?</h3>
             <span>8 responses</span>
           </div>
@@ -119,26 +119,26 @@ export default class SingleGroup extends React.Component {
   }
 }
 
-class SingleGroupQuestion extends React.Component {
+export class SingleGroupQuestion extends React.Component {
   render(){
     return(
-      <div class="question clearfix">
+      <div className="question clearfix">
         <h3>Do you think Tyrion is Targaryen (the third head of the dragon)?</h3>
         <span>13 responses</span>
-        <a href="#" class="prev_btn"></a>
-        <div class="list_container">
+        <a href="#" className="prev_btn"></a>
+        <div className="list_container">
         <ul>
-          <li class="answer_card">
+          <li className="answer_card">
             <a href="single-answer.html">
-            <div style="background-image: url(images/item1.png)" class="video_thumbnail"></div>
-            <div class="play_btn"></div>
+            <div style={{backgroundImage:"url(images/item1.png"}} className="video_thumbnail"></div>
+            <div className="play_btn"></div>
             <h4>Michael Cho</h4>
             <span>Dad. Entrepreneur. Go player.</span>
             </a>
           </li>
         </ul>
       </div>
-      <a href="#" class="next_btn"></a>
+      <a href="#" className="next_btn"></a>
       </div>
     )
   }

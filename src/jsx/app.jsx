@@ -70,10 +70,7 @@ if (document.getElementById('groupQuestions')) {
 
 // Single group:
 if (document.getElementById('group')) {
-  // ReactDOM.render(<SingleGroup />, document.getElementById('group'));
-  ReactDOM.render(
-    <div>hehe</div>
-  );
+  ReactDOM.render(<SingleGroup />, document.getElementById('group'));
 }
 
 // Single question page: answers of question.

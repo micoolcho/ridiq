@@ -3,17 +3,17 @@ import Moment from "moment";
 import Utils from "./Utils.jsx";
 import BasedLoadMoreComponent from "./BasedLoadMoreComponent.jsx";
 import { AnswerService } from "./services/SingleQuestionService.jsx";
-import SingleAnswer from "./SingleAnswer.jsx" 
+import SingleAnswer from "./SingleAnswer.jsx"
 import _ from "lodash"
 
-let baseAPIUrl 
+let baseAPIUrl
 if (process.env.NODE_ENV === 'production') {
   baseAPIUrl = 'http://api.letsyam.com'
 } else if (process.env.NODE_ENV === 'staging') {
    baseAPIUrl = 'http://yam-staging.herokuapp.com'
 } else {
   baseAPIUrl = 'http://localhost:3000'
-} 
+}
 
 function LoadMore ({onClick, isLoading}) {
  return (<div className="text-center m-t-20">
@@ -32,12 +32,12 @@ export default class Answers extends React.Component {
     super(...args);
     this.state = {
       answers:[],
-      page: 1, 
+      page: 1,
       isLoading: false
     }
     this.loadMore = this.loadMore.bind(this)
   }
-  
+
   fetchAnswers(pageCount = 10) {
     this.setState({isLoading: true})
     const {answers, page} = this.state
@@ -46,7 +46,7 @@ export default class Answers extends React.Component {
     })
       .then((response) => {
         return response.json()
-        
+
       })
       .then((json) => {
          this.setState({
@@ -58,7 +58,7 @@ export default class Answers extends React.Component {
       .catch((e) => {
          console.log('error', e)
       })
-  
+
   }
 
   componentDidMount() {
@@ -73,7 +73,7 @@ export default class Answers extends React.Component {
     return (
     <div>
       {answers.map((item, index) => {
-        return <SingleAnswer index={index} key={item.id}  item={item} 
+        return <SingleAnswer index={index} key={item.id}  item={item}
          />
          })}
       <LoadMore onClick={this.loadMore} isLoading={isLoading}/>

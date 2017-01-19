@@ -4,14 +4,24 @@ module.exports = function(grunt) {
       options: {
         style: "compressed",
       },
+      // main: {
+      //   files: {
+      //     '../yam/vendor/assets/stylesheets/share_page/main.css': './src/sass/main.scss',
+      //   }
+      // },
+      // bootstrap: {
+      //   files: {
+      //     '../yam/vendor/assets/stylesheets/share_page/customized_bootstrap.css': './src/sass/customized_bootsrap.scss',
+      //   },
+      // }
       main: {
         files: {
-          '../yam/vendor/assets/stylesheets/share_page/main.css': './src/sass/main.scss',
+          './build/css/main.css': './src/sass/main.scss',
         }
       },
       bootstrap: {
         files: {
-          '../yam/vendor/assets/stylesheets/share_page/customized_bootstrap.css': './src/sass/customized_bootsrap.scss',
+          './build/css/customized_bootstrap.css': './src/sass/customized_bootsrap.scss',
         },
       }
     },
@@ -34,7 +44,7 @@ module.exports = function(grunt) {
         },
         options: {
           watchTask: true,
-          server: './build', 
+          server: './build',
           port: 8000
         }
       }

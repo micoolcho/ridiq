@@ -4,7 +4,8 @@ var webpack = require('webpack')
 
 module.exports = {
   entry: './src/jsx/app.jsx',
-  output: { path: path.resolve('../yam/vendor/assets/stylesheets/share_page/js'), filename: 'app.js' },
+  // output: { path: path.resolve('../yam/vendor/assets/stylesheets/share_page/js'), filename: 'app.js' },
+  output: { path: path.resolve('./build/js'), filename: 'app.js' },
   module: {
     loaders: [
       {
@@ -17,7 +18,7 @@ module.exports = {
       }
     ],
   },
-  
+
   plugins: [
     new webpack.DefinePlugin({
     'process.env': {
