@@ -12,6 +12,29 @@ main{
   background: white;
 }
 
+.prev_btn, .next_btn{
+  width: 56px;
+  height: 56px;
+  display: block;
+  position: absolute;
+}
+
+.prev_btn{
+  background: url(../images/prev_btn.png) no-repeat;
+
+  &:hover{
+    background: url(../images/prev_btn_selected.png) no-repeat;
+  }
+}
+
+.next_btn{
+  background: url(../images/next_btn.png) no-repeat;
+
+  &:hover{
+    background: url(../images/next_btn_selected.png) no-repeat;
+  }
+}
+
 .group_name{
   font-size: 25px;
   color: $bodyTextColor;
@@ -51,24 +74,45 @@ main{
   height: 100px;
   margin: 0 auto;
   max-width: 800px;
+  position: relative;
 
   h3 {
     font-size: 13px;
   }
 
-  li{
-    float: left;
-    font-size: 13px;
-    width:60px;
-    text-align: center;
-    margin-right: 8px;
+  .prev_btn{
+    left: -70px;
+    top: 25px;
+  }
 
-    .avatar{
-      margin: 0 auto 4px;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background-size: cover;
+  .next_btn{
+    right: -70px;
+    top: 25px;
+  }
+
+  .list_container{
+    max-width: 800px;
+    overflow: scroll;
+    height: 80px;
+
+    ul {
+      width: 999999px;
+    }
+
+    li{
+      float: left;
+      font-size: 13px;
+      width:60px;
+      text-align: center;
+      margin-right: 8px;
+
+      .avatar{
+        margin: 0 auto 4px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-size: cover;
+      }
     }
   }
 }
@@ -112,6 +156,7 @@ main{
     border-bottom: 1px solid $separatorColor;
     padding-bottom: 20px;
     margin-bottom: 10px;
+    position: relative;
 
     h3{
       font-size: 17px;
@@ -121,47 +166,68 @@ main{
 
     span{
       font-size: 13px;
+      font-weight: 200;
       color: $timestampColor;
     }
 
-    .answer_card{
-      width: 200px;
-      height: 280px;
-      float: left;
-      margin-top: 20px;
-      margin-right: 10px;
-      position: relative;
-      background: white;
-      border-radius: 6px;
-      box-shadow: 0 2px 6px 0 rgba(0,0,0,0.07);
+    .prev_btn{
+      left: -70px;
+      top: 175px;
+    }
 
-      .video_thumbnail{
+    .next_btn{
+      right: -70px;
+      top: 175px;
+    }
+
+    .list_container{
+      max-width: 800px;
+      overflow: scroll;
+      height: 300px;
+
+      ul {
+        width: 999999px;
+      }
+
+      .answer_card{
         width: 200px;
-        height: 200px;
-        background-size:cover;
-        border-radius: 6px 6px 0 0;
-      }
+        height: 280px;
+        float: left;
+        margin-top: 20px;
+        margin-right: 10px;
+        position: relative;
+        background: white;
+        border-radius: 6px;
+        box-shadow: 0 2px 6px 0 rgba(0,0,0,0.07);
 
-      .play_btn{
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 50px;
-        height: 52px;
-        background: url(../images/answer_card_play_btn.png) no-repeat;
-      }
+        .video_thumbnail{
+          width: 200px;
+          height: 200px;
+          background-size:cover;
+          border-radius: 6px 6px 0 0;
+        }
 
-      h4{
-        font-size: 15px;
-        margin-left: 8px;
-        margin-bottom: 2px;
-      }
+        .play_btn{
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 50px;
+          height: 52px;
+          background: url(../images/answer_card_play_btn.png) no-repeat;
+        }
 
-      span{
-        font-size: 14px;
-        color: $timestampColor;
-        margin-left: 8px;
-        display: block;
+        h4{
+          font-size: 15px;
+          margin-left: 8px;
+          margin-bottom: 2px;
+        }
+
+        span{
+          font-size: 14px;
+          color: $timestampColor;
+          margin-left: 8px;
+          display: block;
+        }
       }
     }
   }

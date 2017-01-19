@@ -504,6 +504,22 @@
 main {
   background: white; }
 
+.prev_btn, .next_btn {
+  width: 56px;
+  height: 56px;
+  display: block;
+  position: absolute; }
+
+.prev_btn {
+  background: url(../images/prev_btn.png) no-repeat; }
+  .prev_btn:hover {
+    background: url(../images/prev_btn_selected.png) no-repeat; }
+
+.next_btn {
+  background: url(../images/next_btn.png) no-repeat; }
+  .next_btn:hover {
+    background: url(../images/next_btn_selected.png) no-repeat; }
+
 .group_name {
   font-size: 25px;
   color: #585858;
@@ -535,21 +551,34 @@ main {
 #group_top_users {
   height: 100px;
   margin: 0 auto;
-  max-width: 800px; }
+  max-width: 800px;
+  position: relative; }
   #group_top_users h3 {
     font-size: 13px; }
-  #group_top_users li {
-    float: left;
-    font-size: 13px;
-    width: 60px;
-    text-align: center;
-    margin-right: 8px; }
-    #group_top_users li .avatar {
-      margin: 0 auto 4px;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background-size: cover; }
+  #group_top_users .prev_btn {
+    left: -70px;
+    top: 25px; }
+  #group_top_users .next_btn {
+    right: -70px;
+    top: 25px; }
+  #group_top_users .list_container {
+    max-width: 800px;
+    overflow: scroll;
+    height: 80px; }
+    #group_top_users .list_container ul {
+      width: 999999px; }
+    #group_top_users .list_container li {
+      float: left;
+      font-size: 13px;
+      width: 60px;
+      text-align: center;
+      margin-right: 8px; }
+      #group_top_users .list_container li .avatar {
+        margin: 0 auto 4px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-size: cover; }
 
 #group_nav {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
@@ -577,45 +606,59 @@ main {
   #questions_list .question {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     padding-bottom: 20px;
-    margin-bottom: 10px; }
+    margin-bottom: 10px;
+    position: relative; }
     #questions_list .question h3 {
       font-size: 17px;
       color: black;
       margin-bottom: 5px; }
     #questions_list .question span {
       font-size: 13px;
+      font-weight: 200;
       color: #A7A7A7; }
-    #questions_list .question .answer_card {
-      width: 200px;
-      height: 280px;
-      float: left;
-      margin-top: 20px;
-      margin-right: 10px;
-      position: relative;
-      background: white;
-      border-radius: 6px;
-      box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07); }
-      #questions_list .question .answer_card .video_thumbnail {
+    #questions_list .question .prev_btn {
+      left: -70px;
+      top: 175px; }
+    #questions_list .question .next_btn {
+      right: -70px;
+      top: 175px; }
+    #questions_list .question .list_container {
+      max-width: 800px;
+      overflow: scroll;
+      height: 300px; }
+      #questions_list .question .list_container ul {
+        width: 999999px; }
+      #questions_list .question .list_container .answer_card {
         width: 200px;
-        height: 200px;
-        background-size: cover;
-        border-radius: 6px 6px 0 0; }
-      #questions_list .question .answer_card .play_btn {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 50px;
-        height: 52px;
-        background: url(../images/answer_card_play_btn.png) no-repeat; }
-      #questions_list .question .answer_card h4 {
-        font-size: 15px;
-        margin-left: 8px;
-        margin-bottom: 2px; }
-      #questions_list .question .answer_card span {
-        font-size: 14px;
-        color: #A7A7A7;
-        margin-left: 8px;
-        display: block; }
+        height: 280px;
+        float: left;
+        margin-top: 20px;
+        margin-right: 10px;
+        position: relative;
+        background: white;
+        border-radius: 6px;
+        box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07); }
+        #questions_list .question .list_container .answer_card .video_thumbnail {
+          width: 200px;
+          height: 200px;
+          background-size: cover;
+          border-radius: 6px 6px 0 0; }
+        #questions_list .question .list_container .answer_card .play_btn {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 50px;
+          height: 52px;
+          background: url(../images/answer_card_play_btn.png) no-repeat; }
+        #questions_list .question .list_container .answer_card h4 {
+          font-size: 15px;
+          margin-left: 8px;
+          margin-bottom: 2px; }
+        #questions_list .question .list_container .answer_card span {
+          font-size: 14px;
+          color: #A7A7A7;
+          margin-left: 8px;
+          display: block; }
 
 .group-questions {
   max-width: 500px;
