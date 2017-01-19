@@ -6,6 +6,7 @@ import MoreComment from './MoreComment.jsx';
 import GroupQuestions from "./group/GroupQuestions.jsx";
 import SingleQuestion from "./SingleQuestion.jsx";
 import FeaturedAnswers from "./FeaturedAnswers.jsx"
+import SingleGroup from "./SingleGroup.jsx"
 import Moment from 'moment';
 // import {Button, Row, Col } from 'react-bootstrap';
 
@@ -65,6 +66,14 @@ if (document.getElementById('answerCreatedAt')) {
 // Group page: questions in group. Including 4 types: trending, most recent, all time, unanswered.
 if (document.getElementById('groupQuestions')) {
   ReactDOM.render(<GroupQuestions />, document.getElementById('groupQuestions'));
+}
+
+// Single group:
+if (document.getElementById('group')) {
+  // ReactDOM.render(<SingleGroup />, document.getElementById('group'));
+  ReactDOM.render(
+    <div>hehe</div>
+  );
 }
 
 // Single question page: answers of question.
