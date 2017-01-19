@@ -90,6 +90,7 @@ main{
       a{
         color: $bodyTextColor;
         font-size: 12px;
+        text-decoration: none;
 
         &.selected{
           color: $textBlueColor;
@@ -97,7 +98,6 @@ main{
 
         &:hover{
           color: $textBlueColor;
-          text-decoration: none;
         }
       }
     }

@@ -564,12 +564,12 @@ main {
       padding: 6px 15px; }
       #group_nav ul li a {
         color: #585858;
-        font-size: 12px; }
+        font-size: 12px;
+        text-decoration: none; }
         #group_nav ul li a.selected {
           color: #19ADE2; }
         #group_nav ul li a:hover {
-          color: #19ADE2;
-          text-decoration: none; }
+          color: #19ADE2; }
 
 #questions_list {
   margin: 0 auto;
@@ -705,9 +705,6 @@ ul {
 a {
   color: #19ADE2; }
 
-main {
-  padding: 0 15px; }
-
 .main-nav {
   background: white;
   padding: 15px;
@@ -737,9 +734,9 @@ main {
     margin-top: 15px;
     margin-bottom: 15px; }
   .user-info .displayName {
-    font-size: 18px;
-    font-weight: 600;
-    color: #505050; }
+    font-size: 25px;
+    color: #585858;
+    margin-top: 40px; }
   .user-info ul.follow {
     margin-bottom: 15px; }
     .user-info ul.follow li {
@@ -907,9 +904,9 @@ main {
   .button.button-small {
     background: #19ADE2;
     color: white;
-    font-size: 14px;
-    padding: 5px 25px;
-    border-radius: 1000px;
+    font-size: 12px;
+    padding: 8px 25px;
+    border-radius: 4px;
     text-transform: uppercase; }
   .button.button-large {
     border: 1px solid #19ADE2;
