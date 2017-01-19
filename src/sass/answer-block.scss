@@ -2,7 +2,7 @@
 @import "mixins";
 
 $questionAvatarSize: 40px;
-$questionUserPadding: 15px;
+$questionUserPadding: 20px;
 
 .answer-block {
   @include smallMobile() {
@@ -17,6 +17,7 @@ $questionUserPadding: 15px;
     padding-left: $questionAvatarSize + ($questionUserPadding * 2);
     cursor: pointer;
   }
+
   .avatar {
     position: absolute;
     left: $questionUserPadding;
@@ -30,7 +31,11 @@ $questionUserPadding: 15px;
     background-position: center;
     text-decoration: none;
   }
-  
+
+  #answerCreatedAt{
+    margin-right: 10px;
+  }
+
   .thumbnail {
     margin: 0;
     padding: 0;
@@ -41,7 +46,7 @@ $questionUserPadding: 15px;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    
+
     // &:before {
     //   content: " ";
     //   opacity: 0.6;
@@ -52,9 +57,9 @@ $questionUserPadding: 15px;
     //   display: block;
     // }
     a {
-      
+
     }
-    
+
     img {
       z-index: 2;
       width: 100%;
@@ -62,8 +67,8 @@ $questionUserPadding: 15px;
       background:rgba(0,0,0,0.6);
       // opacity: 0.5;
     }
-    
-    
+
+
   }
 
   .name {

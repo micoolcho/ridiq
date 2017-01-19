@@ -376,12 +376,12 @@
 .answer-block .user {
   border-top: 0.5px solid rgba(151, 151, 151, 0.4);
   position: relative;
-  padding: 15px;
-  padding-left: 70px;
+  padding: 20px;
+  padding-left: 80px;
   cursor: pointer; }
 .answer-block .avatar {
   position: absolute;
-  left: 15px;
+  left: 20px;
   top: 50%;
   margin-top: -20px;
   display: block;
@@ -391,6 +391,8 @@
   background-size: cover;
   background-position: center;
   text-decoration: none; }
+.answer-block #answerCreatedAt {
+  margin-right: 10px; }
 .answer-block .thumbnail {
   margin: 0;
   padding: 0;
@@ -420,14 +422,16 @@
   .answer-block .info .right {
     float: right; }
 
-.question-block .asked-in {
-  color: rgba(93, 93, 93, 0.6); }
-.question-block .content {
-  font-weight: 600;
-  font-size: 17px;
-  color: #585858;
-  padding: 8px 0 10px;
-  word-wrap: break-word; }
+.question-block {
+  padding: 10px; }
+  .question-block .asked-in {
+    color: rgba(93, 93, 93, 0.6); }
+  .question-block .content {
+    font-weight: 600;
+    font-size: 17px;
+    color: #585858;
+    padding: 8px 0 10px;
+    word-wrap: break-word; }
 
 .single-answer-wrapper,
 .single-question-wrapper {
@@ -509,6 +513,12 @@ main {
   height: 56px;
   display: block;
   position: absolute; }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .prev_btn, .next_btn {
+      display: none; } }
+  @media (max-width: 767px) {
+    .prev_btn, .next_btn {
+      display: none; } }
 
 .prev_btn {
   background: url(../images/prev_btn.png) no-repeat; }
@@ -554,7 +564,8 @@ main {
   max-width: 800px;
   position: relative; }
   #group_top_users h3 {
-    font-size: 13px; }
+    font-size: 13px;
+    margin-left: 10px; }
   #group_top_users .prev_btn {
     left: -70px;
     top: 25px; }
@@ -573,6 +584,9 @@ main {
       width: 60px;
       text-align: center;
       margin-right: 8px; }
+      #group_top_users .list_container li a {
+        text-decoration: none;
+        color: #585858; }
       #group_top_users .list_container li .avatar {
         margin: 0 auto 4px;
         width: 50px;
@@ -611,11 +625,13 @@ main {
     #questions_list .question h3 {
       font-size: 17px;
       color: black;
-      margin-bottom: 5px; }
+      margin-bottom: 5px;
+      margin-left: 10px; }
     #questions_list .question span {
       font-size: 13px;
       font-weight: 200;
-      color: #A7A7A7; }
+      color: #A7A7A7;
+      margin-left: 10px; }
     #questions_list .question .prev_btn {
       left: -70px;
       top: 175px; }
@@ -625,7 +641,7 @@ main {
     #questions_list .question .list_container {
       max-width: 800px;
       overflow: scroll;
-      height: 300px; }
+      height: 310px; }
       #questions_list .question .list_container ul {
         width: 999999px; }
       #questions_list .question .list_container .answer_card {
@@ -633,11 +649,13 @@ main {
         height: 280px;
         float: left;
         margin-top: 20px;
-        margin-right: 10px;
+        margin-left: 10px;
         position: relative;
         background: white;
         border-radius: 6px;
         box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07); }
+        #questions_list .question .list_container .answer_card a {
+          text-decoration: none; }
         #questions_list .question .list_container .answer_card .video_thumbnail {
           width: 200px;
           height: 200px;
@@ -653,7 +671,8 @@ main {
         #questions_list .question .list_container .answer_card h4 {
           font-size: 15px;
           margin-left: 8px;
-          margin-bottom: 2px; }
+          margin-bottom: 2px;
+          color: #585858; }
         #questions_list .question .list_container .answer_card span {
           font-size: 14px;
           color: #A7A7A7;
