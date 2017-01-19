@@ -67503,7 +67503,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.SingleGroupQuestion = undefined;
+	exports.TopUser = exports.SingleGroupTopUsers = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -67518,6 +67518,10 @@
 	var _Utils = __webpack_require__(307);
 
 	var _Utils2 = _interopRequireDefault(_Utils);
+
+	var _BasedLoadMoreComponent = __webpack_require__(190);
+
+	var _BasedLoadMoreComponent2 = _interopRequireDefault(_BasedLoadMoreComponent);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -67536,11 +67540,28 @@
 	  baseAPIUrl = 'http://localhost:3000';
 	}
 
+	function LoadMore(_ref) {
+	  var onClick = _ref.onClick,
+	      isLoading = _ref.isLoading;
+
+	  return _react2.default.createElement(
+	    "div",
+	    { className: "text-center m-t-20" },
+	    _react2.default.createElement(
+	      "div",
+	      {
+	        onClick: onClick,
+	        className: 'button button-large ' + (isLoading ? 'disabled' : '') },
+	      isLoading ? 'loading...' : 'load more'
+	    )
+	  );
+	}
+
 	var SingleGroup = function (_React$Component) {
 	  _inherits(SingleGroup, _React$Component);
 
 	  function SingleGroup() {
-	    var _ref;
+	    var _ref2;
 
 	    _classCallCheck(this, SingleGroup);
 
@@ -67548,7 +67569,7 @@
 	      args[_key] = arguments[_key];
 	    }
 
-	    var _this = _possibleConstructorReturn(this, (_ref = SingleGroup.__proto__ || Object.getPrototypeOf(SingleGroup)).call.apply(_ref, [this].concat(args)));
+	    var _this = _possibleConstructorReturn(this, (_ref2 = SingleGroup.__proto__ || Object.getPrototypeOf(SingleGroup)).call.apply(_ref2, [this].concat(args)));
 
 	    _this.state = {
 	      questions: [],
@@ -67607,6 +67628,44 @@
 	      return _react2.default.createElement(
 	        "div",
 	        null,
+	        _react2.default.createElement(SingleGroupInfo, null),
+	        _react2.default.createElement(SingleGroupTopUsers, null),
+	        _react2.default.createElement(SingleGroupNavBar, null),
+	        _react2.default.createElement(
+	          "div",
+	          { id: "questions_list" },
+	          _react2.default.createElement(SingleGroupQuestion, null),
+	          _react2.default.createElement(SingleGroupQuestionNoAnswer, null),
+	          _react2.default.createElement(SingleGroupQuestionNoAnswer, null),
+	          _react2.default.createElement(SingleGroupQuestionNoAnswer, null),
+	          _react2.default.createElement(SingleGroupQuestion, null),
+	          _react2.default.createElement(SingleGroupQuestionNoAnswer, null),
+	          _react2.default.createElement(LoadMore, { onClick: this.loadMore, isLoading: isLoading })
+	        )
+	      );
+	    }
+	  }]);
+
+	  return SingleGroup;
+	}(_react2.default.Component);
+
+	exports.default = SingleGroup;
+
+	var SingleGroupInfo = function (_React$Component2) {
+	  _inherits(SingleGroupInfo, _React$Component2);
+
+	  function SingleGroupInfo() {
+	    _classCallCheck(this, SingleGroupInfo);
+
+	    return _possibleConstructorReturn(this, (SingleGroupInfo.__proto__ || Object.getPrototypeOf(SingleGroupInfo)).apply(this, arguments));
+	  }
+
+	  _createClass(SingleGroupInfo, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        null,
 	        _react2.default.createElement(
 	          "h1",
 	          { className: "group_name text-center" },
@@ -67658,122 +67717,150 @@
 	              "responses"
 	            )
 	          )
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { id: "group_top_users" },
-	          _react2.default.createElement(
-	            "h3",
-	            null,
-	            "TOP USERS"
-	          ),
-	          _react2.default.createElement("a", { href: "#", className: "prev_btn" }),
-	          _react2.default.createElement(
-	            "div",
-	            { className: "list_container" },
-	            _react2.default.createElement(
-	              "ul",
-	              null,
-	              _react2.default.createElement(
-	                "li",
-	                null,
-	                _react2.default.createElement(
-	                  "a",
-	                  { href: "/" },
-	                  _react2.default.createElement(
-	                    "div",
-	                    { style: { backgroundImage: "url(images/group-avatar.jpeg)" }, className: "avatar" },
-	                    "\xA0"
-	                  ),
-	                  "Louis"
-	                )
-	              )
-	            )
-	          ),
-	          _react2.default.createElement("a", { href: "#", className: "next_btn" })
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { id: "group_nav" },
-	          _react2.default.createElement(
-	            "ul",
-	            null,
-	            _react2.default.createElement(
-	              "li",
-	              null,
-	              _react2.default.createElement(
-	                "a",
-	                { href: "#", className: "selected" },
-	                "TRENDING"
-	              )
-	            ),
-	            _react2.default.createElement(
-	              "li",
-	              null,
-	              _react2.default.createElement(
-	                "a",
-	                { href: "#" },
-	                "RECENT"
-	              )
-	            ),
-	            _react2.default.createElement(
-	              "li",
-	              null,
-	              _react2.default.createElement(
-	                "a",
-	                { href: "#" },
-	                "TOP"
-	              )
-	            ),
-	            _react2.default.createElement(
-	              "li",
-	              null,
-	              _react2.default.createElement(
-	                "a",
-	                { href: "#" },
-	                "UNANSWERED"
-	              )
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          "div",
-	          { id: "questions_list" },
-	          _react2.default.createElement(SingleGroupQuestion, null),
-	          _react2.default.createElement(
-	            "div",
-	            { className: "question clearfix" },
-	            _react2.default.createElement(
-	              "h3",
-	              null,
-	              "What was the most shocking moment for you in the S06E05?"
-	            ),
-	            _react2.default.createElement(
-	              "span",
-	              null,
-	              "8 responses"
-	            )
-	          )
 	        )
-	      )
-	      // <div>
-	      //   {questions.map((item, index) => {
-	      //     return <SingleAnswer index={index} key={item.id}  item={item}
-	      //      />
-	      //      })}
-	      //   <LoadMore onClick={this.loadMore} isLoading={isLoading}/>
-	      // </div>
-	      ;
+	      );
 	    }
 	  }]);
 
-	  return SingleGroup;
+	  return SingleGroupInfo;
 	}(_react2.default.Component);
 
-	exports.default = SingleGroup;
+	var SingleGroupTopUsers = exports.SingleGroupTopUsers = function (_React$Component3) {
+	  _inherits(SingleGroupTopUsers, _React$Component3);
 
-	var SingleGroupQuestion = exports.SingleGroupQuestion = function (_React$Component2) {
-	  _inherits(SingleGroupQuestion, _React$Component2);
+	  function SingleGroupTopUsers() {
+	    _classCallCheck(this, SingleGroupTopUsers);
+
+	    return _possibleConstructorReturn(this, (SingleGroupTopUsers.__proto__ || Object.getPrototypeOf(SingleGroupTopUsers)).apply(this, arguments));
+	  }
+
+	  _createClass(SingleGroupTopUsers, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        { id: "group_top_users" },
+	        _react2.default.createElement(
+	          "h3",
+	          null,
+	          "TOP USERS"
+	        ),
+	        _react2.default.createElement("a", { href: "#", className: "prev_btn" }),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "list_container" },
+	          _react2.default.createElement(
+	            "ul",
+	            null,
+	            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(function (index, item) {
+	              return _react2.default.createElement(TopUser, null);
+	            })
+	          )
+	        ),
+	        _react2.default.createElement("a", { href: "#", className: "next_btn" })
+	      );
+	    }
+	  }]);
+
+	  return SingleGroupTopUsers;
+	}(_react2.default.Component);
+
+	var TopUser = exports.TopUser = function (_React$Component4) {
+	  _inherits(TopUser, _React$Component4);
+
+	  function TopUser() {
+	    _classCallCheck(this, TopUser);
+
+	    return _possibleConstructorReturn(this, (TopUser.__proto__ || Object.getPrototypeOf(TopUser)).apply(this, arguments));
+	  }
+
+	  _createClass(TopUser, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "li",
+	        null,
+	        _react2.default.createElement(
+	          "a",
+	          { href: "/" },
+	          _react2.default.createElement(
+	            "div",
+	            { style: { backgroundImage: "url(images/item2.png)" }, className: "avatar" },
+	            "\xA0"
+	          ),
+	          "Louis"
+	        )
+	      );
+	    }
+	  }]);
+
+	  return TopUser;
+	}(_react2.default.Component);
+
+	var SingleGroupNavBar = function (_React$Component5) {
+	  _inherits(SingleGroupNavBar, _React$Component5);
+
+	  function SingleGroupNavBar() {
+	    _classCallCheck(this, SingleGroupNavBar);
+
+	    return _possibleConstructorReturn(this, (SingleGroupNavBar.__proto__ || Object.getPrototypeOf(SingleGroupNavBar)).apply(this, arguments));
+	  }
+
+	  _createClass(SingleGroupNavBar, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        { id: "group_nav" },
+	        _react2.default.createElement(
+	          "ul",
+	          null,
+	          _react2.default.createElement(
+	            "li",
+	            null,
+	            _react2.default.createElement(
+	              "a",
+	              { href: "#", className: "selected" },
+	              "TRENDING"
+	            )
+	          ),
+	          _react2.default.createElement(
+	            "li",
+	            null,
+	            _react2.default.createElement(
+	              "a",
+	              { href: "#" },
+	              "RECENT"
+	            )
+	          ),
+	          _react2.default.createElement(
+	            "li",
+	            null,
+	            _react2.default.createElement(
+	              "a",
+	              { href: "#" },
+	              "TOP"
+	            )
+	          ),
+	          _react2.default.createElement(
+	            "li",
+	            null,
+	            _react2.default.createElement(
+	              "a",
+	              { href: "#" },
+	              "UNANSWERED"
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return SingleGroupNavBar;
+	}(_react2.default.Component);
+
+	var SingleGroupQuestion = function (_React$Component6) {
+	  _inherits(SingleGroupQuestion, _React$Component6);
 
 	  function SingleGroupQuestion() {
 	    _classCallCheck(this, SingleGroupQuestion);
@@ -67787,6 +67874,53 @@
 	      return _react2.default.createElement(
 	        "div",
 	        { className: "question clearfix" },
+	        _react2.default.createElement(QuestionContent, null),
+	        _react2.default.createElement(AnswerList, null)
+	      );
+	    }
+	  }]);
+
+	  return SingleGroupQuestion;
+	}(_react2.default.Component);
+
+	var SingleGroupQuestionNoAnswer = function (_React$Component7) {
+	  _inherits(SingleGroupQuestionNoAnswer, _React$Component7);
+
+	  function SingleGroupQuestionNoAnswer() {
+	    _classCallCheck(this, SingleGroupQuestionNoAnswer);
+
+	    return _possibleConstructorReturn(this, (SingleGroupQuestionNoAnswer.__proto__ || Object.getPrototypeOf(SingleGroupQuestionNoAnswer)).apply(this, arguments));
+	  }
+
+	  _createClass(SingleGroupQuestionNoAnswer, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        { className: "question clearfix" },
+	        _react2.default.createElement(QuestionContent, null)
+	      );
+	    }
+	  }]);
+
+	  return SingleGroupQuestionNoAnswer;
+	}(_react2.default.Component);
+
+	var QuestionContent = function (_React$Component8) {
+	  _inherits(QuestionContent, _React$Component8);
+
+	  function QuestionContent() {
+	    _classCallCheck(this, QuestionContent);
+
+	    return _possibleConstructorReturn(this, (QuestionContent.__proto__ || Object.getPrototypeOf(QuestionContent)).apply(this, arguments));
+	  }
+
+	  _createClass(QuestionContent, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        null,
 	        _react2.default.createElement(
 	          "h3",
 	          null,
@@ -67796,7 +67930,29 @@
 	          "span",
 	          null,
 	          "13 responses"
-	        ),
+	        )
+	      );
+	    }
+	  }]);
+
+	  return QuestionContent;
+	}(_react2.default.Component);
+
+	var AnswerList = function (_React$Component9) {
+	  _inherits(AnswerList, _React$Component9);
+
+	  function AnswerList() {
+	    _classCallCheck(this, AnswerList);
+
+	    return _possibleConstructorReturn(this, (AnswerList.__proto__ || Object.getPrototypeOf(AnswerList)).apply(this, arguments));
+	  }
+
+	  _createClass(AnswerList, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        null,
 	        _react2.default.createElement("a", { href: "#", className: "prev_btn" }),
 	        _react2.default.createElement(
 	          "div",
@@ -67804,26 +67960,9 @@
 	          _react2.default.createElement(
 	            "ul",
 	            null,
-	            _react2.default.createElement(
-	              "li",
-	              { className: "answer_card" },
-	              _react2.default.createElement(
-	                "a",
-	                { href: "single-answer.html" },
-	                _react2.default.createElement("div", { style: { backgroundImage: "url(images/item1.png" }, className: "video_thumbnail" }),
-	                _react2.default.createElement("div", { className: "play_btn" }),
-	                _react2.default.createElement(
-	                  "h4",
-	                  null,
-	                  "Michael Cho"
-	                ),
-	                _react2.default.createElement(
-	                  "span",
-	                  null,
-	                  "Dad. Entrepreneur. Go player."
-	                )
-	              )
-	            )
+	            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(function (index, item) {
+	              return _react2.default.createElement(AnswerCard, null);
+	            })
 	          )
 	        ),
 	        _react2.default.createElement("a", { href: "#", className: "next_btn" })
@@ -67831,7 +67970,45 @@
 	    }
 	  }]);
 
-	  return SingleGroupQuestion;
+	  return AnswerList;
+	}(_react2.default.Component);
+
+	var AnswerCard = function (_React$Component10) {
+	  _inherits(AnswerCard, _React$Component10);
+
+	  function AnswerCard() {
+	    _classCallCheck(this, AnswerCard);
+
+	    return _possibleConstructorReturn(this, (AnswerCard.__proto__ || Object.getPrototypeOf(AnswerCard)).apply(this, arguments));
+	  }
+
+	  _createClass(AnswerCard, [{
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "li",
+	        { className: "answer_card" },
+	        _react2.default.createElement(
+	          "a",
+	          { href: "single-answer.html" },
+	          _react2.default.createElement("div", { style: { backgroundImage: "url(images/item1.png" }, className: "video_thumbnail" }),
+	          _react2.default.createElement("div", { className: "play_btn" }),
+	          _react2.default.createElement(
+	            "h4",
+	            null,
+	            "Michael Cho"
+	          ),
+	          _react2.default.createElement(
+	            "span",
+	            null,
+	            "Dad. Entrepreneur. Go player."
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return AnswerCard;
 	}(_react2.default.Component);
 
 /***/ }

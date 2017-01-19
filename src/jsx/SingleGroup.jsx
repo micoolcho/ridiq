@@ -1,6 +1,7 @@
 import React from "react";
 import Moment from "moment";
 import Utils from "./Utils.jsx";
+import BasedLoadMoreComponent from "./BasedLoadMoreComponent.jsx";
 
 let baseAPIUrl
 if (process.env.NODE_ENV === 'production') {
@@ -9,6 +10,18 @@ if (process.env.NODE_ENV === 'production') {
    baseAPIUrl = 'http://yam-staging.herokuapp.com'
 } else {
   baseAPIUrl = 'http://localhost:3000'
+}
+
+function LoadMore ({onClick, isLoading}) {
+ return (<div className="text-center m-t-20">
+  <div
+    onClick={onClick}
+    className={'button button-large ' + (isLoading ? 'disabled' : '')}>
+    {
+      isLoading ? 'loading...' : 'load more'
+    }
+  </div>
+</div>)
 }
 
 export default class SingleGroup extends React.Component {
@@ -56,90 +69,163 @@ export default class SingleGroup extends React.Component {
      const {loadMore} = this.loadMore
     return (
       <div>
-      <h1 className="group_name text-center">Game of Thrones</h1>
-      <hr className="group_name_separator"/>
+      <SingleGroupInfo />
+      <SingleGroupTopUsers />
+      <SingleGroupNavBar />
 
-      <ul id="group_info">
-        <li className="count_box">
-          <span className="count">324</span>
-          <span>members</span>
-        </li>
-        <li className="count_box">
-          <span className="count">1782</span>
-          <span>questions</span>
-        </li>
-        <li className="count_box">
-          <span className="count">631</span>
-          <span>responses</span>
-        </li>
-      </ul>
+        <div id="questions_list">
+          <SingleGroupQuestion />
+          <SingleGroupQuestionNoAnswer />
+          <SingleGroupQuestionNoAnswer />
+          <SingleGroupQuestionNoAnswer />
+          <SingleGroupQuestion />
+          <SingleGroupQuestionNoAnswer />
 
+          <LoadMore onClick={this.loadMore} isLoading={isLoading}/>
+        </div>
+    </div>
+    )
+  }
+}
+
+class SingleGroupInfo extends React.Component {
+  render(){
+    return(
+      <div>
+        <h1 className="group_name text-center">Game of Thrones</h1>
+        <hr className="group_name_separator"/>
+
+        <ul id="group_info">
+          <li className="count_box">
+            <span className="count">324</span>
+            <span>members</span>
+          </li>
+          <li className="count_box">
+            <span className="count">1782</span>
+            <span>questions</span>
+          </li>
+          <li className="count_box">
+            <span className="count">631</span>
+            <span>responses</span>
+          </li>
+        </ul>
+      </div>
+    )
+  }
+}
+
+export class SingleGroupTopUsers extends React.Component{
+  render(){
+    return(
       <div id="group_top_users">
         <h3>TOP USERS</h3>
         <a href="#" className="prev_btn"></a>
         <div className="list_container">
         <ul>
-          <li>
-            <a href="/">
-            <div style={{backgroundImage:"url(images/group-avatar.jpeg)"}} className="avatar">&nbsp;</div>
-            Louis
-            </a>
-          </li>
+          {
+            [1,2,3,4,5,6,7,8,9,10,11,12,1,2,3,4,5,6,7,8,9,10,11,12].map((index, item) => {
+              return <TopUser />
+            })
+          }
         </ul>
         </div>
         <a href="#" className="next_btn"></a>
       </div>
-
-        <div id="group_nav">
-          <ul>
-            <li><a href="#" className="selected">TRENDING</a></li>
-            <li><a href="#">RECENT</a></li>
-            <li><a href="#">TOP</a></li>
-            <li><a href="#">UNANSWERED</a></li>
-          </ul>
-        </div>
-
-
-        <div id="questions_list">
-          <SingleGroupQuestion />
-          <div className="question clearfix">
-            <h3>What was the most shocking moment for you in the S06E05?</h3>
-            <span>8 responses</span>
-          </div>
-        </div>
-    </div>
-    // <div>
-    //   {questions.map((item, index) => {
-    //     return <SingleAnswer index={index} key={item.id}  item={item}
-    //      />
-    //      })}
-    //   <LoadMore onClick={this.loadMore} isLoading={isLoading}/>
-    // </div>
     )
   }
 }
 
-export class SingleGroupQuestion extends React.Component {
+export class TopUser extends React.Component{
+  render(){
+    return(
+      <li>
+        <a href="/">
+        <div style={{backgroundImage:"url(images/item2.png)"}} className="avatar">&nbsp;</div>
+        Louis
+        </a>
+      </li>
+    )
+  }
+}
+
+class SingleGroupNavBar extends React.Component{
+  render(){
+    return(
+      <div id="group_nav">
+        <ul>
+          <li><a href="#" className="selected">TRENDING</a></li>
+          <li><a href="#">RECENT</a></li>
+          <li><a href="#">TOP</a></li>
+          <li><a href="#">UNANSWERED</a></li>
+        </ul>
+      </div>
+    )
+  }
+}
+
+class SingleGroupQuestion extends React.Component {
   render(){
     return(
       <div className="question clearfix">
-        <h3>Do you think Tyrion is Targaryen (the third head of the dragon)?</h3>
-        <span>13 responses</span>
+      <QuestionContent />
+      <AnswerList />
+      </div>
+    )
+  }
+}
+
+class SingleGroupQuestionNoAnswer extends React.Component {
+  render(){
+    return(
+      <div className="question clearfix">
+      <QuestionContent />
+      </div>
+    )
+  }
+}
+
+class QuestionContent extends React.Component{
+  render(){
+    return(
+      <div>
+      <h3>Do you think Tyrion is Targaryen (the third head of the dragon)?</h3>
+      <span>13 responses</span>
+      </div>
+    )
+  }
+}
+
+class AnswerList extends React.Component{
+  render(){
+    return(
+      <div>
         <a href="#" className="prev_btn"></a>
         <div className="list_container">
         <ul>
-          <li className="answer_card">
-            <a href="single-answer.html">
-            <div style={{backgroundImage:"url(images/item1.png"}} className="video_thumbnail"></div>
-            <div className="play_btn"></div>
-            <h4>Michael Cho</h4>
-            <span>Dad. Entrepreneur. Go player.</span>
-            </a>
-          </li>
+          {
+            [1,2,3,4,5,6,7,8,9,10,11,12].map((index, item) => {
+              return <AnswerCard />
+            })
+          }
         </ul>
       </div>
       <a href="#" className="next_btn"></a>
       </div>
+    )
+  }
+}
+
+class AnswerCard extends React.Component{
+  render(){
+    return(
+      <li className="answer_card">
+        <a href="single-answer.html">
+        <div style={{backgroundImage:"url(images/item1.png"}} className="video_thumbnail"></div>
+        <div className="play_btn"></div>
+        <h4>Michael Cho</h4>
+        <span>Dad. Entrepreneur. Go player.</span>
+        </a>
+      </li>
     )
   }
 }
