@@ -1,0 +1,28 @@
+{
+  "data": [
+    {
+      "id": 828,
+      "created_at": 1484628243,
+      "user_id": 84,
+      "user_name": "Michael Cho",
+      "user_short_blurb": "I nearly died in a plane crash and now I run YAM.",
+      "user_avatar_url": "https://d2g9p8cekugjwh.cloudfront.net/attachments/images/127_original.jpeg?1475833309",
+      "user_group_bio": "I read, therefore I am.",
+      "image_url": "https://d2g9p8cekugjwh.cloudfront.net/answers/images/828_original.jpg?1484628243",
+      "video_url": "https://d2g9p8cekugjwh.cloudfront.net/answers/videos/828_original.mp4?1484628243",
+      "public_url": "https://api.letsyam.com/answers/98bf8cbd4c",
+      "is_featured": false,
+      "has_liked": false,
+      "has_upvoted": false,
+      "has_downvoted": false,
+      "has_paid": true,
+      "view_count": 4,
+      "like_count": 1,
+      "comment_count": 0,
+      "vote_score": 1,
+      "video_duration": 101.47,
+      "pinned": false,
+      "pinned_at": null
+    }
+  ]
+}

@@ -67666,12 +67666,13 @@
 	        _react2.default.createElement(
 	          "div",
 	          { id: "questions_list" },
-	          _react2.default.createElement(SingleGroupQuestion, null),
-	          _react2.default.createElement(SingleGroupQuestionNoAnswer, null),
-	          _react2.default.createElement(SingleGroupQuestionNoAnswer, null),
-	          _react2.default.createElement(SingleGroupQuestionNoAnswer, null),
-	          _react2.default.createElement(SingleGroupQuestion, null),
-	          _react2.default.createElement(SingleGroupQuestionNoAnswer, null),
+	          questions.map(function (question, index) {
+	            if (question.answer_count > 0) {
+	              return _react2.default.createElement(SingleGroupQuestion, { key: question.id, question: question });
+	            } else {
+	              return _react2.default.createElement(SingleGroupQuestionNoAnswer, { key: question.id, question: question });
+	            }
+	          }),
 	          _react2.default.createElement(LoadMore, { onClick: this.loadMore, isLoading: isLoading })
 	        )
 	      );
@@ -67961,11 +67962,14 @@
 	  _createClass(SingleGroupQuestion, [{
 	    key: "render",
 	    value: function render() {
+	      var question = this.props.question;
+
+
 	      return _react2.default.createElement(
 	        "div",
 	        { className: "question clearfix" },
-	        _react2.default.createElement(QuestionContent, { question: "Do you think Tyrion is Targaryen (the third head of the dragon)?", answerCount: "13" }),
-	        _react2.default.createElement(AnswerList, null)
+	        _react2.default.createElement(QuestionContent, { question: question.content, answerCount: question.answer_count }),
+	        _react2.default.createElement(AnswerList, { question: question })
 	      );
 	    }
 	  }]);
@@ -67985,10 +67989,13 @@
 	  _createClass(SingleGroupQuestionNoAnswer, [{
 	    key: "render",
 	    value: function render() {
+	      var question = this.props.question;
+
+
 	      return _react2.default.createElement(
 	        "div",
 	        { className: "question clearfix" },
-	        _react2.default.createElement(QuestionContent, { question: "Don't answer this question", answerCount: "0" })
+	        _react2.default.createElement(QuestionContent, { question: question.content, answerCount: "0" })
 	      );
 	    }
 	  }]);
@@ -68041,14 +68048,72 @@
 	  _inherits(AnswerList, _React$Component10);
 
 	  function AnswerList() {
+	    var _ref4;
+
 	    _classCallCheck(this, AnswerList);
 
-	    return _possibleConstructorReturn(this, (AnswerList.__proto__ || Object.getPrototypeOf(AnswerList)).apply(this, arguments));
+	    for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+	      args[_key3] = arguments[_key3];
+	    }
+
+	    var _this13 = _possibleConstructorReturn(this, (_ref4 = AnswerList.__proto__ || Object.getPrototypeOf(AnswerList)).call.apply(_ref4, [this].concat(args)));
+
+	    _this13.state = {
+	      answers: [],
+	      page: 1,
+	      isLoading: false
+	    };
+
+	    _this13.loadMore = _this13.loadMore.bind(_this13);
+	    return _this13;
 	  }
 
 	  _createClass(AnswerList, [{
+	    key: "loadMore",
+	    value: function loadMore() {
+	      this.fetchAnswers();
+	    }
+	  }, {
+	    key: "componentDidMount",
+	    value: function componentDidMount() {
+	      this.fetchAnswers();
+	    }
+	  }, {
+	    key: "fetchAnswers",
+	    value: function fetchAnswers() {
+	      var _this14 = this;
+
+	      var pageCount = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 10;
+
+	      this.setState({ isLoading: true });
+	      var _state4 = this.state,
+	          answers = _state4.answers,
+	          page = _state4.page;
+	      var question = this.props.question;
+	      // const endPoint = `${baseAPIUrl}/api/v6/activities/featured?per_page=${pageCount}&page=${page}`
+
+	      var endPoint = baseAPIUrl + "/jsons/question_" + question.id + "_answers.json";
+	      console.log(endPoint);
+	      fetch(endPoint, {
+	        headers: { "Content-Type": "application/json;charset=UTF-8" }
+	      }).then(function (response) {
+	        return response.json();
+	      }).then(function (json) {
+	        _this14.setState({
+	          answers: _.uniqBy(answers.concat(json.data), 'id'),
+	          page: page + 1,
+	          isLoading: false
+	        });
+	      }).catch(function (e) {
+	        console.log('error', e);
+	      });
+	    }
+	  }, {
 	    key: "render",
 	    value: function render() {
+	      var answers = this.state.answers;
+
+
 	      return _react2.default.createElement(
 	        "div",
 	        null,
@@ -68059,8 +68124,8 @@
 	          _react2.default.createElement(
 	            "ul",
 	            null,
-	            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(function (index, item) {
-	              return _react2.default.createElement(AnswerCard, { key: index });
+	            answers.map(function (answer, index) {
+	              return _react2.default.createElement(AnswerCard, { key: answer.id, answer: answer });
 	            })
 	          )
 	        ),
@@ -68084,18 +68149,21 @@
 	  _createClass(AnswerCard, [{
 	    key: "render",
 	    value: function render() {
+	      var answer = this.props.answer;
+
+
 	      return _react2.default.createElement(
 	        "li",
 	        { className: "answer_card" },
 	        _react2.default.createElement(
 	          "a",
 	          { href: "single-answer.html" },
-	          _react2.default.createElement("div", { style: { backgroundImage: "url(images/item1.png" }, className: "video_thumbnail" }),
+	          _react2.default.createElement("div", { style: { backgroundImage: "url(" + answer.image_url + ")" }, className: "video_thumbnail" }),
 	          _react2.default.createElement("div", { className: "play_btn" }),
 	          _react2.default.createElement(
 	            "h4",
 	            null,
-	            "Michael Cho"
+	            answer.user_name
 	          ),
 	          _react2.default.createElement(
 	            "span",

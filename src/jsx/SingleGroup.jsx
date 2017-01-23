@@ -102,12 +102,15 @@ export default class SingleGroup extends React.Component {
       <SingleGroupNavBar />
 
         <div id="questions_list">
-          <SingleGroupQuestion />
-          <SingleGroupQuestionNoAnswer />
-          <SingleGroupQuestionNoAnswer />
-          <SingleGroupQuestionNoAnswer />
-          <SingleGroupQuestion />
-          <SingleGroupQuestionNoAnswer />
+          {
+            questions.map((question, index) => {
+              if(question.answer_count > 0){
+                return <SingleGroupQuestion key={question.id} question={question}/>
+              } else {
+                return <SingleGroupQuestionNoAnswer key={question.id} question={question}/>
+              }
+            })
+          }
 
           <LoadMore onClick={this.loadMore} isLoading={isLoading}/>
         </div>
@@ -242,10 +245,12 @@ class SingleGroupNavBar extends React.Component{
 
 class SingleGroupQuestion extends React.Component {
   render(){
+    const { question } = this.props
+
     return(
       <div className="question clearfix">
-      <QuestionContent question="Do you think Tyrion is Targaryen (the third head of the dragon)?" answerCount="13"/>
-      <AnswerList />
+      <QuestionContent question={question.content} answerCount={question.answer_count}/>
+      <AnswerList question={question}/>
       </div>
     )
   }
@@ -253,9 +258,11 @@ class SingleGroupQuestion extends React.Component {
 
 class SingleGroupQuestionNoAnswer extends React.Component {
   render(){
+    const { question } = this.props
+
     return(
       <div className="question clearfix">
-      <QuestionContent question="Don't answer this question" answerCount="0"/>
+      <QuestionContent question={question.content} answerCount="0"/>
       </div>
     )
   }
@@ -281,15 +288,61 @@ class QuestionContent extends React.Component{
 }
 
 class AnswerList extends React.Component{
+  constructor(...args) {
+    super(...args);
+    this.state = {
+      answers:[],
+      page: 1,
+      isLoading: false
+    }
+
+    this.loadMore = this.loadMore.bind(this)
+  }
+
+  loadMore() {
+    this.fetchAnswers()
+  }
+
+  componentDidMount(){
+    this.fetchAnswers()
+  }
+
+  fetchAnswers(pageCount = 10) {
+    this.setState({isLoading: true})
+    const {answers, page} = this.state
+    const {question} = this.props
+    // const endPoint = `${baseAPIUrl}/api/v6/activities/featured?per_page=${pageCount}&page=${page}`
+    const endPoint = `${baseAPIUrl}/jsons/question_${question.id}_answers.json`
+    console.log(endPoint)
+    fetch(endPoint, {
+      headers: {"Content-Type": "application/json;charset=UTF-8"},
+    })
+      .then((response) => {
+        return response.json()
+      })
+      .then((json) => {
+         this.setState({
+            answers: _.uniqBy(answers.concat(json.data), 'id'),
+            page: page + 1,
+            isLoading: false
+         })
+      })
+      .catch((e) => {
+         console.log('error', e)
+      })
+  }
+
   render(){
+    const {answers} = this.state
+
     return(
       <div>
         <a href="#" className="prev_btn"></a>
         <div className="list_container">
         <ul>
           {
-            [1,2,3,4,5,6,7,8,9,10,11,12].map((index, item) => {
-              return <AnswerCard key={index}/>
+            answers.map((answer, index) => {
+              return <AnswerCard key={answer.id} answer={answer}/>
             })
           }
         </ul>
@@ -302,12 +355,14 @@ class AnswerList extends React.Component{
 
 class AnswerCard extends React.Component{
   render(){
+    const {answer} = this.props
+
     return(
       <li className="answer_card">
         <a href="single-answer.html">
-        <div style={{backgroundImage:"url(images/item1.png"}} className="video_thumbnail"></div>
+        <div style={{backgroundImage:"url(" + answer.image_url + ")"}} className="video_thumbnail"></div>
         <div className="play_btn"></div>
-        <h4>Michael Cho</h4>
+        <h4>{answer.user_name}</h4>
         <span>Dad. Entrepreneur. Go player.</span>
         </a>
       </li>
