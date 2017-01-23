@@ -28,12 +28,35 @@ export default class SingleGroup extends React.Component {
   constructor(...args) {
     super(...args);
     this.state = {
+      group:{},
       questions:[],
+      trendingUsers:[],
       page: 1,
-      isLoading: false
+      isLoading: false,
+      isLoadingGroupInfo: false,
+      isLoadingTrendingUsers: false
     }
 
     this.loadMore = this.loadMore.bind(this)
+  }
+
+  fetchGroupInfo(){
+    this.setState({isLoadingGroupInfo: true})
+
+    const endPoint = `${baseAPIUrl}/jsons/group.json`
+    console.log(endPoint)
+    fetch(endPoint, {
+      headers: {"Content-Type": "application/json;charset=UTF-8"},
+    }).then((response) => {
+      return response.json()
+    }).then((json) => {
+      this.setState({
+        group: json,
+        isLoadingGroupInfo: false
+      })
+    }).catch((e) => {
+      console.log('error', e)
+    })
   }
 
   fetchQuestions(pageCount = 10) {
@@ -47,7 +70,6 @@ export default class SingleGroup extends React.Component {
     })
       .then((response) => {
         return response.json()
-
       })
       .then((json) => {
          this.setState({
@@ -63,16 +85,19 @@ export default class SingleGroup extends React.Component {
 
   componentDidMount() {
     this.fetchQuestions()
+    this.fetchGroupInfo()
   }
+
   loadMore() {
     this.fetchQuestions()
   }
+
   render() {
-     const {questions, isLoading} = this.state
+     const {group, questions, isLoading, isLoadingGroupInfo} = this.state
      const {loadMore} = this.loadMore
     return (
       <div>
-      <SingleGroupInfo name="Game of Thrones"/>
+      <SingleGroupInfo group={group}/>
       <SingleGroupTopUsers />
       <SingleGroupNavBar />
 
@@ -93,15 +118,16 @@ export default class SingleGroup extends React.Component {
 
 class SingleGroupInfo extends React.Component {
   render(){
+    const {name, follower_count, question_count, answer_count} = this.props.group
     return(
       <div>
-        <h1 className="group_name text-center">{this.props.name}</h1>
+        <h1 className="group_name text-center">{name}</h1>
         <hr className="group_name_separator"/>
 
         <ul id="group_info">
-          <CountBox count="324" label="members" />
-          <CountBox count="1782" label="questions" />
-          <CountBox count="631" label="responses" />
+          <CountBox count={follower_count} label="members" />
+          <CountBox count={question_count} label="questions" />
+          <CountBox count={answer_count} label="responses" />
         </ul>
       </div>
     )
@@ -120,7 +146,51 @@ class CountBox extends React.Component{
 }
 
 export class SingleGroupTopUsers extends React.Component{
+  constructor(...args) {
+    super(...args);
+    this.state = {
+      trendingUsers:[],
+      page: 1,
+      isLoading: false
+    }
+
+    this.loadMore = this.loadMore.bind(this)
+  }
+
+  loadMore() {
+    this.fetchTrendingUsers()
+  }
+
+  componentDidMount(){
+    this.fetchTrendingUsers()
+  }
+
+  fetchTrendingUsers(pageCount = 10) {
+    this.setState({isLoading: true})
+    const {trendingUsers, page} = this.state
+    // const endPoint = `${baseAPIUrl}/api/v6/activities/featured?per_page=${pageCount}&page=${page}`
+    const endPoint = `${baseAPIUrl}/jsons/group_trending_users.json`
+    console.log(endPoint)
+    fetch(endPoint, {
+      headers: {"Content-Type": "application/json;charset=UTF-8"},
+    })
+      .then((response) => {
+        return response.json()
+      })
+      .then((json) => {
+         this.setState({
+            trendingUsers: _.uniqBy(trendingUsers.concat(json.data), 'id'),
+            page: page + 1,
+            isLoading: false
+         })
+      })
+      .catch((e) => {
+         console.log('error', e)
+      })
+  }
+
   render(){
+    const { trendingUsers } = this.state
     return(
       <div id="group_top_users">
         <h3>TOP USERS</h3>
@@ -128,8 +198,8 @@ export class SingleGroupTopUsers extends React.Component{
         <div className="list_container">
         <ul>
           {
-            [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18].map((index, item) => {
-              return <TopUser key={index}/>
+            trendingUsers.map((user, index) => {
+              return <TopUser key={user.id} user={user}/>
             })
           }
         </ul>
@@ -142,11 +212,13 @@ export class SingleGroupTopUsers extends React.Component{
 
 export class TopUser extends React.Component{
   render(){
+    const { user } = this.props
+
     return(
       <li>
         <a href="/">
-        <div style={{backgroundImage:"url(images/item2.png)"}} className="avatar">&nbsp;</div>
-        Louis
+        <div style={{backgroundImage:"url(" + user.avatar_url + ")"}} className="avatar">&nbsp;</div>
+        {user.first_name}
         </a>
       </li>
     )
