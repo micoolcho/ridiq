@@ -67537,7 +67537,7 @@
 	} else if ((undefined) === 'staging') {
 	  baseAPIUrl = 'http://yam-staging.herokuapp.com';
 	} else {
-	  baseAPIUrl = 'http://localhost:3000';
+	  baseAPIUrl = 'http://localhost:8002';
 	}
 
 	function LoadMore(_ref) {
@@ -67592,8 +67592,11 @@
 	      var _state = this.state,
 	          questions = _state.questions,
 	          page = _state.page;
+	      // const endPoint = `${baseAPIUrl}/api/v6/activities/featured?per_page=${pageCount}&page=${page}`
 
-	      fetch(baseAPIUrl + "/api/v6/activities/featured?per_page=" + pageCount + "&page=" + page, {
+	      var endPoint = baseAPIUrl + "/jsons/group_questions.json";
+	      console.log(endPoint);
+	      fetch(endPoint, {
 	        headers: { "Content-Type": "application/json;charset=UTF-8" }
 	      }).then(function (response) {
 	        return response.json();

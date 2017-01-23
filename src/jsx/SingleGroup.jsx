@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === 'production') {
 } else if (process.env.NODE_ENV === 'staging') {
    baseAPIUrl = 'http://yam-staging.herokuapp.com'
 } else {
-  baseAPIUrl = 'http://localhost:3000'
+  baseAPIUrl = 'http://localhost:8002'
 }
 
 function LoadMore ({onClick, isLoading}) {
@@ -39,7 +39,10 @@ export default class SingleGroup extends React.Component {
   fetchQuestions(pageCount = 10) {
     this.setState({isLoading: true})
     const {questions, page} = this.state
-    fetch(`${baseAPIUrl}/api/v6/activities/featured?per_page=${pageCount}&page=${page}`, {
+    // const endPoint = `${baseAPIUrl}/api/v6/activities/featured?per_page=${pageCount}&page=${page}`
+    const endPoint = `${baseAPIUrl}/jsons/group_questions.json`
+    console.log(endPoint)
+    fetch(endPoint, {
       headers: {"Content-Type": "application/json;charset=UTF-8"},
     })
       .then((response) => {
