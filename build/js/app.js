@@ -49337,9 +49337,9 @@
 
 /***/ },
 /* 307 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -49355,7 +49355,7 @@
 	  }
 
 	  _createClass(Utils, null, [{
-	    key: "kFormat",
+	    key: 'kFormat',
 	    value: function kFormat(num) {
 	      if (num < 1000) {
 	        return num;
@@ -49373,6 +49373,14 @@
 	}();
 
 	exports.default = Utils;
+	var baseAPIUrl = exports.baseAPIUrl = void 0;
+	if ((undefined) === 'production') {
+	  exports.baseAPIUrl = baseAPIUrl = 'http://api.letsyam.com';
+	} else if ((undefined) === 'staging') {
+	  exports.baseAPIUrl = baseAPIUrl = 'http://yam-staging.herokuapp.com';
+	} else {
+	  exports.baseAPIUrl = baseAPIUrl = 'http://localhost:8002';
+	}
 
 /***/ },
 /* 308 */
@@ -67503,7 +67511,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.TopUser = exports.SingleGroupTopUsers = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -67517,11 +67524,17 @@
 
 	var _Utils = __webpack_require__(307);
 
-	var _Utils2 = _interopRequireDefault(_Utils);
-
 	var _BasedLoadMoreComponent = __webpack_require__(190);
 
 	var _BasedLoadMoreComponent2 = _interopRequireDefault(_BasedLoadMoreComponent);
+
+	var _AnswerList = __webpack_require__(320);
+
+	var _AnswerList2 = _interopRequireDefault(_AnswerList);
+
+	var _SingleGroupTopUsers = __webpack_require__(319);
+
+	var _SingleGroupTopUsers2 = _interopRequireDefault(_SingleGroupTopUsers);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -67530,15 +67543,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var baseAPIUrl = void 0;
-	if ((undefined) === 'production') {
-	  baseAPIUrl = 'http://api.letsyam.com';
-	} else if ((undefined) === 'staging') {
-	  baseAPIUrl = 'http://yam-staging.herokuapp.com';
-	} else {
-	  baseAPIUrl = 'http://localhost:8002';
-	}
 
 	function LoadMore(_ref) {
 	  var onClick = _ref.onClick,
@@ -67592,7 +67596,7 @@
 
 	      this.setState({ isLoadingGroupInfo: true });
 
-	      var endPoint = baseAPIUrl + "/jsons/group.json";
+	      var endPoint = _Utils.baseAPIUrl + "/jsons/group.json";
 	      console.log(endPoint);
 	      fetch(endPoint, {
 	        headers: { "Content-Type": "application/json;charset=UTF-8" }
@@ -67620,7 +67624,7 @@
 	          page = _state.page;
 	      // const endPoint = `${baseAPIUrl}/api/v6/activities/featured?per_page=${pageCount}&page=${page}`
 
-	      var endPoint = baseAPIUrl + "/jsons/group_questions.json";
+	      var endPoint = _Utils.baseAPIUrl + "/jsons/group_questions.json";
 	      console.log(endPoint);
 	      fetch(endPoint, {
 	        headers: { "Content-Type": "application/json;charset=UTF-8" }
@@ -67661,7 +67665,7 @@
 	        "div",
 	        null,
 	        _react2.default.createElement(SingleGroupInfo, { group: group }),
-	        _react2.default.createElement(SingleGroupTopUsers, null),
+	        _react2.default.createElement(_SingleGroupTopUsers2.default, null),
 	        _react2.default.createElement(SingleGroupNavBar, null),
 	        _react2.default.createElement(
 	          "div",
@@ -67757,139 +67761,8 @@
 	  return CountBox;
 	}(_react2.default.Component);
 
-	var SingleGroupTopUsers = exports.SingleGroupTopUsers = function (_React$Component4) {
-	  _inherits(SingleGroupTopUsers, _React$Component4);
-
-	  function SingleGroupTopUsers() {
-	    var _ref3;
-
-	    _classCallCheck(this, SingleGroupTopUsers);
-
-	    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-	      args[_key2] = arguments[_key2];
-	    }
-
-	    var _this6 = _possibleConstructorReturn(this, (_ref3 = SingleGroupTopUsers.__proto__ || Object.getPrototypeOf(SingleGroupTopUsers)).call.apply(_ref3, [this].concat(args)));
-
-	    _this6.state = {
-	      trendingUsers: [],
-	      page: 1,
-	      isLoading: false
-	    };
-
-	    _this6.loadMore = _this6.loadMore.bind(_this6);
-	    return _this6;
-	  }
-
-	  _createClass(SingleGroupTopUsers, [{
-	    key: "loadMore",
-	    value: function loadMore() {
-	      this.fetchTrendingUsers();
-	    }
-	  }, {
-	    key: "componentDidMount",
-	    value: function componentDidMount() {
-	      this.fetchTrendingUsers();
-	    }
-	  }, {
-	    key: "fetchTrendingUsers",
-	    value: function fetchTrendingUsers() {
-	      var _this7 = this;
-
-	      var pageCount = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 10;
-
-	      this.setState({ isLoading: true });
-	      var _state3 = this.state,
-	          trendingUsers = _state3.trendingUsers,
-	          page = _state3.page;
-	      // const endPoint = `${baseAPIUrl}/api/v6/activities/featured?per_page=${pageCount}&page=${page}`
-
-	      var endPoint = baseAPIUrl + "/jsons/group_trending_users.json";
-	      console.log(endPoint);
-	      fetch(endPoint, {
-	        headers: { "Content-Type": "application/json;charset=UTF-8" }
-	      }).then(function (response) {
-	        return response.json();
-	      }).then(function (json) {
-	        _this7.setState({
-	          trendingUsers: _.uniqBy(trendingUsers.concat(json.data), 'id'),
-	          page: page + 1,
-	          isLoading: false
-	        });
-	      }).catch(function (e) {
-	        console.log('error', e);
-	      });
-	    }
-	  }, {
-	    key: "render",
-	    value: function render() {
-	      var trendingUsers = this.state.trendingUsers;
-
-	      return _react2.default.createElement(
-	        "div",
-	        { id: "group_top_users" },
-	        _react2.default.createElement(
-	          "h3",
-	          null,
-	          "TOP USERS"
-	        ),
-	        _react2.default.createElement("a", { href: "#", className: "prev_btn" }),
-	        _react2.default.createElement(
-	          "div",
-	          { className: "list_container" },
-	          _react2.default.createElement(
-	            "ul",
-	            null,
-	            trendingUsers.map(function (user, index) {
-	              return _react2.default.createElement(TopUser, { key: user.id, user: user });
-	            })
-	          )
-	        ),
-	        _react2.default.createElement("a", { href: "#", className: "next_btn" })
-	      );
-	    }
-	  }]);
-
-	  return SingleGroupTopUsers;
-	}(_react2.default.Component);
-
-	var TopUser = exports.TopUser = function (_React$Component5) {
-	  _inherits(TopUser, _React$Component5);
-
-	  function TopUser() {
-	    _classCallCheck(this, TopUser);
-
-	    return _possibleConstructorReturn(this, (TopUser.__proto__ || Object.getPrototypeOf(TopUser)).apply(this, arguments));
-	  }
-
-	  _createClass(TopUser, [{
-	    key: "render",
-	    value: function render() {
-	      var user = this.props.user;
-
-
-	      return _react2.default.createElement(
-	        "li",
-	        null,
-	        _react2.default.createElement(
-	          "a",
-	          { href: "/" },
-	          _react2.default.createElement(
-	            "div",
-	            { style: { backgroundImage: "url(" + user.avatar_url + ")" }, className: "avatar" },
-	            "\xA0"
-	          ),
-	          user.first_name
-	        )
-	      );
-	    }
-	  }]);
-
-	  return TopUser;
-	}(_react2.default.Component);
-
-	var SingleGroupNavBar = function (_React$Component6) {
-	  _inherits(SingleGroupNavBar, _React$Component6);
+	var SingleGroupNavBar = function (_React$Component4) {
+	  _inherits(SingleGroupNavBar, _React$Component4);
 
 	  function SingleGroupNavBar() {
 	    _classCallCheck(this, SingleGroupNavBar);
@@ -67950,8 +67823,8 @@
 	  return SingleGroupNavBar;
 	}(_react2.default.Component);
 
-	var SingleGroupQuestion = function (_React$Component7) {
-	  _inherits(SingleGroupQuestion, _React$Component7);
+	var SingleGroupQuestion = function (_React$Component5) {
+	  _inherits(SingleGroupQuestion, _React$Component5);
 
 	  function SingleGroupQuestion() {
 	    _classCallCheck(this, SingleGroupQuestion);
@@ -67969,7 +67842,7 @@
 	        "div",
 	        { className: "question clearfix" },
 	        _react2.default.createElement(QuestionContent, { question: question.content, answerCount: question.answer_count }),
-	        _react2.default.createElement(AnswerList, { question: question })
+	        _react2.default.createElement(_AnswerList2.default, { question: question })
 	      );
 	    }
 	  }]);
@@ -67977,8 +67850,8 @@
 	  return SingleGroupQuestion;
 	}(_react2.default.Component);
 
-	var SingleGroupQuestionNoAnswer = function (_React$Component8) {
-	  _inherits(SingleGroupQuestionNoAnswer, _React$Component8);
+	var SingleGroupQuestionNoAnswer = function (_React$Component6) {
+	  _inherits(SingleGroupQuestionNoAnswer, _React$Component6);
 
 	  function SingleGroupQuestionNoAnswer() {
 	    _classCallCheck(this, SingleGroupQuestionNoAnswer);
@@ -68003,8 +67876,8 @@
 	  return SingleGroupQuestionNoAnswer;
 	}(_react2.default.Component);
 
-	var QuestionContent = function (_React$Component9) {
-	  _inherits(QuestionContent, _React$Component9);
+	var QuestionContent = function (_React$Component7) {
+	  _inherits(QuestionContent, _React$Component7);
 
 	  function QuestionContent() {
 	    _classCallCheck(this, QuestionContent);
@@ -68044,28 +67917,225 @@
 	  return QuestionContent;
 	}(_react2.default.Component);
 
-	var AnswerList = function (_React$Component10) {
-	  _inherits(AnswerList, _React$Component10);
+/***/ },
+/* 319 */
+/***/ function(module, exports, __webpack_require__) {
 
-	  function AnswerList() {
-	    var _ref4;
+	"use strict";
 
-	    _classCallCheck(this, AnswerList);
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.TopUser = undefined;
 
-	    for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-	      args[_key3] = arguments[_key3];
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _moment = __webpack_require__(195);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	var _Utils = __webpack_require__(307);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var SingleGroupTopUsers = function (_React$Component) {
+	  _inherits(SingleGroupTopUsers, _React$Component);
+
+	  function SingleGroupTopUsers() {
+	    var _ref;
+
+	    _classCallCheck(this, SingleGroupTopUsers);
+
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
 	    }
 
-	    var _this13 = _possibleConstructorReturn(this, (_ref4 = AnswerList.__proto__ || Object.getPrototypeOf(AnswerList)).call.apply(_ref4, [this].concat(args)));
+	    var _this = _possibleConstructorReturn(this, (_ref = SingleGroupTopUsers.__proto__ || Object.getPrototypeOf(SingleGroupTopUsers)).call.apply(_ref, [this].concat(args)));
 
-	    _this13.state = {
-	      answers: [],
+	    _this.state = {
+	      trendingUsers: [],
 	      page: 1,
 	      isLoading: false
 	    };
 
-	    _this13.loadMore = _this13.loadMore.bind(_this13);
-	    return _this13;
+	    _this.loadMore = _this.loadMore.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(SingleGroupTopUsers, [{
+	    key: "loadMore",
+	    value: function loadMore() {
+	      this.fetchTrendingUsers();
+	    }
+	  }, {
+	    key: "componentDidMount",
+	    value: function componentDidMount() {
+	      this.fetchTrendingUsers();
+	    }
+	  }, {
+	    key: "fetchTrendingUsers",
+	    value: function fetchTrendingUsers() {
+	      var _this2 = this;
+
+	      var pageCount = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 10;
+
+	      this.setState({ isLoading: true });
+	      var _state = this.state,
+	          trendingUsers = _state.trendingUsers,
+	          page = _state.page;
+	      // const endPoint = `${baseAPIUrl}/api/v6/activities/featured?per_page=${pageCount}&page=${page}`
+
+	      var endPoint = _Utils.baseAPIUrl + "/jsons/group_trending_users.json";
+	      console.log(endPoint);
+	      fetch(endPoint, {
+	        headers: { "Content-Type": "application/json;charset=UTF-8" }
+	      }).then(function (response) {
+	        return response.json();
+	      }).then(function (json) {
+	        _this2.setState({
+	          trendingUsers: _.uniqBy(trendingUsers.concat(json.data), 'id'),
+	          page: page + 1,
+	          isLoading: false
+	        });
+	      }).catch(function (e) {
+	        console.log('error', e);
+	      });
+	    }
+	  }, {
+	    key: "render",
+	    value: function render() {
+	      var trendingUsers = this.state.trendingUsers;
+
+	      return _react2.default.createElement(
+	        "div",
+	        { id: "group_top_users" },
+	        _react2.default.createElement(
+	          "h3",
+	          null,
+	          "TOP USERS"
+	        ),
+	        _react2.default.createElement("a", { href: "#", className: "prev_btn hidden" }),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "list_container" },
+	          _react2.default.createElement(
+	            "ul",
+	            null,
+	            trendingUsers.map(function (user, index) {
+	              return _react2.default.createElement(TopUser, { key: user.id, user: user });
+	            })
+	          )
+	        ),
+	        _react2.default.createElement("a", { href: "#", className: "next_btn hidden" })
+	      );
+	    }
+	  }]);
+
+	  return SingleGroupTopUsers;
+	}(_react2.default.Component);
+
+	exports.default = SingleGroupTopUsers;
+
+	var TopUser = exports.TopUser = function (_React$Component2) {
+	  _inherits(TopUser, _React$Component2);
+
+	  function TopUser() {
+	    _classCallCheck(this, TopUser);
+
+	    return _possibleConstructorReturn(this, (TopUser.__proto__ || Object.getPrototypeOf(TopUser)).apply(this, arguments));
+	  }
+
+	  _createClass(TopUser, [{
+	    key: "render",
+	    value: function render() {
+	      var user = this.props.user;
+
+
+	      return _react2.default.createElement(
+	        "li",
+	        null,
+	        _react2.default.createElement(
+	          "a",
+	          { href: "/" },
+	          _react2.default.createElement(
+	            "div",
+	            { style: { backgroundImage: "url(" + user.avatar_url + ")" }, className: "avatar" },
+	            "\xA0"
+	          ),
+	          user.first_name
+	        )
+	      );
+	    }
+	  }]);
+
+	  return TopUser;
+	}(_react2.default.Component);
+
+/***/ },
+/* 320 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.AnswerCard = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _moment = __webpack_require__(195);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	var _Utils = __webpack_require__(307);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var AnswerList = function (_React$Component) {
+	  _inherits(AnswerList, _React$Component);
+
+	  function AnswerList() {
+	    var _ref;
+
+	    _classCallCheck(this, AnswerList);
+
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    var _this = _possibleConstructorReturn(this, (_ref = AnswerList.__proto__ || Object.getPrototypeOf(AnswerList)).call.apply(_ref, [this].concat(args)));
+
+	    _this.state = {
+	      answers: [],
+	      page: 1,
+	      isLoading: false,
+	      showingPrevBtn: false,
+	      showingNextBtn: false
+	    };
+
+	    _this.loadMore = _this.loadMore.bind(_this);
+	    return _this;
 	  }
 
 	  _createClass(AnswerList, [{
@@ -68081,28 +68151,30 @@
 	  }, {
 	    key: "fetchAnswers",
 	    value: function fetchAnswers() {
-	      var _this14 = this;
+	      var _this2 = this;
 
 	      var pageCount = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 10;
 
 	      this.setState({ isLoading: true });
-	      var _state4 = this.state,
-	          answers = _state4.answers,
-	          page = _state4.page;
+	      var _state = this.state,
+	          answers = _state.answers,
+	          page = _state.page;
 	      var question = this.props.question;
 	      // const endPoint = `${baseAPIUrl}/api/v6/activities/featured?per_page=${pageCount}&page=${page}`
 
-	      var endPoint = baseAPIUrl + "/jsons/question_" + question.id + "_answers.json";
+	      var endPoint = _Utils.baseAPIUrl + "/jsons/question_" + question.id + "_answers.json";
 	      console.log(endPoint);
 	      fetch(endPoint, {
 	        headers: { "Content-Type": "application/json;charset=UTF-8" }
 	      }).then(function (response) {
 	        return response.json();
 	      }).then(function (json) {
-	        _this14.setState({
+	        _this2.setState({
 	          answers: _.uniqBy(answers.concat(json.data), 'id'),
 	          page: page + 1,
-	          isLoading: false
+	          isLoading: false,
+	          showingPrevBtn: false,
+	          showingNextBtn: answers.length >= 4
 	        });
 	      }).catch(function (e) {
 	        console.log('error', e);
@@ -68111,13 +68183,18 @@
 	  }, {
 	    key: "render",
 	    value: function render() {
-	      var answers = this.state.answers;
+	      var _state2 = this.state,
+	          answers = _state2.answers,
+	          showingPrevBtn = _state2.showingPrevBtn,
+	          showingNextBtn = _state2.showingNextBtn;
 
+	      var prevBtnClass = showingPrevBtn ? "" : " hidden";
+	      var nextBtnClass = showingNextBtn ? "" : " hidden";
 
 	      return _react2.default.createElement(
 	        "div",
 	        null,
-	        _react2.default.createElement("a", { href: "#", className: "prev_btn" }),
+	        _react2.default.createElement("a", { href: "#", className: "prev_btn" + prevBtnClass }),
 	        _react2.default.createElement(
 	          "div",
 	          { className: "list_container" },
@@ -68129,7 +68206,7 @@
 	            })
 	          )
 	        ),
-	        _react2.default.createElement("a", { href: "#", className: "next_btn" })
+	        _react2.default.createElement("a", { href: "#", className: "next_btn" + nextBtnClass })
 	      );
 	    }
 	  }]);
@@ -68137,8 +68214,10 @@
 	  return AnswerList;
 	}(_react2.default.Component);
 
-	var AnswerCard = function (_React$Component11) {
-	  _inherits(AnswerCard, _React$Component11);
+	exports.default = AnswerList;
+
+	var AnswerCard = exports.AnswerCard = function (_React$Component2) {
+	  _inherits(AnswerCard, _React$Component2);
 
 	  function AnswerCard() {
 	    _classCallCheck(this, AnswerCard);
@@ -68151,6 +68230,7 @@
 	    value: function render() {
 	      var answer = this.props.answer;
 
+	      var bio = answer.user_group_bio && answer.user_group_bio.length > 0 ? answer.user_group_bio : answer.user_short_blurb;
 
 	      return _react2.default.createElement(
 	        "li",
@@ -68168,7 +68248,7 @@
 	          _react2.default.createElement(
 	            "span",
 	            null,
-	            "Dad. Entrepreneur. Go player."
+	            bio
 	          )
 	        )
 	      );

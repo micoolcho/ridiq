@@ -11,3 +11,12 @@ export default class Utils {
     return (num/1000).toFixed(1) + 'k';
   }
 }
+
+export let baseAPIUrl
+if (process.env.NODE_ENV === 'production') {
+  baseAPIUrl = 'http://api.letsyam.com'
+} else if (process.env.NODE_ENV === 'staging') {
+   baseAPIUrl = 'http://yam-staging.herokuapp.com'
+} else {
+  baseAPIUrl = 'http://localhost:8002'
+}
