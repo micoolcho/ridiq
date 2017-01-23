@@ -67524,17 +67524,13 @@
 
 	var _Utils = __webpack_require__(307);
 
-	var _BasedLoadMoreComponent = __webpack_require__(190);
-
-	var _BasedLoadMoreComponent2 = _interopRequireDefault(_BasedLoadMoreComponent);
-
-	var _AnswerList = __webpack_require__(320);
-
-	var _AnswerList2 = _interopRequireDefault(_AnswerList);
-
 	var _SingleGroupTopUsers = __webpack_require__(319);
 
 	var _SingleGroupTopUsers2 = _interopRequireDefault(_SingleGroupTopUsers);
+
+	var _GroupQuestionList = __webpack_require__(321);
+
+	var _GroupQuestionList2 = _interopRequireDefault(_GroupQuestionList);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -67544,28 +67540,11 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	function LoadMore(_ref) {
-	  var onClick = _ref.onClick,
-	      isLoading = _ref.isLoading;
-
-	  return _react2.default.createElement(
-	    "div",
-	    { className: "text-center m-t-20" },
-	    _react2.default.createElement(
-	      "div",
-	      {
-	        onClick: onClick,
-	        className: 'button button-large ' + (isLoading ? 'disabled' : '') },
-	      isLoading ? 'loading...' : 'load more'
-	    )
-	  );
-	}
-
 	var SingleGroup = function (_React$Component) {
 	  _inherits(SingleGroup, _React$Component);
 
 	  function SingleGroup() {
-	    var _ref2;
+	    var _ref;
 
 	    _classCallCheck(this, SingleGroup);
 
@@ -67573,19 +67552,12 @@
 	      args[_key] = arguments[_key];
 	    }
 
-	    var _this = _possibleConstructorReturn(this, (_ref2 = SingleGroup.__proto__ || Object.getPrototypeOf(SingleGroup)).call.apply(_ref2, [this].concat(args)));
+	    var _this = _possibleConstructorReturn(this, (_ref = SingleGroup.__proto__ || Object.getPrototypeOf(SingleGroup)).call.apply(_ref, [this].concat(args)));
 
 	    _this.state = {
 	      group: {},
-	      questions: [],
-	      trendingUsers: [],
-	      page: 1,
-	      isLoading: false,
-	      isLoadingGroupInfo: false,
-	      isLoadingTrendingUsers: false
+	      isLoadingGroupInfo: false
 	    };
-
-	    _this.loadMore = _this.loadMore.bind(_this);
 	    return _this;
 	  }
 
@@ -67612,54 +67584,17 @@
 	      });
 	    }
 	  }, {
-	    key: "fetchQuestions",
-	    value: function fetchQuestions() {
-	      var _this3 = this;
-
-	      var pageCount = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 10;
-
-	      this.setState({ isLoading: true });
-	      var _state = this.state,
-	          questions = _state.questions,
-	          page = _state.page;
-	      // const endPoint = `${baseAPIUrl}/api/v6/activities/featured?per_page=${pageCount}&page=${page}`
-
-	      var endPoint = _Utils.baseAPIUrl + "/jsons/group_questions.json";
-	      console.log(endPoint);
-	      fetch(endPoint, {
-	        headers: { "Content-Type": "application/json;charset=UTF-8" }
-	      }).then(function (response) {
-	        return response.json();
-	      }).then(function (json) {
-	        _this3.setState({
-	          questions: _.uniqBy(questions.concat(json.data), 'id'),
-	          page: page + 1,
-	          isLoading: false
-	        });
-	      }).catch(function (e) {
-	        console.log('error', e);
-	      });
-	    }
-	  }, {
 	    key: "componentDidMount",
 	    value: function componentDidMount() {
-	      this.fetchQuestions();
 	      this.fetchGroupInfo();
-	    }
-	  }, {
-	    key: "loadMore",
-	    value: function loadMore() {
-	      this.fetchQuestions();
 	    }
 	  }, {
 	    key: "render",
 	    value: function render() {
-	      var _state2 = this.state,
-	          group = _state2.group,
-	          questions = _state2.questions,
-	          isLoading = _state2.isLoading,
-	          isLoadingGroupInfo = _state2.isLoadingGroupInfo;
-	      var loadMore = this.loadMore.loadMore;
+	      var _state = this.state,
+	          group = _state.group,
+	          isLoadingGroupInfo = _state.isLoadingGroupInfo;
+
 
 	      return _react2.default.createElement(
 	        "div",
@@ -67667,18 +67602,7 @@
 	        _react2.default.createElement(SingleGroupInfo, { group: group }),
 	        _react2.default.createElement(_SingleGroupTopUsers2.default, null),
 	        _react2.default.createElement(SingleGroupNavBar, null),
-	        _react2.default.createElement(
-	          "div",
-	          { id: "questions_list" },
-	          questions.map(function (question, index) {
-	            if (question.answer_count > 0) {
-	              return _react2.default.createElement(SingleGroupQuestion, { key: question.id, question: question });
-	            } else {
-	              return _react2.default.createElement(SingleGroupQuestionNoAnswer, { key: question.id, question: question });
-	            }
-	          }),
-	          _react2.default.createElement(LoadMore, { onClick: this.loadMore, isLoading: isLoading })
-	        )
+	        _react2.default.createElement(_GroupQuestionList2.default, null)
 	      );
 	    }
 	  }]);
@@ -67821,100 +67745,6 @@
 	  }]);
 
 	  return SingleGroupNavBar;
-	}(_react2.default.Component);
-
-	var SingleGroupQuestion = function (_React$Component5) {
-	  _inherits(SingleGroupQuestion, _React$Component5);
-
-	  function SingleGroupQuestion() {
-	    _classCallCheck(this, SingleGroupQuestion);
-
-	    return _possibleConstructorReturn(this, (SingleGroupQuestion.__proto__ || Object.getPrototypeOf(SingleGroupQuestion)).apply(this, arguments));
-	  }
-
-	  _createClass(SingleGroupQuestion, [{
-	    key: "render",
-	    value: function render() {
-	      var question = this.props.question;
-
-
-	      return _react2.default.createElement(
-	        "div",
-	        { className: "question clearfix" },
-	        _react2.default.createElement(QuestionContent, { question: question.content, answerCount: question.answer_count }),
-	        _react2.default.createElement(_AnswerList2.default, { question: question })
-	      );
-	    }
-	  }]);
-
-	  return SingleGroupQuestion;
-	}(_react2.default.Component);
-
-	var SingleGroupQuestionNoAnswer = function (_React$Component6) {
-	  _inherits(SingleGroupQuestionNoAnswer, _React$Component6);
-
-	  function SingleGroupQuestionNoAnswer() {
-	    _classCallCheck(this, SingleGroupQuestionNoAnswer);
-
-	    return _possibleConstructorReturn(this, (SingleGroupQuestionNoAnswer.__proto__ || Object.getPrototypeOf(SingleGroupQuestionNoAnswer)).apply(this, arguments));
-	  }
-
-	  _createClass(SingleGroupQuestionNoAnswer, [{
-	    key: "render",
-	    value: function render() {
-	      var question = this.props.question;
-
-
-	      return _react2.default.createElement(
-	        "div",
-	        { className: "question clearfix" },
-	        _react2.default.createElement(QuestionContent, { question: question.content, answerCount: "0" })
-	      );
-	    }
-	  }]);
-
-	  return SingleGroupQuestionNoAnswer;
-	}(_react2.default.Component);
-
-	var QuestionContent = function (_React$Component7) {
-	  _inherits(QuestionContent, _React$Component7);
-
-	  function QuestionContent() {
-	    _classCallCheck(this, QuestionContent);
-
-	    return _possibleConstructorReturn(this, (QuestionContent.__proto__ || Object.getPrototypeOf(QuestionContent)).apply(this, arguments));
-	  }
-
-	  _createClass(QuestionContent, [{
-	    key: "responseCount",
-	    value: function responseCount(count) {
-	      if (count > 1) {
-	        return count + " responses";
-	      } else {
-	        return count + " response";
-	      }
-	    }
-	  }, {
-	    key: "render",
-	    value: function render() {
-	      return _react2.default.createElement(
-	        "div",
-	        null,
-	        _react2.default.createElement(
-	          "h3",
-	          null,
-	          this.props.question
-	        ),
-	        _react2.default.createElement(
-	          "span",
-	          null,
-	          this.responseCount(this.props.answerCount)
-	        )
-	      );
-	    }
-	  }]);
-
-	  return QuestionContent;
 	}(_react2.default.Component);
 
 /***/ },
@@ -68256,6 +68086,248 @@
 	  }]);
 
 	  return AnswerCard;
+	}(_react2.default.Component);
+
+/***/ },
+/* 321 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.QuestionContent = exports.SingleGroupQuestionNoAnswer = exports.SingleGroupQuestion = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _moment = __webpack_require__(195);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	var _Utils = __webpack_require__(307);
+
+	var _BasedLoadMoreComponent = __webpack_require__(190);
+
+	var _BasedLoadMoreComponent2 = _interopRequireDefault(_BasedLoadMoreComponent);
+
+	var _AnswerList = __webpack_require__(320);
+
+	var _AnswerList2 = _interopRequireDefault(_AnswerList);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	function LoadMore(_ref) {
+	  var onClick = _ref.onClick,
+	      isLoading = _ref.isLoading;
+
+	  return _react2.default.createElement(
+	    "div",
+	    { className: "text-center m-t-20" },
+	    _react2.default.createElement(
+	      "div",
+	      {
+	        onClick: onClick,
+	        className: 'button button-large ' + (isLoading ? 'disabled' : '') },
+	      isLoading ? 'loading...' : 'load more'
+	    )
+	  );
+	}
+
+	var GroupQuestionList = function (_React$Component) {
+	  _inherits(GroupQuestionList, _React$Component);
+
+	  function GroupQuestionList() {
+	    var _ref2;
+
+	    _classCallCheck(this, GroupQuestionList);
+
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    var _this = _possibleConstructorReturn(this, (_ref2 = GroupQuestionList.__proto__ || Object.getPrototypeOf(GroupQuestionList)).call.apply(_ref2, [this].concat(args)));
+
+	    _this.state = {
+	      questions: [],
+	      page: 1,
+	      isLoading: false
+	    };
+
+	    _this.loadMore = _this.loadMore.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(GroupQuestionList, [{
+	    key: "fetchQuestions",
+	    value: function fetchQuestions() {
+	      var _this2 = this;
+
+	      var pageCount = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 10;
+
+	      this.setState({ isLoading: true });
+	      var _state = this.state,
+	          questions = _state.questions,
+	          page = _state.page;
+	      // const endPoint = `${baseAPIUrl}/api/v6/activities/featured?per_page=${pageCount}&page=${page}`
+
+	      var endPoint = _Utils.baseAPIUrl + "/jsons/group_questions.json";
+	      console.log(endPoint);
+	      fetch(endPoint, {
+	        headers: { "Content-Type": "application/json;charset=UTF-8" }
+	      }).then(function (response) {
+	        return response.json();
+	      }).then(function (json) {
+	        _this2.setState({
+	          questions: _.uniqBy(questions.concat(json.data), 'id'),
+	          page: page + 1,
+	          isLoading: false
+	        });
+	      }).catch(function (e) {
+	        console.log('error', e);
+	      });
+	    }
+	  }, {
+	    key: "componentDidMount",
+	    value: function componentDidMount() {
+	      this.fetchQuestions();
+	    }
+	  }, {
+	    key: "loadMore",
+	    value: function loadMore() {
+	      this.fetchQuestions();
+	    }
+	  }, {
+	    key: "render",
+	    value: function render() {
+	      var _state2 = this.state,
+	          questions = _state2.questions,
+	          isLoading = _state2.isLoading;
+	      var loadMore = this.loadMore.loadMore;
+
+
+	      return _react2.default.createElement(
+	        "div",
+	        { id: "questions_list" },
+	        questions.map(function (question, index) {
+	          if (question.answer_count > 0) {
+	            return _react2.default.createElement(SingleGroupQuestion, { key: question.id, question: question });
+	          } else {
+	            return _react2.default.createElement(SingleGroupQuestionNoAnswer, { key: question.id, question: question });
+	          }
+	        }),
+	        _react2.default.createElement(LoadMore, { onClick: this.loadMore, isLoading: isLoading })
+	      );
+	    }
+	  }]);
+
+	  return GroupQuestionList;
+	}(_react2.default.Component);
+
+	exports.default = GroupQuestionList;
+
+	var SingleGroupQuestion = exports.SingleGroupQuestion = function (_React$Component2) {
+	  _inherits(SingleGroupQuestion, _React$Component2);
+
+	  function SingleGroupQuestion() {
+	    _classCallCheck(this, SingleGroupQuestion);
+
+	    return _possibleConstructorReturn(this, (SingleGroupQuestion.__proto__ || Object.getPrototypeOf(SingleGroupQuestion)).apply(this, arguments));
+	  }
+
+	  _createClass(SingleGroupQuestion, [{
+	    key: "render",
+	    value: function render() {
+	      var question = this.props.question;
+
+
+	      return _react2.default.createElement(
+	        "div",
+	        { className: "question clearfix" },
+	        _react2.default.createElement(QuestionContent, { question: question.content, answerCount: question.answer_count }),
+	        _react2.default.createElement(_AnswerList2.default, { question: question })
+	      );
+	    }
+	  }]);
+
+	  return SingleGroupQuestion;
+	}(_react2.default.Component);
+
+	var SingleGroupQuestionNoAnswer = exports.SingleGroupQuestionNoAnswer = function (_React$Component3) {
+	  _inherits(SingleGroupQuestionNoAnswer, _React$Component3);
+
+	  function SingleGroupQuestionNoAnswer() {
+	    _classCallCheck(this, SingleGroupQuestionNoAnswer);
+
+	    return _possibleConstructorReturn(this, (SingleGroupQuestionNoAnswer.__proto__ || Object.getPrototypeOf(SingleGroupQuestionNoAnswer)).apply(this, arguments));
+	  }
+
+	  _createClass(SingleGroupQuestionNoAnswer, [{
+	    key: "render",
+	    value: function render() {
+	      var question = this.props.question;
+
+
+	      return _react2.default.createElement(
+	        "div",
+	        { className: "question clearfix" },
+	        _react2.default.createElement(QuestionContent, { question: question.content, answerCount: "0" })
+	      );
+	    }
+	  }]);
+
+	  return SingleGroupQuestionNoAnswer;
+	}(_react2.default.Component);
+
+	var QuestionContent = exports.QuestionContent = function (_React$Component4) {
+	  _inherits(QuestionContent, _React$Component4);
+
+	  function QuestionContent() {
+	    _classCallCheck(this, QuestionContent);
+
+	    return _possibleConstructorReturn(this, (QuestionContent.__proto__ || Object.getPrototypeOf(QuestionContent)).apply(this, arguments));
+	  }
+
+	  _createClass(QuestionContent, [{
+	    key: "responseCount",
+	    value: function responseCount(count) {
+	      if (count > 1) {
+	        return count + " responses";
+	      } else {
+	        return count + " response";
+	      }
+	    }
+	  }, {
+	    key: "render",
+	    value: function render() {
+	      return _react2.default.createElement(
+	        "div",
+	        null,
+	        _react2.default.createElement(
+	          "h3",
+	          null,
+	          this.props.question
+	        ),
+	        _react2.default.createElement(
+	          "span",
+	          null,
+	          this.responseCount(this.props.answerCount)
+	        )
+	      );
+	    }
+	  }]);
+
+	  return QuestionContent;
 	}(_react2.default.Component);
 
 /***/ }
