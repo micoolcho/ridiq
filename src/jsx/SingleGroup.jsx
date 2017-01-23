@@ -72,7 +72,7 @@ export default class SingleGroup extends React.Component {
      const {loadMore} = this.loadMore
     return (
       <div>
-      <SingleGroupInfo />
+      <SingleGroupInfo name="Game of Thrones"/>
       <SingleGroupTopUsers />
       <SingleGroupNavBar />
 
@@ -95,24 +95,26 @@ class SingleGroupInfo extends React.Component {
   render(){
     return(
       <div>
-        <h1 className="group_name text-center">Game of Thrones</h1>
+        <h1 className="group_name text-center">{this.props.name}</h1>
         <hr className="group_name_separator"/>
 
         <ul id="group_info">
-          <li className="count_box">
-            <span className="count">324</span>
-            <span>members</span>
-          </li>
-          <li className="count_box">
-            <span className="count">1782</span>
-            <span>questions</span>
-          </li>
-          <li className="count_box">
-            <span className="count">631</span>
-            <span>responses</span>
-          </li>
+          <CountBox count="324" label="members" />
+          <CountBox count="1782" label="questions" />
+          <CountBox count="631" label="responses" />
         </ul>
       </div>
+    )
+  }
+}
+
+class CountBox extends React.Component{
+  render(){
+    return(
+      <li className="count_box">
+        <span className="count">{this.props.count}</span>
+        <span>{this.props.label}</span>
+      </li>
     )
   }
 }
@@ -126,8 +128,8 @@ export class SingleGroupTopUsers extends React.Component{
         <div className="list_container">
         <ul>
           {
-            [1,2,3,4,5,6,7,8,9,10,11,12,1,2,3,4,5,6,7,8,9,10,11,12].map((index, item) => {
-              return <TopUser />
+            [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18].map((index, item) => {
+              return <TopUser key={index}/>
             })
           }
         </ul>
@@ -170,7 +172,7 @@ class SingleGroupQuestion extends React.Component {
   render(){
     return(
       <div className="question clearfix">
-      <QuestionContent />
+      <QuestionContent question="Do you think Tyrion is Targaryen (the third head of the dragon)?" answerCount="13"/>
       <AnswerList />
       </div>
     )
@@ -181,18 +183,26 @@ class SingleGroupQuestionNoAnswer extends React.Component {
   render(){
     return(
       <div className="question clearfix">
-      <QuestionContent />
+      <QuestionContent question="Don't answer this question" answerCount="0"/>
       </div>
     )
   }
 }
 
 class QuestionContent extends React.Component{
+  responseCount(count){
+    if (count > 1) {
+      return count + " responses"
+    } else {
+      return count + " response"
+    }
+  }
+
   render(){
     return(
       <div>
-      <h3>Do you think Tyrion is Targaryen (the third head of the dragon)?</h3>
-      <span>13 responses</span>
+      <h3>{this.props.question}</h3>
+      <span>{this.responseCount(this.props.answerCount)}</span>
       </div>
     )
   }
@@ -207,7 +217,7 @@ class AnswerList extends React.Component{
         <ul>
           {
             [1,2,3,4,5,6,7,8,9,10,11,12].map((index, item) => {
-              return <AnswerCard />
+              return <AnswerCard key={index}/>
             })
           }
         </ul>
