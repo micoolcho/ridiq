@@ -6,7 +6,7 @@ export default class AnswerList extends React.Component{
   constructor(...args) {
     super(...args);
     this.state = {
-      answers:[],
+      items:[],
       page: 1,
       isLoading: false,
       hasNext: true,
@@ -37,17 +37,17 @@ export default class AnswerList extends React.Component{
   }
 
   loadMore() {
-    this.fetchAnswers()
+    this.fetchData()
   }
 
   componentDidMount(){
-    this.fetchAnswers()
+    this.fetchData()
   }
 
-  fetchAnswers(pageCount = 10) {
+  fetchData(pageCount = 10) {
     this.setState({isLoading: true})
 
-    const {answers, page} = this.state
+    const {items, page} = this.state
     const {question} = this.props
     const endPoint = `${baseAPIUrl}/questions/${question.id}/public_answers?per_page=${pageCount}&page=${page}`
 
@@ -56,13 +56,15 @@ export default class AnswerList extends React.Component{
     }).then((response) => {
         return response.json()
       }).then((json) => {
+        const data = json.data
+
          this.setState({
-            answers: _.uniqBy(answers.concat(json.data), 'id'),
+            items: _.uniqBy(items.concat(data), 'id'),
             page: page + 1,
             isLoading: false,
-            hasNext: json.data.length >= pageCount,
+            hasNext: data.length >= pageCount,
             showingPrevBtn: false,
-            showingNextBtn: (json.data.length >= 4)
+            showingNextBtn: (data.length >= 4)
          })
       }).catch((e) => {
          console.log('error', e)
@@ -70,7 +72,7 @@ export default class AnswerList extends React.Component{
   }
 
   render(){
-    const {answers, showingPrevBtn, showingNextBtn, offsetX} = this.state
+    const {items, showingPrevBtn, showingNextBtn, offsetX} = this.state
     const prevBtnClass = showingPrevBtn ? "" : " hidden"
     const nextBtnClass = showingNextBtn ? "" : " hidden"
     const left = offsetX + "px"
@@ -81,7 +83,7 @@ export default class AnswerList extends React.Component{
         <div className="list_container">
         <ul>
           {
-            answers.map((answer, index) => {
+            items.map((answer, index) => {
               return <AnswerCard key={answer.id} answer={answer}/>
             })
           }
@@ -98,7 +100,7 @@ export class AnswerCard extends React.Component{
     const {answer} = this.props
     const bio = (answer.user.group_bio && answer.user.group_bio.length > 0) ? answer.user.group_bio : answer.user.short_blurb
     const backgroundImage = `url(${answer.image_url})`
-    
+
     return(
       <li className="answer_card">
         <a href="single-answer.html">

@@ -38,12 +38,14 @@ export default class SingleGroupTopUsers extends React.Component{
     }).then((response) => {
         return response.json()
       }).then((json) => {
+        const data = json.data
+
          this.setState({
-            items: _.uniqBy(items.concat(json.data), 'id'),
+            items: _.uniqBy(items.concat(data), 'id'),
             page: page + 1,
             isLoading: false,
-            hasNext: json.data.length >= pageCount,
-            showingNextBtn: json.data.length > 13
+            hasNext: data.length >= pageCount,
+            showingNextBtn: data.length > 13
          })
       }).catch((e) => {
          console.log('error', e)

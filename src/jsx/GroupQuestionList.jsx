@@ -19,7 +19,7 @@ export default class GroupQuestionList extends React.Component {
   constructor(...args) {
     super(...args);
     this.state = {
-      questions:[],
+      items:[],
       page: 1,
       isLoading: false,
       hasNext: true
@@ -28,10 +28,10 @@ export default class GroupQuestionList extends React.Component {
     this.loadMore = this.loadMore.bind(this)
   }
 
-  fetchQuestions(pageCount = 10) {
+  fetchData(pageCount = 10) {
     this.setState({isLoading: true})
 
-    const {questions, page} = this.state
+    const {items, page} = this.state
     const {group} = this.props
     const endPoint = `${baseAPIUrl}/public_groups/5/trending_questions?per_page=${pageCount}&page=${page}`
 
@@ -40,11 +40,13 @@ export default class GroupQuestionList extends React.Component {
     }).then((response) => {
         return response.json()
       }).then((json) => {
+        const data = json.data
+
          this.setState({
-            questions: _.uniqBy(questions.concat(json.data), 'id'),
+            items: _.uniqBy(items.concat(data), 'id'),
             page: page + 1,
             isLoading: false,
-            hasNext: json.data.length >= pageCount
+            hasNext: data.length >= pageCount
          })
       }).catch((e) => {
          console.log('error', e)
@@ -52,21 +54,21 @@ export default class GroupQuestionList extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchQuestions()
+    this.fetchData()
   }
 
   loadMore() {
-    this.fetchQuestions()
+    this.fetchData()
   }
 
   render(){
-    const {questions, isLoading, hasNext} = this.state
+    const {items, isLoading, hasNext} = this.state
     const {loadMore} = this.loadMore
 
     return(
     <div id="questions_list">
       {
-        questions.map((question, index) => {
+        items.map((question, index) => {
           if(question.answer_count > 0){
             return <SingleGroupQuestion key={question.id} question={question}/>
           } else {

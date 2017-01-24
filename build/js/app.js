@@ -67883,12 +67883,14 @@
 	      }).then(function (response) {
 	        return response.json();
 	      }).then(function (json) {
+	        var data = json.data;
+
 	        _this2.setState({
-	          items: _.uniqBy(items.concat(json.data), 'id'),
+	          items: _.uniqBy(items.concat(data), 'id'),
 	          page: page + 1,
 	          isLoading: false,
-	          hasNext: json.data.length >= pageCount,
-	          showingNextBtn: json.data.length > 13
+	          hasNext: data.length >= pageCount,
+	          showingNextBtn: data.length > 13
 	        });
 	      }).catch(function (e) {
 	        console.log('error', e);
@@ -68039,7 +68041,7 @@
 	    var _this = _possibleConstructorReturn(this, (_ref2 = GroupQuestionList.__proto__ || Object.getPrototypeOf(GroupQuestionList)).call.apply(_ref2, [this].concat(args)));
 
 	    _this.state = {
-	      questions: [],
+	      items: [],
 	      page: 1,
 	      isLoading: false,
 	      hasNext: true
@@ -68050,8 +68052,8 @@
 	  }
 
 	  _createClass(GroupQuestionList, [{
-	    key: "fetchQuestions",
-	    value: function fetchQuestions() {
+	    key: "fetchData",
+	    value: function fetchData() {
 	      var _this2 = this;
 
 	      var pageCount = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 10;
@@ -68059,7 +68061,7 @@
 	      this.setState({ isLoading: true });
 
 	      var _state = this.state,
-	          questions = _state.questions,
+	          items = _state.items,
 	          page = _state.page;
 	      var group = this.props.group;
 
@@ -68070,11 +68072,13 @@
 	      }).then(function (response) {
 	        return response.json();
 	      }).then(function (json) {
+	        var data = json.data;
+
 	        _this2.setState({
-	          questions: _.uniqBy(questions.concat(json.data), 'id'),
+	          items: _.uniqBy(items.concat(data), 'id'),
 	          page: page + 1,
 	          isLoading: false,
-	          hasNext: json.data.length >= pageCount
+	          hasNext: data.length >= pageCount
 	        });
 	      }).catch(function (e) {
 	        console.log('error', e);
@@ -68083,18 +68087,18 @@
 	  }, {
 	    key: "componentDidMount",
 	    value: function componentDidMount() {
-	      this.fetchQuestions();
+	      this.fetchData();
 	    }
 	  }, {
 	    key: "loadMore",
 	    value: function loadMore() {
-	      this.fetchQuestions();
+	      this.fetchData();
 	    }
 	  }, {
 	    key: "render",
 	    value: function render() {
 	      var _state2 = this.state,
-	          questions = _state2.questions,
+	          items = _state2.items,
 	          isLoading = _state2.isLoading,
 	          hasNext = _state2.hasNext;
 	      var loadMore = this.loadMore.loadMore;
@@ -68103,7 +68107,7 @@
 	      return _react2.default.createElement(
 	        "div",
 	        { id: "questions_list" },
-	        questions.map(function (question, index) {
+	        items.map(function (question, index) {
 	          if (question.answer_count > 0) {
 	            return _react2.default.createElement(SingleGroupQuestion, { key: question.id, question: question });
 	          } else {
@@ -68260,7 +68264,7 @@
 	    var _this = _possibleConstructorReturn(this, (_ref = AnswerList.__proto__ || Object.getPrototypeOf(AnswerList)).call.apply(_ref, [this].concat(args)));
 
 	    _this.state = {
-	      answers: [],
+	      items: [],
 	      page: 1,
 	      isLoading: false,
 	      hasNext: true,
@@ -68296,16 +68300,16 @@
 	  }, {
 	    key: "loadMore",
 	    value: function loadMore() {
-	      this.fetchAnswers();
+	      this.fetchData();
 	    }
 	  }, {
 	    key: "componentDidMount",
 	    value: function componentDidMount() {
-	      this.fetchAnswers();
+	      this.fetchData();
 	    }
 	  }, {
-	    key: "fetchAnswers",
-	    value: function fetchAnswers() {
+	    key: "fetchData",
+	    value: function fetchData() {
 	      var _this2 = this;
 
 	      var pageCount = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 10;
@@ -68313,7 +68317,7 @@
 	      this.setState({ isLoading: true });
 
 	      var _state = this.state,
-	          answers = _state.answers,
+	          items = _state.items,
 	          page = _state.page;
 	      var question = this.props.question;
 
@@ -68324,13 +68328,15 @@
 	      }).then(function (response) {
 	        return response.json();
 	      }).then(function (json) {
+	        var data = json.data;
+
 	        _this2.setState({
-	          answers: _.uniqBy(answers.concat(json.data), 'id'),
+	          items: _.uniqBy(items.concat(data), 'id'),
 	          page: page + 1,
 	          isLoading: false,
-	          hasNext: json.data.length >= pageCount,
+	          hasNext: data.length >= pageCount,
 	          showingPrevBtn: false,
-	          showingNextBtn: json.data.length >= 4
+	          showingNextBtn: data.length >= 4
 	        });
 	      }).catch(function (e) {
 	        console.log('error', e);
@@ -68340,7 +68346,7 @@
 	    key: "render",
 	    value: function render() {
 	      var _state2 = this.state,
-	          answers = _state2.answers,
+	          items = _state2.items,
 	          showingPrevBtn = _state2.showingPrevBtn,
 	          showingNextBtn = _state2.showingNextBtn,
 	          offsetX = _state2.offsetX;
@@ -68359,7 +68365,7 @@
 	          _react2.default.createElement(
 	            "ul",
 	            null,
-	            answers.map(function (answer, index) {
+	            items.map(function (answer, index) {
 	              return _react2.default.createElement(AnswerCard, { key: answer.id, answer: answer });
 	            })
 	          )
