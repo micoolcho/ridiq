@@ -6,13 +6,14 @@ import AnswerList from "./AnswerList.jsx"
 
 function LoadMore ({onClick, isLoading, hidden}) {
   const hiddenClass = hidden ? " hidden" : ""
+  const disabledClass = isLoading ? 'disabled' : '';
   const text = isLoading ? 'loading...' : 'load more'
+
  return (
-   <div className={"text-center m-t-20" + hiddenClass}>
-  <div onClick={onClick} className={'button button-large ' + (isLoading ? 'disabled' : '')}>
-    {text}
+  <div className={"text-center m-t-20" + hiddenClass}>
+  <div onClick={onClick} className={'button button-large ' + disabledClass}>{text}</div>
   </div>
-</div>)
+  )
 }
 
 export default class GroupQuestionList extends React.Component {
@@ -33,9 +34,10 @@ export default class GroupQuestionList extends React.Component {
 
     const {items, page} = this.state
     const {group} = this.props
-    const endPoint = `${baseAPIUrl}/public_groups/5/trending_questions?per_page=${pageCount}&page=${page}`
+    const endPoint = `public_groups/5/trending_questions`
+    const url = `${baseAPIUrl}/${endPoint}?per_page=${pageCount}&page=${page}`
 
-    fetch(endPoint, {
+    fetch(url, {
       headers: {"Content-Type": "application/json;charset=UTF-8"},
     }).then((response) => {
         return response.json()
@@ -118,10 +120,13 @@ export class QuestionContent extends React.Component{
   }
 
   render(){
+    const {question, answerCount} = this.props
+    const countString = this.responseCount(answerCount)
+
     return(
       <div>
-      <h3>{this.props.question}</h3>
-      <span>{this.responseCount(this.props.answerCount)}</span>
+      <h3>{question}</h3>
+      <span>{countString}</span>
       </div>
     )
   }

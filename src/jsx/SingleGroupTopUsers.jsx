@@ -31,9 +31,10 @@ export default class SingleGroupTopUsers extends React.Component{
 
     const {items, page} = this.state
     const {group} = this.props
-    const endPoint = `${baseAPIUrl}/public_groups/5/trending_users?per_page=${pageCount}&page=${page}`
+    const endPoint = "public_groups/5/trending_users"
+    const url = `${baseAPIUrl}/${endPoint}?per_page=${pageCount}&page=${page}`
 
-    fetch(endPoint, {
+    fetch(url, {
       headers: {"Content-Type": "application/json;charset=UTF-8"},
     }).then((response) => {
         return response.json()

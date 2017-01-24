@@ -172,6 +172,10 @@ main{
     margin-bottom: 10px;
     position: relative;
 
+    &:nth-last-child(2){
+      border-bottom: 0;
+    }
+
     h3{
       font-size: 17px;
       color: black;

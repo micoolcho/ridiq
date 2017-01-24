@@ -67876,9 +67876,10 @@
 	          page = _state.page;
 	      var group = this.props.group;
 
-	      var endPoint = _Utils.baseAPIUrl + "/public_groups/5/trending_users?per_page=" + pageCount + "&page=" + page;
+	      var endPoint = "public_groups/5/trending_users";
+	      var url = _Utils.baseAPIUrl + "/" + endPoint + "?per_page=" + pageCount + "&page=" + page;
 
-	      fetch(endPoint, {
+	      fetch(url, {
 	        headers: { "Content-Type": "application/json;charset=UTF-8" }
 	      }).then(function (response) {
 	        return response.json();
@@ -68014,13 +68015,15 @@
 	      hidden = _ref.hidden;
 
 	  var hiddenClass = hidden ? " hidden" : "";
+	  var disabledClass = isLoading ? 'disabled' : '';
 	  var text = isLoading ? 'loading...' : 'load more';
+
 	  return _react2.default.createElement(
 	    "div",
 	    { className: "text-center m-t-20" + hiddenClass },
 	    _react2.default.createElement(
 	      "div",
-	      { onClick: onClick, className: 'button button-large ' + (isLoading ? 'disabled' : '') },
+	      { onClick: onClick, className: 'button button-large ' + disabledClass },
 	      text
 	    )
 	  );
@@ -68065,9 +68068,10 @@
 	          page = _state.page;
 	      var group = this.props.group;
 
-	      var endPoint = _Utils.baseAPIUrl + "/public_groups/5/trending_questions?per_page=" + pageCount + "&page=" + page;
+	      var endPoint = "public_groups/5/trending_questions";
+	      var url = _Utils.baseAPIUrl + "/" + endPoint + "?per_page=" + pageCount + "&page=" + page;
 
-	      fetch(endPoint, {
+	      fetch(url, {
 	        headers: { "Content-Type": "application/json;charset=UTF-8" }
 	      }).then(function (response) {
 	        return response.json();
@@ -68198,18 +68202,24 @@
 	  }, {
 	    key: "render",
 	    value: function render() {
+	      var _props = this.props,
+	          question = _props.question,
+	          answerCount = _props.answerCount;
+
+	      var countString = this.responseCount(answerCount);
+
 	      return _react2.default.createElement(
 	        "div",
 	        null,
 	        _react2.default.createElement(
 	          "h3",
 	          null,
-	          this.props.question
+	          question
 	        ),
 	        _react2.default.createElement(
 	          "span",
 	          null,
-	          this.responseCount(this.props.answerCount)
+	          countString
 	        )
 	      );
 	    }
@@ -68321,9 +68331,10 @@
 	          page = _state.page;
 	      var question = this.props.question;
 
-	      var endPoint = _Utils.baseAPIUrl + "/questions/" + question.id + "/public_answers?per_page=" + pageCount + "&page=" + page;
+	      var endPoint = "questions/" + question.id + "/public_answers";
+	      var url = _Utils.baseAPIUrl + "/" + endPoint + "?per_page=" + pageCount + "&page=" + page;
 
-	      fetch(endPoint, {
+	      fetch(url, {
 	        headers: { "Content-Type": "application/json;charset=UTF-8" }
 	      }).then(function (response) {
 	        return response.json();
