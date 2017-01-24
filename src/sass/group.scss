@@ -149,6 +149,7 @@ main{
         color: $bodyTextColor;
         font-size: 12px;
         text-decoration: none;
+        text-transform: uppercase;
 
         &.selected{
           color: $textBlueColor;

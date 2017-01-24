@@ -19,22 +19,80 @@ function LoadMore ({onClick, isLoading, hidden}) {
 export default class GroupQuestionList extends React.Component {
   constructor(...args) {
     super(...args);
+
     this.state = {
       items:[],
       page: 1,
       isLoading: false,
-      hasNext: true
+      hasNext: true,
+      type: "trending_questions"
     }
 
     this.loadMore = this.loadMore.bind(this)
   }
 
+  componentDidMount() {
+    this.fetchData()
+  }
+
+  componentWillReceiveProps(nextProps){
+    const {showingTrending, showingRecent, showingTop, showingUnanswered} = this.props
+
+    if(nextProps.showingTrending){
+      if(!showingTrending){
+        this.setState({
+          items:[],
+          page: 1,
+          isLoading: false,
+          hasNext: true,
+          type: "trending_questions"
+        })
+      }
+    } else if(nextProps.showingRecent){
+      if(!showingRecent){
+        this.setState({
+          items:[],
+          page: 1,
+          isLoading: false,
+          hasNext: true,
+          type: "questions"
+        })
+      }
+    } else if(nextProps.showingTop){
+      if(!showingTop){
+        this.setState({
+          items:[],
+          page: 1,
+          isLoading: false,
+          hasNext: true,
+          type: "all_time"
+        })
+      }
+    } else if(nextProps.showingUnanswered){
+      if(!showingUnanswered){
+        this.setState({
+          items:[],
+          page: 1,
+          isLoading: false,
+          hasNext: true,
+          type: "unanswered"
+        })
+      }
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState){
+    if (this.state.type !== prevState.type) {
+      this.fetchData()
+    }
+  }
+
   fetchData(pageCount = 10) {
     this.setState({isLoading: true})
 
-    const {items, page} = this.state
+    const {items, page, type} = this.state
     const {group} = this.props
-    const endPoint = `public_groups/5/trending_questions`
+    const endPoint = `public_groups/5/${type}`
     const url = `${baseAPIUrl}/${endPoint}?per_page=${pageCount}&page=${page}`
 
     fetch(url, {
@@ -53,10 +111,6 @@ export default class GroupQuestionList extends React.Component {
       }).catch((e) => {
          console.log('error', e)
       })
-  }
-
-  componentDidMount() {
-    this.fetchData()
   }
 
   loadMore() {

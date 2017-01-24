@@ -7,10 +7,24 @@ import GroupQuestionList from "./GroupQuestionList.jsx"
 export default class SingleGroup extends React.Component {
   constructor(...args) {
     super(...args);
+
     this.state = {
       group:{},
       isLoading: false,
+      showingTrending: true,
+      showingRecent: false,
+      showingTop: false,
+      showingUnanswered: false
     }
+
+    this.showTrending = this.showTrending.bind(this)
+    this.showRecent = this.showRecent.bind(this)
+    this.showTop = this.showTop.bind(this)
+    this.showUnanswered = this.showUnanswered.bind(this)
+  }
+
+  componentDidMount() {
+    this.fetchGroupInfo()
   }
 
   fetchGroupInfo(){
@@ -32,19 +46,74 @@ export default class SingleGroup extends React.Component {
     })
   }
 
-  componentDidMount() {
-    this.fetchGroupInfo()
+  showTrending(e){
+    e.preventDefault()
+
+    this.setState({
+      showingTrending: true,
+      showingRecent: false,
+      showingTop: false,
+      showingUnanswered: false
+    })
+  }
+
+  showRecent(e){
+    e.preventDefault()
+
+    this.setState({
+      showingTrending: false,
+      showingRecent: true,
+      showingTop: false,
+      showingUnanswered: false
+    })
+  }
+
+  showTop(e){
+    e.preventDefault()
+
+    this.setState({
+      showingTrending: false,
+      showingRecent: false,
+      showingTop: true,
+      showingUnanswered: false
+    })
+  }
+
+  showUnanswered(e){
+    e.preventDefault()
+
+    this.setState({
+      showingTrending: false,
+      showingRecent: false,
+      showingTop: false,
+      showingUnanswered: true
+    })
   }
 
   render() {
-     const {group, isLoading} = this.state
+     const {group, isLoading, showingTrending, showingRecent, showingTop, showingUnanswered} = this.state
 
     return (
       <div>
       <SingleGroupInfo group={group}/>
       <SingleGroupTopUsers group={group}/>
-      <SingleGroupNavBar />
-      <GroupQuestionList group={group}/>
+      <SingleGroupNavBar
+        showTrending={this.showTrending}
+        showRecent={this.showRecent}
+        showTop={this.showTop}
+        showUnanswered={this.showUnanswered}
+        showingTrending={showingTrending}
+        showingRecent={showingRecent}
+        showingTop={showingTop}
+        showingUnanswered={showingUnanswered}
+        />
+      <GroupQuestionList
+        group={group}
+        showingTrending={showingTrending}
+        showingRecent={showingRecent}
+        showingTop={showingTop}
+        showingUnanswered={showingUnanswered}
+        />
     </div>
     )
   }
@@ -82,15 +151,27 @@ class CountBox extends React.Component{
 
 class SingleGroupNavBar extends React.Component{
   render(){
+    const {showingTrending, showingRecent, showingTop, showingUnanswered, showTrending, showRecent, showTop, showUnanswered} = this.props
     return(
       <div id="group_nav">
         <ul>
-          <li><a href="#" className="selected">TRENDING</a></li>
-          <li><a href="#">RECENT</a></li>
-          <li><a href="#">TOP</a></li>
-          <li><a href="#">UNANSWERED</a></li>
+          <SingleGroupNavBarLink selected={showingTrending} onClick={showTrending} title="Trending"/>
+          <SingleGroupNavBarLink selected={showingRecent} onClick={showRecent} title="Recent"/>
+          <SingleGroupNavBarLink selected={showingTop} onClick={showTop} title="Top"/>
+          <SingleGroupNavBarLink selected={showingUnanswered} onClick={showUnanswered} title="Unanswered"/>
         </ul>
       </div>
+    )
+  }
+}
+
+class SingleGroupNavBarLink extends React.Component{
+  render(){
+    const {selected, title, onClick} = this.props
+    const cssClass = selected ? "selected" : ""
+
+    return(
+      <li><a href="#" className={cssClass} onClick={onClick}>{title}</a></li>
     )
   }
 }

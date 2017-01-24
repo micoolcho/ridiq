@@ -67602,12 +67602,26 @@
 
 	    _this.state = {
 	      group: {},
-	      isLoading: false
+	      isLoading: false,
+	      showingTrending: true,
+	      showingRecent: false,
+	      showingTop: false,
+	      showingUnanswered: false
 	    };
+
+	    _this.showTrending = _this.showTrending.bind(_this);
+	    _this.showRecent = _this.showRecent.bind(_this);
+	    _this.showTop = _this.showTop.bind(_this);
+	    _this.showUnanswered = _this.showUnanswered.bind(_this);
 	    return _this;
 	  }
 
 	  _createClass(SingleGroup, [{
+	    key: "componentDidMount",
+	    value: function componentDidMount() {
+	      this.fetchGroupInfo();
+	    }
+	  }, {
 	    key: "fetchGroupInfo",
 	    value: function fetchGroupInfo() {
 	      var _this2 = this;
@@ -67630,16 +67644,63 @@
 	      });
 	    }
 	  }, {
-	    key: "componentDidMount",
-	    value: function componentDidMount() {
-	      this.fetchGroupInfo();
+	    key: "showTrending",
+	    value: function showTrending(e) {
+	      e.preventDefault();
+
+	      this.setState({
+	        showingTrending: true,
+	        showingRecent: false,
+	        showingTop: false,
+	        showingUnanswered: false
+	      });
+	    }
+	  }, {
+	    key: "showRecent",
+	    value: function showRecent(e) {
+	      e.preventDefault();
+
+	      this.setState({
+	        showingTrending: false,
+	        showingRecent: true,
+	        showingTop: false,
+	        showingUnanswered: false
+	      });
+	    }
+	  }, {
+	    key: "showTop",
+	    value: function showTop(e) {
+	      e.preventDefault();
+
+	      this.setState({
+	        showingTrending: false,
+	        showingRecent: false,
+	        showingTop: true,
+	        showingUnanswered: false
+	      });
+	    }
+	  }, {
+	    key: "showUnanswered",
+	    value: function showUnanswered(e) {
+	      e.preventDefault();
+
+	      this.setState({
+	        showingTrending: false,
+	        showingRecent: false,
+	        showingTop: false,
+	        showingUnanswered: true
+	      });
 	    }
 	  }, {
 	    key: "render",
 	    value: function render() {
 	      var _state = this.state,
 	          group = _state.group,
-	          isLoading = _state.isLoading;
+	          isLoading = _state.isLoading,
+	          showingTrending = _state.showingTrending,
+	          showingRecent = _state.showingRecent,
+	          showingTop = _state.showingTop,
+	          showingUnanswered = _state.showingUnanswered;
 
 
 	      return _react2.default.createElement(
@@ -67647,8 +67708,23 @@
 	        null,
 	        _react2.default.createElement(SingleGroupInfo, { group: group }),
 	        _react2.default.createElement(_SingleGroupTopUsers2.default, { group: group }),
-	        _react2.default.createElement(SingleGroupNavBar, null),
-	        _react2.default.createElement(_GroupQuestionList2.default, { group: group })
+	        _react2.default.createElement(SingleGroupNavBar, {
+	          showTrending: this.showTrending,
+	          showRecent: this.showRecent,
+	          showTop: this.showTop,
+	          showUnanswered: this.showUnanswered,
+	          showingTrending: showingTrending,
+	          showingRecent: showingRecent,
+	          showingTop: showingTop,
+	          showingUnanswered: showingUnanswered
+	        }),
+	        _react2.default.createElement(_GroupQuestionList2.default, {
+	          group: group,
+	          showingTrending: showingTrending,
+	          showingRecent: showingRecent,
+	          showingTop: showingTop,
+	          showingUnanswered: showingUnanswered
+	        })
 	      );
 	    }
 	  }]);
@@ -67744,54 +67820,66 @@
 	  _createClass(SingleGroupNavBar, [{
 	    key: "render",
 	    value: function render() {
+	      var _props = this.props,
+	          showingTrending = _props.showingTrending,
+	          showingRecent = _props.showingRecent,
+	          showingTop = _props.showingTop,
+	          showingUnanswered = _props.showingUnanswered,
+	          showTrending = _props.showTrending,
+	          showRecent = _props.showRecent,
+	          showTop = _props.showTop,
+	          showUnanswered = _props.showUnanswered;
+
 	      return _react2.default.createElement(
 	        "div",
 	        { id: "group_nav" },
 	        _react2.default.createElement(
 	          "ul",
 	          null,
-	          _react2.default.createElement(
-	            "li",
-	            null,
-	            _react2.default.createElement(
-	              "a",
-	              { href: "#", className: "selected" },
-	              "TRENDING"
-	            )
-	          ),
-	          _react2.default.createElement(
-	            "li",
-	            null,
-	            _react2.default.createElement(
-	              "a",
-	              { href: "#" },
-	              "RECENT"
-	            )
-	          ),
-	          _react2.default.createElement(
-	            "li",
-	            null,
-	            _react2.default.createElement(
-	              "a",
-	              { href: "#" },
-	              "TOP"
-	            )
-	          ),
-	          _react2.default.createElement(
-	            "li",
-	            null,
-	            _react2.default.createElement(
-	              "a",
-	              { href: "#" },
-	              "UNANSWERED"
-	            )
-	          )
+	          _react2.default.createElement(SingleGroupNavBarLink, { selected: showingTrending, onClick: showTrending, title: "Trending" }),
+	          _react2.default.createElement(SingleGroupNavBarLink, { selected: showingRecent, onClick: showRecent, title: "Recent" }),
+	          _react2.default.createElement(SingleGroupNavBarLink, { selected: showingTop, onClick: showTop, title: "Top" }),
+	          _react2.default.createElement(SingleGroupNavBarLink, { selected: showingUnanswered, onClick: showUnanswered, title: "Unanswered" })
 	        )
 	      );
 	    }
 	  }]);
 
 	  return SingleGroupNavBar;
+	}(_react2.default.Component);
+
+	var SingleGroupNavBarLink = function (_React$Component5) {
+	  _inherits(SingleGroupNavBarLink, _React$Component5);
+
+	  function SingleGroupNavBarLink() {
+	    _classCallCheck(this, SingleGroupNavBarLink);
+
+	    return _possibleConstructorReturn(this, (SingleGroupNavBarLink.__proto__ || Object.getPrototypeOf(SingleGroupNavBarLink)).apply(this, arguments));
+	  }
+
+	  _createClass(SingleGroupNavBarLink, [{
+	    key: "render",
+	    value: function render() {
+	      var _props2 = this.props,
+	          selected = _props2.selected,
+	          title = _props2.title,
+	          onClick = _props2.onClick;
+
+	      var cssClass = selected ? "selected" : "";
+
+	      return _react2.default.createElement(
+	        "li",
+	        null,
+	        _react2.default.createElement(
+	          "a",
+	          { href: "#", className: cssClass, onClick: onClick },
+	          title
+	        )
+	      );
+	    }
+	  }]);
+
+	  return SingleGroupNavBarLink;
 	}(_react2.default.Component);
 
 /***/ },
@@ -68048,7 +68136,8 @@
 	      items: [],
 	      page: 1,
 	      isLoading: false,
-	      hasNext: true
+	      hasNext: true,
+	      type: "trending_questions"
 	    };
 
 	    _this.loadMore = _this.loadMore.bind(_this);
@@ -68056,6 +68145,70 @@
 	  }
 
 	  _createClass(GroupQuestionList, [{
+	    key: "componentDidMount",
+	    value: function componentDidMount() {
+	      this.fetchData();
+	    }
+	  }, {
+	    key: "componentWillReceiveProps",
+	    value: function componentWillReceiveProps(nextProps) {
+	      var _props = this.props,
+	          showingTrending = _props.showingTrending,
+	          showingRecent = _props.showingRecent,
+	          showingTop = _props.showingTop,
+	          showingUnanswered = _props.showingUnanswered;
+
+
+	      if (nextProps.showingTrending) {
+	        if (!showingTrending) {
+	          this.setState({
+	            items: [],
+	            page: 1,
+	            isLoading: false,
+	            hasNext: true,
+	            type: "trending_questions"
+	          });
+	        }
+	      } else if (nextProps.showingRecent) {
+	        if (!showingRecent) {
+	          this.setState({
+	            items: [],
+	            page: 1,
+	            isLoading: false,
+	            hasNext: true,
+	            type: "questions"
+	          });
+	        }
+	      } else if (nextProps.showingTop) {
+	        if (!showingTop) {
+	          this.setState({
+	            items: [],
+	            page: 1,
+	            isLoading: false,
+	            hasNext: true,
+	            type: "all_time"
+	          });
+	        }
+	      } else if (nextProps.showingUnanswered) {
+	        if (!showingUnanswered) {
+	          this.setState({
+	            items: [],
+	            page: 1,
+	            isLoading: false,
+	            hasNext: true,
+	            type: "unanswered"
+	          });
+	        }
+	      }
+	    }
+	  }, {
+	    key: "componentDidUpdate",
+	    value: function componentDidUpdate(prevProps, prevState) {
+	      if (this.state.type !== prevState.type) {
+	        this.fetchData();
+	      }
+	    }
+	  }, {
 	    key: "fetchData",
 	    value: function fetchData() {
 	      var _this2 = this;
@@ -68066,10 +68219,11 @@
 
 	      var _state = this.state,
 	          items = _state.items,
-	          page = _state.page;
+	          page = _state.page,
+	          type = _state.type;
 	      var group = this.props.group;
 
-	      var endPoint = "public_groups/5/trending_questions";
+	      var endPoint = "public_groups/5/" + type;
 	      var url = _Utils.baseAPIUrl + "/" + endPoint + "?per_page=" + pageCount + "&page=" + page;
 
 	      fetch(url, {
@@ -68088,11 +68242,6 @@
 	      }).catch(function (e) {
 	        console.log('error', e);
 	      });
-	    }
-	  }, {
-	    key: "componentDidMount",
-	    value: function componentDidMount() {
-	      this.fetchData();
 	    }
 	  }, {
 	    key: "loadMore",
@@ -68203,9 +68352,9 @@
 	  }, {
 	    key: "render",
 	    value: function render() {
-	      var _props = this.props,
-	          question = _props.question,
-	          answerCount = _props.answerCount;
+	      var _props2 = this.props,
+	          question = _props2.question,
+	          answerCount = _props2.answerCount;
 
 	      var countString = this.responseCount(answerCount);
 
