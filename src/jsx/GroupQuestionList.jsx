@@ -30,9 +30,9 @@ export default class GroupQuestionList extends React.Component {
 
   fetchQuestions(pageCount = 10) {
     this.setState({isLoading: true})
+
     const {questions, page} = this.state
     const {group} = this.props
-
     const endPoint = `${baseAPIUrl}/public_groups/5/trending_questions?per_page=${pageCount}&page=${page}`
 
     fetch(endPoint, {

@@ -9,6 +9,7 @@ export default class AnswerList extends React.Component{
       answers:[],
       page: 1,
       isLoading: false,
+      hasNext: true,
       showingPrevBtn: false,
       showingNextBtn: false,
       offsetX: 0
@@ -45,9 +46,9 @@ export default class AnswerList extends React.Component{
 
   fetchAnswers(pageCount = 10) {
     this.setState({isLoading: true})
+
     const {answers, page} = this.state
     const {question} = this.props
-
     const endPoint = `${baseAPIUrl}/questions/${question.id}/public_answers?per_page=${pageCount}&page=${page}`
 
     fetch(endPoint, {
@@ -59,6 +60,7 @@ export default class AnswerList extends React.Component{
             answers: _.uniqBy(answers.concat(json.data), 'id'),
             page: page + 1,
             isLoading: false,
+            hasNext: json.data.length >= pageCount,
             showingPrevBtn: false,
             showingNextBtn: (json.data.length >= 4)
          })
@@ -95,11 +97,12 @@ export class AnswerCard extends React.Component{
   render(){
     const {answer} = this.props
     const bio = (answer.user.group_bio && answer.user.group_bio.length > 0) ? answer.user.group_bio : answer.user.short_blurb
-
+    const backgroundImage = `url(${answer.image_url})`
+    
     return(
       <li className="answer_card">
         <a href="single-answer.html">
-        <div style={{backgroundImage:"url(" + answer.image_url + ")"}} className="video_thumbnail"></div>
+        <div style={{backgroundImage:backgroundImage}} className="video_thumbnail"></div>
         <div className="play_btn"></div>
         <h4>{answer.user.name}</h4>
         <span>{bio}</span>

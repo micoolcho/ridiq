@@ -67839,9 +67839,10 @@
 	    var _this = _possibleConstructorReturn(this, (_ref = SingleGroupTopUsers.__proto__ || Object.getPrototypeOf(SingleGroupTopUsers)).call.apply(_ref, [this].concat(args)));
 
 	    _this.state = {
-	      trendingUsers: [],
+	      items: [],
 	      page: 1,
 	      isLoading: false,
+	      hasNext: true,
 	      showingPrevBtn: false,
 	      showingNextBtn: false,
 	      offsetX: 0
@@ -67854,26 +67855,26 @@
 	  _createClass(SingleGroupTopUsers, [{
 	    key: "loadMore",
 	    value: function loadMore() {
-	      this.fetchTrendingUsers();
+	      this.fetchData();
 	    }
 	  }, {
 	    key: "componentDidMount",
 	    value: function componentDidMount() {
-	      this.fetchTrendingUsers();
+	      this.fetchData();
 	    }
 	  }, {
-	    key: "fetchTrendingUsers",
-	    value: function fetchTrendingUsers() {
+	    key: "fetchData",
+	    value: function fetchData() {
 	      var _this2 = this;
 
 	      var pageCount = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 10;
 
 	      this.setState({ isLoading: true });
+
 	      var _state = this.state,
-	          trendingUsers = _state.trendingUsers,
+	          items = _state.items,
 	          page = _state.page;
 	      var group = this.props.group;
-
 
 	      var endPoint = _Utils.baseAPIUrl + "/public_groups/5/trending_users?per_page=" + pageCount + "&page=" + page;
 
@@ -67883,9 +67884,10 @@
 	        return response.json();
 	      }).then(function (json) {
 	        _this2.setState({
-	          trendingUsers: _.uniqBy(trendingUsers.concat(json.data), 'id'),
+	          items: _.uniqBy(items.concat(json.data), 'id'),
 	          page: page + 1,
 	          isLoading: false,
+	          hasNext: json.data.length >= pageCount,
 	          showingNextBtn: json.data.length > 13
 	        });
 	      }).catch(function (e) {
@@ -67896,7 +67898,7 @@
 	    key: "render",
 	    value: function render() {
 	      var _state2 = this.state,
-	          trendingUsers = _state2.trendingUsers,
+	          items = _state2.items,
 	          showingPrevBtn = _state2.showingPrevBtn,
 	          showingNextBtn = _state2.showingNextBtn;
 
@@ -67918,7 +67920,7 @@
 	          _react2.default.createElement(
 	            "ul",
 	            null,
-	            trendingUsers.map(function (user, index) {
+	            items.map(function (user, index) {
 	              return _react2.default.createElement(TopUser, { key: user.id, user: user });
 	            })
 	          )
@@ -67947,6 +67949,7 @@
 	    value: function render() {
 	      var user = this.props.user;
 
+	      var backgroundImage = "url(" + user.avatar_url + ")";
 
 	      return _react2.default.createElement(
 	        "li",
@@ -67954,11 +67957,7 @@
 	        _react2.default.createElement(
 	          "a",
 	          { href: "/" },
-	          _react2.default.createElement(
-	            "div",
-	            { style: { backgroundImage: "url(" + user.avatar_url + ")" }, className: "avatar" },
-	            "\xA0"
-	          ),
+	          _react2.default.createElement("div", { style: { backgroundImage: backgroundImage }, className: "avatar" }),
 	          user.first_name
 	        )
 	      );
@@ -68058,11 +68057,11 @@
 	      var pageCount = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 10;
 
 	      this.setState({ isLoading: true });
+
 	      var _state = this.state,
 	          questions = _state.questions,
 	          page = _state.page;
 	      var group = this.props.group;
-
 
 	      var endPoint = _Utils.baseAPIUrl + "/public_groups/5/trending_questions?per_page=" + pageCount + "&page=" + page;
 
@@ -68264,6 +68263,7 @@
 	      answers: [],
 	      page: 1,
 	      isLoading: false,
+	      hasNext: true,
 	      showingPrevBtn: false,
 	      showingNextBtn: false,
 	      offsetX: 0
@@ -68311,11 +68311,11 @@
 	      var pageCount = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 10;
 
 	      this.setState({ isLoading: true });
+
 	      var _state = this.state,
 	          answers = _state.answers,
 	          page = _state.page;
 	      var question = this.props.question;
-
 
 	      var endPoint = _Utils.baseAPIUrl + "/questions/" + question.id + "/public_answers?per_page=" + pageCount + "&page=" + page;
 
@@ -68328,6 +68328,7 @@
 	          answers: _.uniqBy(answers.concat(json.data), 'id'),
 	          page: page + 1,
 	          isLoading: false,
+	          hasNext: json.data.length >= pageCount,
 	          showingPrevBtn: false,
 	          showingNextBtn: json.data.length >= 4
 	        });
@@ -68388,6 +68389,7 @@
 	      var answer = this.props.answer;
 
 	      var bio = answer.user.group_bio && answer.user.group_bio.length > 0 ? answer.user.group_bio : answer.user.short_blurb;
+	      var backgroundImage = "url(" + answer.image_url + ")";
 
 	      return _react2.default.createElement(
 	        "li",
@@ -68395,7 +68397,7 @@
 	        _react2.default.createElement(
 	          "a",
 	          { href: "single-answer.html" },
-	          _react2.default.createElement("div", { style: { backgroundImage: "url(" + answer.image_url + ")" }, className: "video_thumbnail" }),
+	          _react2.default.createElement("div", { style: { backgroundImage: backgroundImage }, className: "video_thumbnail" }),
 	          _react2.default.createElement("div", { className: "play_btn" }),
 	          _react2.default.createElement(
 	            "h4",
