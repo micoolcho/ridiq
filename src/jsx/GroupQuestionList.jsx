@@ -1,7 +1,6 @@
 import React from "react";
 import Moment from "moment";
 import {baseAPIUrl} from "./Utils.jsx";
-import BasedLoadMoreComponent from "./BasedLoadMoreComponent.jsx";
 import AnswerList from "./AnswerList.jsx"
 
 function LoadMore ({onClick, isLoading, hidden}) {

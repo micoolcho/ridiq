@@ -173,6 +173,10 @@ main{
     margin-bottom: 10px;
     position: relative;
 
+    &:first-child{
+      margin-top:10px;
+    }
+
     &:nth-last-child(2){
       border-bottom: 0;
     }

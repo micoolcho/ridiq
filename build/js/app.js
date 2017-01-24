@@ -68082,10 +68082,6 @@
 
 	var _Utils = __webpack_require__(307);
 
-	var _BasedLoadMoreComponent = __webpack_require__(190);
-
-	var _BasedLoadMoreComponent2 = _interopRequireDefault(_BasedLoadMoreComponent);
-
 	var _AnswerList = __webpack_require__(321);
 
 	var _AnswerList2 = _interopRequireDefault(_AnswerList);
