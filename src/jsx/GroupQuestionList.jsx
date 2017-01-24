@@ -31,8 +31,9 @@ export default class GroupQuestionList extends React.Component {
   fetchQuestions(pageCount = 10) {
     this.setState({isLoading: true})
     const {questions, page} = this.state
+    const {group} = this.props
     // const endPoint = `${baseAPIUrl}/api/v6/activities/featured?per_page=${pageCount}&page=${page}`
-    const endPoint = `${baseAPIUrl}/jsons/group_questions.json`
+    const endPoint = `${baseAPIUrl}/public_groups/19/trending_questions`
     console.log(endPoint)
     fetch(endPoint, {
       headers: {"Content-Type": "application/json;charset=UTF-8"},

@@ -10,10 +10,29 @@ export default class AnswerList extends React.Component{
       page: 1,
       isLoading: false,
       showingPrevBtn: false,
-      showingNextBtn: false
+      showingNextBtn: false,
+      offsetX: 0
     }
 
     this.loadMore = this.loadMore.bind(this)
+    this.scrollLeft = this.scrollLeft.bind(this)
+    this.scrollRight = this.scrollRight.bind(this)
+  }
+
+  scrollLeft(e){
+    e.preventDefault()
+
+    this.setState({
+      offsetX: this.state.offsetX + 50
+    })
+  }
+
+  scrollRight(e){
+    e.preventDefault()
+
+    this.setState({
+      offsetX: this.state.offsetX - 50
+    })
   }
 
   loadMore() {
@@ -29,7 +48,7 @@ export default class AnswerList extends React.Component{
     const {answers, page} = this.state
     const {question} = this.props
     // const endPoint = `${baseAPIUrl}/api/v6/activities/featured?per_page=${pageCount}&page=${page}`
-    const endPoint = `${baseAPIUrl}/jsons/question_${question.id}_answers.json`
+    const endPoint = `${baseAPIUrl}/questions/${question.id}/public_answers`
     console.log(endPoint)
     fetch(endPoint, {
       headers: {"Content-Type": "application/json;charset=UTF-8"},
@@ -43,7 +62,7 @@ export default class AnswerList extends React.Component{
             page: page + 1,
             isLoading: false,
             showingPrevBtn: false,
-            showingNextBtn: (answers.length >= 4)
+            showingNextBtn: (json.data.length >= 4)
          })
       })
       .catch((e) => {
@@ -52,15 +71,16 @@ export default class AnswerList extends React.Component{
   }
 
   render(){
-    const {answers, showingPrevBtn, showingNextBtn} = this.state
+    const {answers, showingPrevBtn, showingNextBtn, offsetX} = this.state
     const prevBtnClass = showingPrevBtn ? "" : " hidden"
     const nextBtnClass = showingNextBtn ? "" : " hidden"
+    const left = offsetX + "px"
 
     return(
       <div>
-        <a href="#" className={"prev_btn" + prevBtnClass}></a>
+        <a href="#" className={"prev_btn" + prevBtnClass} onClick={this.scrollLeft}></a>
         <div className="list_container">
-        <ul>
+        <ul style={{marginLeft:left}}>
           {
             answers.map((answer, index) => {
               return <AnswerCard key={answer.id} answer={answer}/>
@@ -68,7 +88,7 @@ export default class AnswerList extends React.Component{
           }
         </ul>
       </div>
-      <a href="#" className={"next_btn" + nextBtnClass}></a>
+      <a href="#" className={"next_btn" + nextBtnClass} onClick={this.scrollRight}></a>
       </div>
     )
   }
@@ -77,14 +97,14 @@ export default class AnswerList extends React.Component{
 export class AnswerCard extends React.Component{
   render(){
     const {answer} = this.props
-    const bio = (answer.user_group_bio && answer.user_group_bio.length > 0) ? answer.user_group_bio : answer.user_short_blurb
+    const bio = (answer.user.group_bio && answer.user.group_bio.length > 0) ? answer.user.group_bio : answer.user.short_blurb
 
     return(
       <li className="answer_card">
         <a href="single-answer.html">
         <div style={{backgroundImage:"url(" + answer.image_url + ")"}} className="video_thumbnail"></div>
         <div className="play_btn"></div>
-        <h4>{answer.user_name}</h4>
+        <h4>{answer.user.name}</h4>
         <span>{bio}</span>
         </a>
       </li>

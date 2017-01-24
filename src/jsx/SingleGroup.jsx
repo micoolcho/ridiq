@@ -9,14 +9,14 @@ export default class SingleGroup extends React.Component {
     super(...args);
     this.state = {
       group:{},
-      isLoadingGroupInfo: false,
+      isLoading: false,
     }
   }
 
   fetchGroupInfo(){
-    this.setState({isLoadingGroupInfo: true})
+    this.setState({isLoading: true})
 
-    const endPoint = `${baseAPIUrl}/jsons/group.json`
+    const endPoint = `jsons/group.json`
     console.log(endPoint)
     fetch(endPoint, {
       headers: {"Content-Type": "application/json;charset=UTF-8"},
@@ -25,7 +25,7 @@ export default class SingleGroup extends React.Component {
     }).then((json) => {
       this.setState({
         group: json,
-        isLoadingGroupInfo: false
+        isLoading: false
       })
     }).catch((e) => {
       console.log('error', e)
@@ -37,15 +37,14 @@ export default class SingleGroup extends React.Component {
   }
 
   render() {
-     const {group, isLoadingGroupInfo} = this.state
+     const {group, isLoading} = this.state
 
     return (
       <div>
       <SingleGroupInfo group={group}/>
-      <SingleGroupTopUsers />
+      <SingleGroupTopUsers group={group}/>
       <SingleGroupNavBar />
-
-        <GroupQuestionList />
+      <GroupQuestionList group={group}/>
     </div>
     )
   }
@@ -73,6 +72,7 @@ class CountBox extends React.Component{
   render(){
     return(
       <li className="count_box">
+
         <span className="count">{this.props.count}</span>
         <span>{this.props.label}</span>
       </li>

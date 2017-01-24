@@ -8,7 +8,10 @@ export default class SingleGroupTopUsers extends React.Component{
     this.state = {
       trendingUsers:[],
       page: 1,
-      isLoading: false
+      isLoading: false,
+      showingPrevBtn: false,
+      showingNextBtn: false,
+      offsetX: 0
     }
 
     this.loadMore = this.loadMore.bind(this)
@@ -25,8 +28,9 @@ export default class SingleGroupTopUsers extends React.Component{
   fetchTrendingUsers(pageCount = 10) {
     this.setState({isLoading: true})
     const {trendingUsers, page} = this.state
+    const {group} = this.props
     // const endPoint = `${baseAPIUrl}/api/v6/activities/featured?per_page=${pageCount}&page=${page}`
-    const endPoint = `${baseAPIUrl}/jsons/group_trending_users.json`
+    const endPoint = `${baseAPIUrl}/public_groups/19/trending_users`
     console.log(endPoint)
     fetch(endPoint, {
       headers: {"Content-Type": "application/json;charset=UTF-8"},
@@ -38,7 +42,8 @@ export default class SingleGroupTopUsers extends React.Component{
          this.setState({
             trendingUsers: _.uniqBy(trendingUsers.concat(json.data), 'id'),
             page: page + 1,
-            isLoading: false
+            isLoading: false,
+            showingNextBtn: json.data.length > 13
          })
       })
       .catch((e) => {
@@ -47,11 +52,14 @@ export default class SingleGroupTopUsers extends React.Component{
   }
 
   render(){
-    const { trendingUsers } = this.state
+    const { trendingUsers, showingPrevBtn, showingNextBtn } = this.state
+    const prevClass = showingPrevBtn ? "" : " hidden"
+    const nextClass = showingNextBtn ? "" : " hidden"
+
     return(
       <div id="group_top_users">
         <h3>TOP USERS</h3>
-        <a href="#" className="prev_btn hidden"></a>
+        <a href="#" className={"prev_btn" + prevClass}></a>
         <div className="list_container">
         <ul>
           {
@@ -61,7 +69,7 @@ export default class SingleGroupTopUsers extends React.Component{
           }
         </ul>
         </div>
-        <a href="#" className="next_btn hidden"></a>
+        <a href="#" className={"next_btn" + nextClass}></a>
       </div>
     )
   }
