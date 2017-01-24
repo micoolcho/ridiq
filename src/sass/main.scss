@@ -309,10 +309,12 @@ a {
     border: 1px solid #19ADE2;
     border-radius: 1000px;
     text-transform: capitalize;
-    padding: 13px 50px;
+    padding: 12px 50px;
     min-width: 240px;
-    font-size: 18px;
+    font-size: 16px;
     color: #19ADE2;
+    margin-top:20px;
+    margin-bottom: 50px;
 
     @include extraSmallMobile() {
       min-width: initial;

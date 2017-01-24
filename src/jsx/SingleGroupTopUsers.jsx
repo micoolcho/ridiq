@@ -29,24 +29,21 @@ export default class SingleGroupTopUsers extends React.Component{
     this.setState({isLoading: true})
     const {trendingUsers, page} = this.state
     const {group} = this.props
-    // const endPoint = `${baseAPIUrl}/api/v6/activities/featured?per_page=${pageCount}&page=${page}`
-    const endPoint = `${baseAPIUrl}/public_groups/19/trending_users`
-    console.log(endPoint)
+
+    const endPoint = `${baseAPIUrl}/public_groups/5/trending_users?per_page=${pageCount}&page=${page}`
+
     fetch(endPoint, {
       headers: {"Content-Type": "application/json;charset=UTF-8"},
-    })
-      .then((response) => {
+    }).then((response) => {
         return response.json()
-      })
-      .then((json) => {
+      }).then((json) => {
          this.setState({
             trendingUsers: _.uniqBy(trendingUsers.concat(json.data), 'id'),
             page: page + 1,
             isLoading: false,
             showingNextBtn: json.data.length > 13
          })
-      })
-      .catch((e) => {
+      }).catch((e) => {
          console.log('error', e)
       })
   }

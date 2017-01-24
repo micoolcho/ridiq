@@ -67873,10 +67873,10 @@
 	          trendingUsers = _state.trendingUsers,
 	          page = _state.page;
 	      var group = this.props.group;
-	      // const endPoint = `${baseAPIUrl}/api/v6/activities/featured?per_page=${pageCount}&page=${page}`
 
-	      var endPoint = _Utils.baseAPIUrl + "/public_groups/19/trending_users";
-	      console.log(endPoint);
+
+	      var endPoint = _Utils.baseAPIUrl + "/public_groups/5/trending_users?per_page=" + pageCount + "&page=" + page;
+
 	      fetch(endPoint, {
 	        headers: { "Content-Type": "application/json;charset=UTF-8" }
 	      }).then(function (response) {
@@ -68009,17 +68009,18 @@
 
 	function LoadMore(_ref) {
 	  var onClick = _ref.onClick,
-	      isLoading = _ref.isLoading;
+	      isLoading = _ref.isLoading,
+	      hidden = _ref.hidden;
 
+	  var hiddenClass = hidden ? " hidden" : "";
+	  var text = isLoading ? 'loading...' : 'load more';
 	  return _react2.default.createElement(
 	    "div",
-	    { className: "text-center m-t-20" },
+	    { className: "text-center m-t-20" + hiddenClass },
 	    _react2.default.createElement(
 	      "div",
-	      {
-	        onClick: onClick,
-	        className: 'button button-large ' + (isLoading ? 'disabled' : '') },
-	      isLoading ? 'loading...' : 'load more'
+	      { onClick: onClick, className: 'button button-large ' + (isLoading ? 'disabled' : '') },
+	      text
 	    )
 	  );
 	}
@@ -68041,7 +68042,8 @@
 	    _this.state = {
 	      questions: [],
 	      page: 1,
-	      isLoading: false
+	      isLoading: false,
+	      hasNext: true
 	    };
 
 	    _this.loadMore = _this.loadMore.bind(_this);
@@ -68060,10 +68062,10 @@
 	          questions = _state.questions,
 	          page = _state.page;
 	      var group = this.props.group;
-	      // const endPoint = `${baseAPIUrl}/api/v6/activities/featured?per_page=${pageCount}&page=${page}`
 
-	      var endPoint = _Utils.baseAPIUrl + "/public_groups/19/trending_questions";
-	      console.log(endPoint);
+
+	      var endPoint = _Utils.baseAPIUrl + "/public_groups/5/trending_questions?per_page=" + pageCount + "&page=" + page;
+
 	      fetch(endPoint, {
 	        headers: { "Content-Type": "application/json;charset=UTF-8" }
 	      }).then(function (response) {
@@ -68072,7 +68074,8 @@
 	        _this2.setState({
 	          questions: _.uniqBy(questions.concat(json.data), 'id'),
 	          page: page + 1,
-	          isLoading: false
+	          isLoading: false,
+	          hasNext: json.data.length >= pageCount
 	        });
 	      }).catch(function (e) {
 	        console.log('error', e);
@@ -68093,7 +68096,8 @@
 	    value: function render() {
 	      var _state2 = this.state,
 	          questions = _state2.questions,
-	          isLoading = _state2.isLoading;
+	          isLoading = _state2.isLoading,
+	          hasNext = _state2.hasNext;
 	      var loadMore = this.loadMore.loadMore;
 
 
@@ -68107,7 +68111,7 @@
 	            return _react2.default.createElement(SingleGroupQuestionNoAnswer, { key: question.id, question: question });
 	          }
 	        }),
-	        _react2.default.createElement(LoadMore, { onClick: this.loadMore, isLoading: isLoading })
+	        _react2.default.createElement(LoadMore, { onClick: this.loadMore, isLoading: isLoading, hidden: !hasNext })
 	      );
 	    }
 	  }]);
@@ -68311,10 +68315,10 @@
 	          answers = _state.answers,
 	          page = _state.page;
 	      var question = this.props.question;
-	      // const endPoint = `${baseAPIUrl}/api/v6/activities/featured?per_page=${pageCount}&page=${page}`
 
-	      var endPoint = _Utils.baseAPIUrl + "/questions/" + question.id + "/public_answers";
-	      console.log(endPoint);
+
+	      var endPoint = _Utils.baseAPIUrl + "/questions/" + question.id + "/public_answers?per_page=" + pageCount + "&page=" + page;
+
 	      fetch(endPoint, {
 	        headers: { "Content-Type": "application/json;charset=UTF-8" }
 	      }).then(function (response) {

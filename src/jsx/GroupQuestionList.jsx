@@ -4,14 +4,13 @@ import {baseAPIUrl} from "./Utils.jsx";
 import BasedLoadMoreComponent from "./BasedLoadMoreComponent.jsx";
 import AnswerList from "./AnswerList.jsx"
 
-function LoadMore ({onClick, isLoading}) {
- return (<div className="text-center m-t-20">
-  <div
-    onClick={onClick}
-    className={'button button-large ' + (isLoading ? 'disabled' : '')}>
-    {
-      isLoading ? 'loading...' : 'load more'
-    }
+function LoadMore ({onClick, isLoading, hidden}) {
+  const hiddenClass = hidden ? " hidden" : ""
+  const text = isLoading ? 'loading...' : 'load more'
+ return (
+   <div className={"text-center m-t-20" + hiddenClass}>
+  <div onClick={onClick} className={'button button-large ' + (isLoading ? 'disabled' : '')}>
+    {text}
   </div>
 </div>)
 }
@@ -22,7 +21,8 @@ export default class GroupQuestionList extends React.Component {
     this.state = {
       questions:[],
       page: 1,
-      isLoading: false
+      isLoading: false,
+      hasNext: true
     }
 
     this.loadMore = this.loadMore.bind(this)
@@ -32,23 +32,21 @@ export default class GroupQuestionList extends React.Component {
     this.setState({isLoading: true})
     const {questions, page} = this.state
     const {group} = this.props
-    // const endPoint = `${baseAPIUrl}/api/v6/activities/featured?per_page=${pageCount}&page=${page}`
-    const endPoint = `${baseAPIUrl}/public_groups/19/trending_questions`
-    console.log(endPoint)
+
+    const endPoint = `${baseAPIUrl}/public_groups/5/trending_questions?per_page=${pageCount}&page=${page}`
+
     fetch(endPoint, {
       headers: {"Content-Type": "application/json;charset=UTF-8"},
-    })
-      .then((response) => {
+    }).then((response) => {
         return response.json()
-      })
-      .then((json) => {
+      }).then((json) => {
          this.setState({
             questions: _.uniqBy(questions.concat(json.data), 'id'),
             page: page + 1,
-            isLoading: false
+            isLoading: false,
+            hasNext: json.data.length >= pageCount
          })
-      })
-      .catch((e) => {
+      }).catch((e) => {
          console.log('error', e)
       })
   }
@@ -62,7 +60,7 @@ export default class GroupQuestionList extends React.Component {
   }
 
   render(){
-    const {questions, isLoading} = this.state
+    const {questions, isLoading, hasNext} = this.state
     const {loadMore} = this.loadMore
 
     return(
@@ -77,7 +75,7 @@ export default class GroupQuestionList extends React.Component {
         })
       }
 
-      <LoadMore onClick={this.loadMore} isLoading={isLoading}/>
+      <LoadMore onClick={this.loadMore} isLoading={isLoading} hidden={!hasNext}/>
     </div>
   )
   }

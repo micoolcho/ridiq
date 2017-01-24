@@ -47,16 +47,14 @@ export default class AnswerList extends React.Component{
     this.setState({isLoading: true})
     const {answers, page} = this.state
     const {question} = this.props
-    // const endPoint = `${baseAPIUrl}/api/v6/activities/featured?per_page=${pageCount}&page=${page}`
-    const endPoint = `${baseAPIUrl}/questions/${question.id}/public_answers`
-    console.log(endPoint)
+
+    const endPoint = `${baseAPIUrl}/questions/${question.id}/public_answers?per_page=${pageCount}&page=${page}`
+
     fetch(endPoint, {
       headers: {"Content-Type": "application/json;charset=UTF-8"},
-    })
-      .then((response) => {
+    }).then((response) => {
         return response.json()
-      })
-      .then((json) => {
+      }).then((json) => {
          this.setState({
             answers: _.uniqBy(answers.concat(json.data), 'id'),
             page: page + 1,
@@ -64,8 +62,7 @@ export default class AnswerList extends React.Component{
             showingPrevBtn: false,
             showingNextBtn: (json.data.length >= 4)
          })
-      })
-      .catch((e) => {
+      }).catch((e) => {
          console.log('error', e)
       })
   }
