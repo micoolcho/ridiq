@@ -68353,7 +68353,7 @@
 	          { className: "list_container" },
 	          _react2.default.createElement(
 	            "ul",
-	            { style: { marginLeft: left } },
+	            null,
 	            answers.map(function (answer, index) {
 	              return _react2.default.createElement(AnswerCard, { key: answer.id, answer: answer });
 	            })

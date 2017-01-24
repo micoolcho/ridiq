@@ -80,7 +80,7 @@ export default class AnswerList extends React.Component{
       <div>
         <a href="#" className={"prev_btn" + prevBtnClass} onClick={this.scrollLeft}></a>
         <div className="list_container">
-        <ul style={{marginLeft:left}}>
+        <ul>
           {
             answers.map((answer, index) => {
               return <AnswerCard key={answer.id} answer={answer}/>
