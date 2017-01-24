@@ -67615,7 +67615,7 @@
 	      this.setState({ isLoading: true });
 
 	      var endPoint = "jsons/group.json";
-	      console.log(endPoint);
+
 	      fetch(endPoint, {
 	        headers: { "Content-Type": "application/json;charset=UTF-8" }
 	      }).then(function (response) {
@@ -67675,6 +67675,7 @@
 	          follower_count = _props$group.follower_count,
 	          question_count = _props$group.question_count,
 	          answer_count = _props$group.answer_count;
+
 
 	      return _react2.default.createElement(
 	        "div",
@@ -68405,7 +68406,8 @@
 	    value: function render() {
 	      var answer = this.props.answer;
 
-	      var bio = answer.user.group_bio && answer.user.group_bio.length > 0 ? answer.user.group_bio : answer.user.short_blurb;
+	      var user = answer.user;
+	      var bio = user.group_bio && user.group_bio.length > 0 ? user.group_bio : user.short_blurb;
 	      var backgroundImage = "url(" + answer.image_url + ")";
 
 	      return _react2.default.createElement(
@@ -68419,7 +68421,7 @@
 	          _react2.default.createElement(
 	            "h4",
 	            null,
-	            answer.user.name
+	            user.name
 	          ),
 	          _react2.default.createElement(
 	            "span",

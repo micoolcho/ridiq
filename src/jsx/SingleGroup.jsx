@@ -17,7 +17,7 @@ export default class SingleGroup extends React.Component {
     this.setState({isLoading: true})
 
     const endPoint = `jsons/group.json`
-    console.log(endPoint)
+
     fetch(endPoint, {
       headers: {"Content-Type": "application/json;charset=UTF-8"},
     }).then((response) => {
@@ -53,6 +53,7 @@ export default class SingleGroup extends React.Component {
 class SingleGroupInfo extends React.Component {
   render(){
     const {name, follower_count, question_count, answer_count} = this.props.group
+
     return(
       <div>
         <h1 className="group_name text-center">{name}</h1>
@@ -72,7 +73,6 @@ class CountBox extends React.Component{
   render(){
     return(
       <li className="count_box">
-
         <span className="count">{this.props.count}</span>
         <span>{this.props.label}</span>
       </li>

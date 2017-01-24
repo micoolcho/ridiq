@@ -99,7 +99,8 @@ export default class AnswerList extends React.Component{
 export class AnswerCard extends React.Component{
   render(){
     const {answer} = this.props
-    const bio = (answer.user.group_bio && answer.user.group_bio.length > 0) ? answer.user.group_bio : answer.user.short_blurb
+    const user = answer.user
+    const bio = (user.group_bio && user.group_bio.length > 0) ? user.group_bio : user.short_blurb
     const backgroundImage = `url(${answer.image_url})`
 
     return(
@@ -107,7 +108,7 @@ export class AnswerCard extends React.Component{
         <a href={answer.public_url}>
         <div style={{backgroundImage:backgroundImage}} className="video_thumbnail"></div>
         <div className="play_btn"></div>
-        <h4>{answer.user.name}</h4>
+        <h4>{user.name}</h4>
         <span>{bio}</span>
         </a>
       </li>
