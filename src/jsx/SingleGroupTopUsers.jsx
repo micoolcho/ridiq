@@ -86,7 +86,7 @@ export class TopUser extends React.Component{
 
     return(
       <li>
-        <a href="/">
+        <a href={user.public_url}>
         <div style={{backgroundImage:backgroundImage}} className="avatar"></div>
         {user.first_name}
         </a>

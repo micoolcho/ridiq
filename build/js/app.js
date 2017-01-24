@@ -67959,7 +67959,7 @@
 	        null,
 	        _react2.default.createElement(
 	          "a",
-	          { href: "/" },
+	          { href: user.public_url },
 	          _react2.default.createElement("div", { style: { backgroundImage: backgroundImage }, className: "avatar" }),
 	          user.first_name
 	        )
@@ -68413,7 +68413,7 @@
 	        { className: "answer_card" },
 	        _react2.default.createElement(
 	          "a",
-	          { href: "single-answer.html" },
+	          { href: answer.public_url },
 	          _react2.default.createElement("div", { style: { backgroundImage: backgroundImage }, className: "video_thumbnail" }),
 	          _react2.default.createElement("div", { className: "play_btn" }),
 	          _react2.default.createElement(
