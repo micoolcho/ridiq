@@ -68028,7 +68028,8 @@
 	    value: function render() {
 	      var user = this.props.user;
 
-	      var backgroundImage = "url(" + user.avatar_url + ")";
+	      var avatar_url = user.avatar_url.length > 0 ? user.avatar_url : "../images/avatar_placeholder_small.png";
+	      var backgroundImage = "url(" + avatar_url + ")";
 
 	      return _react2.default.createElement(
 	        "li",
