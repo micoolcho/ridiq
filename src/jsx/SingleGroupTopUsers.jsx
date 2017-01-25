@@ -31,7 +31,7 @@ export default class SingleGroupTopUsers extends React.Component{
 
     const {items, page} = this.state
     const {group} = this.props
-    const endPoint = "public_groups/5/trending_users"
+    const endPoint = `public_groups/${group.id}/trending_users`
     const url = `${baseAPIUrl}/${endPoint}?per_page=${pageCount}&page=${page}`
 
     fetch(url, {

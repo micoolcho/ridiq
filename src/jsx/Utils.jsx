@@ -12,11 +12,12 @@ export default class Utils {
   }
 }
 
-export let baseAPIUrl = "https://api.letsyam.com/api/v7"
+export let baseAPIUrl = 'https://yam-staging.herokuapp.com/api/v7'
 // if (process.env.NODE_ENV === 'production') {
-//   baseAPIUrl = 'http://api.letsyam.com'
+//   baseAPIUrl = 'https://api.letsyam.com/api/v7'
 // } else if (process.env.NODE_ENV === 'staging') {
-//    baseAPIUrl = 'http://yam-staging.herokuapp.com'
+//    baseAPIUrl = 'https://yam-staging.herokuapp.com/api/v7'
 // } else {
-//   baseAPIUrl = 'http://localhost:8000'
+//   // baseAPIUrl = 'http://localhost:8000'
+//   baseAPIUrl = 'https://api.letsyam.com/api/v7'
 // }

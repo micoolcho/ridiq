@@ -91,7 +91,7 @@ export default class GroupQuestionList extends React.Component {
 
     const {items, page, type} = this.state
     const {group} = this.props
-    const endPoint = `public_groups/5/${type}`
+    const endPoint = `public_groups/${group.id}/${type}`
     const url = `${baseAPIUrl}/${endPoint}?per_page=${pageCount}&page=${page}`
 
     fetch(url, {

@@ -9,7 +9,7 @@ export default class SingleGroup extends React.Component {
     super(...args);
 
     this.state = {
-      group:{},
+      // group:{},
       isLoading: false,
       showingTrending: true,
       showingRecent: false,
@@ -24,26 +24,26 @@ export default class SingleGroup extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchGroupInfo()
+    // this.fetchGroupInfo()
   }
 
   fetchGroupInfo(){
-    this.setState({isLoading: true})
-
-    const endPoint = `jsons/group.json`
-
-    fetch(endPoint, {
-      headers: {"Content-Type": "application/json;charset=UTF-8"},
-    }).then((response) => {
-      return response.json()
-    }).then((json) => {
-      this.setState({
-        group: json,
-        isLoading: false
-      })
-    }).catch((e) => {
-      console.log('error', e)
-    })
+    // this.setState({isLoading: true})
+    //
+    // const endPoint = `jsons/group.json`
+    //
+    // fetch(endPoint, {
+    //   headers: {"Content-Type": "application/json;charset=UTF-8"},
+    // }).then((response) => {
+    //   return response.json()
+    // }).then((json) => {
+    //   this.setState({
+    //     group: json,
+    //     isLoading: false
+    //   })
+    // }).catch((e) => {
+    //   console.log('error', e)
+    // })
   }
 
   showTrending(e){
@@ -91,7 +91,8 @@ export default class SingleGroup extends React.Component {
   }
 
   render() {
-     const {group, isLoading, showingTrending, showingRecent, showingTop, showingUnanswered} = this.state
+     const {isLoading, showingTrending, showingRecent, showingTop, showingUnanswered} = this.state
+     const {group} = this.props
 
     return (
       <div>

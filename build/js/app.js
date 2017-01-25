@@ -144,7 +144,7 @@
 
 	// Single group:
 	if (document.getElementById('group')) {
-	  _reactDom2.default.render(_react2.default.createElement(_SingleGroup2.default, null), document.getElementById('group'));
+	  _reactDom2.default.render(_react2.default.createElement(_SingleGroup2.default, { group: window.yamConf.group }), document.getElementById('group'));
 	}
 
 	// Single question page: answers of question.
@@ -49366,7 +49366,7 @@
 /* 307 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -49382,7 +49382,7 @@
 	  }
 
 	  _createClass(Utils, null, [{
-	    key: "kFormat",
+	    key: 'kFormat',
 	    value: function kFormat(num) {
 	      if (num < 1000) {
 	        return num;
@@ -49400,13 +49400,14 @@
 	}();
 
 	exports.default = Utils;
-	var baseAPIUrl = exports.baseAPIUrl = "https://api.letsyam.com/api/v7";
+	var baseAPIUrl = exports.baseAPIUrl = 'https://yam-staging.herokuapp.com/api/v7';
 	// if (process.env.NODE_ENV === 'production') {
-	//   baseAPIUrl = 'http://api.letsyam.com'
+	//   baseAPIUrl = 'https://api.letsyam.com/api/v7'
 	// } else if (process.env.NODE_ENV === 'staging') {
-	//    baseAPIUrl = 'http://yam-staging.herokuapp.com'
+	//    baseAPIUrl = 'https://yam-staging.herokuapp.com/api/v7'
 	// } else {
-	//   baseAPIUrl = 'http://localhost:8000'
+	//   // baseAPIUrl = 'http://localhost:8000'
+	//   baseAPIUrl = 'https://api.letsyam.com/api/v7'
 	// }
 
 /***/ },
@@ -67601,7 +67602,7 @@
 	    var _this = _possibleConstructorReturn(this, (_ref = SingleGroup.__proto__ || Object.getPrototypeOf(SingleGroup)).call.apply(_ref, [this].concat(args)));
 
 	    _this.state = {
-	      group: {},
+	      // group:{},
 	      isLoading: false,
 	      showingTrending: true,
 	      showingRecent: false,
@@ -67619,29 +67620,27 @@
 	  _createClass(SingleGroup, [{
 	    key: "componentDidMount",
 	    value: function componentDidMount() {
-	      this.fetchGroupInfo();
+	      // this.fetchGroupInfo()
 	    }
 	  }, {
 	    key: "fetchGroupInfo",
 	    value: function fetchGroupInfo() {
-	      var _this2 = this;
-
-	      this.setState({ isLoading: true });
-
-	      var endPoint = "jsons/group.json";
-
-	      fetch(endPoint, {
-	        headers: { "Content-Type": "application/json;charset=UTF-8" }
-	      }).then(function (response) {
-	        return response.json();
-	      }).then(function (json) {
-	        _this2.setState({
-	          group: json,
-	          isLoading: false
-	        });
-	      }).catch(function (e) {
-	        console.log('error', e);
-	      });
+	      // this.setState({isLoading: true})
+	      //
+	      // const endPoint = `jsons/group.json`
+	      //
+	      // fetch(endPoint, {
+	      //   headers: {"Content-Type": "application/json;charset=UTF-8"},
+	      // }).then((response) => {
+	      //   return response.json()
+	      // }).then((json) => {
+	      //   this.setState({
+	      //     group: json,
+	      //     isLoading: false
+	      //   })
+	      // }).catch((e) => {
+	      //   console.log('error', e)
+	      // })
 	    }
 	  }, {
 	    key: "showTrending",
@@ -67695,12 +67694,12 @@
 	    key: "render",
 	    value: function render() {
 	      var _state = this.state,
-	          group = _state.group,
 	          isLoading = _state.isLoading,
 	          showingTrending = _state.showingTrending,
 	          showingRecent = _state.showingRecent,
 	          showingTop = _state.showingTop,
 	          showingUnanswered = _state.showingUnanswered;
+	      var group = this.props.group;
 
 
 	      return _react2.default.createElement(
@@ -67965,7 +67964,7 @@
 	          page = _state.page;
 	      var group = this.props.group;
 
-	      var endPoint = "public_groups/5/trending_users";
+	      var endPoint = "public_groups/" + group.id + "/trending_users";
 	      var url = _Utils.baseAPIUrl + "/" + endPoint + "?per_page=" + pageCount + "&page=" + page;
 
 	      fetch(url, {
@@ -68219,7 +68218,7 @@
 	          type = _state.type;
 	      var group = this.props.group;
 
-	      var endPoint = "public_groups/5/" + type;
+	      var endPoint = "public_groups/" + group.id + "/" + type;
 	      var url = _Utils.baseAPIUrl + "/" + endPoint + "?per_page=" + pageCount + "&page=" + page;
 
 	      fetch(url, {
