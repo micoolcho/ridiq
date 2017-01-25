@@ -25,44 +25,33 @@ export default class SingleGroup extends React.Component {
   showTrending(e){
     e.preventDefault()
 
-    this.setState({
-      showingTrending: true,
-      showingRecent: false,
-      showingTop: false,
-      showingUnanswered: false
-    })
+    this.switchTab({showingTrending:true})
   }
 
   showRecent(e){
     e.preventDefault()
 
-    this.setState({
-      showingTrending: false,
-      showingRecent: true,
-      showingTop: false,
-      showingUnanswered: false
-    })
+    this.switchTab({showingRecent:true})
   }
 
   showTop(e){
     e.preventDefault()
 
-    this.setState({
-      showingTrending: false,
-      showingRecent: false,
-      showingTop: true,
-      showingUnanswered: false
-    })
+    this.switchTab({showingTop:true})
   }
 
   showUnanswered(e){
     e.preventDefault()
 
+    this.switchTab({showingUnanswered:true})
+  }
+
+  switchTab({showingTrending = false, showingRecent = false, showingTop = false, showingUnanswered = false}){
     this.setState({
-      showingTrending: false,
-      showingRecent: false,
-      showingTop: false,
-      showingUnanswered: true
+      showingTrending,
+      showingRecent,
+      showingTop,
+      showingUnanswered
     })
   }
 

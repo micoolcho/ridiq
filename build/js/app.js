@@ -67615,47 +67615,46 @@
 	    value: function showTrending(e) {
 	      e.preventDefault();
 
-	      this.setState({
-	        showingTrending: true,
-	        showingRecent: false,
-	        showingTop: false,
-	        showingUnanswered: false
-	      });
+	      this.switchTab({ showingTrending: true });
 	    }
 	  }, {
 	    key: "showRecent",
 	    value: function showRecent(e) {
 	      e.preventDefault();
 
-	      this.setState({
-	        showingTrending: false,
-	        showingRecent: true,
-	        showingTop: false,
-	        showingUnanswered: false
-	      });
+	      this.switchTab({ showingRecent: true });
 	    }
 	  }, {
 	    key: "showTop",
 	    value: function showTop(e) {
 	      e.preventDefault();
 
-	      this.setState({
-	        showingTrending: false,
-	        showingRecent: false,
-	        showingTop: true,
-	        showingUnanswered: false
-	      });
+	      this.switchTab({ showingTop: true });
 	    }
 	  }, {
 	    key: "showUnanswered",
 	    value: function showUnanswered(e) {
 	      e.preventDefault();
 
+	      this.switchTab({ showingUnanswered: true });
+	    }
+	  }, {
+	    key: "switchTab",
+	    value: function switchTab(_ref) {
+	      var _ref$showingTrending = _ref.showingTrending,
+	          showingTrending = _ref$showingTrending === undefined ? false : _ref$showingTrending,
+	          _ref$showingRecent = _ref.showingRecent,
+	          showingRecent = _ref$showingRecent === undefined ? false : _ref$showingRecent,
+	          _ref$showingTop = _ref.showingTop,
+	          showingTop = _ref$showingTop === undefined ? false : _ref$showingTop,
+	          _ref$showingUnanswere = _ref.showingUnanswered,
+	          showingUnanswered = _ref$showingUnanswere === undefined ? false : _ref$showingUnanswere;
+
 	      this.setState({
-	        showingTrending: false,
-	        showingRecent: false,
-	        showingTop: false,
-	        showingUnanswered: true
+	        showingTrending: showingTrending,
+	        showingRecent: showingRecent,
+	        showingTop: showingTop,
+	        showingUnanswered: showingUnanswered
 	      });
 	    }
 	  }, {
