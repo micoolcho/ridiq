@@ -3,8 +3,8 @@ import Moment from "moment";
 import {baseAPIUrl} from "./Utils.jsx";
 
 export default class AnswerList extends React.Component{
-  constructor(...args) {
-    super(...args);
+  constructor(props) {
+    super(props);
     this.state = {
       items:[],
       page: 1,

@@ -8,7 +8,7 @@
 @import "_mixins";
 
 body {
-  font-family: "Open Sans";
+  font-family: "Open Sans" !important;
   background: $bodyTextColor;
   background-color: #F8F7F7;
   font-size: 15px;

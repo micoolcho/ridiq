@@ -5,8 +5,8 @@ import SingleGroupTopUsers from "./SingleGroupTopUsers.jsx"
 import GroupQuestionList from "./GroupQuestionList.jsx"
 
 export default class SingleGroup extends React.Component {
-  constructor(...args) {
-    super(...args);
+  constructor(props) {
+    super(props);
 
     this.state = {
       // group:{},

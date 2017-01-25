@@ -16,8 +16,8 @@ function LoadMore ({onClick, isLoading, hidden}) {
 }
 
 export default class GroupQuestionList extends React.Component {
-  constructor(...args) {
-    super(...args);
+  constructor(props) {
+    super(props);
 
     this.state = {
       items:[],
@@ -39,45 +39,31 @@ export default class GroupQuestionList extends React.Component {
 
     if(nextProps.showingTrending){
       if(!showingTrending){
-        this.setState({
-          items:[],
-          page: 1,
-          isLoading: false,
-          hasNext: true,
-          type: "trending_questions"
-        })
+        this.reload("trending_questions")
       }
     } else if(nextProps.showingRecent){
       if(!showingRecent){
-        this.setState({
-          items:[],
-          page: 1,
-          isLoading: false,
-          hasNext: true,
-          type: "questions"
-        })
+        this.reload("questions")
       }
     } else if(nextProps.showingTop){
       if(!showingTop){
-        this.setState({
-          items:[],
-          page: 1,
-          isLoading: false,
-          hasNext: true,
-          type: "all_time"
-        })
+        this.reload("all_time")
       }
     } else if(nextProps.showingUnanswered){
       if(!showingUnanswered){
-        this.setState({
-          items:[],
-          page: 1,
-          isLoading: false,
-          hasNext: true,
-          type: "unanswered"
-        })
+        this.reload("unanswered")
       }
     }
+  }
+
+  reload(type = "trending_questions"){
+    this.setState({
+      items:[],
+      page: 1,
+      isLoading: false,
+      hasNext: true,
+      type: type
+    })
   }
 
   componentDidUpdate(prevProps, prevState){

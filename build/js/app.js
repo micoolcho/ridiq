@@ -67590,16 +67590,10 @@
 	var SingleGroup = function (_React$Component) {
 	  _inherits(SingleGroup, _React$Component);
 
-	  function SingleGroup() {
-	    var _ref;
-
+	  function SingleGroup(props) {
 	    _classCallCheck(this, SingleGroup);
 
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
-
-	    var _this = _possibleConstructorReturn(this, (_ref = SingleGroup.__proto__ || Object.getPrototypeOf(SingleGroup)).call.apply(_ref, [this].concat(args)));
+	    var _this = _possibleConstructorReturn(this, (SingleGroup.__proto__ || Object.getPrototypeOf(SingleGroup)).call(this, props));
 
 	    _this.state = {
 	      // group:{},
@@ -67915,16 +67909,10 @@
 	var SingleGroupTopUsers = function (_React$Component) {
 	  _inherits(SingleGroupTopUsers, _React$Component);
 
-	  function SingleGroupTopUsers() {
-	    var _ref;
-
+	  function SingleGroupTopUsers(props) {
 	    _classCallCheck(this, SingleGroupTopUsers);
 
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
-
-	    var _this = _possibleConstructorReturn(this, (_ref = SingleGroupTopUsers.__proto__ || Object.getPrototypeOf(SingleGroupTopUsers)).call.apply(_ref, [this].concat(args)));
+	    var _this = _possibleConstructorReturn(this, (SingleGroupTopUsers.__proto__ || Object.getPrototypeOf(SingleGroupTopUsers)).call(this, props));
 
 	    _this.state = {
 	      items: [],
@@ -68116,16 +68104,10 @@
 	var GroupQuestionList = function (_React$Component) {
 	  _inherits(GroupQuestionList, _React$Component);
 
-	  function GroupQuestionList() {
-	    var _ref2;
-
+	  function GroupQuestionList(props) {
 	    _classCallCheck(this, GroupQuestionList);
 
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
-
-	    var _this = _possibleConstructorReturn(this, (_ref2 = GroupQuestionList.__proto__ || Object.getPrototypeOf(GroupQuestionList)).call.apply(_ref2, [this].concat(args)));
+	    var _this = _possibleConstructorReturn(this, (GroupQuestionList.__proto__ || Object.getPrototypeOf(GroupQuestionList)).call(this, props));
 
 	    _this.state = {
 	      items: [],
@@ -68156,45 +68138,34 @@
 
 	      if (nextProps.showingTrending) {
 	        if (!showingTrending) {
-	          this.setState({
-	            items: [],
-	            page: 1,
-	            isLoading: false,
-	            hasNext: true,
-	            type: "trending_questions"
-	          });
+	          this.reload("trending_questions");
 	        }
 	      } else if (nextProps.showingRecent) {
 	        if (!showingRecent) {
-	          this.setState({
-	            items: [],
-	            page: 1,
-	            isLoading: false,
-	            hasNext: true,
-	            type: "questions"
-	          });
+	          this.reload("questions");
 	        }
 	      } else if (nextProps.showingTop) {
 	        if (!showingTop) {
-	          this.setState({
-	            items: [],
-	            page: 1,
-	            isLoading: false,
-	            hasNext: true,
-	            type: "all_time"
-	          });
+	          this.reload("all_time");
 	        }
 	      } else if (nextProps.showingUnanswered) {
 	        if (!showingUnanswered) {
-	          this.setState({
-	            items: [],
-	            page: 1,
-	            isLoading: false,
-	            hasNext: true,
-	            type: "unanswered"
-	          });
+	          this.reload("unanswered");
 	        }
 	      }
+	    }
+	  }, {
+	    key: "reload",
+	    value: function reload() {
+	      var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "trending_questions";
+
+	      this.setState({
+	        items: [],
+	        page: 1,
+	        isLoading: false,
+	        hasNext: true,
+	        type: type
+	      });
 	    }
 	  }, {
 	    key: "componentDidUpdate",
@@ -68407,16 +68378,10 @@
 	var AnswerList = function (_React$Component) {
 	  _inherits(AnswerList, _React$Component);
 
-	  function AnswerList() {
-	    var _ref;
-
+	  function AnswerList(props) {
 	    _classCallCheck(this, AnswerList);
 
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
-
-	    var _this = _possibleConstructorReturn(this, (_ref = AnswerList.__proto__ || Object.getPrototypeOf(AnswerList)).call.apply(_ref, [this].concat(args)));
+	    var _this = _possibleConstructorReturn(this, (AnswerList.__proto__ || Object.getPrototypeOf(AnswerList)).call(this, props));
 
 	    _this.state = {
 	      items: [],
