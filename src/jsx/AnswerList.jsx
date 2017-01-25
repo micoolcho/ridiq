@@ -49,12 +49,12 @@ export default class AnswerList extends React.Component{
 
     const {items, page} = this.state
     const {question} = this.props
+
     const endPoint = `questions/${question.id}/public_answers`
     const url = `${baseAPIUrl}/${endPoint}?per_page=${pageCount}&page=${page}`
+    const headers = {"Content-Type": "application/json;charset=UTF-8"}
 
-    fetch(url, {
-      headers: {"Content-Type": "application/json;charset=UTF-8"},
-    }).then((response) => {
+    fetch(url, {headers}).then((response) => {
         return response.json()
       }).then((json) => {
         const data = json.data

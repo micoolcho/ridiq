@@ -9,7 +9,6 @@ export default class SingleGroup extends React.Component {
     super(props);
 
     this.state = {
-      // group:{},
       isLoading: false,
       showingTrending: true,
       showingRecent: false,
@@ -21,29 +20,6 @@ export default class SingleGroup extends React.Component {
     this.showRecent = this.showRecent.bind(this)
     this.showTop = this.showTop.bind(this)
     this.showUnanswered = this.showUnanswered.bind(this)
-  }
-
-  componentDidMount() {
-    // this.fetchGroupInfo()
-  }
-
-  fetchGroupInfo(){
-    // this.setState({isLoading: true})
-    //
-    // const endPoint = `jsons/group.json`
-    //
-    // fetch(endPoint, {
-    //   headers: {"Content-Type": "application/json;charset=UTF-8"},
-    // }).then((response) => {
-    //   return response.json()
-    // }).then((json) => {
-    //   this.setState({
-    //     group: json,
-    //     isLoading: false
-    //   })
-    // }).catch((e) => {
-    //   console.log('error', e)
-    // })
   }
 
   showTrending(e){
@@ -141,10 +117,12 @@ class SingleGroupInfo extends React.Component {
 
 class CountBox extends React.Component{
   render(){
+    const {count, label} = this.props
+
     return(
       <li className="count_box">
-        <span className="count">{this.props.count}</span>
-        <span>{this.props.label}</span>
+        <span className="count">{count}</span>
+        <span>{label}</span>
       </li>
     )
   }
@@ -153,6 +131,7 @@ class CountBox extends React.Component{
 class SingleGroupNavBar extends React.Component{
   render(){
     const {showingTrending, showingRecent, showingTop, showingUnanswered, showTrending, showRecent, showTop, showUnanswered} = this.props
+
     return(
       <div id="group_nav">
         <ul>

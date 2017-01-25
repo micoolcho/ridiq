@@ -67596,7 +67596,6 @@
 	    var _this = _possibleConstructorReturn(this, (SingleGroup.__proto__ || Object.getPrototypeOf(SingleGroup)).call(this, props));
 
 	    _this.state = {
-	      // group:{},
 	      isLoading: false,
 	      showingTrending: true,
 	      showingRecent: false,
@@ -67612,31 +67611,6 @@
 	  }
 
 	  _createClass(SingleGroup, [{
-	    key: "componentDidMount",
-	    value: function componentDidMount() {
-	      // this.fetchGroupInfo()
-	    }
-	  }, {
-	    key: "fetchGroupInfo",
-	    value: function fetchGroupInfo() {
-	      // this.setState({isLoading: true})
-	      //
-	      // const endPoint = `jsons/group.json`
-	      //
-	      // fetch(endPoint, {
-	      //   headers: {"Content-Type": "application/json;charset=UTF-8"},
-	      // }).then((response) => {
-	      //   return response.json()
-	      // }).then((json) => {
-	      //   this.setState({
-	      //     group: json,
-	      //     isLoading: false
-	      //   })
-	      // }).catch((e) => {
-	      //   console.log('error', e)
-	      // })
-	    }
-	  }, {
 	    key: "showTrending",
 	    value: function showTrending(e) {
 	      e.preventDefault();
@@ -67781,18 +67755,23 @@
 	  _createClass(CountBox, [{
 	    key: "render",
 	    value: function render() {
+	      var _props = this.props,
+	          count = _props.count,
+	          label = _props.label;
+
+
 	      return _react2.default.createElement(
 	        "li",
 	        { className: "count_box" },
 	        _react2.default.createElement(
 	          "span",
 	          { className: "count" },
-	          this.props.count
+	          count
 	        ),
 	        _react2.default.createElement(
 	          "span",
 	          null,
-	          this.props.label
+	          label
 	        )
 	      );
 	    }
@@ -67813,15 +67792,16 @@
 	  _createClass(SingleGroupNavBar, [{
 	    key: "render",
 	    value: function render() {
-	      var _props = this.props,
-	          showingTrending = _props.showingTrending,
-	          showingRecent = _props.showingRecent,
-	          showingTop = _props.showingTop,
-	          showingUnanswered = _props.showingUnanswered,
-	          showTrending = _props.showTrending,
-	          showRecent = _props.showRecent,
-	          showTop = _props.showTop,
-	          showUnanswered = _props.showUnanswered;
+	      var _props2 = this.props,
+	          showingTrending = _props2.showingTrending,
+	          showingRecent = _props2.showingRecent,
+	          showingTop = _props2.showingTop,
+	          showingUnanswered = _props2.showingUnanswered,
+	          showTrending = _props2.showTrending,
+	          showRecent = _props2.showRecent,
+	          showTop = _props2.showTop,
+	          showUnanswered = _props2.showUnanswered;
+
 
 	      return _react2.default.createElement(
 	        "div",
@@ -67853,10 +67833,10 @@
 	  _createClass(SingleGroupNavBarLink, [{
 	    key: "render",
 	    value: function render() {
-	      var _props2 = this.props,
-	          selected = _props2.selected,
-	          title = _props2.title,
-	          onClick = _props2.onClick;
+	      var _props3 = this.props,
+	          selected = _props3.selected,
+	          title = _props3.title,
+	          onClick = _props3.onClick;
 
 	      var cssClass = selected ? "selected" : "";
 
@@ -67952,12 +67932,12 @@
 	          page = _state.page;
 	      var group = this.props.group;
 
+
 	      var endPoint = "public_groups/" + group.id + "/trending_users";
 	      var url = _Utils.baseAPIUrl + "/" + endPoint + "?per_page=" + pageCount + "&page=" + page;
+	      var headers = { "Content-Type": "application/json;charset=UTF-8" };
 
-	      fetch(url, {
-	        headers: { "Content-Type": "application/json;charset=UTF-8" }
-	      }).then(function (response) {
+	      fetch(url, { headers: headers }).then(function (response) {
 	        return response.json();
 	      }).then(function (json) {
 	        var data = json.data;
@@ -68442,12 +68422,12 @@
 	          page = _state.page;
 	      var question = this.props.question;
 
+
 	      var endPoint = "questions/" + question.id + "/public_answers";
 	      var url = _Utils.baseAPIUrl + "/" + endPoint + "?per_page=" + pageCount + "&page=" + page;
+	      var headers = { "Content-Type": "application/json;charset=UTF-8" };
 
-	      fetch(url, {
-	        headers: { "Content-Type": "application/json;charset=UTF-8" }
-	      }).then(function (response) {
+	      fetch(url, { headers: headers }).then(function (response) {
 	        return response.json();
 	      }).then(function (json) {
 	        var data = json.data;
