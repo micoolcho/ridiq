@@ -10,8 +10,8 @@ export default class AnswerList extends React.Component{
       page: 1,
       isLoading: false,
       hasNext: true,
-      showingPrevBtn: false,
-      showingNextBtn: false,
+      isShowingPrevBtn: false,
+      isShowingNextBtn: false,
       offsetX: 0
     }
 
@@ -64,8 +64,8 @@ export default class AnswerList extends React.Component{
             page: page + 1,
             isLoading: false,
             hasNext: data.length >= pageCount,
-            showingPrevBtn: false,
-            showingNextBtn: (data.length >= 4)
+            isShowingPrevBtn: false,
+            isShowingNextBtn: (data.length >= 4)
          })
       }).catch((e) => {
          console.log('error', e)
@@ -73,9 +73,9 @@ export default class AnswerList extends React.Component{
   }
 
   render(){
-    const {items, showingPrevBtn, showingNextBtn, offsetX} = this.state
-    const prevBtnClass = showingPrevBtn ? "" : " hidden"
-    const nextBtnClass = showingNextBtn ? "" : " hidden"
+    const {items, isShowingPrevBtn, isShowingNextBtn, offsetX} = this.state
+    const prevBtnClass = isShowingPrevBtn ? "" : " hidden"
+    const nextBtnClass = isShowingNextBtn ? "" : " hidden"
     const left = offsetX + "px"
 
     return(

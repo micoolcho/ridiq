@@ -10,10 +10,10 @@ export default class SingleGroup extends React.Component {
 
     this.state = {
       isLoading: false,
-      showingTrending: true,
-      showingRecent: false,
-      showingTop: false,
-      showingUnanswered: false
+      isShowingTrending: true,
+      isShowingRecent: false,
+      isShowingTop: false,
+      isShowingUnanswered: false
     }
 
     this.showTrending = this.showTrending.bind(this)
@@ -25,38 +25,38 @@ export default class SingleGroup extends React.Component {
   showTrending(e){
     e.preventDefault()
 
-    this.switchTab({showingTrending:true})
+    this.switchTab({isShowingTrending:true})
   }
 
   showRecent(e){
     e.preventDefault()
 
-    this.switchTab({showingRecent:true})
+    this.switchTab({isShowingRecent:true})
   }
 
   showTop(e){
     e.preventDefault()
 
-    this.switchTab({showingTop:true})
+    this.switchTab({isShowingTop:true})
   }
 
   showUnanswered(e){
     e.preventDefault()
 
-    this.switchTab({showingUnanswered:true})
+    this.switchTab({isShowingUnanswered:true})
   }
 
-  switchTab({showingTrending = false, showingRecent = false, showingTop = false, showingUnanswered = false}){
+  switchTab({isShowingTrending = false, isShowingRecent = false, isShowingTop = false, isShowingUnanswered = false}){
     this.setState({
-      showingTrending,
-      showingRecent,
-      showingTop,
-      showingUnanswered
+      isShowingTrending,
+      isShowingRecent,
+      isShowingTop,
+      isShowingUnanswered
     })
   }
 
   render() {
-     const {isLoading, showingTrending, showingRecent, showingTop, showingUnanswered} = this.state
+     const {isLoading, isShowingTrending, isShowingRecent, isShowingTop, isShowingUnanswered} = this.state
      const {group} = this.props
 
     return (
@@ -68,17 +68,17 @@ export default class SingleGroup extends React.Component {
         showRecent={this.showRecent}
         showTop={this.showTop}
         showUnanswered={this.showUnanswered}
-        showingTrending={showingTrending}
-        showingRecent={showingRecent}
-        showingTop={showingTop}
-        showingUnanswered={showingUnanswered}
+        isShowingTrending={isShowingTrending}
+        isShowingRecent={isShowingRecent}
+        isShowingTop={isShowingTop}
+        isShowingUnanswered={isShowingUnanswered}
         />
       <GroupQuestionList
         group={group}
-        showingTrending={showingTrending}
-        showingRecent={showingRecent}
-        showingTop={showingTop}
-        showingUnanswered={showingUnanswered}
+        isShowingTrending={isShowingTrending}
+        isShowingRecent={isShowingRecent}
+        isShowingTop={isShowingTop}
+        isShowingUnanswered={isShowingUnanswered}
         />
     </div>
     )
@@ -119,15 +119,15 @@ class CountBox extends React.Component{
 
 class SingleGroupNavBar extends React.Component{
   render(){
-    const {showingTrending, showingRecent, showingTop, showingUnanswered, showTrending, showRecent, showTop, showUnanswered} = this.props
+    const {isShowingTrending, isShowingRecent, isShowingTop, isShowingUnanswered, showTrending, showRecent, showTop, showUnanswered} = this.props
 
     return(
       <div id="group_nav">
         <ul>
-          <SingleGroupNavBarLink selected={showingTrending} onClick={showTrending} title="Trending"/>
-          <SingleGroupNavBarLink selected={showingRecent} onClick={showRecent} title="Recent"/>
-          <SingleGroupNavBarLink selected={showingTop} onClick={showTop} title="Top"/>
-          <SingleGroupNavBarLink selected={showingUnanswered} onClick={showUnanswered} title="Unanswered"/>
+          <SingleGroupNavBarLink selected={isShowingTrending} onClick={showTrending} title="Trending"/>
+          <SingleGroupNavBarLink selected={isShowingRecent} onClick={showRecent} title="Recent"/>
+          <SingleGroupNavBarLink selected={isShowingTop} onClick={showTop} title="Top"/>
+          <SingleGroupNavBarLink selected={isShowingUnanswered} onClick={showUnanswered} title="Unanswered"/>
         </ul>
       </div>
     )

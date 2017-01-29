@@ -10,8 +10,8 @@ export default class SingleGroupTopUsers extends React.Component{
       page: 1,
       isLoading: false,
       hasNext: true,
-      showingPrevBtn: false,
-      showingNextBtn: false,
+      isShowingPrevBtn: false,
+      isShowingNextBtn: false,
       offsetX: 0
     }
 
@@ -46,7 +46,7 @@ export default class SingleGroupTopUsers extends React.Component{
             page: page + 1,
             isLoading: false,
             hasNext: data.length >= pageCount,
-            showingNextBtn: data.length > 13
+            isShowingNextBtn: data.length > 13
          })
       }).catch((e) => {
          console.log('error', e)
@@ -54,9 +54,9 @@ export default class SingleGroupTopUsers extends React.Component{
   }
 
   render(){
-    const { items, showingPrevBtn, showingNextBtn } = this.state
-    const prevClass = showingPrevBtn ? "" : " hidden"
-    const nextClass = showingNextBtn ? "" : " hidden"
+    const { items, isShowingPrevBtn, isShowingNextBtn } = this.state
+    const prevClass = isShowingPrevBtn ? "" : " hidden"
+    const nextClass = isShowingNextBtn ? "" : " hidden"
 
     return(
       <div id="group_top_users">

@@ -35,22 +35,22 @@ export default class GroupQuestionList extends React.Component {
   }
 
   componentWillReceiveProps(nextProps){
-    const {showingTrending, showingRecent, showingTop, showingUnanswered} = this.props
+    const {isShowingTrending, isShowingRecent, isShowingTop, isShowingUnanswered} = this.props
 
-    if(nextProps.showingTrending){
-      if(!showingTrending){
+    if(nextProps.isShowingTrending){
+      if(!isShowingTrending){
         this.reload("trending_questions")
       }
-    } else if(nextProps.showingRecent){
-      if(!showingRecent){
+    } else if(nextProps.isShowingRecent){
+      if(!isShowingRecent){
         this.reload("questions")
       }
-    } else if(nextProps.showingTop){
-      if(!showingTop){
+    } else if(nextProps.isShowingTop){
+      if(!isShowingTop){
         this.reload("all_time")
       }
-    } else if(nextProps.showingUnanswered){
-      if(!showingUnanswered){
+    } else if(nextProps.isShowingUnanswered){
+      if(!isShowingUnanswered){
         this.reload("unanswered")
       }
     }

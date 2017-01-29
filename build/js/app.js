@@ -67597,10 +67597,10 @@
 
 	    _this.state = {
 	      isLoading: false,
-	      showingTrending: true,
-	      showingRecent: false,
-	      showingTop: false,
-	      showingUnanswered: false
+	      isShowingTrending: true,
+	      isShowingRecent: false,
+	      isShowingTop: false,
+	      isShowingUnanswered: false
 	    };
 
 	    _this.showTrending = _this.showTrending.bind(_this);
@@ -67615,46 +67615,46 @@
 	    value: function showTrending(e) {
 	      e.preventDefault();
 
-	      this.switchTab({ showingTrending: true });
+	      this.switchTab({ isShowingTrending: true });
 	    }
 	  }, {
 	    key: "showRecent",
 	    value: function showRecent(e) {
 	      e.preventDefault();
 
-	      this.switchTab({ showingRecent: true });
+	      this.switchTab({ isShowingRecent: true });
 	    }
 	  }, {
 	    key: "showTop",
 	    value: function showTop(e) {
 	      e.preventDefault();
 
-	      this.switchTab({ showingTop: true });
+	      this.switchTab({ isShowingTop: true });
 	    }
 	  }, {
 	    key: "showUnanswered",
 	    value: function showUnanswered(e) {
 	      e.preventDefault();
 
-	      this.switchTab({ showingUnanswered: true });
+	      this.switchTab({ isShowingUnanswered: true });
 	    }
 	  }, {
 	    key: "switchTab",
 	    value: function switchTab(_ref) {
-	      var _ref$showingTrending = _ref.showingTrending,
-	          showingTrending = _ref$showingTrending === undefined ? false : _ref$showingTrending,
-	          _ref$showingRecent = _ref.showingRecent,
-	          showingRecent = _ref$showingRecent === undefined ? false : _ref$showingRecent,
-	          _ref$showingTop = _ref.showingTop,
-	          showingTop = _ref$showingTop === undefined ? false : _ref$showingTop,
-	          _ref$showingUnanswere = _ref.showingUnanswered,
-	          showingUnanswered = _ref$showingUnanswere === undefined ? false : _ref$showingUnanswere;
+	      var _ref$isShowingTrendin = _ref.isShowingTrending,
+	          isShowingTrending = _ref$isShowingTrendin === undefined ? false : _ref$isShowingTrendin,
+	          _ref$isShowingRecent = _ref.isShowingRecent,
+	          isShowingRecent = _ref$isShowingRecent === undefined ? false : _ref$isShowingRecent,
+	          _ref$isShowingTop = _ref.isShowingTop,
+	          isShowingTop = _ref$isShowingTop === undefined ? false : _ref$isShowingTop,
+	          _ref$isShowingUnanswe = _ref.isShowingUnanswered,
+	          isShowingUnanswered = _ref$isShowingUnanswe === undefined ? false : _ref$isShowingUnanswe;
 
 	      this.setState({
-	        showingTrending: showingTrending,
-	        showingRecent: showingRecent,
-	        showingTop: showingTop,
-	        showingUnanswered: showingUnanswered
+	        isShowingTrending: isShowingTrending,
+	        isShowingRecent: isShowingRecent,
+	        isShowingTop: isShowingTop,
+	        isShowingUnanswered: isShowingUnanswered
 	      });
 	    }
 	  }, {
@@ -67662,10 +67662,10 @@
 	    value: function render() {
 	      var _state = this.state,
 	          isLoading = _state.isLoading,
-	          showingTrending = _state.showingTrending,
-	          showingRecent = _state.showingRecent,
-	          showingTop = _state.showingTop,
-	          showingUnanswered = _state.showingUnanswered;
+	          isShowingTrending = _state.isShowingTrending,
+	          isShowingRecent = _state.isShowingRecent,
+	          isShowingTop = _state.isShowingTop,
+	          isShowingUnanswered = _state.isShowingUnanswered;
 	      var group = this.props.group;
 
 
@@ -67679,17 +67679,17 @@
 	          showRecent: this.showRecent,
 	          showTop: this.showTop,
 	          showUnanswered: this.showUnanswered,
-	          showingTrending: showingTrending,
-	          showingRecent: showingRecent,
-	          showingTop: showingTop,
-	          showingUnanswered: showingUnanswered
+	          isShowingTrending: isShowingTrending,
+	          isShowingRecent: isShowingRecent,
+	          isShowingTop: isShowingTop,
+	          isShowingUnanswered: isShowingUnanswered
 	        }),
 	        _react2.default.createElement(_GroupQuestionList2.default, {
 	          group: group,
-	          showingTrending: showingTrending,
-	          showingRecent: showingRecent,
-	          showingTop: showingTop,
-	          showingUnanswered: showingUnanswered
+	          isShowingTrending: isShowingTrending,
+	          isShowingRecent: isShowingRecent,
+	          isShowingTop: isShowingTop,
+	          isShowingUnanswered: isShowingUnanswered
 	        })
 	      );
 	    }
@@ -67792,10 +67792,10 @@
 	    key: "render",
 	    value: function render() {
 	      var _props2 = this.props,
-	          showingTrending = _props2.showingTrending,
-	          showingRecent = _props2.showingRecent,
-	          showingTop = _props2.showingTop,
-	          showingUnanswered = _props2.showingUnanswered,
+	          isShowingTrending = _props2.isShowingTrending,
+	          isShowingRecent = _props2.isShowingRecent,
+	          isShowingTop = _props2.isShowingTop,
+	          isShowingUnanswered = _props2.isShowingUnanswered,
 	          showTrending = _props2.showTrending,
 	          showRecent = _props2.showRecent,
 	          showTop = _props2.showTop,
@@ -67808,10 +67808,10 @@
 	        _react2.default.createElement(
 	          "ul",
 	          null,
-	          _react2.default.createElement(SingleGroupNavBarLink, { selected: showingTrending, onClick: showTrending, title: "Trending" }),
-	          _react2.default.createElement(SingleGroupNavBarLink, { selected: showingRecent, onClick: showRecent, title: "Recent" }),
-	          _react2.default.createElement(SingleGroupNavBarLink, { selected: showingTop, onClick: showTop, title: "Top" }),
-	          _react2.default.createElement(SingleGroupNavBarLink, { selected: showingUnanswered, onClick: showUnanswered, title: "Unanswered" })
+	          _react2.default.createElement(SingleGroupNavBarLink, { selected: isShowingTrending, onClick: showTrending, title: "Trending" }),
+	          _react2.default.createElement(SingleGroupNavBarLink, { selected: isShowingRecent, onClick: showRecent, title: "Recent" }),
+	          _react2.default.createElement(SingleGroupNavBarLink, { selected: isShowingTop, onClick: showTop, title: "Top" }),
+	          _react2.default.createElement(SingleGroupNavBarLink, { selected: isShowingUnanswered, onClick: showUnanswered, title: "Unanswered" })
 	        )
 	      );
 	    }
@@ -67897,8 +67897,8 @@
 	      page: 1,
 	      isLoading: false,
 	      hasNext: true,
-	      showingPrevBtn: false,
-	      showingNextBtn: false,
+	      isShowingPrevBtn: false,
+	      isShowingNextBtn: false,
 	      offsetX: 0
 	    };
 
@@ -67945,7 +67945,7 @@
 	          page: page + 1,
 	          isLoading: false,
 	          hasNext: data.length >= pageCount,
-	          showingNextBtn: data.length > 13
+	          isShowingNextBtn: data.length > 13
 	        });
 	      }).catch(function (e) {
 	        console.log('error', e);
@@ -67956,11 +67956,11 @@
 	    value: function render() {
 	      var _state2 = this.state,
 	          items = _state2.items,
-	          showingPrevBtn = _state2.showingPrevBtn,
-	          showingNextBtn = _state2.showingNextBtn;
+	          isShowingPrevBtn = _state2.isShowingPrevBtn,
+	          isShowingNextBtn = _state2.isShowingNextBtn;
 
-	      var prevClass = showingPrevBtn ? "" : " hidden";
-	      var nextClass = showingNextBtn ? "" : " hidden";
+	      var prevClass = isShowingPrevBtn ? "" : " hidden";
+	      var nextClass = isShowingNextBtn ? "" : " hidden";
 
 	      return _react2.default.createElement(
 	        "div",
@@ -68108,26 +68108,26 @@
 	    key: "componentWillReceiveProps",
 	    value: function componentWillReceiveProps(nextProps) {
 	      var _props = this.props,
-	          showingTrending = _props.showingTrending,
-	          showingRecent = _props.showingRecent,
-	          showingTop = _props.showingTop,
-	          showingUnanswered = _props.showingUnanswered;
+	          isShowingTrending = _props.isShowingTrending,
+	          isShowingRecent = _props.isShowingRecent,
+	          isShowingTop = _props.isShowingTop,
+	          isShowingUnanswered = _props.isShowingUnanswered;
 
 
-	      if (nextProps.showingTrending) {
-	        if (!showingTrending) {
+	      if (nextProps.isShowingTrending) {
+	        if (!isShowingTrending) {
 	          this.reload("trending_questions");
 	        }
-	      } else if (nextProps.showingRecent) {
-	        if (!showingRecent) {
+	      } else if (nextProps.isShowingRecent) {
+	        if (!isShowingRecent) {
 	          this.reload("questions");
 	        }
-	      } else if (nextProps.showingTop) {
-	        if (!showingTop) {
+	      } else if (nextProps.isShowingTop) {
+	        if (!isShowingTop) {
 	          this.reload("all_time");
 	        }
-	      } else if (nextProps.showingUnanswered) {
-	        if (!showingUnanswered) {
+	      } else if (nextProps.isShowingUnanswered) {
+	        if (!isShowingUnanswered) {
 	          this.reload("unanswered");
 	        }
 	      }
@@ -68340,8 +68340,8 @@
 	      page: 1,
 	      isLoading: false,
 	      hasNext: true,
-	      showingPrevBtn: false,
-	      showingNextBtn: false,
+	      isShowingPrevBtn: false,
+	      isShowingNextBtn: false,
 	      offsetX: 0
 	    };
 
@@ -68408,8 +68408,8 @@
 	          page: page + 1,
 	          isLoading: false,
 	          hasNext: data.length >= pageCount,
-	          showingPrevBtn: false,
-	          showingNextBtn: data.length >= 4
+	          isShowingPrevBtn: false,
+	          isShowingNextBtn: data.length >= 4
 	        });
 	      }).catch(function (e) {
 	        console.log('error', e);
@@ -68420,12 +68420,12 @@
 	    value: function render() {
 	      var _state2 = this.state,
 	          items = _state2.items,
-	          showingPrevBtn = _state2.showingPrevBtn,
-	          showingNextBtn = _state2.showingNextBtn,
+	          isShowingPrevBtn = _state2.isShowingPrevBtn,
+	          isShowingNextBtn = _state2.isShowingNextBtn,
 	          offsetX = _state2.offsetX;
 
-	      var prevBtnClass = showingPrevBtn ? "" : " hidden";
-	      var nextBtnClass = showingNextBtn ? "" : " hidden";
+	      var prevBtnClass = isShowingPrevBtn ? "" : " hidden";
+	      var nextBtnClass = isShowingNextBtn ? "" : " hidden";
 	      var left = offsetX + "px";
 
 	      return _react2.default.createElement(
