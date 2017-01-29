@@ -77,12 +77,12 @@ export default class GroupQuestionList extends React.Component {
 
     const {items, page, type} = this.state
     const {group} = this.props
+
     const endPoint = `public_groups/${group.id}/${type}`
     const url = `${baseAPIUrl}/${endPoint}?per_page=${pageCount}&page=${page}`
+    const headers = {"Content-Type": "application/json;charset=UTF-8"}
 
-    fetch(url, {
-      headers: {"Content-Type": "application/json;charset=UTF-8"},
-    }).then((response) => {
+    fetch(url, {headers}).then((response) => {
         return response.json()
       }).then((json) => {
         const data = json.data
@@ -110,11 +110,7 @@ export default class GroupQuestionList extends React.Component {
     <div id="questions_list">
       {
         items.map((question, index) => {
-          if(question.answer_count > 0){
-            return <SingleGroupQuestion key={question.id} question={question}/>
-          } else {
-            return <SingleGroupQuestionNoAnswer key={question.id} question={question}/>
-          }
+          return <SingleGroupQuestion key={question.id} question={question}/>
         })
       }
 
@@ -124,32 +120,25 @@ export default class GroupQuestionList extends React.Component {
   }
 }
 
-export class SingleGroupQuestion extends React.Component {
+class SingleGroupQuestion extends React.Component {
   render(){
     const { question } = this.props
+    let answerList = null
+
+    if (question.answer_count > 0) {
+      answerList = <AnswerList question={question}/>
+    }
 
     return(
       <div className="question clearfix">
       <QuestionContent question={question.content} answerCount={question.answer_count}/>
-      <AnswerList question={question}/>
+      {answerList}
       </div>
     )
   }
 }
 
-export class SingleGroupQuestionNoAnswer extends React.Component {
-  render(){
-    const { question } = this.props
-
-    return(
-      <div className="question clearfix">
-      <QuestionContent question={question.content} answerCount="0"/>
-      </div>
-    )
-  }
-}
-
-export class QuestionContent extends React.Component{
+class QuestionContent extends React.Component{
   responseCount(count){
     if (count > 1) {
       return count + " responses"

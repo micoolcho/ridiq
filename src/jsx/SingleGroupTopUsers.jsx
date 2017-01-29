@@ -79,15 +79,15 @@ export default class SingleGroupTopUsers extends React.Component{
   }
 }
 
-export class TopUser extends React.Component{
+class TopUser extends React.Component{
   render(){
     const { user } = this.props
-    const avatar_url = user.avatar_url.length > 0 ? user.avatar_url : "../images/avatar_placeholder_small.png"
+    const avatar_url = (user.avatar_url.length > 0) ? user.avatar_url : "../images/avatar_placeholder_small.png"
     const backgroundImage = `url(${avatar_url})`
 
     return(
       <li>
-        <a href={user.public_url}>
+        <a href={user.public_url} target="_blank">
         <div style={{backgroundImage:backgroundImage}} className="avatar"></div>
         {user.first_name}
         </a>

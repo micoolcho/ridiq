@@ -96,7 +96,7 @@ export default class AnswerList extends React.Component{
   }
 }
 
-export class AnswerCard extends React.Component{
+class AnswerCard extends React.Component{
   render(){
     const {answer} = this.props
     const user = answer.user
@@ -105,7 +105,7 @@ export class AnswerCard extends React.Component{
 
     return(
       <li className="answer_card">
-        <a href={answer.public_url}>
+        <a href={answer.public_url} target="_blank">
         <div style={{backgroundImage:backgroundImage}} className="video_thumbnail"></div>
         <div className="play_btn"></div>
         <h4>{user.name}</h4>

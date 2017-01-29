@@ -67863,7 +67863,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.TopUser = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -67993,7 +67992,7 @@
 
 	exports.default = SingleGroupTopUsers;
 
-	var TopUser = exports.TopUser = function (_React$Component2) {
+	var TopUser = function (_React$Component2) {
 	  _inherits(TopUser, _React$Component2);
 
 	  function TopUser() {
@@ -68015,7 +68014,7 @@
 	        null,
 	        _react2.default.createElement(
 	          "a",
-	          { href: user.public_url },
+	          { href: user.public_url, target: "_blank" },
 	          _react2.default.createElement("div", { style: { backgroundImage: backgroundImage }, className: "avatar" }),
 	          user.first_name
 	        )
@@ -68035,7 +68034,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.QuestionContent = exports.SingleGroupQuestionNoAnswer = exports.SingleGroupQuestion = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -68169,12 +68167,12 @@
 	          type = _state.type;
 	      var group = this.props.group;
 
+
 	      var endPoint = "public_groups/" + group.id + "/" + type;
 	      var url = _Utils.baseAPIUrl + "/" + endPoint + "?per_page=" + pageCount + "&page=" + page;
+	      var headers = { "Content-Type": "application/json;charset=UTF-8" };
 
-	      fetch(url, {
-	        headers: { "Content-Type": "application/json;charset=UTF-8" }
-	      }).then(function (response) {
+	      fetch(url, { headers: headers }).then(function (response) {
 	        return response.json();
 	      }).then(function (json) {
 	        var data = json.data;
@@ -68208,11 +68206,7 @@
 	        "div",
 	        { id: "questions_list" },
 	        items.map(function (question, index) {
-	          if (question.answer_count > 0) {
-	            return _react2.default.createElement(SingleGroupQuestion, { key: question.id, question: question });
-	          } else {
-	            return _react2.default.createElement(SingleGroupQuestionNoAnswer, { key: question.id, question: question });
-	          }
+	          return _react2.default.createElement(SingleGroupQuestion, { key: question.id, question: question });
 	        }),
 	        _react2.default.createElement(LoadMore, { onClick: this.loadMore, isLoading: isLoading, hidden: !hasNext })
 	      );
@@ -68224,7 +68218,7 @@
 
 	exports.default = GroupQuestionList;
 
-	var SingleGroupQuestion = exports.SingleGroupQuestion = function (_React$Component2) {
+	var SingleGroupQuestion = function (_React$Component2) {
 	  _inherits(SingleGroupQuestion, _React$Component2);
 
 	  function SingleGroupQuestion() {
@@ -68238,12 +68232,17 @@
 	    value: function render() {
 	      var question = this.props.question;
 
+	      var answerList = null;
+
+	      if (question.answer_count > 0) {
+	        answerList = _react2.default.createElement(_AnswerList2.default, { question: question });
+	      }
 
 	      return _react2.default.createElement(
 	        "div",
 	        { className: "question clearfix" },
 	        _react2.default.createElement(QuestionContent, { question: question.content, answerCount: question.answer_count }),
-	        _react2.default.createElement(_AnswerList2.default, { question: question })
+	        answerList
 	      );
 	    }
 	  }]);
@@ -68251,34 +68250,8 @@
 	  return SingleGroupQuestion;
 	}(_react2.default.Component);
 
-	var SingleGroupQuestionNoAnswer = exports.SingleGroupQuestionNoAnswer = function (_React$Component3) {
-	  _inherits(SingleGroupQuestionNoAnswer, _React$Component3);
-
-	  function SingleGroupQuestionNoAnswer() {
-	    _classCallCheck(this, SingleGroupQuestionNoAnswer);
-
-	    return _possibleConstructorReturn(this, (SingleGroupQuestionNoAnswer.__proto__ || Object.getPrototypeOf(SingleGroupQuestionNoAnswer)).apply(this, arguments));
-	  }
-
-	  _createClass(SingleGroupQuestionNoAnswer, [{
-	    key: "render",
-	    value: function render() {
-	      var question = this.props.question;
-
-
-	      return _react2.default.createElement(
-	        "div",
-	        { className: "question clearfix" },
-	        _react2.default.createElement(QuestionContent, { question: question.content, answerCount: "0" })
-	      );
-	    }
-	  }]);
-
-	  return SingleGroupQuestionNoAnswer;
-	}(_react2.default.Component);
-
-	var QuestionContent = exports.QuestionContent = function (_React$Component4) {
-	  _inherits(QuestionContent, _React$Component4);
+	var QuestionContent = function (_React$Component3) {
+	  _inherits(QuestionContent, _React$Component3);
 
 	  function QuestionContent() {
 	    _classCallCheck(this, QuestionContent);
@@ -68333,7 +68306,6 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.AnswerCard = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -68481,7 +68453,7 @@
 
 	exports.default = AnswerList;
 
-	var AnswerCard = exports.AnswerCard = function (_React$Component2) {
+	var AnswerCard = function (_React$Component2) {
 	  _inherits(AnswerCard, _React$Component2);
 
 	  function AnswerCard() {
@@ -68504,7 +68476,7 @@
 	        { className: "answer_card" },
 	        _react2.default.createElement(
 	          "a",
-	          { href: answer.public_url },
+	          { href: answer.public_url, target: "_blank" },
 	          _react2.default.createElement("div", { style: { backgroundImage: backgroundImage }, className: "video_thumbnail" }),
 	          _react2.default.createElement("div", { className: "play_btn" }),
 	          _react2.default.createElement(
