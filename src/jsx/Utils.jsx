@@ -12,7 +12,7 @@ export default class Utils {
   }
 }
 
-export let baseAPIUrl = 'https://yam-staging.herokuapp.com/api/v7'
+export let baseAPIUrl = 'https://api.letsyam.com/api/v7'
 // if (process.env.NODE_ENV === 'production') {
 //   baseAPIUrl = 'https://api.letsyam.com/api/v7'
 // } else if (process.env.NODE_ENV === 'staging') {
