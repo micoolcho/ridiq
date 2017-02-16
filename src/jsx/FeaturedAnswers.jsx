@@ -8,7 +8,7 @@ import _ from "lodash"
 
 let baseAPIUrl
 if (process.env.NODE_ENV === 'production') {
-  baseAPIUrl = 'http://api.letsyam.com'
+  baseAPIUrl = 'https://api.letsyam.com'
 } else if (process.env.NODE_ENV === 'staging') {
    baseAPIUrl = 'http://yam-staging.herokuapp.com'
 } else {
