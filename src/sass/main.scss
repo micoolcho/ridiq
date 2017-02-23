@@ -339,7 +339,8 @@ a {
   textarea {
     background: transparent;
     width: 100%;
-    border: none;
+    border: 1px solid $separatorColor;
+    padding: 10px;
     resize: none;
     outline: none;
   }
