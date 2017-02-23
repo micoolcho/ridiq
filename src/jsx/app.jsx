@@ -8,6 +8,7 @@ import SingleQuestion from "./SingleQuestion.jsx";
 import FeaturedAnswers from "./FeaturedAnswers.jsx"
 import SingleGroup from "./SingleGroup.jsx"
 import AllGroups from "./AllGroups.jsx"
+import FeaturedUsers from "./FeaturedUsers.jsx"
 import Moment from 'moment';
 // import {Button, Row, Col } from 'react-bootstrap';
 
@@ -77,6 +78,11 @@ if (document.getElementById('group')) {
 // All groups:
 if (document.getElementById('all_groups')) {
   ReactDOM.render(<AllGroups />, document.getElementById('all_groups'));
+}
+
+// All groups:
+if (document.getElementById('featured_users')) {
+  ReactDOM.render(<FeaturedUsers />, document.getElementById('featured_users'));
 }
 
 // Single question page: answers of question.
