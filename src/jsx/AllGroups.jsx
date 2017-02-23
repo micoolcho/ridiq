@@ -85,10 +85,10 @@ export default class AllGroups extends React.Component {
 class Group extends React.Component {
 
   render(){
-    const {name, follower_count, question_count, answer_count} = this.props.group
+    const {name, follower_count, question_count, answer_count, public_url} = this.props.group
 
     return (
-      <a className="group" href="#">
+      <a className="group" href={public_url}>
         <h3>{name}</h3>
         <div>
           <span>{follower_count} members</span>

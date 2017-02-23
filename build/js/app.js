@@ -68670,12 +68670,13 @@
 	          name = _props$group.name,
 	          follower_count = _props$group.follower_count,
 	          question_count = _props$group.question_count,
-	          answer_count = _props$group.answer_count;
+	          answer_count = _props$group.answer_count,
+	          public_url = _props$group.public_url;
 
 
 	      return _react2.default.createElement(
 	        "a",
-	        { className: "group", href: "#" },
+	        { className: "group", href: public_url },
 	        _react2.default.createElement(
 	          "h3",
 	          null,
