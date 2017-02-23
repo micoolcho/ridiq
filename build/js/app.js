@@ -82,6 +82,10 @@
 
 	var _SingleGroup2 = _interopRequireDefault(_SingleGroup);
 
+	var _AllGroups = __webpack_require__(322);
+
+	var _AllGroups2 = _interopRequireDefault(_AllGroups);
+
 	var _moment = __webpack_require__(195);
 
 	var _moment2 = _interopRequireDefault(_moment);
@@ -145,6 +149,11 @@
 	// Single group:
 	if (document.getElementById('group')) {
 	  _reactDom2.default.render(_react2.default.createElement(_SingleGroup2.default, { group: window.yamConf.group }), document.getElementById('group'));
+	}
+
+	// All groups:
+	if (document.getElementById('all_groups')) {
+	  _reactDom2.default.render(_react2.default.createElement(_AllGroups2.default, null), document.getElementById('all_groups'));
 	}
 
 	// Single question page: answers of question.
@@ -68495,6 +68504,210 @@
 	  }]);
 
 	  return AnswerCard;
+	}(_react2.default.Component);
+
+/***/ },
+/* 322 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _moment = __webpack_require__(195);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
+	var _Utils = __webpack_require__(307);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	function LoadMore(_ref) {
+	  var onClick = _ref.onClick,
+	      isLoading = _ref.isLoading,
+	      hidden = _ref.hidden;
+
+	  var hiddenClass = hidden ? " hidden" : "";
+	  var disabledClass = isLoading ? 'disabled' : '';
+	  var text = isLoading ? 'loading...' : 'load more';
+
+	  return _react2.default.createElement(
+	    "div",
+	    { className: "text-center m-t-20" + hiddenClass },
+	    _react2.default.createElement(
+	      "div",
+	      { onClick: onClick, className: 'button button-large ' + disabledClass },
+	      text
+	    )
+	  );
+	}
+
+	var AllGroups = function (_React$Component) {
+	  _inherits(AllGroups, _React$Component);
+
+	  function AllGroups(props) {
+	    _classCallCheck(this, AllGroups);
+
+	    var _this = _possibleConstructorReturn(this, (AllGroups.__proto__ || Object.getPrototypeOf(AllGroups)).call(this, props));
+
+	    _this.state = {
+	      items: [],
+	      page: 1,
+	      isLoading: false,
+	      hasNext: true
+	    };
+
+	    _this.loadMore = _this.loadMore.bind(_this);
+	    return _this;
+	  }
+
+	  _createClass(AllGroups, [{
+	    key: "componentDidMount",
+	    value: function componentDidMount() {
+	      this.fetchData();
+	    }
+	  }, {
+	    key: "fetchData",
+	    value: function fetchData() {
+	      var _this2 = this;
+
+	      var pageCount = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 10;
+
+	      this.setState({ isLoading: true });
+
+	      var _state = this.state,
+	          items = _state.items,
+	          page = _state.page,
+	          type = _state.type;
+
+
+	      var endPoint = "public_groups";
+	      var url = _Utils.baseAPIUrl + "/" + endPoint + "?per_page=" + pageCount + "&page=" + page;
+	      var headers = { "Content-Type": "application/json;charset=UTF-8" };
+
+	      fetch(url, { headers: headers }).then(function (response) {
+	        return response.json();
+	      }).then(function (json) {
+	        var data = json.data;
+
+	        _this2.setState({
+	          items: _.uniqBy(items.concat(data), 'id'),
+	          page: page + 1,
+	          isLoading: false,
+	          hasNext: data.length >= pageCount
+	        });
+	      }).catch(function (e) {
+	        console.log('error', e);
+	      });
+	    }
+	  }, {
+	    key: "loadMore",
+	    value: function loadMore() {
+	      this.fetchData();
+	    }
+	  }, {
+	    key: "render",
+	    value: function render() {
+	      var _state2 = this.state,
+	          items = _state2.items,
+	          isLoading = _state2.isLoading,
+	          hasNext = _state2.hasNext;
+	      var loadMore = this.loadMore.loadMore;
+
+
+	      return _react2.default.createElement(
+	        "div",
+	        null,
+	        _react2.default.createElement(
+	          "h2",
+	          null,
+	          "Groups on YAM"
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { id: "groups_list" },
+	          items.map(function (group, index) {
+	            return _react2.default.createElement(Group, { key: group.id, group: group });
+	          }),
+	          _react2.default.createElement(LoadMore, { onClick: this.loadMore, isLoading: isLoading, hidden: !hasNext })
+	        )
+	      );
+	    }
+	  }]);
+
+	  return AllGroups;
+	}(_react2.default.Component);
+
+	exports.default = AllGroups;
+
+	var Group = function (_React$Component2) {
+	  _inherits(Group, _React$Component2);
+
+	  function Group() {
+	    _classCallCheck(this, Group);
+
+	    return _possibleConstructorReturn(this, (Group.__proto__ || Object.getPrototypeOf(Group)).apply(this, arguments));
+	  }
+
+	  _createClass(Group, [{
+	    key: "render",
+	    value: function render() {
+	      var _props$group = this.props.group,
+	          name = _props$group.name,
+	          follower_count = _props$group.follower_count,
+	          question_count = _props$group.question_count,
+	          answer_count = _props$group.answer_count;
+
+
+	      return _react2.default.createElement(
+	        "a",
+	        { className: "group", href: "#" },
+	        _react2.default.createElement(
+	          "h3",
+	          null,
+	          name
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          null,
+	          _react2.default.createElement(
+	            "span",
+	            null,
+	            follower_count,
+	            " members"
+	          ),
+	          _react2.default.createElement(
+	            "span",
+	            null,
+	            question_count,
+	            " questions"
+	          ),
+	          _react2.default.createElement(
+	            "span",
+	            null,
+	            answer_count,
+	            " responses"
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Group;
 	}(_react2.default.Component);
 
 /***/ }
