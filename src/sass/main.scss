@@ -124,16 +124,6 @@ a {
     max-width: initial;
   }
 
-  &:before {
-    content: " ";
-    height: 1px;
-    display: block;
-    margin: 40px auto;
-    border-bottom: 1px solid #979797;
-    opacity: 0.3;
-    max-width: $contentMaxWidth;
-  }
-
   .overflow-wrapper {
     margin-right: -$lgAnswerPadding;
 
@@ -171,22 +161,6 @@ a {
       }
     }
 
-    &:before {
-      content: " ";
-      opacity: 0.6;
-      background: black;
-    }
-
-    &:before, .question {
-      display: block;
-      position: absolute;
-      z-index: 2;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-    }
-
     .cover {
       position: relative;
       z-index: 1;
@@ -207,57 +181,11 @@ a {
       }
     }
 
-    .question {
-      color: white;
-      z-index: 4;
-      text-align: center;
-      font-weight: 300;
-
-      .content {
-        position: absolute;
-        font-size: 17px;
-        line-height: 25px;
-        left: 40px;
-        top: 40px;
-        right: 40px;
-        bottom: 55px;
-        overflow: hidden;
-
-        @include smallMobile() {
-          font-size: 16px;
-          line-height: 23px;
-          left: 20px;
-          top: 15px;
-          right: 15px;
-          bottom: 25px;
-        }
-      }
+    .content{
+      font-size: 14px;
+      display: block;
     }
 
-    .info {
-      position: absolute;
-      z-index: 3;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      color: white;
-      text-align: center;
-      padding-bottom: 20px;
-
-      @include smallMobile() {
-        display: none;
-      }
-
-      img {
-        width: 21px;
-        margin-right: 4px;
-        margin-top: -3px;
-      }
-
-      span + span {
-        margin-left: 15px;
-      }
-    }
   }
 }
 

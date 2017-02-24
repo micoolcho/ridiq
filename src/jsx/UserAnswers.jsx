@@ -1,6 +1,6 @@
 import React from 'react';
 import jQuery from 'jquery';
-import AnswerService from './services/AnserServices.jsx';
+import AnswerService from './services/AnswerServices.jsx';
 import BasedLoadMoreComponent from "./BasedLoadMoreComponent.jsx";
 
 export default class UserAnsweredQuestions extends BasedLoadMoreComponent {
@@ -9,7 +9,7 @@ export default class UserAnsweredQuestions extends BasedLoadMoreComponent {
     const externalArgs = {
       service: AnswerService,
     }
-    
+
     super(...args, externalArgs);
 
     this.state.successLoadCount = 0;
@@ -17,25 +17,24 @@ export default class UserAnsweredQuestions extends BasedLoadMoreComponent {
   }
 
   render() {
-    if (this.props.total == 0) {
+    const {total} = this.props
+
+    if (total == 0) {
       return (<span></span>);
     }
 
     return (
       <div>
         {
-          this.items.map((item)=>{
+          this.items.map((answer, index) => {
             return (
-              <div className="answer" key={`answer-${Math.random()}`}>
-                <img className="cover" src={item.image_url} alt="" />
-                <a href={item.public_url} className="question">
-                  <span className="content">
-                    {item.question.content}
-                  </span>
+              <div className="answer" key={answer.id}>
+                <span className="content">
+                  {answer.question.content}
+                </span>
+                <img className="cover" src={answer.image_url} alt="" />
+                <a href={answer.public_url} className="question">
                 </a>
-                <div className="info">
-                  <span><img src="/images/view_icon.png" alt="" /> {item.view_count}</span>
-                </div>
               </div>
             )
           })

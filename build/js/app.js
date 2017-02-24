@@ -21551,9 +21551,9 @@
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
-	var _AnserServices = __webpack_require__(180);
+	var _AnswerServices = __webpack_require__(324);
 
-	var _AnserServices2 = _interopRequireDefault(_AnserServices);
+	var _AnswerServices2 = _interopRequireDefault(_AnswerServices);
 
 	var _BasedLoadMoreComponent = __webpack_require__(190);
 
@@ -21576,7 +21576,7 @@
 	    _classCallCheck(this, UserAnsweredQuestions);
 
 	    var externalArgs = {
-	      service: _AnserServices2.default
+	      service: _AnswerServices2.default
 	    };
 
 	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
@@ -21593,38 +21593,27 @@
 	  _createClass(UserAnsweredQuestions, [{
 	    key: 'render',
 	    value: function render() {
-	      if (this.props.total == 0) {
+	      var total = this.props.total;
+
+
+	      if (total == 0) {
 	        return _react2.default.createElement('span', null);
 	      }
 
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        this.items.map(function (item) {
+	        this.items.map(function (answer, index) {
 	          return _react2.default.createElement(
 	            'div',
-	            { className: 'answer', key: 'answer-' + Math.random() },
-	            _react2.default.createElement('img', { className: 'cover', src: item.image_url, alt: '' }),
+	            { className: 'answer', key: answer.id },
 	            _react2.default.createElement(
-	              'a',
-	              { href: item.public_url, className: 'question' },
-	              _react2.default.createElement(
-	                'span',
-	                { className: 'content' },
-	                item.question.content
-	              )
+	              'span',
+	              { className: 'content' },
+	              answer.question.content
 	            ),
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'info' },
-	              _react2.default.createElement(
-	                'span',
-	                null,
-	                _react2.default.createElement('img', { src: '/images/view_icon.png', alt: '' }),
-	                ' ',
-	                item.view_count
-	              )
-	            )
+	            _react2.default.createElement('img', { className: 'cover', src: answer.image_url, alt: '' }),
+	            _react2.default.createElement('a', { href: answer.public_url, className: 'question' })
 	          );
 	        }),
 	        _react2.default.createElement('div', { className: 'clearfix' }),
@@ -31486,79 +31475,7 @@
 
 
 /***/ },
-/* 180 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _fbemitter = __webpack_require__(181);
-
-	var _es6Promise = __webpack_require__(186);
-
-	var _es6Promise2 = _interopRequireDefault(_es6Promise);
-
-	var _isomorphicFetch = __webpack_require__(188);
-
-	var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var AnswerService = function (_EventEmitter) {
-	  _inherits(AnswerService, _EventEmitter);
-
-	  function AnswerService() {
-	    var _ref;
-
-	    _classCallCheck(this, AnswerService);
-
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
-
-	    var _this = _possibleConstructorReturn(this, (_ref = AnswerService.__proto__ || Object.getPrototypeOf(AnswerService)).call.apply(_ref, [this].concat(args)));
-
-	    _es6Promise2.default.polyfill();
-	    return _this;
-	  }
-
-	  _createClass(AnswerService, [{
-	    key: 'loadMore',
-	    value: function loadMore(pageNum) {
-	      var _this2 = this;
-
-	      var apiUrl = window.yamConf.answer.apiGet + "?" + "user_id=" + window.yamConf.answer.userId + "&" + "perpage=" + window.yamConf.answer.perPage + "&" + "page=" + pageNum;
-
-	      (0, _isomorphicFetch2.default)(apiUrl, {
-	        method: "GET"
-	      }).then(function (response) {
-	        if (response.status >= 400) {
-	          throw new Error("Bad response from server");
-	        }
-	        return response.json();
-	      }).then(function (stories) {
-	        _this2.emit('loadmore', stories);
-	      });
-	    }
-	  }]);
-
-	  return AnswerService;
-	}(_fbemitter.EventEmitter);
-
-	exports.default = new AnswerService();
-
-/***/ },
+/* 180 */,
 /* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -68867,6 +68784,79 @@
 
 	  return UserCard;
 	}(_react2.default.Component);
+
+/***/ },
+/* 324 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _fbemitter = __webpack_require__(181);
+
+	var _es6Promise = __webpack_require__(186);
+
+	var _es6Promise2 = _interopRequireDefault(_es6Promise);
+
+	var _isomorphicFetch = __webpack_require__(188);
+
+	var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var AnswerService = function (_EventEmitter) {
+	  _inherits(AnswerService, _EventEmitter);
+
+	  function AnswerService() {
+	    var _ref;
+
+	    _classCallCheck(this, AnswerService);
+
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    var _this = _possibleConstructorReturn(this, (_ref = AnswerService.__proto__ || Object.getPrototypeOf(AnswerService)).call.apply(_ref, [this].concat(args)));
+
+	    _es6Promise2.default.polyfill();
+	    return _this;
+	  }
+
+	  _createClass(AnswerService, [{
+	    key: 'loadMore',
+	    value: function loadMore(pageNum) {
+	      var _this2 = this;
+
+	      var apiUrl = window.yamConf.answer.apiGet + "?" + "user_id=" + window.yamConf.answer.userId + "&" + "perpage=" + window.yamConf.answer.perPage + "&" + "page=" + pageNum;
+
+	      (0, _isomorphicFetch2.default)(apiUrl, {
+	        method: "GET"
+	      }).then(function (response) {
+	        if (response.status >= 400) {
+	          throw new Error("Bad response from server");
+	        }
+	        return response.json();
+	      }).then(function (stories) {
+	        _this2.emit('loadmore', stories);
+	      });
+	    }
+	  }]);
+
+	  return AnswerService;
+	}(_fbemitter.EventEmitter);
+
+	exports.default = new AnswerService();
 
 /***/ }
 /******/ ]);
