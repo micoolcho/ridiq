@@ -2,7 +2,7 @@ import {EventEmitter} from 'fbemitter';
 import Es6Promise from 'es6-promise';
 import jQuery from 'jquery';
 
-export default class AskQuestionService extends EventEmitter {
+class AskQuestionService extends EventEmitter {
   constructor(...args) {
     super(...args);
     Es6Promise.polyfill();
@@ -21,3 +21,5 @@ export default class AskQuestionService extends EventEmitter {
     });
   }
 }
+
+export default new AskQuestionService();

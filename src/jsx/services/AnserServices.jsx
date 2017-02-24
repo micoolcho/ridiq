@@ -2,7 +2,7 @@ import {EventEmitter} from 'fbemitter';
 import Es6Promise from 'es6-promise';
 import Fetch from 'isomorphic-fetch';
 
-export default class AnswerService extends EventEmitter {
+class AnswerService extends EventEmitter {
   constructor(...args) {
     super(...args);
     Es6Promise.polyfill();
@@ -29,3 +29,5 @@ export default class AnswerService extends EventEmitter {
       });
   }
 }
+
+export default new AnswerService();
