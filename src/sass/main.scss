@@ -228,7 +228,7 @@ a {
   }
 
   &.button-small {
-    background: #19ADE2;
+    background: $textBlueColor;
     color: white;
     font-size: 12px;
     padding: 8px 25px;
@@ -237,15 +237,18 @@ a {
   }
 
   &.button-large {
-    border: 1px solid #19ADE2;
-    border-radius: 1000px;
+    border: 1px solid $textBlueColor;
+    border-radius: 4px;
     text-transform: capitalize;
     padding: 12px 50px;
-    min-width: 240px;
-    font-size: 16px;
-    color: #19ADE2;
+    font-size: 14px;
+    color: $textBlueColor;
     margin-top:20px;
     margin-bottom: 50px;
+
+    &:hover{
+      background-color: rgba($textBlueColor, 0.05);
+    }
 
     @include extraSmallMobile() {
       min-width: initial;
