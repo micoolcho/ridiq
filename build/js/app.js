@@ -21604,17 +21604,7 @@
 	        'div',
 	        null,
 	        this.items.map(function (answer, index) {
-	          return _react2.default.createElement(
-	            'div',
-	            { className: 'answer', key: answer.id },
-	            _react2.default.createElement(
-	              'span',
-	              { className: 'content' },
-	              answer.question.content
-	            ),
-	            _react2.default.createElement('img', { className: 'cover', src: answer.image_url, alt: '' }),
-	            _react2.default.createElement('a', { href: answer.public_url, className: 'question' })
-	          );
+	          return _react2.default.createElement(ProfileAnswerCard, { key: answer.id, answer: answer });
 	        }),
 	        _react2.default.createElement('div', { className: 'clearfix' }),
 	        this.getLoadMoreBtn()
@@ -21653,6 +21643,46 @@
 	}(_BasedLoadMoreComponent2.default);
 
 	exports.default = UserAnsweredQuestions;
+
+	var ProfileAnswerCard = function (_React$Component) {
+	  _inherits(ProfileAnswerCard, _React$Component);
+
+	  function ProfileAnswerCard() {
+	    _classCallCheck(this, ProfileAnswerCard);
+
+	    return _possibleConstructorReturn(this, (ProfileAnswerCard.__proto__ || Object.getPrototypeOf(ProfileAnswerCard)).apply(this, arguments));
+	  }
+
+	  _createClass(ProfileAnswerCard, [{
+	    key: 'render',
+	    value: function render() {
+	      var answer = this.props.answer;
+
+	      var user = answer.user;
+	      var question = answer.question.content;
+	      var backgroundImage = 'url(' + answer.image_url + ')';
+
+	      return _react2.default.createElement(
+	        'li',
+	        { className: 'answer_card' },
+	        _react2.default.createElement(
+	          'a',
+	          { href: answer.public_url, target: '_blank' },
+	          _react2.default.createElement('div', { style: { backgroundImage: backgroundImage }, className: 'video_thumbnail' }),
+	          _react2.default.createElement('h4', null),
+	          _react2.default.createElement('div', { className: 'play_btn' }),
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            question
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return ProfileAnswerCard;
+	}(_react2.default.Component);
 
 /***/ },
 /* 179 */

@@ -28,14 +28,7 @@ export default class UserAnsweredQuestions extends BasedLoadMoreComponent {
         {
           this.items.map((answer, index) => {
             return (
-              <div className="answer" key={answer.id}>
-                <span className="content">
-                  {answer.question.content}
-                </span>
-                <img className="cover" src={answer.image_url} alt="" />
-                <a href={answer.public_url} className="question">
-                </a>
-              </div>
+              <ProfileAnswerCard key={answer.id} answer={answer}/>
             )
           })
         }
@@ -68,5 +61,25 @@ export default class UserAnsweredQuestions extends BasedLoadMoreComponent {
     if ( super.onReceiveLoadmoreResult(result) ) {
       this.state.successLoadCount = this.state.successLoadCount + 1;
     }
+  }
+}
+
+class ProfileAnswerCard extends React.Component{
+  render(){
+    const {answer} = this.props
+    const user = answer.user
+    const question = answer.question.content
+    const backgroundImage = `url(${answer.image_url})`
+
+    return(
+      <li className="answer_card">
+        <a href={answer.public_url} target="_blank">
+        <div style={{backgroundImage:backgroundImage}} className="video_thumbnail"></div>
+        <h4></h4>
+        <div className="play_btn"></div>
+        <span>{question}</span>
+        </a>
+      </li>
+    )
   }
 }
