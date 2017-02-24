@@ -4,6 +4,8 @@
 @import "question-block";
 @import "single-answer";
 @import "group";
+@import "all_groups";
+@import "featured_users";
 @import "vars";
 @import "_mixins";
 
@@ -339,7 +341,8 @@ a {
   textarea {
     background: transparent;
     width: 100%;
-    border: none;
+    border: 1px solid $separatorColor;
+    padding: 10px;
     resize: none;
     outline: none;
   }
