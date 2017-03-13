@@ -72,7 +72,7 @@ class ProfileAnswerCard extends React.Component{
     const backgroundImage = `url(${answer.image_url})`
 
     return(
-      <li className="answer_card">
+      <li className="answer_card shrinkable">
         <a href={answer.public_url} target="_blank">
         <div style={{backgroundImage:backgroundImage}} className="video_thumbnail"></div>
         <h4></h4>

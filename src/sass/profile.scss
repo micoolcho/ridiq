@@ -57,7 +57,7 @@
 }
 
 .answer-list {
-  max-width: $lgAnswerListSize;
+  max-width: 850px;
   margin-bottom: 50px;
 
   @include mobile() {
@@ -70,17 +70,17 @@
   }
 
   @include extraSmallMobile() {
-    margin-left: -$mainPadding !important;
-    margin-right: -$mainPadding !important;
+    // margin-left: -$mainPadding !important;
+    // margin-right: -$mainPadding !important;
     max-width: initial;
   }
 
   .overflow-wrapper {
-    margin-right: -$lgAnswerPadding;
+    // margin-right: -$lgAnswerPadding;
 
     @include extraSmallMobile() {
-      margin-left: -2% !important;
-      margin-right: -2% !important;
+      // margin-left: -2% !important;
+      // margin-right: -2% !important;
     }
   }
 }

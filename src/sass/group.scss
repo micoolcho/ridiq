@@ -273,6 +273,24 @@ main{
     margin-left: 8px;
     display: block;
   }
+
+  &.shrinkable{
+    @include smallMobile() {
+      width: 46%;
+    }
+
+      a {
+        @include smallMobile() {
+          width: 100%;
+        }
+      }
+
+      .video_thumbnail{
+        @include smallMobile() {
+          width:100%;
+        }
+      }
+    }
 }
 
 .group-questions {
