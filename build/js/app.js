@@ -33971,13 +33971,17 @@
 	          comment_count = _props$answer.comment_count,
 	          created_at = _props$answer.created_at;
 
+	      var user = {};
+
+	      var avatar_url = user.avatar_url && user.avatar_url.length > 0 ? user.avatar_url : "../images/avatar_placeholder_small.png";
+	      var backgroundImage = "url(" + avatar_url + ")";
 
 	      var bioString = question.author_name + " - ";
 
 	      var likeOrLikes = like_count > 1 ? "likes" : "like";
 	      var commentOrComments = comment_count > 1 ? "comments" : "comment";
 
-	      var commentLikeString = like_count + " " + likeOrLikes + "    " + comment_count + " " + commentOrComments;
+	      var commentLikeString = like_count + " " + likeOrLikes + "  " + comment_count + " " + commentOrComments;
 
 	      return _react2.default.createElement(
 	        "div",
@@ -33985,11 +33989,7 @@
 	        _react2.default.createElement(
 	          "div",
 	          { className: "user" },
-	          _react2.default.createElement(
-	            "a",
-	            { href: question.author_public_url, className: "avatar" },
-	            "\xA0"
-	          ),
+	          _react2.default.createElement("a", { href: question.author_public_url, style: { backgroundImage: backgroundImage }, className: "avatar" }),
 	          _react2.default.createElement(
 	            "div",
 	            { className: "name" },

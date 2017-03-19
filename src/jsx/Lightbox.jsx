@@ -61,18 +61,22 @@ class LightboxQuestionBlock extends React.Component{
 class LightboxAnswerBlock extends React.Component{
   render() {
     const {id, question, like_count, comment_count, created_at} = this.props.answer
+    const user = {}
+
+    const avatar_url = (user.avatar_url && user.avatar_url.length > 0) ? user.avatar_url : "../images/avatar_placeholder_small.png"
+    const backgroundImage = `url(${avatar_url})`
 
     const bioString = `${question.author_name} - `
 
     const likeOrLikes = like_count > 1 ? "likes" : "like"
     const commentOrComments = comment_count > 1 ? "comments" : "comment"
 
-    const commentLikeString = `${like_count} ${likeOrLikes}    ${comment_count} ${commentOrComments}`
+    const commentLikeString = `${like_count} ${likeOrLikes}  ${comment_count} ${commentOrComments}`
 
     return (
       <div className="answer-block">
         <div className="user">
-          <a href={question.author_public_url} className="avatar">&nbsp;</a>
+          <a href={question.author_public_url} style={{backgroundImage:backgroundImage}} className="avatar"></a>
           <div className="name">{bioString}</div>
           <div className="clearfix">
             <div className="view pull-left">{commentLikeString}</div>
