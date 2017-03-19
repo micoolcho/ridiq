@@ -70,6 +70,7 @@ export default class Answers extends React.Component {
   render() {
      const {answers, isLoading} = this.state
      const {loadMore} = this.loadMore
+     
     return (
     <div>
       {answers.map((item, index) => {

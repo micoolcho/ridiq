@@ -2,6 +2,7 @@ import React from 'react';
 import jQuery from 'jquery';
 import AnswerService from './services/AnswerServices.jsx';
 import BasedLoadMoreComponent from "./BasedLoadMoreComponent.jsx";
+import Lightbox from "./Lightbox.jsx";
 
 export default class UserAnsweredQuestions extends BasedLoadMoreComponent {
 
@@ -14,6 +15,12 @@ export default class UserAnsweredQuestions extends BasedLoadMoreComponent {
 
     this.state.successLoadCount = 0;
     this.state.total = this.props.totalItem;
+
+    this.showLightbox = this.showLightbox.bind(this)
+  }
+
+  showLightbox(){
+
   }
 
   render() {
@@ -36,6 +43,11 @@ export default class UserAnsweredQuestions extends BasedLoadMoreComponent {
         <div className="clearfix"></div>
 
         { this.getLoadMoreBtn() }
+
+        {
+          
+        }
+        <Lightbox answer={this.items[0]}/>
       </div>
     )
   }
