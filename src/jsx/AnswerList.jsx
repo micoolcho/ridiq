@@ -105,7 +105,7 @@ class AnswerCard extends React.Component{
 
     return(
       <li className="answer_card">
-        <a href={answer.public_url} target="_blank">
+        <a href="#" target="_blank">
         <div style={{backgroundImage:backgroundImage}} className="video_thumbnail"></div>
         <div className="play_btn"></div>
         <h4>{user.name}</h4>

@@ -13,18 +13,31 @@ export default class UserAnsweredQuestions extends BasedLoadMoreComponent {
 
     super(...args, externalArgs);
 
+    this.state.isShowingLightbox = true
     this.state.successLoadCount = 0;
     this.state.total = this.props.totalItem;
 
     this.showLightbox = this.showLightbox.bind(this)
+    this.hideLightbox = this.hideLightbox.bind(this)
   }
 
-  showLightbox(){
+  showLightbox(e){
+    e.preventDefault()
 
+    setState({
+      isShowingLightbox: true
+    })
+  }
+
+  hideLightbox(){
+    setState({
+      isShowingLightbox: false
+    })
   }
 
   render() {
     const {total} = this.props
+    const {isShowingLightbox} = this.state
 
     if (total == 0) {
       return (<span></span>);
@@ -35,7 +48,7 @@ export default class UserAnsweredQuestions extends BasedLoadMoreComponent {
         {
           this.items.map((answer, index) => {
             return (
-              <ProfileAnswerCard key={answer.id} answer={answer}/>
+              <ProfileAnswerCard key={answer.id} answer={answer} onClick={this.showLightbox}/>
             )
           })
         }
@@ -44,10 +57,9 @@ export default class UserAnsweredQuestions extends BasedLoadMoreComponent {
 
         { this.getLoadMoreBtn() }
 
-        {
-          
+        {isShowingLightbox &&
+          <Lightbox answer={this.items[0]} onClose={this.hideLightbox}/>
         }
-        <Lightbox answer={this.items[0]}/>
       </div>
     )
   }
@@ -85,7 +97,7 @@ class ProfileAnswerCard extends React.Component{
 
     return(
       <li className="answer_card shrinkable">
-        <a href={answer.public_url} target="_blank">
+        <a href="#">
         <div style={{backgroundImage:backgroundImage}} className="video_thumbnail"></div>
         <h4></h4>
         <div className="play_btn"></div>

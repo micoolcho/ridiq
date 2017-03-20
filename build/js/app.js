@@ -21589,20 +21589,38 @@
 
 	    var _this = _possibleConstructorReturn(this, (_ref = UserAnsweredQuestions.__proto__ || Object.getPrototypeOf(UserAnsweredQuestions)).call.apply(_ref, [this].concat(args, [externalArgs])));
 
+	    _this.state.isShowingLightbox = true;
 	    _this.state.successLoadCount = 0;
 	    _this.state.total = _this.props.totalItem;
 
 	    _this.showLightbox = _this.showLightbox.bind(_this);
+	    _this.hideLightbox = _this.hideLightbox.bind(_this);
 	    return _this;
 	  }
 
 	  _createClass(UserAnsweredQuestions, [{
 	    key: 'showLightbox',
-	    value: function showLightbox() {}
+	    value: function showLightbox(e) {
+	      e.preventDefault();
+
+	      setState({
+	        isShowingLightbox: true
+	      });
+	    }
+	  }, {
+	    key: 'hideLightbox',
+	    value: function hideLightbox() {
+	      setState({
+	        isShowingLightbox: false
+	      });
+	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
+
 	      var total = this.props.total;
+	      var isShowingLightbox = this.state.isShowingLightbox;
 
 
 	      if (total == 0) {
@@ -21613,30 +21631,30 @@
 	        'div',
 	        null,
 	        this.items.map(function (answer, index) {
-	          return _react2.default.createElement(ProfileAnswerCard, { key: answer.id, answer: answer });
+	          return _react2.default.createElement(ProfileAnswerCard, { key: answer.id, answer: answer, onClick: _this2.showLightbox });
 	        }),
 	        _react2.default.createElement('div', { className: 'clearfix' }),
 	        this.getLoadMoreBtn(),
-	        _react2.default.createElement(_Lightbox2.default, { answer: this.items[0] })
+	        isShowingLightbox && _react2.default.createElement(_Lightbox2.default, { answer: this.items[0], onClose: this.hideLightbox })
 	      );
 	    }
 	  }, {
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
-	      var _this2 = this;
+	      var _this3 = this;
 
 	      var $window = (0, _jquery2.default)(window);
 	      this.loadmore();
 
 	      $window.scroll(function (e) {
-	        if (_this2.state.successLoadCount <= 1 || _this2.state.isLoading) {
+	        if (_this3.state.successLoadCount <= 1 || _this3.state.isLoading) {
 	          return;
 	        }
 
 	        var wHeight = $window.height();
 	        var wScrollTop = $window.scrollTop();
 	        if (wScrollTop + window.innerHeight + 20 >= wHeight) {
-	          _this2.loadmore();
+	          _this3.loadmore();
 	        }
 	      });
 	    }
@@ -21677,7 +21695,7 @@
 	        { className: 'answer_card shrinkable' },
 	        _react2.default.createElement(
 	          'a',
-	          { href: answer.public_url, target: '_blank' },
+	          { href: '#' },
 	          _react2.default.createElement('div', { style: { backgroundImage: backgroundImage }, className: 'video_thumbnail' }),
 	          _react2.default.createElement('h4', null),
 	          _react2.default.createElement('div', { className: 'play_btn' }),
@@ -33842,7 +33860,9 @@
 	  _createClass(Lightbox, [{
 	    key: "render",
 	    value: function render() {
-	      var answer = this.props.answer;
+	      var _props = this.props,
+	          answer = _props.answer,
+	          onClose = _props.onClose;
 
 
 	      if (!answer) {
@@ -33860,7 +33880,7 @@
 	      return _react2.default.createElement(
 	        "div",
 	        { className: "lightbox" },
-	        _react2.default.createElement("div", { className: "dimView" }),
+	        _react2.default.createElement("div", { className: "dimView", onClick: onClose }),
 	        _react2.default.createElement(
 	          "div",
 	          { className: "mainView" },
@@ -33903,16 +33923,6 @@
 	      return _react2.default.createElement(
 	        "div",
 	        { className: "question-block" },
-	        _react2.default.createElement(
-	          "div",
-	          { className: "asked-in" },
-	          "Asked in ",
-	          _react2.default.createElement(
-	            "a",
-	            { href: "group.html" },
-	            "Startups"
-	          )
-	        ),
 	        _react2.default.createElement(
 	          "div",
 	          { className: "content" },
@@ -68671,7 +68681,7 @@
 	        { className: "answer_card" },
 	        _react2.default.createElement(
 	          "a",
-	          { href: answer.public_url, target: "_blank" },
+	          { href: "#", target: "_blank" },
 	          _react2.default.createElement("div", { style: { backgroundImage: backgroundImage }, className: "video_thumbnail" }),
 	          _react2.default.createElement("div", { className: "play_btn" }),
 	          _react2.default.createElement(

@@ -13,7 +13,7 @@ export default class Lightbox extends React.Component {
   }
 
   render(){
-    const {answer} = this.props
+    const {answer, onClose} = this.props
 
     if (!answer) {
       return <div></div>
@@ -23,7 +23,7 @@ export default class Lightbox extends React.Component {
 
     return (
       <div className="lightbox">
-        <div className="dimView"></div>
+        <div className="dimView" onClick={onClose}></div>
 
         <div className="mainView">
           <div className="player_container">
@@ -48,11 +48,7 @@ class LightboxQuestionBlock extends React.Component{
 
     return (
       <div className="question-block">
-        <div className="asked-in">
-          Asked in <a href="group.html">Startups</a>
-        </div>
-        <div className="content">{content}
-        </div>
+        <div className="content">{content}</div>
       </div>
     )
   }
