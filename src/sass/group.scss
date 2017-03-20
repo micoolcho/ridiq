@@ -242,6 +242,10 @@ main{
 
   a{
     text-decoration: none;
+
+    &:hover, &:focus{
+      text-decoration: none;
+    }
   }
 
   .video_thumbnail{
