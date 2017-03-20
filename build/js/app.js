@@ -21601,16 +21601,17 @@
 	  _createClass(UserAnsweredQuestions, [{
 	    key: 'showLightbox',
 	    value: function showLightbox(e) {
+	      e.stopPropagation();
 	      e.preventDefault();
 
-	      setState({
+	      this.setState({
 	        isShowingLightbox: true
 	      });
 	    }
 	  }, {
 	    key: 'hideLightbox',
 	    value: function hideLightbox() {
-	      setState({
+	      this.setState({
 	        isShowingLightbox: false
 	      });
 	    }
@@ -21635,7 +21636,7 @@
 	        }),
 	        _react2.default.createElement('div', { className: 'clearfix' }),
 	        this.getLoadMoreBtn(),
-	        isShowingLightbox && _react2.default.createElement(_Lightbox2.default, { answer: this.items[0], onClose: this.hideLightbox })
+	        isShowingLightbox && _react2.default.createElement(_Lightbox2.default, { answer: this.items[0], onCloseRequest: this.hideLightbox })
 	      );
 	    }
 	  }, {
@@ -33845,6 +33846,12 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	var KEYS = {
+	  ESC: 27,
+	  LEFT_ARROW: 37,
+	  RIGHT_ARROW: 39
+	};
+
 	var Lightbox = function (_React$Component) {
 	  _inherits(Lightbox, _React$Component);
 
@@ -33854,15 +33861,56 @@
 	    var _this = _possibleConstructorReturn(this, (Lightbox.__proto__ || Object.getPrototypeOf(Lightbox)).call(this, props));
 
 	    _this.state = {};
+
+	    _this.handleKeyInput = _this.handleKeyInput.bind(_this);
+	    _this.requestClose = _this.requestClose.bind(_this);
 	    return _this;
 	  }
 
 	  _createClass(Lightbox, [{
+	    key: "requestClose",
+	    value: function requestClose(event) {
+	      var _this2 = this;
+
+	      // Call the parent close request
+	      var closeLightbox = function closeLightbox() {
+	        return _this2.props.onCloseRequest(event);
+	      };
+
+	      return closeLightbox();
+	    }
+	  }, {
+	    key: "handleKeyInput",
+	    value: function handleKeyInput(event) {
+	      event.stopPropagation();
+
+	      var keyCode = event.which || event.keyCode;
+
+	      switch (keyCode) {
+	        case KEYS.ESC:
+	          event.preventDefault();
+	          this.requestClose(event);
+	          break;
+
+	        case KEYS.LEFT_ARROW:
+	          event.preventDefault();
+	          // this.requestMovePrev(event);
+	          break;
+
+	        case KEYS.RIGHT_ARROW:
+	          event.preventDefault();
+	          // this.requestMoveNext(event);
+	          break;
+
+	        default:
+	      }
+	    }
+	  }, {
 	    key: "render",
 	    value: function render() {
 	      var _props = this.props,
 	          answer = _props.answer,
-	          onClose = _props.onClose;
+	          onCloseRequest = _props.onCloseRequest;
 
 
 	      if (!answer) {
@@ -33879,8 +33927,8 @@
 
 	      return _react2.default.createElement(
 	        "div",
-	        { className: "lightbox" },
-	        _react2.default.createElement("div", { className: "dimView", onClick: onClose }),
+	        { className: "lightbox", onKeyDown: this.handleKeyInput },
+	        _react2.default.createElement("div", { className: "dimView", onClick: onCloseRequest }),
 	        _react2.default.createElement(
 	          "div",
 	          { className: "mainView" },

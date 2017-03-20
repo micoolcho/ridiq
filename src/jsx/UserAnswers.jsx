@@ -22,15 +22,16 @@ export default class UserAnsweredQuestions extends BasedLoadMoreComponent {
   }
 
   showLightbox(e){
+    e.stopPropagation()
     e.preventDefault()
 
-    setState({
+    this.setState({
       isShowingLightbox: true
     })
   }
 
   hideLightbox(){
-    setState({
+    this.setState({
       isShowingLightbox: false
     })
   }
@@ -58,7 +59,7 @@ export default class UserAnsweredQuestions extends BasedLoadMoreComponent {
         { this.getLoadMoreBtn() }
 
         {isShowingLightbox &&
-          <Lightbox answer={this.items[0]} onClose={this.hideLightbox}/>
+          <Lightbox answer={this.items[0]} onCloseRequest={this.hideLightbox}/>
         }
       </div>
     )
